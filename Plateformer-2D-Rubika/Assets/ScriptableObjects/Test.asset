@@ -31,7 +31,7 @@ MonoBehaviour:
   jumpForce: 22.222221
   jumpCutGravityMult: 3
   jumpHangGravityMult: 0.8
-  jumpHangTimeThreshold: 2
+  jumpHangTimeThreshold: 5
   jumpHangAccelerationMult: 1
   jumpHangMaxSpeedMult: 1
   wallJumpForce: {x: 0, y: 0}
@@ -40,5 +40,5 @@ MonoBehaviour:
   doTurnOnWallJump: 0
   slideSpeed: 0
   slideAccel: 0
-  coyoteTime: 0.01
-  jumpInputBufferTime: 0.01
+  coyoteTime: 0.15
+  jumpInputBufferTime: 0.1
