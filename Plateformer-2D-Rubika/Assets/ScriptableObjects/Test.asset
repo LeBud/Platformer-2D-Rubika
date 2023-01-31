@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d23a9e6e13425f848bfb303bec9cb7ae, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
-  gravityStrength: -8
-  gravityScale: 0.81549436
-  fallGravityMult: 4
-  maxFallSpeed: 20
+  gravityStrength: -49.382717
+  gravityScale: 5.033916
+  fallGravityMult: 2
+  maxFallSpeed: 40
   fastFallGravityMult: 2
-  maxFastFallSpeed: 2
+  maxFastFallSpeed: 60
   runMaxSpeed: 10
   runAcceleration: 5
   runAccelAmount: 25
@@ -26,12 +26,12 @@ MonoBehaviour:
   accelInAir: 0.5
   deccelInAir: 0.5
   doConserveMomentum: 1
-  jumpHeight: 4
-  jumpTimeToApex: 1
-  jumpForce: 8
-  jumpCutGravityMult: 1
-  jumpHangGravityMult: 0.1
-  jumpHangTimeThreshold: 1
+  jumpHeight: 5
+  jumpTimeToApex: 0.45
+  jumpForce: 22.222221
+  jumpCutGravityMult: 3
+  jumpHangGravityMult: 0.8
+  jumpHangTimeThreshold: 2
   jumpHangAccelerationMult: 1
   jumpHangMaxSpeedMult: 1
   wallJumpForce: {x: 0, y: 0}
