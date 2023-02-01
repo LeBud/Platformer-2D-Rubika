@@ -38,7 +38,7 @@ public class Controller : MonoBehaviour
 
     //All Vector2
     Vector2 groundCheckSize = new Vector2(0.49f, 0.03f);
-    Vector2 wallCheckSize = new Vector2(0.5f, .1f);
+    Vector2 wallCheckSize = new Vector2(0.5f, 1f);
     Vector2 moveInput;
 
     private void Awake()
@@ -74,6 +74,8 @@ public class Controller : MonoBehaviour
         if (((Physics2D.OverlapBox(frontWallCheckPos.position, wallCheckSize, 0, groundLayer) && !isFacingRight)
             || (Physics2D.OverlapBox(backWallCheckPos.position, wallCheckSize, 0, groundLayer) && isFacingRight)) && !isWallJumping)
             lastOnWallTimeLeft = data.coyoteTime;
+
+        lastOnWallTime = Mathf.Max(lastOnWallTimeLeft, lastOnWallTimeRight);
         #endregion
 
         if (moveInput.x != 0)
@@ -94,16 +96,16 @@ public class Controller : MonoBehaviour
                 isFalling = true;
         }
 
+        if (isWallJumping && Time.time - wallJumpStartTime > data.wallJumpTime)
+        {
+            isWallJumping = false;
+        }
+
         if (lastGroundTime > 0 && !isJumping && !isWallJumping)
         {
             jumpCut = false;
             if (!isJumping)
                 isFalling = false;
-        }
-
-        if (isWallJumping && Time.time - wallJumpStartTime > data.wallJumpTime)
-        {
-            isWallJumping = false;
         }
 
         if (CanJump() && lastJumpPressed > 0)
@@ -182,7 +184,8 @@ public class Controller : MonoBehaviour
             lastJumpPressed = data.jumpInputBufferTime;
 
         if (Input.GetButtonUp("Jump") && lastGroundTime < 0)
-            jumpCut = true;
+            if (CanWallJumpCut() || CanJumpCut())
+                jumpCut = true;
     }
 
     void Jump()
@@ -296,6 +299,17 @@ public class Controller : MonoBehaviour
 
         isFacingRight = !isFacingRight;
     }
+
+    private bool CanJumpCut()
+    {
+        return isJumping && rb.velocity.y > 0;
+    }
+
+    private bool CanWallJumpCut()
+    {
+        return isWallJumping && rb.velocity.y > 0;
+    }
+
 
     private void OnDrawGizmosSelected()
     {
