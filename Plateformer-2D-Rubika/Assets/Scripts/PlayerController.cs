@@ -6,6 +6,13 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
 
+    [Header("Player Settings")]
+    [SerializeField] float gravity;
+    [SerializeField] float fallGravity;
+    [SerializeField] float jumpCutGravity;
+
+    [SerializeField] float maxFallSpeed;
+
     [Header("Movements Settings")]
     [SerializeField] float runSpeed;
     [SerializeField] float lerpAmount;
@@ -17,18 +24,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float coyoteTime;
     [SerializeField] float jumpInputBuffer;
     [SerializeField] Transform groundCheckPos;
-    [SerializeField] Vector2 groundCheckSize;
     [SerializeField] LayerMask groundCheckLayer;
+    
     bool isJumping;
 
     float lastTimeOnGround;
     float lastJumpPressed;
 
     Vector2 inputMov;
+    Vector2 groundCheckSize = new Vector2(1, 0.04f);
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        groundCheckSize.x = transform.localScale.x;
+        SetGravity(gravity);
     }
 
     private void Update()
@@ -37,7 +47,7 @@ public class PlayerController : MonoBehaviour
         lastJumpPressed -= Time.deltaTime;
 
         MyInputs();
-
+        
         if (Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundCheckLayer)) lastTimeOnGround = coyoteTime;
 
         if (lastJumpPressed > 0 && lastTimeOnGround > 0) Jump();
@@ -49,6 +59,11 @@ public class PlayerController : MonoBehaviour
         inputMov.y = Input.GetAxisRaw("Vertical");
 
         if (Input.GetButtonDown("Jump")) lastJumpPressed = jumpInputBuffer;
+    }
+
+    void SetGravity(float appliedGravity)
+    {
+        rb.gravityScale = appliedGravity;
     }
 
     void Jump()

@@ -326,6 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41e9e85fccf57014bbd463465110cdb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gravity: 2
   runSpeed: 10
   lerpAmount: 1
   accelRate: 5
@@ -334,7 +335,6 @@ MonoBehaviour:
   coyoteTime: 0.15
   jumpInputBuffer: 0.1
   groundCheckPos: {fileID: 13611371}
-  groundCheckSize: {x: 1, y: 0.03}
   groundCheckLayer:
     serializedVersion: 2
     m_Bits: 64
