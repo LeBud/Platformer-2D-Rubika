@@ -329,7 +329,15 @@ MonoBehaviour:
   runSpeed: 10
   lerpAmount: 1
   accelRate: 5
-  deccelRate: 2
+  deccelRate: 5
+  jumpForce: 10
+  coyoteTime: 0.15
+  jumpInputBuffer: 0.1
+  groundCheckPos: {fileID: 13611371}
+  groundCheckSize: {x: 1, y: 0.03}
+  groundCheckLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
