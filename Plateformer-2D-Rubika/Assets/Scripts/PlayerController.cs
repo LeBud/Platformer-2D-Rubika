@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movements Settings")]
     [SerializeField] float runSpeed;
-    [SerializeField] float lerpAmount;
     [SerializeField] float accelRate;
     [SerializeField] float deccelRate;
 
@@ -25,7 +24,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float jumpInputBuffer;
     [SerializeField] Transform groundCheckPos;
     [SerializeField] LayerMask groundCheckLayer;
-    
+
+    [Header("Air Settings")]
+    [SerializeField] float airAccelRate;
+    [SerializeField] float airDeccelRate;
+    //[SerializeField] float airLerpAmount;
+
     bool isJumping;
 
     float lastTimeOnGround;
@@ -80,15 +84,20 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        PlayerMovement();
+        PlayerMovement(1);
     }
 
-    void PlayerMovement()
+    void PlayerMovement(float lerpAmount)
     {
         float targetSpeed = inputMov.x * runSpeed;
         targetSpeed = Mathf.Lerp(rb.velocity.x, targetSpeed, lerpAmount);
 
-        float acceleration = (Mathf.Abs(targetSpeed) > 0.01f ) ? accelRate : deccelRate;
+        float acceleration;
+
+        if(lastTimeOnGround > 0)
+            acceleration = (Mathf.Abs(targetSpeed) > 0.01f) ? accelRate : deccelRate;
+        else
+            acceleration = (Mathf.Abs(targetSpeed) > 0.01f) ? accelRate * airAccelRate : deccelRate * airDeccelRate;
 
         float clampSpeed = targetSpeed - rb.velocity.x;
 

@@ -327,8 +327,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: 2
+  fallGravity: 0
+  jumpCutGravity: 0
+  maxFallSpeed: 0
   runSpeed: 10
-  lerpAmount: 1
   accelRate: 5
   deccelRate: 5
   jumpForce: 10
@@ -338,6 +340,8 @@ MonoBehaviour:
   groundCheckLayer:
     serializedVersion: 2
     m_Bits: 64
+  airAccelRate: 0.4
+  airDeccelRate: 0.4
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
