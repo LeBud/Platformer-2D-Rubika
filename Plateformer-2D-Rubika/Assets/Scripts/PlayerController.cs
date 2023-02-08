@@ -26,14 +26,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float normalGravitysScale = 5;
     [SerializeField] float hoverGravityScale;
     [SerializeField] float maxHoverTime;
+    [SerializeField] float hoverSpeedMult;
+
+    [Header("Fly Ability")]
+    [SerializeField] float flyGravity = 0;
+    [SerializeField] float flyMaxTime;
+    [SerializeField] float flySpeedMult;
 
     bool jumpCut;
     bool isJumping;
     bool hovering;
+    bool isFlying;
 
     float lastPressedJump;
     float onGround;
     float hoverTime;
+    float flyTime;
 
     Vector2 moveInput;
 
@@ -48,6 +56,7 @@ public class PlayerController : MonoBehaviour
         onGround -= Time.deltaTime;
         lastPressedJump -= Time.deltaTime;
 
+
         MyInputs();
         CheckMethods();
 
@@ -55,13 +64,22 @@ public class PlayerController : MonoBehaviour
 
     void MyInputs()
     {
-        //Movements and Jumps Inputs
+        //Movements Input
         moveInput.x = Input.GetAxisRaw("Horizontal");
+        moveInput.y = Input.GetAxisRaw("Vertical");
 
+
+        //Fly Input
+        if(Input.GetButtonDown("Fire1"))
+            isFlying = true;
+
+
+        //Jumps Inputs
         if (Input.GetButtonDown("Jump")) 
             lastPressedJump = jumpBuffer;
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0) jumpCut = true;
+
 
         //Hover Inputs
         if (Input.GetButton("Jump") && !isJumping && onGround < 0 && hoverTime > 0)
@@ -93,14 +111,21 @@ public class PlayerController : MonoBehaviour
             jumpCut = false;
         }
 
+
         //Hover Fields
         if (hovering)
-        {
-            Hover(hoverGravityScale);
             hoverTime -= Time.deltaTime;
-        }
+
+
+        //Fly
+        if (isFlying)
+            flyTime -= Time.deltaTime;
         else
-            Hover(normalGravitysScale);
+            flyTime = flyMaxTime;
+        
+
+        if (flyTime < 0)
+            isFlying = false;
     }
 
     void Jump()
@@ -113,28 +138,60 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
+    private void FixedUpdate()
+    {
+        if(isFlying && flyTime > 0)
+            Fly();
+        else
+            Movement();
+
+        if (hovering)
+            Hover(hoverGravityScale);
+        else if (isFlying)
+            Hover(flyGravity);
+        else
+            Hover(normalGravitysScale);
+    }
+
     void Hover(float gravity)
     {
         rb.gravityScale = gravity;
-     
+
         /*if (hovering)
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Lerp(rb.velocity.y, -1, 1));*/
     }
 
-    private void FixedUpdate()
-    {
-        Movement();
-    }
-
     void Movement()
     {
-        var movement = moveInput.x * speed;
+        float speedForce;
+
+        if (hovering) speedForce = speed * hoverSpeedMult;
+        else speedForce = speed;
+
+        var movement = moveInput.x * speedForce;
 
         float acceleration = Mathf.Abs(movement) > .01f ? accel : deccel;
         
         movement = movement - rb.velocity.x;
 
         var force = new Vector2(movement * acceleration, rb.velocity.y);
+
+        rb.AddForce(force, ForceMode2D.Force);
+    }
+
+    void Fly()
+    {
+        float speedForce = speed * flySpeedMult;
+
+        var horMov = moveInput.x * speedForce;
+        var verMov = moveInput.y * speedForce;
+
+        float acceleration = Mathf.Abs(horMov) > .01f || Mathf.Abs(verMov) > .01f ? accel : deccel;
+
+        horMov = horMov - rb.velocity.x;
+        verMov = verMov - rb.velocity.y;
+
+        var force = new Vector2(horMov * acceleration, verMov * acceleration);
 
         rb.AddForce(force, ForceMode2D.Force);
     }

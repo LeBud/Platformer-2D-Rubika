@@ -556,7 +556,10 @@ MonoBehaviour:
   normalGravitysScale: 5
   hoverGravityScale: 0
   maxHoverTime: 1
-  minusY: 5
+  hoverSpeedMult: 0.8
+  flyGravity: 0
+  flyMaxTime: 4
+  flySpeedMult: 1.2
 --- !u!96 &363216979
 TrailRenderer:
   serializedVersion: 3
