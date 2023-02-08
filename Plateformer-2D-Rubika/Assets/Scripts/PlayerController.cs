@@ -22,10 +22,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Vector2 groundCheckSize;
     [SerializeField] LayerMask groundCheckLayerMask;
 
+    [Header("Hover")]
+    [SerializeField] float normalGravitysScale = 5;
+    [SerializeField] float hoverGravityScale;
+    [SerializeField] float maxHoverTime;
+
     bool jumpCut;
     bool isJumping;
+    bool hovering;
+    bool stopHover;
+
     float lastPressedJump;
     float onGround;
+    float hoverTime;
+
     Vector2 moveInput;
 
     private void Awake()
@@ -35,20 +45,13 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        //Timers
         onGround -= Time.deltaTime;
         lastPressedJump -= Time.deltaTime;
 
-        if (Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundCheckLayerMask))
-            onGround = coyoteTime; jumpCut = false;
-
-        if (rb.velocity.y < 0) isJumping = false;
-
         MyInputs();
+        CheckMethods();
 
-        if (lastPressedJump > 0 && onGround > 0) 
-            Jump();
-
-        if (jumpCut) rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / jumpCutForce) ;
     }
 
     void MyInputs()
@@ -59,6 +62,33 @@ public class PlayerController : MonoBehaviour
             lastPressedJump = jumpBuffer;
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0) jumpCut = true;
+
+    }
+
+    void CheckMethods()
+    {
+        //Jump Fields
+        if (Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundCheckLayerMask))
+        {
+            onGround = coyoteTime;
+            jumpCut = false;
+        }
+
+        if (lastPressedJump > 0 && onGround > 0)
+            Jump();
+
+        if (rb.velocity.y < 0)
+            isJumping = false;
+
+        if (jumpCut)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / jumpCutForce);
+            jumpCut = false;
+        }
+
+        //Hover Fields
+        if (hovering)
+            hoverTime -= Time.deltaTime;
     }
 
     void Jump()
@@ -69,6 +99,12 @@ public class PlayerController : MonoBehaviour
         isJumping = true;
 
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+    }
+
+    void Hover()
+    {
+        hovering = true;
+        rb.gravityScale = hoverGravityScale;
     }
 
     private void FixedUpdate()
