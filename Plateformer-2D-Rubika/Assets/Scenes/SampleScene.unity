@@ -327,8 +327,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  accel: 0.3
-  deccel: 0.7
+  accel: 5
+  deccel: 5
+  jumpForce: 10
+  coyoteTime: 0.1
+  jumpBuffer: 0.1
+  groundCheckPos: {fileID: 13611371}
+  groundCheckSize: {x: 0.5, y: 0.04}
+  groundCheckLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
