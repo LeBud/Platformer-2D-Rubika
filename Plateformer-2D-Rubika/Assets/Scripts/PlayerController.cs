@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float coyoteTime = .1f;
     [SerializeField] float jumpBuffer = .1f;
     [SerializeField] float jumpCutForce = .1f;
+
+    [Header("Ground Check")]
     [SerializeField] Transform groundCheckPos;
     [SerializeField] Vector2 groundCheckSize;
     [SerializeField] LayerMask groundCheckLayerMask;
