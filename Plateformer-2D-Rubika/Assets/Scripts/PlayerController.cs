@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
             hovering = true;
         else if ((Input.GetButtonUp("Jump") && hovering) || hoverTime <= 0)
             hovering = false;
+        else hovering = false;
     }
 
     void CheckMethods()
@@ -115,6 +116,9 @@ public class PlayerController : MonoBehaviour
     void Hover(float gravity)
     {
         rb.gravityScale = gravity;
+     
+        /*if (hovering)
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Lerp(rb.velocity.y, -1, 1));*/
     }
 
     private void FixedUpdate()
