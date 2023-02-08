@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
 
     void MyInputs()
     {
+        //Movements and Jumps Inputs
         moveInput.x = Input.GetAxisRaw("Horizontal");
 
         if (Input.GetButtonDown("Jump")) 
@@ -62,6 +63,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0) jumpCut = true;
 
+        //Hover Inputs
         if (Input.GetButton("Jump") && !isJumping && onGround < 0 && hoverTime > 0)
             hovering = true;
         else if ((Input.GetButtonUp("Jump") && hovering) || hoverTime <= 0)
