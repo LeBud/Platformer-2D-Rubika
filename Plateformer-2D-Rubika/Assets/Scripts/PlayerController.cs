@@ -79,9 +79,10 @@ public class PlayerController : MonoBehaviour
     void Movement()
     {
         var movement = moveInput.x * speed;
-        movement = movement - rb.velocity.x;
 
         float acceleration = Mathf.Abs(movement) > .01f ? accel : deccel;
+        
+        movement = movement - rb.velocity.x;
 
         var force = new Vector2(movement * acceleration, rb.velocity.y);
 
