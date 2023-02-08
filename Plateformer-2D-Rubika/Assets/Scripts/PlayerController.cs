@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
     bool jumpCut;
     bool isJumping;
     bool hovering;
-    bool stopHover;
 
     float lastPressedJump;
     float onGround;
@@ -63,6 +62,10 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0) jumpCut = true;
 
+        if (Input.GetButton("Jump") && !isJumping && onGround < 0 && hoverTime > 0)
+            hovering = true;
+        else if ((Input.GetButtonUp("Jump") && hovering) || hoverTime <= 0)
+            hovering = false;
     }
 
     void CheckMethods()
@@ -72,6 +75,7 @@ public class PlayerController : MonoBehaviour
         {
             onGround = coyoteTime;
             jumpCut = false;
+            hoverTime = maxHoverTime;
         }
 
         if (lastPressedJump > 0 && onGround > 0)
@@ -88,7 +92,12 @@ public class PlayerController : MonoBehaviour
 
         //Hover Fields
         if (hovering)
+        {
+            Hover(hoverGravityScale);
             hoverTime -= Time.deltaTime;
+        }
+        else
+            Hover(normalGravitysScale);
     }
 
     void Jump()
@@ -101,10 +110,9 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
-    void Hover()
+    void Hover(float gravity)
     {
-        hovering = true;
-        rb.gravityScale = hoverGravityScale;
+        rb.gravityScale = gravity;
     }
 
     private void FixedUpdate()
