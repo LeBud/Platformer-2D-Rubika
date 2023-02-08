@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float jumpForce;
     [SerializeField] float coyoteTime = .1f;
     [SerializeField] float jumpBuffer = .1f;
+    [SerializeField] float jumpCutForce = .1f;
     [SerializeField] Transform groundCheckPos;
     [SerializeField] Vector2 groundCheckSize;
     [SerializeField] LayerMask groundCheckLayerMask;
@@ -45,7 +46,7 @@ public class PlayerController : MonoBehaviour
         if (lastPressedJump > 0 && onGround > 0) 
             Jump();
 
-        if (jumpCut) rb.velocity = new Vector2(rb.velocity.x, 0);
+        if (jumpCut) rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / jumpCutForce) ;
     }
 
     void MyInputs()
