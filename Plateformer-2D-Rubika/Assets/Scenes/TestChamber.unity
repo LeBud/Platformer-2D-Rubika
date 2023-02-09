@@ -293,10 +293,11 @@ MonoBehaviour:
   jumpBuffer: 0.1
   jumpCutForce: 2
   groundCheckPos: {fileID: 535365518}
-  groundCheckSize: {x: 1, y: 0.04}
+  groundCheckSize: {x: 0.98, y: 0.04}
   groundCheckLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  holdBtt: 1
   normalGravitysScale: 5
   hoverGravityScale: 0.25
   hoverDownForce: 2

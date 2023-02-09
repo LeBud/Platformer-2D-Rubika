@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask groundCheckLayerMask;
 
     [Header("Hover")]
+    [SerializeField] bool holdBtt;
     [SerializeField] float normalGravitysScale = 5;
     [SerializeField] float hoverGravityScale;
     [SerializeField] float hoverDownForce;
@@ -87,11 +88,21 @@ public class PlayerController : MonoBehaviour
 
 
         //Hover Inputs
-        if ((Input.GetButtonDown("Jump") || Input.GetButton("Jump")) && !isJumping && onGround < 0 && hoverTime > 0)
-            hovering = true;
-        else if ((Input.GetButtonUp("Jump") && hovering) || hoverTime <= 0)
-            hovering = false;
-        //else hovering = false;
+        if (holdBtt)
+        {
+            if (Input.GetButton("Jump") && !isJumping && onGround < 0 && hoverTime > 0)
+                hovering = true;
+            else if ((Input.GetButtonUp("Jump") && hovering) || hoverTime <= 0)
+                hovering = false;
+        }
+        else
+        {
+
+            if (Input.GetButtonDown("Jump") && !isJumping && onGround < 0 && hoverTime > 0)
+                hovering = true;
+            else if ((Input.GetButtonUp("Jump") && hovering) || hoverTime <= 0)
+                hovering = false;
+        }
     }
 
     void CheckMethods()
