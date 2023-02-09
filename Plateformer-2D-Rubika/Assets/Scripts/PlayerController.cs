@@ -167,10 +167,8 @@ public class PlayerController : MonoBehaviour
         rb.gravityScale = gravity;
 
         if (hovering)
-        {
-            //rb.velocity = new Vector2(rb.velocity.x, Mathf.Lerp(rb.velocity.y, -hoverDownForce, maxHoverTime));
             StartCoroutine(HoverCurve());
-        }
+        
     }
 
     IEnumerator HoverCurve()
@@ -219,5 +217,11 @@ public class PlayerController : MonoBehaviour
         var force = new Vector2(horMov * acceleration, verMov * acceleration);
 
         rb.AddForce(force, ForceMode2D.Force);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow; 
+        Gizmos.DrawWireCube(groundCheckPos.position, groundCheckSize);
     }
 }
