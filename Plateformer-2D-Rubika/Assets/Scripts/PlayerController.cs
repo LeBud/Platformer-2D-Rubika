@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
             hoverTime = maxHoverTime;
         }
 
-        if (lastPressedJump > 0 && onGround > 0)
+        if (lastPressedJump > 0 && onGround > 0 && !isFlying)
             Jump();
 
         if (rb.velocity.y < 0)
