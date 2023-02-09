@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float hoverDownForce;
     [SerializeField] float maxHoverTime;
     [SerializeField] float hoverSpeedMult;
+    [SerializeField] AnimationCurve hoverCurve;
 
     [Header("Fly Ability")]
     [SerializeField] float flyGravity = 0;
@@ -163,7 +165,30 @@ public class PlayerController : MonoBehaviour
         rb.gravityScale = gravity;
 
         if (hovering)
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Lerp(rb.velocity.y, -hoverDownForce, maxHoverTime));
+        {
+            //rb.velocity = new Vector2(rb.velocity.x, Mathf.Lerp(rb.velocity.y, -hoverDownForce, maxHoverTime));
+            StartCoroutine(HoverCurve());
+        }
+    }
+
+    IEnumerator HoverCurve()
+    {
+        Vector2 startPosition = transform.position;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < hoverTime)
+        {
+            if (!hovering)
+                yield break;
+
+            elapsedTime += Time.deltaTime;
+            float strenght = hoverCurve.Evaluate(elapsedTime / hoverTime);
+            //transform.position = startPosition + (Random.insideUnitCircle / 2) * strenght;
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * strenght);
+            yield return null;
+        }
+
+        transform.position = startPosition;
     }
 
     void Movement()
