@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     [Header("Hover")]
     [SerializeField] float normalGravitysScale = 5;
     [SerializeField] float hoverGravityScale;
+    [SerializeField] float hoverDownForce;
     [SerializeField] float maxHoverTime;
     [SerializeField] float hoverSpeedMult;
 
@@ -82,11 +83,11 @@ public class PlayerController : MonoBehaviour
 
 
         //Hover Inputs
-        if (Input.GetButton("Jump") && !isJumping && onGround < 0 && hoverTime > 0)
+        if ((Input.GetButtonDown("Jump") || Input.GetButton("Jump")) && !isJumping && onGround < 0 && hoverTime > 0)
             hovering = true;
         else if ((Input.GetButtonUp("Jump") && hovering) || hoverTime <= 0)
             hovering = false;
-        else hovering = false;
+        //else hovering = false;
     }
 
     void CheckMethods()
@@ -135,7 +136,11 @@ public class PlayerController : MonoBehaviour
         jumpCut = false;
         isJumping = true;
 
-        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        float force = jumpForce;
+        if (rb.velocity.y < 0)
+            force -= rb.velocity.y;
+
+        rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
     }
 
     private void FixedUpdate()
@@ -157,8 +162,8 @@ public class PlayerController : MonoBehaviour
     {
         rb.gravityScale = gravity;
 
-        /*if (hovering)
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Lerp(rb.velocity.y, -1, 1));*/
+        if (hovering)
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Lerp(rb.velocity.y, -hoverDownForce, maxHoverTime));
     }
 
     void Movement()
