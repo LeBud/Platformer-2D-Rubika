@@ -64,8 +64,6 @@ public class PlayerController : MonoBehaviour
 
         MyInputs();
         CheckMethods();
-
-        Debug.Log(hovering);
     }
 
     void MyInputs()
