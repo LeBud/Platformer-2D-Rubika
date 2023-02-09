@@ -184,7 +184,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator HoverCurve()
     {
-        while (hoverTime < maxHoverTime)
+        while (hoverTime <= maxHoverTime)
         {
             if (!hovering)
                 yield break;
