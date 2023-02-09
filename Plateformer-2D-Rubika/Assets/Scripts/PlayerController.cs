@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float hoverDownForce;
     [SerializeField] float maxHoverTime;
     [SerializeField] float hoverSpeedMult;
+    [SerializeField] float curveMult;
     [SerializeField] AnimationCurve hoverCurve;
 
     [Header("Fly Ability")]
@@ -63,6 +64,7 @@ public class PlayerController : MonoBehaviour
         MyInputs();
         CheckMethods();
 
+        Debug.Log(hovering);
     }
 
     void MyInputs()
@@ -173,22 +175,15 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator HoverCurve()
     {
-        Vector2 startPosition = transform.position;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < hoverTime)
+        while (hoverTime < maxHoverTime)
         {
             if (!hovering)
                 yield break;
 
-            elapsedTime += Time.deltaTime;
-            float strenght = hoverCurve.Evaluate(elapsedTime / hoverTime);
-            //transform.position = startPosition + (Random.insideUnitCircle / 2) * strenght;
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * strenght);
+            float strenght = hoverCurve.Evaluate(hoverTime / maxHoverTime);
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Lerp(rb.velocity.y, -strenght * curveMult, maxHoverTime));
             yield return null;
         }
-
-        transform.position = startPosition;
     }
 
     void Movement()

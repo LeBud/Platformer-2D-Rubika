@@ -302,35 +302,27 @@ MonoBehaviour:
   hoverDownForce: 2
   maxHoverTime: 1
   hoverSpeedMult: 0.8
+  curveMult: 7
   hoverCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: 0.07328185
-      outSlope: 0.07328185
-      tangentMode: 0
+      inSlope: -1
+      outSlope: -1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.064367816
-    - serializedVersion: 3
-      time: 0.7045977
-      value: 0.6367924
-      inSlope: -1.630987
-      outSlope: -1.630987
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.15175095
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: -2.2384226
-      outSlope: -2.2384226
-      tangentMode: 0
+      inSlope: -1
+      outSlope: -1
+      tangentMode: 34
       weightedMode: 0
-      inWeight: 0.037931025
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
