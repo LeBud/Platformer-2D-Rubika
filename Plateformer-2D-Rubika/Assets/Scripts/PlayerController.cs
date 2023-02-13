@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
     bool gliding;
     bool isFlying;
     bool glideJump;
+    bool isGlideJumping;
 
     float lastPressedJump;
     float onGround;
@@ -65,9 +66,13 @@ public class PlayerController : MonoBehaviour
         onGround -= Time.deltaTime;
         lastPressedJump -= Time.deltaTime;
 
+        Debug.Log(glideJump);
 
         MyInputs();
         CheckMethods();
+
+        if (gliding)
+            Glide();
     }
 
     void MyInputs()
@@ -129,11 +134,10 @@ public class PlayerController : MonoBehaviour
 
 
         //Glide Fields
-        if (gliding) glideTime -= Time.deltaTime;
+        if (gliding && Gliding()) glideTime -= Time.deltaTime;
 
-        if (glideTime == maxGlideTime) glideJump = true;
+        if (glideTime == maxGlideTime && onGround > 0) glideJump = true;
 
-        Debug.Log(glideJump);
 
         //Fly
         if (isFlying) flyTime -= Time.deltaTime;
@@ -157,6 +161,41 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
     }
 
+    void Glide()
+    {
+        if (glideJump && !isGlideJumping)
+            StartCoroutine(GlideJump());
+
+        if (Gliding())
+        {
+            while (glideTime <= maxGlideTime)
+            {
+                if (!gliding)
+                    break;
+
+                float strenght = glideCurve.Evaluate(glideTime / maxGlideTime);
+                rb.velocity = new Vector2(rb.velocity.x, Mathf.Lerp(rb.velocity.y, -strenght * curveMult, maxGlideTime));
+                return;
+            }
+        }
+    }
+
+    IEnumerator GlideJump()
+    {
+        isGlideJumping = true;
+        glideJump = false;
+
+        float upForce = glideJumpForce;
+        if (rb.velocity.y < 0)
+            upForce -= rb.velocity.y;
+
+        rb.AddForce(Vector2.up * upForce, ForceMode2D.Impulse);
+
+        yield return new WaitForSeconds(.01f);
+
+        isGlideJumping = false;
+    }
+    
     private void FixedUpdate()
     {
         //Movement
@@ -164,9 +203,6 @@ public class PlayerController : MonoBehaviour
             Fly();
         else
             Movement();
-
-        if (gliding)
-            Glide();
 
         //Set gravity
         if (gliding && !glideJump)
@@ -180,36 +216,6 @@ public class PlayerController : MonoBehaviour
     void SetGravityScale(float gravity)
     {
         rb.gravityScale = gravity;
-    }
-
-    void Glide()
-    {   
-        StartCoroutine(HoverCurve());
-    }
-
-    IEnumerator GlideJump()
-    {
-        rb.AddForce(Vector2.up * glideJumpForce, ForceMode2D.Force);
-        yield return new WaitForSeconds(.1f);
-        glideJump = false;
-    }
-    IEnumerator HoverCurve()
-    {
-        if (glideJump)
-            StartCoroutine(GlideJump());
-
-        if (!glideJump)
-        {
-            while (glideTime <= maxGlideTime)
-            {
-                if (!gliding)
-                    yield break;
-
-                float strenght = glideCurve.Evaluate(glideTime / maxGlideTime);
-                rb.velocity = new Vector2(rb.velocity.x, Mathf.Lerp(rb.velocity.y, -strenght * curveMult, maxGlideTime));
-                yield return null;
-            }
-        }
     }
 
     void Movement()
@@ -252,6 +258,10 @@ public class PlayerController : MonoBehaviour
         return !isJumping && onGround < 0 && glideTime > 0 && !isFlying;
     }
 
+    bool Gliding()
+    {
+        return !glideJump && !isGlideJumping && rb.velocity.y <= 0;
+    }
 
     private void OnDrawGizmos()
     {
