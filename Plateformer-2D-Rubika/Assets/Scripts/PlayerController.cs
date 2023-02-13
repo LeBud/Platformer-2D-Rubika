@@ -23,29 +23,33 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Vector2 groundCheckSize;
     [SerializeField] LayerMask groundCheckLayerMask;
 
-    [Header("Hover")]
+    [Header("Glide")]
     [SerializeField] bool holdBtt;
-    [SerializeField] float normalGravitysScale = 5;
-    [SerializeField] float hoverGravityScale;
-    [SerializeField] float hoverDownForce;
-    [SerializeField] float maxHoverTime;
-    [SerializeField] float hoverSpeedMult;
+    [SerializeField] float glideJumpForce;
+    [SerializeField] float maxGlideTime;
+    [SerializeField] float glideSpeedMult;
     [SerializeField] float curveMult;
-    [SerializeField] AnimationCurve hoverCurve;
+    [SerializeField] AnimationCurve glideCurve;
 
     [Header("Fly Ability")]
-    [SerializeField] float flyGravity = 0;
     [SerializeField] float flyMaxTime;
     [SerializeField] float flySpeedMult;
 
+    [Header("Gravity")]
+    [SerializeField] float normalGravitysScale = 5;
+    [SerializeField] float glideGravityScale;
+    [SerializeField] float flyGravity = 0;
+
+
     bool jumpCut;
     bool isJumping;
-    bool hovering;
+    bool gliding;
     bool isFlying;
+    bool glideJump;
 
     float lastPressedJump;
     float onGround;
-    float hoverTime;
+    float glideTime;
     float flyTime;
 
     Vector2 moveInput;
@@ -88,18 +92,18 @@ public class PlayerController : MonoBehaviour
         //Hover Inputs
         if (holdBtt)
         {
-            if (Input.GetButton("Jump") && !isJumping && onGround < 0 && hoverTime > 0)
-                hovering = true;
-            else if ((Input.GetButtonUp("Jump") && hovering) || hoverTime <= 0)
-                hovering = false;
+            if (Input.GetButton("Jump") && CanGlide())
+                gliding = true;
+            else if ((Input.GetButtonUp("Jump") && gliding) || glideTime <= 0)
+                gliding = false;
         }
         else
         {
 
-            if (Input.GetButtonDown("Jump") && !isJumping && onGround < 0 && hoverTime > 0)
-                hovering = true;
-            else if ((Input.GetButtonUp("Jump") && hovering) || hoverTime <= 0)
-                hovering = false;
+            if (Input.GetButtonDown("Jump") && CanGlide())
+                gliding = true;
+            else if ((Input.GetButtonUp("Jump") && gliding) || glideTime <= 0)
+                gliding = false;
         }
     }
 
@@ -110,14 +114,12 @@ public class PlayerController : MonoBehaviour
         {
             onGround = coyoteTime;
             jumpCut = false;
-            hoverTime = maxHoverTime;
+            glideTime = maxGlideTime;
         }
 
-        if (lastPressedJump > 0 && onGround > 0 && !isFlying)
-            Jump();
+        if (lastPressedJump > 0 && onGround > 0 && !isFlying) Jump();
 
-        if (rb.velocity.y < 0)
-            isJumping = false;
+        if (rb.velocity.y < 0) isJumping = false;
 
         if (jumpCut)
         {
@@ -126,20 +128,19 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        //Hover Fields
-        if (hovering)
-            hoverTime -= Time.deltaTime;
+        //Glide Fields
+        if (gliding) glideTime -= Time.deltaTime;
 
+        if (glideTime == maxGlideTime) glideJump = true;
+
+        Debug.Log(glideJump);
 
         //Fly
-        if (isFlying)
-            flyTime -= Time.deltaTime;
-        else
-            flyTime = flyMaxTime;
+        if (isFlying) flyTime -= Time.deltaTime;
+        else flyTime = flyMaxTime;
         
 
-        if (flyTime < 0)
-            isFlying = false;
+        if (flyTime < 0) isFlying = false;
     }
 
     void Jump()
@@ -158,38 +159,56 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Movement
         if(isFlying && flyTime > 0)
             Fly();
         else
             Movement();
 
-        if (hovering)
-            Hover(hoverGravityScale);
+        if (gliding)
+            Glide();
+
+        //Set gravity
+        if (gliding && !glideJump)
+            SetGravityScale(glideGravityScale);
         else if (isFlying)
-            Hover(flyGravity);
+            SetGravityScale(flyGravity);
         else
-            Hover(normalGravitysScale);
+            SetGravityScale(normalGravitysScale);
     }
 
-    void Hover(float gravity)
+    void SetGravityScale(float gravity)
     {
         rb.gravityScale = gravity;
-
-        if (hovering)
-            StartCoroutine(HoverCurve());
-        
     }
 
+    void Glide()
+    {   
+        StartCoroutine(HoverCurve());
+    }
+
+    IEnumerator GlideJump()
+    {
+        rb.AddForce(Vector2.up * glideJumpForce, ForceMode2D.Force);
+        yield return new WaitForSeconds(.1f);
+        glideJump = false;
+    }
     IEnumerator HoverCurve()
     {
-        while (hoverTime <= maxHoverTime)
-        {
-            if (!hovering)
-                yield break;
+        if (glideJump)
+            StartCoroutine(GlideJump());
 
-            float strenght = hoverCurve.Evaluate(hoverTime / maxHoverTime);
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Lerp(rb.velocity.y, -strenght * curveMult, maxHoverTime));
-            yield return null;
+        if (!glideJump)
+        {
+            while (glideTime <= maxGlideTime)
+            {
+                if (!gliding)
+                    yield break;
+
+                float strenght = glideCurve.Evaluate(glideTime / maxGlideTime);
+                rb.velocity = new Vector2(rb.velocity.x, Mathf.Lerp(rb.velocity.y, -strenght * curveMult, maxGlideTime));
+                yield return null;
+            }
         }
     }
 
@@ -197,7 +216,7 @@ public class PlayerController : MonoBehaviour
     {
         float speedForce;
 
-        if (hovering) speedForce = speed * hoverSpeedMult;
+        if (gliding) speedForce = speed * glideSpeedMult;
         else speedForce = speed;
 
         var movement = moveInput.x * speedForce;
@@ -227,6 +246,12 @@ public class PlayerController : MonoBehaviour
 
         rb.AddForce(force, ForceMode2D.Force);
     }
+
+    bool CanGlide()
+    {
+        return !isJumping && onGround < 0 && glideTime > 0 && !isFlying;
+    }
+
 
     private void OnDrawGizmos()
     {

@@ -298,13 +298,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   holdBtt: 1
-  normalGravitysScale: 5
-  hoverGravityScale: 0.25
-  hoverDownForce: 2
-  maxHoverTime: 1
-  hoverSpeedMult: 0.8
+  glideJumpForce: 500
+  maxGlideTime: 1
+  glideSpeedMult: 0.8
   curveMult: 7
-  hoverCurve:
+  glideCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -328,9 +326,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  flyGravity: 0
   flyMaxTime: 4
   flySpeedMult: 1.2
+  normalGravitysScale: 5
+  glideGravityScale: 0.25
+  flyGravity: 0
 --- !u!50 &157576282
 Rigidbody2D:
   serializedVersion: 4
