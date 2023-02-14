@@ -79,12 +79,12 @@ public class PlayerController : MonoBehaviour
         {
             /*if (holdBtt)
             {
-                if (Input.GetButton("Jump") && !isJumping && glideJump && onGround < 0)
+                if (Input.GetButton("Jump") && !isJumping && !isFlying && glideJump && onGround < 0)
                     GlideJump();
             }
             else
             {*/
-                if (Input.GetButtonDown("Jump") && !isJumping && glideJump && onGround < 0)
+            if (Input.GetButtonDown("Jump") && !isJumping && !isFlying && glideJump && onGround < 0)
                     GlideJump();
             //}
         }
