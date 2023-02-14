@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool holdBtt;
     [SerializeField] bool canGlideJump;
     [SerializeField] float glideJumpForce;
-    [SerializeField] float maxGlideTime;
+    public float maxGlideTime;
     [SerializeField] float glideSpeedMult;
     [SerializeField] float curveMult;
     [SerializeField] AnimationCurve glideCurve;
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     [Header("Fly Ability")]
     public int aphidAmount;
     [SerializeField] float flyTimePerAphid;
-    [SerializeField] float flyMaxTime;
+    public float flyMaxTime;
     [SerializeField] float flySpeedMult;
 
     [Header("Gravity")]
@@ -52,8 +52,10 @@ public class PlayerController : MonoBehaviour
 
     float lastPressedJump;
     float onGround;
-    float glideTime;
-    float flyTime;
+    [HideInInspector]
+    public float glideTime;
+    [HideInInspector]
+    public float flyTime;
 
     Vector2 moveInput;
 
@@ -67,13 +69,13 @@ public class PlayerController : MonoBehaviour
         //Timers
         onGround -= Time.deltaTime;
         lastPressedJump -= Time.deltaTime;
-
+        if (gliding) glideTime -= Time.deltaTime;
+        if (isFlying) flyTime -= Time.deltaTime;
 
         MyInputs();
         CheckMethods();
 
-        if (gliding)
-            Glide();
+        if (gliding) Glide();
     }
 
     void MyInputs()
@@ -102,16 +104,16 @@ public class PlayerController : MonoBehaviour
         //Glide Inputs
         if (canGlideJump)
         {
-            if (holdBtt)
+            /*if (holdBtt)
             {
                 if (Input.GetButton("Jump") && !isJumping && glideJump && onGround < 0)
                     GlideJump();
             }
             else
-            {
+            {*/
                 if (Input.GetButtonDown("Jump") && !isJumping && glideJump && onGround < 0)
                     GlideJump();
-            }
+            //}
         }
 
         if (holdBtt)
@@ -140,11 +142,12 @@ public class PlayerController : MonoBehaviour
             onGround = coyoteTime;
             jumpCut = false;
             glideTime = maxGlideTime;
+            glideJump = true;
         }
 
         if (lastPressedJump > 0 && onGround > 0 && !isFlying) Jump();
 
-        if (rb.velocity.y < 0) isJumping = false;
+        if (rb.velocity.y < 8) isJumping = false;
 
         if (jumpCut)
         {
@@ -154,22 +157,15 @@ public class PlayerController : MonoBehaviour
 
 
         //Glide Fields
-        if (gliding) glideTime -= Time.deltaTime;
-
-        if (canGlideJump)
-        {
-            if (onGround > 0) glideJump = true;
-        }
-        else
+        if (!canGlideJump)
             glideJump = false;
+
 
         //Fly
         if (flyTime >= 0) isFlying = true;
         else isFlying = false;
 
         if (flyTime > flyMaxTime) flyTime = flyMaxTime;
-        if (isFlying) flyTime -= Time.deltaTime;
-        
     }
 
     void Jump()
