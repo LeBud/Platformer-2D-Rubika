@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 4493773985308631814}
   m_Layer: 0
   m_Name: Controller
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -547,6 +547,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  aphidAmount: 0
+  flyTimePerAphid: 4
   flyMaxTime: 4
   flySpeedMult: 1.2
   normalGravitysScale: 5

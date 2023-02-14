@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AnimationCurve glideCurve;
 
     [Header("Fly Ability")]
+    public int aphidAmount;
+    [SerializeField] float flyTimePerAphid;
     [SerializeField] float flyMaxTime;
     [SerializeField] float flySpeedMult;
 
@@ -82,8 +84,11 @@ public class PlayerController : MonoBehaviour
 
 
         //Fly Input
-        if(Input.GetButtonDown("Fire1"))
-            isFlying = true;
+        if (Input.GetButtonDown("Fire1") && CanFly())
+        {
+            flyTime = flyTimePerAphid; 
+            aphidAmount--;
+        }
 
 
         //Jumps Inputs
@@ -93,8 +98,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0) jumpCut = true;
 
 
+        #region GlideInputs
         //Glide Inputs
-
         if (canGlideJump)
         {
             if (holdBtt)
@@ -124,6 +129,7 @@ public class PlayerController : MonoBehaviour
             else if ((Input.GetButtonUp("Jump") && gliding) || glideTime <= 0)
                 gliding = false;
         }
+        #endregion
     }
 
     void CheckMethods()
@@ -158,11 +164,12 @@ public class PlayerController : MonoBehaviour
             glideJump = false;
 
         //Fly
-        if (isFlying) flyTime -= Time.deltaTime;
-        else flyTime = flyMaxTime;
-        
+        if (flyTime >= 0) isFlying = true;
+        else isFlying = false;
 
-        if (flyTime < 0) isFlying = false;
+        if (flyTime > flyMaxTime) flyTime = flyMaxTime;
+        if (isFlying) flyTime -= Time.deltaTime;
+        
     }
 
     void Jump()
@@ -263,6 +270,11 @@ public class PlayerController : MonoBehaviour
     bool CanGlide()
     {
         return !isJumping && onGround < 0 && glideTime > 0 && !isFlying && !glideJump && rb.velocity.y <= 0;
+    }
+
+    bool CanFly()
+    {
+        return aphidAmount > 0;
     }
 
     private void OnDrawGizmos()
