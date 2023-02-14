@@ -16,14 +16,14 @@ public class PlayerUI : MonoBehaviour
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
-        flySlider.maxValue = playerController.flyMaxTime;
-        glideSlider.maxValue = playerController.maxGlideTime;
+        flySlider.maxValue = playerController.playerControllerData.flyMaxTime;
+        glideSlider.maxValue = playerController.playerControllerData.maxGlideTime;
     }
 
     private void LateUpdate()
     {
         glideSlider.value = playerController.glideTime;
         flySlider.value = playerController.flyTime;
-        aphidTxt.text = "consommable : " + playerController.aphidAmount;
+        aphidTxt.text = "consommable : " + playerController.playerControllerData.aphidAmount;
     }
 }

@@ -1151,55 +1151,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41e9e85fccf57014bbd463465110cdb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  accel: 5
-  deccel: 15
-  jumpForce: 18.65
-  coyoteTime: 0.15
-  jumpBuffer: 0.1
-  jumpCutForce: 2
+  playerControllerData: {fileID: 11400000, guid: 7546c6d7360acac458da6905d62b496d, type: 2}
   groundCheckPos: {fileID: 4493773985485097168}
   groundCheckSize: {x: 0.98, y: 0.04}
   groundCheckLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  holdBtt: 1
-  canGlideJump: 1
-  glideJumpForce: 14
-  maxGlideTime: 1
-  glideSpeedMult: 0.8
-  curveMult: 7
-  glideCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: -1
-      outSlope: -1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: -1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  aphidAmount: 0
-  flyTimePerAphid: 4
-  flyMaxTime: 4
-  flySpeedMult: 1.2
-  normalGravitysScale: 5
-  glideGravityScale: 0.25
-  flyGravity: 0
   glideTime: 0
   flyTime: 0
 --- !u!114 &3833941071312306833
