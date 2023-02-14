@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Glide")]
     [SerializeField] bool holdBtt;
+    [SerializeField] bool canGlideJump;
     [SerializeField] float glideJumpForce;
     [SerializeField] float maxGlideTime;
     [SerializeField] float glideSpeedMult;
@@ -46,7 +47,6 @@ public class PlayerController : MonoBehaviour
     bool gliding;
     bool isFlying;
     bool glideJump;
-    bool isGlideJumping;
 
     float lastPressedJump;
     float onGround;
@@ -66,7 +66,6 @@ public class PlayerController : MonoBehaviour
         onGround -= Time.deltaTime;
         lastPressedJump -= Time.deltaTime;
 
-        Debug.Log(glideJump);
 
         MyInputs();
         CheckMethods();
@@ -94,7 +93,22 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0) jumpCut = true;
 
 
-        //Hover Inputs
+        //Glide Inputs
+
+        if (canGlideJump)
+        {
+            if (holdBtt)
+            {
+                if (Input.GetButton("Jump") && !isJumping && glideJump && onGround < 0)
+                    GlideJump();
+            }
+            else
+            {
+                if (Input.GetButtonDown("Jump") && !isJumping && glideJump && onGround < 0)
+                    GlideJump();
+            }
+        }
+
         if (holdBtt)
         {
             if (Input.GetButton("Jump") && CanGlide())
@@ -134,10 +148,14 @@ public class PlayerController : MonoBehaviour
 
 
         //Glide Fields
-        if (gliding && Gliding()) glideTime -= Time.deltaTime;
+        if (gliding) glideTime -= Time.deltaTime;
 
-        if (glideTime == maxGlideTime && onGround > 0) glideJump = true;
-
+        if (canGlideJump)
+        {
+            if (onGround > 0) glideJump = true;
+        }
+        else
+            glideJump = false;
 
         //Fly
         if (isFlying) flyTime -= Time.deltaTime;
@@ -163,26 +181,19 @@ public class PlayerController : MonoBehaviour
 
     void Glide()
     {
-        if (glideJump && !isGlideJumping)
-            StartCoroutine(GlideJump());
-
-        if (Gliding())
+        while (glideTime <= maxGlideTime)
         {
-            while (glideTime <= maxGlideTime)
-            {
-                if (!gliding)
-                    break;
+            if (!gliding)
+                break;
 
-                float strenght = glideCurve.Evaluate(glideTime / maxGlideTime);
-                rb.velocity = new Vector2(rb.velocity.x, Mathf.Lerp(rb.velocity.y, -strenght * curveMult, maxGlideTime));
-                return;
-            }
+            float strenght = glideCurve.Evaluate(glideTime / maxGlideTime);
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Lerp(rb.velocity.y, -strenght * curveMult, maxGlideTime));
+            return;
         }
     }
 
-    IEnumerator GlideJump()
+    void GlideJump()
     {
-        isGlideJumping = true;
         glideJump = false;
 
         float upForce = glideJumpForce;
@@ -190,10 +201,6 @@ public class PlayerController : MonoBehaviour
             upForce -= rb.velocity.y;
 
         rb.AddForce(Vector2.up * upForce, ForceMode2D.Impulse);
-
-        yield return new WaitForSeconds(.01f);
-
-        isGlideJumping = false;
     }
     
     private void FixedUpdate()
@@ -205,7 +212,7 @@ public class PlayerController : MonoBehaviour
             Movement();
 
         //Set gravity
-        if (gliding && !glideJump)
+        if (gliding)
             SetGravityScale(glideGravityScale);
         else if (isFlying)
             SetGravityScale(flyGravity);
@@ -255,12 +262,7 @@ public class PlayerController : MonoBehaviour
 
     bool CanGlide()
     {
-        return !isJumping && onGround < 0 && glideTime > 0 && !isFlying;
-    }
-
-    bool Gliding()
-    {
-        return !glideJump && !isGlideJumping && rb.velocity.y <= 0;
+        return !isJumping && onGround < 0 && glideTime > 0 && !isFlying && !glideJump && rb.velocity.y <= 0;
     }
 
     private void OnDrawGizmos()
