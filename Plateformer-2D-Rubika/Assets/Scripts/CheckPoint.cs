@@ -6,15 +6,23 @@ public class CheckPoint : MonoBehaviour
 {
 
     public int checkPointNum;
+    SpriteRenderer sprite;
+    PlayerController player;
+
+    private void Awake()
+    {
+        player = FindObjectOfType<PlayerController>();
+        sprite = GetComponent<SpriteRenderer>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
         if (collision.CompareTag("Player"))
         {
-            PlayerController player = collision.GetComponent<PlayerController>();
             if(checkPointNum > player.currentCheckPoint)
             {
+                sprite.color = new Vector4(1, 1, 0.1568628f, 1);
                 player.checkPointPos = transform.position;
                 player.currentCheckPoint = checkPointNum;
             }
