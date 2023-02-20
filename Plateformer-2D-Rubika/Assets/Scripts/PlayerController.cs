@@ -34,6 +34,12 @@ public class PlayerController : MonoBehaviour
 
     Vector2 moveInput;
 
+    //CheckPoint settings
+    [HideInInspector]
+    public Vector2 checkPointPos;
+    [HideInInspector]
+    public int currentCheckPoint = 0;
+    
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -246,6 +252,12 @@ public class PlayerController : MonoBehaviour
     bool CanFly()
     {
         return aphidAmount > 0;
+    }
+
+    public void Respawn()
+    {
+        rb.velocity = Vector2.zero;
+        transform.position = checkPointPos;
     }
 
     private void OnDrawGizmos()
