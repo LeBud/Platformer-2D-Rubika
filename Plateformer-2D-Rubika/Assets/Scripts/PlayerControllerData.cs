@@ -26,7 +26,6 @@ public class PlayerControllerData : ScriptableObject
     public AnimationCurve glideCurve;
 
     [Header("Fly Ability")]
-    public int aphidAmount;
     public float flyTimePerAphid;
     public float flyMaxTime;
     public float flySpeedMult;

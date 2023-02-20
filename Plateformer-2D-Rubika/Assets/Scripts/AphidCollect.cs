@@ -9,7 +9,7 @@ public class AphidCollect : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<PlayerController>().playerControllerData.aphidAmount++;
+            collision.GetComponent<PlayerController>().aphidAmount++;
             Destroy(gameObject);
         }
     }

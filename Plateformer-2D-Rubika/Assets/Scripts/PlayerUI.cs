@@ -24,6 +24,6 @@ public class PlayerUI : MonoBehaviour
     {
         glideSlider.value = playerController.glideTime;
         flySlider.value = playerController.flyTime;
-        aphidTxt.text = "consommable : " + playerController.playerControllerData.aphidAmount;
+        aphidTxt.text = "consommable : " + playerController.aphidAmount;
     }
 }

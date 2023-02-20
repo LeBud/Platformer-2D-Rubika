@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Vector2 groundCheckSize;
     [SerializeField] LayerMask groundCheckLayerMask;
 
+    [Header("Aphid Amount")]
+    public int aphidAmount;
 
     bool jumpCut;
     bool isJumping;
@@ -62,7 +64,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && CanFly())
         {
             flyTime = playerControllerData.flyTimePerAphid;
-            playerControllerData.aphidAmount--;
+            aphidAmount--;
         }
 
 
@@ -243,7 +245,7 @@ public class PlayerController : MonoBehaviour
 
     bool CanFly()
     {
-        return playerControllerData.aphidAmount > 0;
+        return aphidAmount > 0;
     }
 
     private void OnDrawGizmos()
