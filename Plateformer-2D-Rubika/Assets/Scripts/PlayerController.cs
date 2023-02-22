@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {*/
-            if (Input.GetButtonDown("Jump") && !isJumping && !isFlying && glideJump && onGround < 0)
+            if (Input.GetButtonDown("Jump") && (!isJumping || rb.velocity.y < 12) && !isFlying && glideJump && onGround < 0)
                     GlideJump();
             //}
         }
@@ -166,6 +166,8 @@ public class PlayerController : MonoBehaviour
         float force = playerControllerData.jumpForce;
         if (rb.velocity.y < 0)
             force -= rb.velocity.y;
+
+        rb.velocity = new Vector2(rb.velocity.x, 0);
 
         rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
     }
