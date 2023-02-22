@@ -18,6 +18,10 @@ public class PlayerController : MonoBehaviour
     [Header("Aphid Amount")]
     public int aphidAmount;
 
+    [Header("Clamp Velocity")]
+    [SerializeField] float maxVelocity;
+
+    bool canJump = true;
     bool jumpCut;
     bool isJumping;
     bool gliding;
@@ -52,6 +56,9 @@ public class PlayerController : MonoBehaviour
         lastPressedJump -= Time.deltaTime;
         if (gliding) glideTime -= Time.deltaTime;
         if (isFlying) flyTime -= Time.deltaTime;
+
+        //ClampVelocity
+        rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity);
 
         MyInputs();
         CheckMethods();
@@ -126,9 +133,9 @@ public class PlayerController : MonoBehaviour
             glideJump = true;
         }
 
-        if (lastPressedJump > 0 && onGround > 0 && !isFlying) Jump();
+        if (lastPressedJump > 0 && onGround > 0 && !isFlying && canJump && !isJumping) Jump();
 
-        if (rb.velocity.y < 8) isJumping = false;
+        if (rb.velocity.y < 0) isJumping = false;
 
         if (jumpCut)
         {
