@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
     [Header("Clamp Velocity")]
     [SerializeField] float maxVelocity;
 
+    [Header("Can Glide")]
+    public bool canGlide;
+
     bool canJump = true;
     bool jumpCut;
     bool isJumping;
@@ -90,18 +93,11 @@ public class PlayerController : MonoBehaviour
 
         #region GlideInputs
         //Glide Inputs
+        if (!canGlide) return;
         if (playerControllerData.canGlideJump)
         {
-            /*if (holdBtt)
-            {
-                if (Input.GetButton("Jump") && !isJumping && !isFlying && glideJump && onGround < 0)
-                    GlideJump();
-            }
-            else
-            {*/
             if (Input.GetButtonDown("Jump") && (!isJumping || rb.velocity.y < 12) && !isFlying && glideJump && onGround < 0)
                     GlideJump();
-            //}
         }
 
         if (playerControllerData.holdBtt)
