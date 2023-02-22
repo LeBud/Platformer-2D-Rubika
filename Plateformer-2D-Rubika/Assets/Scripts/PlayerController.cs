@@ -133,9 +133,9 @@ public class PlayerController : MonoBehaviour
             glideJump = true;
         }
 
-        if (lastPressedJump > 0 && onGround > 0 && !isFlying && canJump) Jump();
+        if (lastPressedJump > 0 && onGround > 0 && !isFlying && canJump && !isJumping) Jump();
 
-        if (rb.velocity.y < 8) isJumping = false;
+        if (rb.velocity.y < 0) isJumping = false;
 
         if (jumpCut)
         {
