@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
         if (!canGlide) return;
         if (playerControllerData.canGlideJump)
         {
-            if (Input.GetButtonDown("Jump") && (!isJumping || rb.velocity.y < 12) && !isFlying && glideJump && onGround < 0)
+            if (Input.GetButtonDown("Jump") && CanJumpGlide())
                     GlideJump();
         }
 
@@ -121,17 +121,20 @@ public class PlayerController : MonoBehaviour
     void CheckMethods()
     {
         //Jump Fields
-        if (Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundCheckLayerMask))
+        if (!isJumping)
         {
-            onGround = playerControllerData.coyoteTime;
-            jumpCut = false;
-            glideTime = playerControllerData.maxGlideTime;
-            glideJump = true;
+            if (Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundCheckLayerMask))
+            {
+                onGround = playerControllerData.coyoteTime;
+                jumpCut = false;
+                glideTime = playerControllerData.maxGlideTime;
+                glideJump = true;
+            }
         }
 
-        if (lastPressedJump > 0 && onGround > 0 && !isFlying && canJump && !isJumping) Jump();
+        if (CanJump()) Jump();
 
-        if (rb.velocity.y < 0) isJumping = false;
+        if (rb.velocity.y < 0 && isJumping) isJumping = false;
 
         if (jumpCut)
         {
@@ -247,6 +250,16 @@ public class PlayerController : MonoBehaviour
         var force = new Vector2(horMov * acceleration, verMov * acceleration);
 
         rb.AddForce(force, ForceMode2D.Force);
+    }
+
+    bool CanJumpGlide()
+    {
+        return (!isJumping || rb.velocity.y < 12) && !isFlying && glideJump && onGround < 0;
+    }
+
+    bool CanJump()
+    {
+        return lastPressedJump > 0 && onGround > 0 && !isFlying && canJump && !isJumping;
     }
 
     bool CanGlide()
