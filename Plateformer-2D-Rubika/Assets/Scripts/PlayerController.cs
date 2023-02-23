@@ -134,7 +134,7 @@ public class PlayerController : MonoBehaviour
 
         if (CanJump()) Jump();
 
-        if (rb.velocity.y < 0 && isJumping) isJumping = false;
+        if (rb.velocity.y <= 0 && isJumping) isJumping = false;
 
         if (jumpCut)
         {
@@ -166,7 +166,8 @@ public class PlayerController : MonoBehaviour
         if (rb.velocity.y < 0)
             force -= rb.velocity.y;
 
-        rb.velocity = new Vector2(rb.velocity.x, 0);
+        if(rb.velocity.y > 0)
+            rb.velocity = new Vector2(rb.velocity.x, 0);
 
         rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
     }
