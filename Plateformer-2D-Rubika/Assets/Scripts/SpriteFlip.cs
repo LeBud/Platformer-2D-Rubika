@@ -13,12 +13,12 @@ public class SpriteFlip : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(rb.velocity.x > 0)
+        if(rb.velocity.x > 0.5f)
         {
             transform.localScale = new Vector3(1, 1, 1);
             transform.localPosition = new Vector3(.1f, -.11f, 0);
         }
-        else if(rb.velocity.x < 0)
+        else if(rb.velocity.x < -0.5f)
         {
             transform.localScale = new Vector3(-1, 1, 1);
             transform.localPosition = new Vector3(-.1f, -.11f, 0);
