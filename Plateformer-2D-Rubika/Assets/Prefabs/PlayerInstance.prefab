@@ -1398,6 +1398,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4493773985414094393}
+  - component: {fileID: 3614885301926329794}
   m_Layer: 0
   m_Name: PlayerInstance
   m_TagString: Untagged
@@ -1423,6 +1424,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3614885301926329794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4493773985414094392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcf9ecf480516b645b10ab4ae33f28cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followPlayer: 1
+  orthographicSize: 9
+  damping: {x: 0.15, y: 0.15}
+  deadZone: {x: 0.01, y: 0.02}
+  targetOffset: {x: 0, y: 2, z: 0}
+  cameraPos: {x: 0, y: 0}
+  speed: 6
+  inMain: 0
 --- !u!1 &4493773985485097171
 GameObject:
   m_ObjectHideFlags: 0
