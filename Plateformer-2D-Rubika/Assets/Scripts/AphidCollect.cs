@@ -16,8 +16,18 @@ public class AphidCollect : MonoBehaviour
 
             player.flyTime += player.playerControllerData.flyMaxTime / 3;
 
-            Destroy(gameObject);
+            StartCoroutine(Respawn());
         }
+    }
+    
+    IEnumerator Respawn()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        gameObject.GetComponent<CircleCollider2D>().enabled = false;
+        yield return new WaitForSeconds(4);
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        gameObject.GetComponent<CircleCollider2D>().enabled = true;
+
     }
 
 }
