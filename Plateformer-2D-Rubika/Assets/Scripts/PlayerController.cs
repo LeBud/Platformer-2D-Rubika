@@ -15,8 +15,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Vector2 groundCheckSize;
     [SerializeField] LayerMask groundCheckLayerMask;
 
-    [Header("Aphid Amount")]
-    public int aphidAmount;
+    /*[Header("Aphid Amount")]
+    public int aphidAmount;*/
 
     [Header("Clamp Velocity")]
     [SerializeField] float maxVelocity;
