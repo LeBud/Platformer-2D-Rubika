@@ -11,7 +11,6 @@ public class PlayerUI : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] Slider glideSlider;
     [SerializeField] Slider flySlider;
-    [SerializeField] TextMeshProUGUI aphidTxt;
 
     private void Awake()
     {
@@ -24,6 +23,5 @@ public class PlayerUI : MonoBehaviour
     {
         glideSlider.value = playerController.glideTime;
         flySlider.value = playerController.flyTime;
-        aphidTxt.text = "consommable : " + playerController.aphidAmount;
     }
 }
