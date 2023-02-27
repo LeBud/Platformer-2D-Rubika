@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     bool isJumping;
     bool gliding;
     bool glideJump;
+    bool glideSpeed;
     bool isFlying;
     bool flyRequierement;
 
@@ -147,6 +148,10 @@ public class PlayerController : MonoBehaviour
         if (!playerControllerData.canGlideJump)
             glideJump = false;
 
+        if (glideTime < playerControllerData.maxGlideTime && onGround < 0)
+            glideSpeed = true;
+        else
+            glideSpeed = false;
 
         //Fly
         if (flyTime >= 0 && flyRequierement) isFlying = true;
@@ -222,7 +227,7 @@ public class PlayerController : MonoBehaviour
     {
         float speedForce;
 
-        if (gliding) speedForce = playerControllerData.speed * playerControllerData.glideSpeedMult;
+        if (glideSpeed) speedForce = playerControllerData.speed * playerControllerData.glideSpeedMult;
         else speedForce = playerControllerData.speed;
 
         var movement = moveInput.x * speedForce;
