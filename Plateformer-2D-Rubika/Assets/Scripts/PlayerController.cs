@@ -28,8 +28,9 @@ public class PlayerController : MonoBehaviour
     bool jumpCut;
     bool isJumping;
     bool gliding;
-    bool isFlying;
     bool glideJump;
+    bool isFlying;
+    bool flyRequierement;
 
     float lastPressedJump;
     float onGround;
@@ -77,11 +78,10 @@ public class PlayerController : MonoBehaviour
 
 
         //Fly Input
-        if (Input.GetButtonDown("Fire1") && CanFly())
-        {
-            flyTime = playerControllerData.flyTimePerAphid;
-            aphidAmount--;
-        }
+        if (Input.GetButton("Fire1") && CanFly())
+            flyRequierement = true;
+        else
+            flyRequierement = false;
 
 
         //Jumps Inputs
@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour
 
 
         //Fly
-        if (flyTime >= 0) isFlying = true;
+        if (flyTime >= 0 && flyRequierement) isFlying = true;
         else isFlying = false;
 
         if (flyTime > playerControllerData.flyMaxTime) flyTime = playerControllerData.flyMaxTime;
@@ -199,7 +199,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         //Movement
-        if(isFlying && flyTime > 0)
+        if(flyRequierement && flyTime > 0)
             Fly();
         else
             Movement();
@@ -270,7 +270,7 @@ public class PlayerController : MonoBehaviour
 
     bool CanFly()
     {
-        return aphidAmount > 0;
+        return flyTime > 0;
     }
 
     public void Respawn()
