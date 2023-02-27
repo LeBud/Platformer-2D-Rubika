@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] Vector2 cameraPos;
 
     [Header("Transition speed")]
-    [SerializeField] float speed = 1;
+    [SerializeField] float speed;
 
     bool inTrigger;
 
@@ -49,6 +49,7 @@ public class CameraController : MonoBehaviour
             vcBody.m_YDamping = damping.y;
             vcBody.m_DeadZoneWidth = deadZone.x;
             vcBody.m_DeadZoneHeight = deadZone.y;
+
         }
     }
 
@@ -65,6 +66,8 @@ public class CameraController : MonoBehaviour
             }
 
             virtualCamera.m_Lens.OrthographicSize = Mathf.MoveTowards(virtualCamera.m_Lens.OrthographicSize, orthographicSize, speed * Time.deltaTime);
+            Camera.main.orthographicSize = Mathf.MoveTowards(Camera.main.orthographicSize, orthographicSize, speed * Time.deltaTime);
+
             vcBody.m_TrackedObjectOffset.x = Mathf.MoveTowards(vcBody.m_TrackedObjectOffset.x, targetOffset.x, speed * Time.deltaTime);
             vcBody.m_TrackedObjectOffset.y = Mathf.MoveTowards(vcBody.m_TrackedObjectOffset.y, targetOffset.y, speed * Time.deltaTime);
         }
