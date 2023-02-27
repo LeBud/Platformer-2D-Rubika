@@ -15,8 +15,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Vector2 groundCheckSize;
     [SerializeField] LayerMask groundCheckLayerMask;
 
-    [Header("Aphid Amount")]
-    public int aphidAmount;
+    /*[Header("Aphid Amount")]
+    public int aphidAmount;*/
 
     [Header("Clamp Velocity")]
     [SerializeField] float maxVelocity;
@@ -28,8 +28,10 @@ public class PlayerController : MonoBehaviour
     bool jumpCut;
     bool isJumping;
     bool gliding;
-    bool isFlying;
     bool glideJump;
+    bool glideSpeed;
+    bool isFlying;
+    bool flyRequierement;
 
     float lastPressedJump;
     float onGround;
@@ -77,11 +79,10 @@ public class PlayerController : MonoBehaviour
 
 
         //Fly Input
-        if (Input.GetButtonDown("Fire1") && CanFly())
-        {
-            flyTime = playerControllerData.flyTimePerAphid;
-            aphidAmount--;
-        }
+        if (Input.GetButton("Fire1") && CanFly())
+            flyRequierement = true;
+        else
+            flyRequierement = false;
 
 
         //Jumps Inputs
@@ -147,9 +148,13 @@ public class PlayerController : MonoBehaviour
         if (!playerControllerData.canGlideJump)
             glideJump = false;
 
+        if (glideTime < playerControllerData.maxGlideTime && onGround < 0)
+            glideSpeed = true;
+        else
+            glideSpeed = false;
 
         //Fly
-        if (flyTime >= 0) isFlying = true;
+        if (flyTime >= 0 && flyRequierement) isFlying = true;
         else isFlying = false;
 
         if (flyTime > playerControllerData.flyMaxTime) flyTime = playerControllerData.flyMaxTime;
@@ -199,7 +204,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         //Movement
-        if(isFlying && flyTime > 0)
+        if(flyRequierement && flyTime > 0)
             Fly();
         else
             Movement();
@@ -222,7 +227,7 @@ public class PlayerController : MonoBehaviour
     {
         float speedForce;
 
-        if (gliding) speedForce = playerControllerData.speed * playerControllerData.glideSpeedMult;
+        if (glideSpeed) speedForce = playerControllerData.speed * playerControllerData.glideSpeedMult;
         else speedForce = playerControllerData.speed;
 
         var movement = moveInput.x * speedForce;
@@ -270,7 +275,7 @@ public class PlayerController : MonoBehaviour
 
     bool CanFly()
     {
-        return aphidAmount > 0;
+        return flyTime > 0;
     }
 
     public void Respawn()
