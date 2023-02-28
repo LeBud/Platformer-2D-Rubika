@@ -27,7 +27,8 @@ public class PlayerController : MonoBehaviour
     bool canJump = true;
     bool jumpCut;
     bool isJumping;
-    bool gliding;
+    [HideInInspector]
+    public bool gliding;
     bool glideJump;
     bool glideSpeed;
     bool isFlying;
@@ -48,7 +49,12 @@ public class PlayerController : MonoBehaviour
     public Vector2 checkPointPos;
     [HideInInspector]
     public int currentCheckPoint = 0;
+
+    //AirFlow
+    [HideInInspector]
+    public bool inAirFlow;
     
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -59,7 +65,7 @@ public class PlayerController : MonoBehaviour
         //Timers
         onGround -= Time.deltaTime;
         lastPressedJump -= Time.deltaTime;
-        if (gliding) glideTime -= Time.deltaTime;
+        if (gliding && !inAirFlow) glideTime -= Time.deltaTime;
         if (isFlying) flyTime -= Time.deltaTime;
 
         //ClampVelocity
@@ -181,7 +187,10 @@ public class PlayerController : MonoBehaviour
     {
         while (glideTime <= playerControllerData.maxGlideTime)
         {
-            if (!gliding)
+            if (!gliding || inAirFlow)
+                break;
+
+            if (rb.velocity.y >= 0)
                 break;
 
             float strenght = playerControllerData.glideCurve.Evaluate(glideTime / playerControllerData.maxGlideTime);

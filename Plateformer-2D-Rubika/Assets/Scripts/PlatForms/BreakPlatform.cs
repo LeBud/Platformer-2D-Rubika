@@ -8,6 +8,9 @@ public class BreakPlatform : MonoBehaviour
     [SerializeField] float breakTimer;
     [SerializeField] float respawnTimer;
 
+    [SerializeField] Color color1;
+    [SerializeField] Color color2;
+
     bool isPlaying;
 
     SpriteRenderer spriteRenderer;
@@ -32,12 +35,12 @@ public class BreakPlatform : MonoBehaviour
         isPlaying = true;
         yield return new WaitForSeconds(breakTimer);
 
-        spriteRenderer.enabled = false;
+        spriteRenderer.color= color2;
         BoxCollider2D.enabled = false;
 
         yield return new WaitForSeconds(respawnTimer);
 
-        spriteRenderer.enabled = true;
+        spriteRenderer.color= color1;
         BoxCollider2D.enabled = true;
 
         isPlaying = false;
