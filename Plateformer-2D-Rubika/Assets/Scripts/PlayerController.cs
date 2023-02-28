@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
 
+    public float airFlowGrav;
+
     [Header("Controller Data")]
     public PlayerControllerData playerControllerData;
 
@@ -27,7 +29,8 @@ public class PlayerController : MonoBehaviour
     bool canJump = true;
     bool jumpCut;
     bool isJumping;
-    bool gliding;
+    [HideInInspector]
+    public bool gliding;
     bool glideJump;
     bool glideSpeed;
     bool isFlying;
@@ -48,7 +51,13 @@ public class PlayerController : MonoBehaviour
     public Vector2 checkPointPos;
     [HideInInspector]
     public int currentCheckPoint = 0;
-    
+
+    //AirFlow
+    [HideInInspector]
+    public bool inAirFlow;
+    [HideInInspector]
+    public Vector2 airFlowDir;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -59,7 +68,7 @@ public class PlayerController : MonoBehaviour
         //Timers
         onGround -= Time.deltaTime;
         lastPressedJump -= Time.deltaTime;
-        if (gliding) glideTime -= Time.deltaTime;
+        if (gliding && !inAirFlow) glideTime -= Time.deltaTime;
         if (isFlying) flyTime -= Time.deltaTime;
 
         //ClampVelocity
@@ -68,7 +77,7 @@ public class PlayerController : MonoBehaviour
         MyInputs();
         CheckMethods();
 
-        if (gliding) Glide();
+        if (gliding && !inAirFlow) Glide();
     }
 
     void MyInputs()
@@ -181,7 +190,10 @@ public class PlayerController : MonoBehaviour
     {
         while (glideTime <= playerControllerData.maxGlideTime)
         {
-            if (!gliding)
+            if (rb.velocity.y > 0)
+                break;
+
+            if (!gliding || inAirFlow)
                 break;
 
             float strenght = playerControllerData.glideCurve.Evaluate(glideTime / playerControllerData.maxGlideTime);
@@ -204,14 +216,18 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         //Movement
-        if(flyRequierement && flyTime > 0)
+        if (flyRequierement && flyTime > 0)
             Fly();
+        else if (inAirFlow)
+            AirFlowMovement();
         else
             Movement();
 
         //Set gravity
-        if (gliding)
+        if (gliding && !inAirFlow)
             SetGravityScale(playerControllerData.glideGravityScale);
+        else if (gliding && inAirFlow)
+            SetGravityScale(airFlowGrav);
         else if (isFlying)
             SetGravityScale(playerControllerData.flyGravity);
         else
@@ -239,6 +255,25 @@ public class PlayerController : MonoBehaviour
         var force = new Vector2(movement * acceleration, rb.velocity.y);
 
         rb.AddForce(force, ForceMode2D.Force);
+    }
+
+    void AirFlowMovement()
+    {
+        float speedForce = playerControllerData.speed * playerControllerData.flySpeedMult;
+
+        var horMov = airFlowDir.x;
+        var verMov = airFlowDir.y;
+
+        //float acceleration = Mathf.Abs(horMov) > .01f || Mathf.Abs(verMov) > .01f ? playerControllerData.accel : playerControllerData.deccel;
+
+        /*horMov = horMov - rb.velocity.x;
+        verMov = verMov - rb.velocity.y;*/
+
+        var force = new Vector2(horMov, verMov);
+
+        //rb.AddForce(force * speedForce, ForceMode2D.Force);
+        rb.velocity = force * speedForce;
+
     }
 
     void Fly()
