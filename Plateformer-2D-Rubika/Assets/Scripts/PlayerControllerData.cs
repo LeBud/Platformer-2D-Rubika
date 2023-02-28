@@ -30,9 +30,12 @@ public class PlayerControllerData : ScriptableObject
     public float flyMaxTime;
     public float flySpeedMult;
 
+    [Header("Air Flow")]
+    public float airFlowLerpSpeed = 2;
+
     [Header("Gravity")]
     public float normalGravitysScale = 5;
-    public float glideGravityScale;
+    public float airFlowGravity = 1;
     public float flyGravity = 0;
 
 }

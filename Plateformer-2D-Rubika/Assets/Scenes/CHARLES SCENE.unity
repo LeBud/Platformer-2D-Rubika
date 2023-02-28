@@ -520,7 +520,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cd9c20c37df28b48904acf4e7aaf832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  airFlowForce: 2
+  airFlowForce: 30
+  dir: {x: 0, y: 0}
 --- !u!61 &134186172
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1060,7 +1061,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cd9c20c37df28b48904acf4e7aaf832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  airFlowForce: 2
+  airFlowForce: 30
+  dir: {x: 0, y: 0}
 --- !u!61 &442418130
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2595,9 +2597,13 @@ PrefabInstance:
       propertyPath: m_TargetGraphic
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3614885301926329794, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
+      propertyPath: orthographicSize
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 4493773983549887248, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: m_Lens.OrthographicSize
-      value: 9
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4493773983549887251, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2625,7 +2631,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4493773985029801108, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: orthographic size
-      value: 9
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4493773985308631815, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
+      propertyPath: airFlowGrav
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4493773985414094392, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: m_Name
@@ -4894,7 +4904,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cd9c20c37df28b48904acf4e7aaf832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  airFlowForce: 2
+  airFlowForce: 20
+  dir: {x: 0, y: 0}
 --- !u!61 &2083200802
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5000,8 +5011,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2083200800}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -40, y: 0, z: 0}
-  m_LocalScale: {x: 6, y: 3, z: 1}
+  m_LocalPosition: {x: 4.03, y: 11.23, z: 0}
+  m_LocalScale: {x: 8, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1390509653}
@@ -5039,7 +5050,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cd9c20c37df28b48904acf4e7aaf832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  airFlowForce: 5
+  airFlowForce: 60
+  dir: {x: 0, y: 0}
 --- !u!61 &2117651076
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5145,7 +5157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2117651074}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -37.33, y: 10.14, z: 0}
+  m_LocalPosition: {x: -27.74, y: 10.14, z: 0}
   m_LocalScale: {x: 28, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

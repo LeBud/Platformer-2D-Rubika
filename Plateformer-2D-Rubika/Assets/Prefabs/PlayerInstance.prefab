@@ -1257,11 +1257,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   maxVelocity: 60
+  airFlowLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  airFlowGrav: 0
+  airFlowLerpSpeed: 2
   canGlide: 1
+  gliding: 0
   glideTime: 0
   flyTime: 0
   checkPointPos: {x: 0, y: 0}
   currentCheckPoint: 0
+  inAirFlow: 0
+  airFlowDir: {x: 0, y: 0}
 --- !u!114 &3833941071312306833
 MonoBehaviour:
   m_ObjectHideFlags: 0

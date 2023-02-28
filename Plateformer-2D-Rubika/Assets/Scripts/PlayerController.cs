@@ -6,8 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
-
-    public float airFlowGrav;
+    AirFlow airFlow;
 
     [Header("Controller Data")]
     public PlayerControllerData playerControllerData;
@@ -17,8 +16,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Vector2 groundCheckSize;
     [SerializeField] LayerMask groundCheckLayerMask;
 
-    /*[Header("Aphid Amount")]
-    public int aphidAmount;*/
+    [Header("AirFlow")]
+    [SerializeField] LayerMask airFlowLayerMask;
 
     [Header("Clamp Velocity")]
     [SerializeField] float maxVelocity;
@@ -26,7 +25,6 @@ public class PlayerController : MonoBehaviour
     [Header("Can Glide")]
     public bool canGlide;
 
-    bool canJump = true;
     bool jumpCut;
     bool isJumping;
     [HideInInspector]
@@ -35,9 +33,11 @@ public class PlayerController : MonoBehaviour
     bool glideSpeed;
     bool isFlying;
     bool flyRequierement;
+    bool airFlowing;
 
     float lastPressedJump;
     float onGround;
+    float airFlowForce;
 
     [HideInInspector]
     public float glideTime;
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
         //Timers
         onGround -= Time.deltaTime;
         lastPressedJump -= Time.deltaTime;
-        if (gliding && !inAirFlow) glideTime -= Time.deltaTime;
+        if (gliding && !inAirFlow && rb.velocity.y < 0) glideTime -= Time.deltaTime;
         if (isFlying) flyTime -= Time.deltaTime;
 
         //ClampVelocity
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
         MyInputs();
         CheckMethods();
 
-        if (gliding && !inAirFlow) Glide();
+        if (gliding && !inAirFlow && rb.velocity.y < 0) Glide();
     }
 
     void MyInputs()
@@ -100,6 +100,12 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0) jumpCut = true;
 
+        //AirFlow Inputs
+        if (Input.GetButton("Jump") && inAirFlow && gliding)
+        {
+            airFlowing = true;
+        }
+        else airFlowing = false;
 
         #region GlideInputs
         //Glide Inputs
@@ -117,19 +123,20 @@ public class PlayerController : MonoBehaviour
             else if ((Input.GetButtonUp("Jump") && gliding) || glideTime <= 0)
                 gliding = false;
         }
-        else
+        /*else
         {
 
             if (Input.GetButtonDown("Jump") && CanGlide())
                 gliding = true;
             else if ((Input.GetButtonUp("Jump") && gliding) || glideTime <= 0)
                 gliding = false;
-        }
+        }*/
         #endregion
     }
 
     void CheckMethods()
     {
+
         //Jump Fields
         if (!isJumping)
         {
@@ -146,12 +153,33 @@ public class PlayerController : MonoBehaviour
 
         if (rb.velocity.y <= 0 && isJumping) isJumping = false;
 
-        if (jumpCut)
+        if (jumpCut && isJumping)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / playerControllerData.jumpCutForce);
             jumpCut = false;
         }
 
+        //AirFlow Check
+        if (onGround < 0)
+        {
+            if (Physics2D.OverlapBox(transform.position, transform.localScale, 0, airFlowLayerMask))
+            {
+                inAirFlow = true;
+                airFlow = Physics2D.OverlapBox(transform.position, transform.localScale, 0, airFlowLayerMask).GetComponent<AirFlow>();
+            }
+            else
+                inAirFlow = false;
+        }
+        else
+            inAirFlow = false;
+
+        if(airFlow != null)
+        {
+            airFlowDir = airFlow.dir;
+            airFlowForce = airFlow.airFlowForce;
+        }
+
+        if (airFlowing) glideTime = playerControllerData.maxGlideTime;
 
         //Glide Fields
         if (!playerControllerData.canGlideJump)
@@ -190,9 +218,6 @@ public class PlayerController : MonoBehaviour
     {
         while (glideTime <= playerControllerData.maxGlideTime)
         {
-            if (rb.velocity.y > 0)
-                break;
-
             if (!gliding || inAirFlow)
                 break;
 
@@ -216,18 +241,16 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         //Movement
-        if (flyRequierement && flyTime > 0)
-            Fly();
-        else if (inAirFlow)
+        if (airFlowing)
             AirFlowMovement();
+        else if (flyRequierement && flyTime > 0)
+            Fly();
         else
             Movement();
 
         //Set gravity
-        if (gliding && !inAirFlow)
-            SetGravityScale(playerControllerData.glideGravityScale);
-        else if (gliding && inAirFlow)
-            SetGravityScale(airFlowGrav);
+        if (airFlowing)
+            SetGravityScale(playerControllerData.airFlowGravity);
         else if (isFlying)
             SetGravityScale(playerControllerData.flyGravity);
         else
@@ -255,25 +278,17 @@ public class PlayerController : MonoBehaviour
         var force = new Vector2(movement * acceleration, rb.velocity.y);
 
         rb.AddForce(force, ForceMode2D.Force);
+
     }
 
     void AirFlowMovement()
     {
-        float speedForce = playerControllerData.speed * playerControllerData.flySpeedMult;
 
-        var horMov = airFlowDir.x;
-        var verMov = airFlowDir.y;
+        rb.velocity = new Vector2(
+            Mathf.Lerp(rb.velocity.x, airFlowDir.x * airFlowForce, playerControllerData.airFlowLerpSpeed * Time.fixedDeltaTime),
+            Mathf.Lerp(rb.velocity.y, airFlowDir.y * airFlowForce, playerControllerData.airFlowLerpSpeed * Time.fixedDeltaTime));
 
-        //float acceleration = Mathf.Abs(horMov) > .01f || Mathf.Abs(verMov) > .01f ? playerControllerData.accel : playerControllerData.deccel;
-
-        /*horMov = horMov - rb.velocity.x;
-        verMov = verMov - rb.velocity.y;*/
-
-        var force = new Vector2(horMov, verMov);
-
-        //rb.AddForce(force * speedForce, ForceMode2D.Force);
-        rb.velocity = force * speedForce;
-
+        rb.AddForce(airFlowDir.normalized * airFlowForce, ForceMode2D.Force);
     }
 
     void Fly()
@@ -300,7 +315,7 @@ public class PlayerController : MonoBehaviour
 
     bool CanJump()
     {
-        return lastPressedJump > 0 && onGround > 0 && !isFlying && canJump && !isJumping;
+        return lastPressedJump > 0 && onGround > 0 && !isFlying && !isJumping && !airFlowing;
     }
 
     bool CanGlide()
@@ -310,7 +325,7 @@ public class PlayerController : MonoBehaviour
 
     bool CanFly()
     {
-        return flyTime > 0;
+        return flyTime > 0 && !airFlowing;
     }
 
     public void Respawn()
