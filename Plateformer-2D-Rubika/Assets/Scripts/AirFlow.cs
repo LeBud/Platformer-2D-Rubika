@@ -9,7 +9,6 @@ public class AirFlow : MonoBehaviour
     [Header("Air Flow Settings")]
     [SerializeField] float airFlowForce;
 
-    Rigidbody2D rb;
     PlayerController playerController;
 
     Quaternion angle;
@@ -17,29 +16,20 @@ public class AirFlow : MonoBehaviour
 
     private void Awake()
     {
-        rb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
-        playerController = rb.transform.GetComponent<PlayerController>();
+        playerController = FindObjectOfType<PlayerController>();
 
         angle = Quaternion.AngleAxis(transform.rotation.z, Vector2.right);
         dir = angle * transform.right;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player") && playerController.gliding)
-        {
-            rb.AddForce(dir * airFlowForce, ForceMode2D.Impulse);
-        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && playerController.gliding)
         {
-            playerController.glideTime = playerController.playerControllerData.maxGlideTime;
             playerController.inAirFlow = true;
+            playerController.glideTime = playerController.playerControllerData.maxGlideTime;
 
-            rb.AddForce(dir * airFlowForce, ForceMode2D.Force);
+            playerController.airFlowDir = dir;
         }
     }
 
