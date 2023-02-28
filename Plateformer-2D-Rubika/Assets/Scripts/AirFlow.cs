@@ -28,7 +28,7 @@ public class AirFlow : MonoBehaviour
     {
         if (collision.CompareTag("Player") && playerController.gliding)
         {
-            rb.velocity = new Vector2(rb.velocity.x / 4, rb.velocity.y / 4);
+            rb.AddForce(dir * airFlowForce, ForceMode2D.Impulse);
         }
     }
 
@@ -39,7 +39,7 @@ public class AirFlow : MonoBehaviour
             playerController.glideTime = playerController.playerControllerData.maxGlideTime;
             playerController.inAirFlow = true;
 
-            rb.velocity = new Vector2(dir.x * airFlowForce, dir.y * airFlowForce);
+            rb.AddForce(dir * airFlowForce, ForceMode2D.Force);
         }
     }
 
