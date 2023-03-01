@@ -1256,12 +1256,10 @@ MonoBehaviour:
   groundCheckLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  maxVelocity: 60
   airFlowLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  airFlowGrav: 0
-  airFlowLerpSpeed: 2
+  maxVelocity: 60
   canGlide: 1
   gliding: 0
   glideTime: 0
@@ -1450,7 +1448,7 @@ MonoBehaviour:
   deadZone: {x: 0.01, y: 0.02}
   targetOffset: {x: 0, y: 2, z: 0}
   cameraPos: {x: 0, y: 0}
-  speed: 6
+  speed: 16
   inMain: 0
 --- !u!1 &4493773985485097171
 GameObject:
