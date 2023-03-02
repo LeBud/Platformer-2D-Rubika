@@ -13,7 +13,7 @@ public class CameraController : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] bool followPlayer;
-    [SerializeField] int orthographicSize;
+    [SerializeField] float orthographicSize;
     [SerializeField] Vector2 damping;
     [SerializeField] Vector2 deadZone;
 
