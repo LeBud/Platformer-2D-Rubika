@@ -11,17 +11,20 @@ public class PlayerUI : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] Slider glideSlider;
     [SerializeField] Slider flySlider;
+    [SerializeField] TextMeshProUGUI deathCounterTxt;
 
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
         flySlider.maxValue = playerController.playerControllerData.flyMaxTime;
         glideSlider.maxValue = playerController.playerControllerData.maxGlideTime;
+        deathCounterTxt.text = "Death : " + playerController.deathCounter;
     }
 
     private void LateUpdate()
     {
         glideSlider.value = playerController.glideTime;
         flySlider.value = playerController.flyTime;
+        deathCounterTxt.text = "Death : " + playerController.deathCounter;
     }
 }

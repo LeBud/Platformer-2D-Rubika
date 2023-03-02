@@ -19,11 +19,18 @@ public class PlayerController : MonoBehaviour
     [Header("AirFlow")]
     [SerializeField] LayerMask airFlowLayerMask;
 
+    [Header("Slow Platform")]
+    [SerializeField] LayerMask slowPlatformLayerMask;
+    [SerializeField] float slowMultMovement;
+    [SerializeField] float slowMultJump;
+
     [Header("Clamp Velocity")]
     [SerializeField] float maxVelocity;
 
     [Header("Can Glide")]
     public bool canGlide;
+
+    public int deathCounter;
 
     bool jumpCut;
     bool isJumping;
@@ -34,6 +41,8 @@ public class PlayerController : MonoBehaviour
     bool isFlying;
     bool flyRequierement;
     bool airFlowing;
+    bool onSlowPlatform;
+    bool slowMov;
 
     float lastPressedJump;
     float onGround;
@@ -61,6 +70,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        checkPointPos = transform.position;
     }
 
     private void Update()
@@ -137,7 +147,7 @@ public class PlayerController : MonoBehaviour
     void CheckMethods()
     {
 
-        //Jump Fields
+        #region Jump
         if (!isJumping)
         {
             if (Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundCheckLayerMask))
@@ -158,8 +168,9 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / playerControllerData.jumpCutForce);
             jumpCut = false;
         }
+        #endregion
 
-        //AirFlow Check
+        #region AirFlow
         if (onGround < 0)
         {
             if (Physics2D.OverlapBox(transform.position, transform.localScale, 0, airFlowLayerMask))
@@ -180,8 +191,17 @@ public class PlayerController : MonoBehaviour
         }
 
         if (airFlowing) glideTime = playerControllerData.maxGlideTime;
+        #endregion
 
-        //Glide Fields
+        #region SlowPlatform
+        if (Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, slowPlatformLayerMask))
+            onSlowPlatform = true;
+        else
+            onSlowPlatform = false;
+
+        #endregion
+
+        #region Glide
         if (!playerControllerData.canGlideJump)
             glideJump = false;
 
@@ -189,12 +209,14 @@ public class PlayerController : MonoBehaviour
             glideSpeed = true;
         else
             glideSpeed = false;
+        #endregion
 
-        //Fly
+        #region Fly
         if (flyTime >= 0 && flyRequierement) isFlying = true;
         else isFlying = false;
 
         if (flyTime > playerControllerData.flyMaxTime) flyTime = playerControllerData.flyMaxTime;
+        #endregion
     }
 
     void Jump()
@@ -205,6 +227,10 @@ public class PlayerController : MonoBehaviour
         isJumping = true;
 
         float force = playerControllerData.jumpForce;
+
+        if (onSlowPlatform)
+            force = force * slowMultJump;
+
         if (rb.velocity.y < 0)
             force -= rb.velocity.y;
 
@@ -269,6 +295,9 @@ public class PlayerController : MonoBehaviour
         if (glideSpeed) speedForce = playerControllerData.speed * playerControllerData.glideSpeedMult;
         else speedForce = playerControllerData.speed;
 
+        if (onSlowPlatform)
+            speedForce = speedForce * slowMultMovement;
+
         var movement = moveInput.x * speedForce;
 
         float acceleration = Mathf.Abs(movement) > .01f ? playerControllerData.accel : playerControllerData.deccel;
@@ -332,6 +361,7 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = Vector2.zero;
         transform.position = checkPointPos;
+        deathCounter++;
     }
 
     private void OnDrawGizmos()
