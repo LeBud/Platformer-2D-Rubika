@@ -5,8 +5,8 @@ using Cinemachine;
 [ExecuteInEditMode] [SaveDuringPlay] [AddComponentMenu("")]
 public class CameraFreezeAxis : CinemachineExtension
 {
-    public bool followXOnly;
-    public bool followYOnly;
+    public bool freezeY;
+    public bool freezeX;
 
     public float xPos;
     public float yPos;
@@ -21,16 +21,16 @@ public class CameraFreezeAxis : CinemachineExtension
     {
         if (stage == CinemachineCore.Stage.Body)
         {
-            if(followXOnly)
+            if(freezeY)
             {
-                var pos = state.RawPosition;
-                actualPos.x = pos.x;
+                actualPos = state.RawPosition;
+                actualPos.x = xPos;
                 state.RawPosition = actualPos;
             }
-            else if(followYOnly)
+            else if(freezeX)
             {
-                var pos = state.RawPosition;
-                actualPos.y = pos.y;
+                actualPos = state.RawPosition;
+                actualPos.y = yPos;
                 state.RawPosition = actualPos;
             }
         }
@@ -38,12 +38,17 @@ public class CameraFreezeAxis : CinemachineExtension
 
     private void LateUpdate()
     {
-        if (followXOnly)
+        /*if(freezeY)
             actualPos.x = Mathf.MoveTowards(actualPos.x, xPos, speed * Time.deltaTime);
-        
-        if (followYOnly)
+        else
+            actualPos.x = Mathf.MoveTowards(actualPos.x, transform.localPosition.x, speed * Time.deltaTime);
+
+
+        if (freezeX)
             actualPos.y = Mathf.MoveTowards(actualPos.y, yPos, speed * Time.deltaTime);
-        
+        else
+            actualPos.y = Mathf.MoveTowards(actualPos.y, transform.localPosition.y, speed * Time.deltaTime);*/
+
     }
 
 }
