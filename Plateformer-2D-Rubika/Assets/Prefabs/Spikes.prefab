@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6748278527240897121}
   - component: {fileID: 6748278527240897135}
   - component: {fileID: 6748278527240897122}
+  - component: {fileID: 1604607259919083827}
   m_Layer: 0
   m_Name: Triangle
   m_TagString: Untagged
@@ -143,6 +144,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 0.75}
   m_EdgeRadius: 0
+--- !u!50 &1604607259919083827
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6748278527240897133}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!1 &6748278527906181265
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,6 +183,7 @@ GameObject:
   - component: {fileID: 6748278527906181269}
   - component: {fileID: 6748278527906181267}
   - component: {fileID: 6748278527906181270}
+  - component: {fileID: 8909557185318329358}
   m_Layer: 0
   m_Name: Triangle (4)
   m_TagString: Untagged
@@ -286,6 +315,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 0.75}
   m_EdgeRadius: 0
+--- !u!50 &8909557185318329358
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6748278527906181265}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!1 &6748278528234316547
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,6 +354,7 @@ GameObject:
   - component: {fileID: 6748278528234316551}
   - component: {fileID: 6748278528234316549}
   - component: {fileID: 6748278528234316600}
+  - component: {fileID: 6121583917142700927}
   m_Layer: 0
   m_Name: Triangle (2)
   m_TagString: Untagged
@@ -429,6 +486,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 0.75}
   m_EdgeRadius: 0
+--- !u!50 &6121583917142700927
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6748278528234316547}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!1 &6748278528351168728
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,6 +525,7 @@ GameObject:
   - component: {fileID: 6748278528351168732}
   - component: {fileID: 6748278528351168730}
   - component: {fileID: 6748278528351168733}
+  - component: {fileID: 97266694367816641}
   m_Layer: 0
   m_Name: Triangle (3)
   m_TagString: Untagged
@@ -572,6 +657,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 0.75}
   m_EdgeRadius: 0
+--- !u!50 &97266694367816641
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6748278528351168728}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!1 &6748278528436855218
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,6 +696,7 @@ GameObject:
   - component: {fileID: 6748278528436855222}
   - component: {fileID: 6748278528436855220}
   - component: {fileID: 6748278528436855223}
+  - component: {fileID: 959851482158270422}
   m_Layer: 0
   m_Name: Triangle (1)
   m_TagString: Untagged
@@ -715,6 +828,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 0.75}
   m_EdgeRadius: 0
+--- !u!50 &959851482158270422
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6748278528436855218}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!1 &6748278528884442368
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,5 +889,5 @@ Transform:
   - {fileID: 6748278528351168729}
   - {fileID: 6748278527906181266}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
