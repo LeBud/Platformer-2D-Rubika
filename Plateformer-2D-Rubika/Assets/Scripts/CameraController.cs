@@ -42,7 +42,7 @@ public class CameraController : MonoBehaviour
 
             if(!followPlayer)
             {
-                virtualCamera.enabled = followPlayer;
+                virtualCamera.enabled = false;
             }
 
             vcBody.m_XDamping = damping.x;
@@ -59,6 +59,7 @@ public class CameraController : MonoBehaviour
         {
             if (!followPlayer)
             {
+                virtualCamera.enabled = false;
                 virtualCamera.transform.position = new Vector3(
                     Mathf.MoveTowards(virtualCamera.transform.position.x, cameraPos.x, speed * Time.deltaTime),
                     Mathf.MoveTowards(virtualCamera.transform.position.y, cameraPos.y, speed * Time.deltaTime), 
