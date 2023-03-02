@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
     CinemachineVirtualCamera virtualCamera;
     CinemachineFramingTransposer vcBody;
     CameraControllerMain main;
+    CameraFreezeAxis camFreeze;
 
     [Header("Settings")]
     [SerializeField] bool followPlayer;
@@ -20,8 +21,16 @@ public class CameraController : MonoBehaviour
     [SerializeField] Vector3 targetOffset;
     [SerializeField] Vector2 cameraPos;
 
+    [Header("FreezeAxis")]
+    [SerializeField] bool freezeY;
+    [SerializeField] bool freezeX;
+    [SerializeField] float yPos;
+    [SerializeField] float xPos;
+
     [Header("Transition speed")]
     [SerializeField] float speed;
+
+
 
     bool inTrigger;
 
@@ -30,6 +39,7 @@ public class CameraController : MonoBehaviour
         main = FindObjectOfType<CameraControllerMain>();
         virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
         vcBody = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+        camFreeze = virtualCamera.GetComponent<CameraFreezeAxis>();
     }
 
 
@@ -42,13 +52,22 @@ public class CameraController : MonoBehaviour
 
             if(!followPlayer)
             {
-                virtualCamera.enabled = followPlayer;
+                virtualCamera.enabled = false;
             }
 
             vcBody.m_XDamping = damping.x;
             vcBody.m_YDamping = damping.y;
             vcBody.m_DeadZoneWidth = deadZone.x;
             vcBody.m_DeadZoneHeight = deadZone.y;
+
+            if(freezeX || freezeY)
+            {
+                camFreeze.freezeY = freezeX;
+                camFreeze.freezeX = freezeY;
+
+                camFreeze.yPos = yPos;
+                camFreeze.xPos = xPos;
+            }
 
         }
     }
@@ -59,6 +78,7 @@ public class CameraController : MonoBehaviour
         {
             if (!followPlayer)
             {
+                virtualCamera.enabled = false;
                 virtualCamera.transform.position = new Vector3(
                     Mathf.MoveTowards(virtualCamera.transform.position.x, cameraPos.x, speed * Time.deltaTime),
                     Mathf.MoveTowards(virtualCamera.transform.position.y, cameraPos.y, speed * Time.deltaTime), 
@@ -79,6 +99,8 @@ public class CameraController : MonoBehaviour
         {
             main.MainSettings();
             inTrigger = false;
+            camFreeze.freezeY = false;
+            camFreeze.freezeX = false;
         }
     }
 

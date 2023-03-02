@@ -38,6 +38,7 @@ public class CameraControllerMain : MonoBehaviour
         {
             if (!followPlayer)
             {
+                virtualCamera.enabled = false;
                 virtualCamera.transform.position = new Vector3(
                     Mathf.MoveTowards(virtualCamera.transform.position.x, cameraPos.x, speed * Time.deltaTime),
                     Mathf.MoveTowards(virtualCamera.transform.position.y, cameraPos.y, speed * Time.deltaTime),
