@@ -624,6 +624,10 @@ MonoBehaviour:
   deadZone: {x: 0.01, y: 0.02}
   targetOffset: {x: 0, y: 0, z: 0}
   cameraPos: {x: 0, y: 0}
+  freezeY: 0
+  freezeX: 0
+  yPos: 0
+  xPos: 0
   speed: 24
 --- !u!61 &59239044
 BoxCollider2D:
@@ -2024,6 +2028,10 @@ MonoBehaviour:
   deadZone: {x: 0.3, y: 0.02}
   targetOffset: {x: 0, y: 0, z: 0}
   cameraPos: {x: 0, y: 0}
+  freezeY: 0
+  freezeX: 1
+  yPos: 0
+  xPos: 215.5
   speed: 16
 --- !u!61 &374839054
 BoxCollider2D:
@@ -5186,7 +5194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4493773983549887251, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 1.9999995
       objectReference: {fileID: 0}
     - target: {fileID: 4493773983549887251, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5206,11 +5214,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4493773985414094393, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 232.79
+      value: 199.5
       objectReference: {fileID: 0}
     - target: {fileID: 4493773985414094393, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 35.27
+      value: 7.56
       objectReference: {fileID: 0}
     - target: {fileID: 4493773985414094393, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6234,11 +6242,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followPlayer: 1
-  orthographicSize: 14
+  orthographicSize: 12
   damping: {x: 0.15, y: 0.15}
-  deadZone: {x: 0.01, y: 0.2}
+  deadZone: {x: 0.01, y: 0.02}
   targetOffset: {x: 0, y: 2, z: 0}
   cameraPos: {x: 290, y: 50}
+  freezeY: 1
+  freezeX: 0
+  yPos: 76
+  xPos: 0
   speed: 16
 --- !u!61 &1334990270
 BoxCollider2D:
@@ -6964,11 +6976,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followPlayer: 0
-  orthographicSize: 18
+  orthographicSize: 17
   damping: {x: 0.15, y: 2.5}
   deadZone: {x: 0.95, y: 0.02}
   targetOffset: {x: 0, y: 0, z: 0}
   cameraPos: {x: 290, y: 50}
+  freezeY: 0
+  freezeX: 0
+  yPos: 0
+  xPos: 0
   speed: 24
 --- !u!61 &1587001016
 BoxCollider2D:

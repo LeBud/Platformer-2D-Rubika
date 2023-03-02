@@ -27,28 +27,14 @@ public class CameraFreezeAxis : CinemachineExtension
                 actualPos.x = xPos;
                 state.RawPosition = actualPos;
             }
-            else if(freezeX)
+
+            if(freezeX)
             {
                 actualPos = state.RawPosition;
                 actualPos.y = yPos;
                 state.RawPosition = actualPos;
             }
         }
-    }
-
-    private void LateUpdate()
-    {
-        /*if(freezeY)
-            actualPos.x = Mathf.MoveTowards(actualPos.x, xPos, speed * Time.deltaTime);
-        else
-            actualPos.x = Mathf.MoveTowards(actualPos.x, transform.localPosition.x, speed * Time.deltaTime);
-
-
-        if (freezeX)
-            actualPos.y = Mathf.MoveTowards(actualPos.y, yPos, speed * Time.deltaTime);
-        else
-            actualPos.y = Mathf.MoveTowards(actualPos.y, transform.localPosition.y, speed * Time.deltaTime);*/
-
     }
 
 }
