@@ -362,6 +362,22 @@ public class PlayerController : MonoBehaviour
         rb.velocity = Vector2.zero;
         transform.position = checkPointPos;
         deathCounter++;
+
+        if(GameObject.FindObjectsOfType<FallingObject>().Length >= 1)
+        {
+            if(GameObject.FindObjectsOfType<FallingObject>().Length == 1)
+            {
+                GameObject.FindObjectOfType<FallingObject>().ResetFall();
+            }
+            else
+            {
+                FallingObject[] fall = GameObject.FindObjectsOfType<FallingObject>();
+                for(int i = 0; i < fall.Length; i++)
+                {
+                    fall[i].ResetFall();
+                }
+            }
+        }
     }
 
     private void OnDrawGizmos()

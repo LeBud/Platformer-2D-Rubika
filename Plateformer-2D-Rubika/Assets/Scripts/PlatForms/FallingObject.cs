@@ -9,9 +9,12 @@ public class FallingObject : MonoBehaviour
 
     [SerializeField] float fallGravityScale;
 
+    Vector2 startPos;
+
     private void Awake()
     {
         rb.gravityScale = 0;
+        startPos = rb.position;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -20,6 +23,12 @@ public class FallingObject : MonoBehaviour
         {
             rb.gravityScale = fallGravityScale;
         }
+    }
+
+    public void ResetFall()
+    {
+        rb.gravityScale = 0;
+        rb.position = startPos;
     }
 
 }
