@@ -23,9 +23,8 @@ public class CameraController : MonoBehaviour
 
     [Header("FreezeAxis")]
     [SerializeField] CameraFreezeAxis.FreezeAxis axis;
-    [SerializeField] bool freezeX;
-    [SerializeField] float yPos;
     [SerializeField] float xPos;
+    [SerializeField] float yPos;
 
     [Header("Transition speed")]
     [SerializeField] float speed;
@@ -62,10 +61,10 @@ public class CameraController : MonoBehaviour
 
             if(axis == CameraFreezeAxis.FreezeAxis.x || axis == CameraFreezeAxis.FreezeAxis.y)
             {
-                camFreeze.axis = axis;
+                camFreeze.targetX = virtualCamera.transform.position.x;
+                camFreeze.targetY = virtualCamera.transform.position.y;
 
-                camFreeze.yPos = yPos;
-                camFreeze.xPos = xPos;
+                camFreeze.axis = axis;
             }
 
         }
@@ -89,6 +88,13 @@ public class CameraController : MonoBehaviour
 
             vcBody.m_TrackedObjectOffset.x = Mathf.MoveTowards(vcBody.m_TrackedObjectOffset.x, targetOffset.x, speed * Time.deltaTime);
             vcBody.m_TrackedObjectOffset.y = Mathf.MoveTowards(vcBody.m_TrackedObjectOffset.y, targetOffset.y, speed * Time.deltaTime);
+
+            if (axis == CameraFreezeAxis.FreezeAxis.x || axis == CameraFreezeAxis.FreezeAxis.y)
+            {
+                camFreeze.targetX = Mathf.MoveTowards(virtualCamera.transform.position.x, xPos, speed * Time.deltaTime);
+                camFreeze.targetY = Mathf.MoveTowards(virtualCamera.transform.position.y, yPos, speed * Time.deltaTime);
+            }
+
         }
     }
 

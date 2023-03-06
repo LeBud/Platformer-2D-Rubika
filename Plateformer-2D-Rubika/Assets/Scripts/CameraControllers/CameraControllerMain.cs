@@ -7,6 +7,7 @@ public class CameraControllerMain : MonoBehaviour
 {
     CinemachineVirtualCamera virtualCamera;
     CinemachineFramingTransposer vcBody;
+    Transform playerPos;
 
     [Header("Settings")]
     [SerializeField] bool followPlayer;
@@ -21,12 +22,14 @@ public class CameraControllerMain : MonoBehaviour
     [Header("Transition speed")]
     [SerializeField] float speed;
 
+    Vector3 postPos;
 
     [HideInInspector]
     public bool inMain;
 
     void Awake()
     {
+        playerPos = FindObjectOfType<PlayerController>().transform;
         virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
         vcBody = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
         MainSettings();
@@ -45,6 +48,18 @@ public class CameraControllerMain : MonoBehaviour
                     -10);
             }
 
+            //Ca marche pas
+            /*else if(postPos != playerPos.position)
+            {
+                virtualCamera.enabled = true;
+                virtualCamera.transform.position = new Vector3(
+                    Mathf.MoveTowards(postPos.x, playerPos.position.x, speed * Time.deltaTime), 
+                    Mathf.MoveTowards(postPos.y, playerPos.position.y, speed * Time.deltaTime), 
+                    -10);
+            }
+
+            virtualCamera.transform.position = postPos;*/
+
             virtualCamera.m_Lens.OrthographicSize = Mathf.MoveTowards(virtualCamera.m_Lens.OrthographicSize, orthographicSize, speed * Time.deltaTime);
             Camera.main.orthographicSize = Mathf.MoveTowards(Camera.main.orthographicSize, orthographicSize, speed * Time.deltaTime);
 
@@ -56,6 +71,8 @@ public class CameraControllerMain : MonoBehaviour
     public void MainSettings()
     {
         inMain = true;
+
+        postPos = virtualCamera.transform.position;
 
         virtualCamera.enabled = followPlayer;
         
