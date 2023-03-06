@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] Vector2 cameraPos;
 
     [Header("FreezeAxis")]
-    [SerializeField] bool freezeY;
+    [SerializeField] CameraFreezeAxis.FreezeAxis axis;
     [SerializeField] bool freezeX;
     [SerializeField] float yPos;
     [SerializeField] float xPos;
@@ -60,10 +60,9 @@ public class CameraController : MonoBehaviour
             vcBody.m_DeadZoneWidth = deadZone.x;
             vcBody.m_DeadZoneHeight = deadZone.y;
 
-            if(freezeX || freezeY)
+            if(axis == CameraFreezeAxis.FreezeAxis.x || axis == CameraFreezeAxis.FreezeAxis.y)
             {
-                camFreeze.freezeY = freezeX;
-                camFreeze.freezeX = freezeY;
+                camFreeze.axis = axis;
 
                 camFreeze.yPos = yPos;
                 camFreeze.xPos = xPos;
@@ -99,8 +98,7 @@ public class CameraController : MonoBehaviour
         {
             main.MainSettings();
             inTrigger = false;
-            camFreeze.freezeY = false;
-            camFreeze.freezeX = false;
+            camFreeze.axis = CameraFreezeAxis.FreezeAxis.none;
         }
     }
 

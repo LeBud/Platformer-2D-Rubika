@@ -5,8 +5,8 @@ using Cinemachine;
 [ExecuteInEditMode] [SaveDuringPlay] [AddComponentMenu("")]
 public class CameraFreezeAxis : CinemachineExtension
 {
-    public bool freezeY;
-    public bool freezeX;
+    public enum FreezeAxis {none, x, y}
+    public FreezeAxis axis;
 
     public float xPos;
     public float yPos;
@@ -21,14 +21,14 @@ public class CameraFreezeAxis : CinemachineExtension
     {
         if (stage == CinemachineCore.Stage.Body)
         {
-            if(freezeY)
+            if(axis == FreezeAxis.x)
             {
                 actualPos = state.RawPosition;
                 actualPos.x = xPos;
                 state.RawPosition = actualPos;
             }
 
-            if(freezeX)
+            if(axis == FreezeAxis.y)
             {
                 actualPos = state.RawPosition;
                 actualPos.y = yPos;

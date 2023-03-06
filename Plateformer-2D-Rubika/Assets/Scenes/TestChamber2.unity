@@ -636,7 +636,7 @@ MonoBehaviour:
   deadZone: {x: 0.01, y: 0.02}
   targetOffset: {x: 0, y: 0, z: 0}
   cameraPos: {x: 0, y: 0}
-  freezeY: 0
+  axis: 0
   freezeX: 0
   yPos: 0
   xPos: 0
@@ -2904,7 +2904,7 @@ MonoBehaviour:
   deadZone: {x: 0.3, y: 0.02}
   targetOffset: {x: 0, y: 4, z: 0}
   cameraPos: {x: 0, y: 0}
-  freezeY: 0
+  axis: 1
   freezeX: 1
   yPos: 0
   xPos: 215.5
@@ -7873,7 +7873,19 @@ PrefabInstance:
       value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 4493773983595351271, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
+      propertyPath: m_XDamping
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4493773983595351271, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: m_YDamping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4493773983595351271, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
+      propertyPath: m_DeadZoneWidth
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4493773983595351271, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
+      propertyPath: m_TrackedObjectOffset.y
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4493773985029801108, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
@@ -7898,11 +7910,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4493773985414094393, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.4
+      value: 197.6
       objectReference: {fileID: 0}
     - target: {fileID: 4493773985414094393, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.3
+      value: 8.8
       objectReference: {fileID: 0}
     - target: {fileID: 4493773985414094393, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7937,8 +7949,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4610043457168008705, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
+      propertyPath: axis
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4610043457168008705, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
+      propertyPath: xPos
+      value: 235
+      objectReference: {fileID: 0}
+    - target: {fileID: 4610043457168008705, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: yPos
-      value: 76
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4610043457168008705, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: freezeXPos
@@ -8421,7 +8441,7 @@ MonoBehaviour:
   deadZone: {x: 0.01, y: 0.02}
   targetOffset: {x: 0, y: 2, z: 0}
   cameraPos: {x: 290, y: 50}
-  freezeY: 0
+  axis: 1
   freezeX: 1
   yPos: 0
   xPos: 235
@@ -9558,7 +9578,7 @@ MonoBehaviour:
   deadZone: {x: 0.01, y: 0.02}
   targetOffset: {x: 0, y: 2, z: 0}
   cameraPos: {x: 290, y: 50}
-  freezeY: 1
+  axis: 2
   freezeX: 0
   yPos: 76
   xPos: 0
@@ -11093,7 +11113,7 @@ MonoBehaviour:
   deadZone: {x: 0.95, y: 0.02}
   targetOffset: {x: 0, y: 0, z: 0}
   cameraPos: {x: 290, y: 50}
-  freezeY: 0
+  axis: 0
   freezeX: 0
   yPos: 0
   xPos: 0
