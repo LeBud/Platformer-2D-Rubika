@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BreakPlatform : MonoBehaviour
@@ -14,15 +15,15 @@ public class BreakPlatform : MonoBehaviour
     bool isPlaying;
 
     SpriteRenderer spriteRenderer;
-    BoxCollider2D BoxCollider2D;
+    BoxCollider2D[] BoxCollider2D;
 
     private void Start()
     {
         spriteRenderer= GetComponent<SpriteRenderer>();
-        BoxCollider2D= GetComponent<BoxCollider2D>();
+        BoxCollider2D = GetComponents<BoxCollider2D>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && !isPlaying)
         {
@@ -30,18 +31,32 @@ public class BreakPlatform : MonoBehaviour
         }
     }
 
+    /*private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && !isPlaying)
+        {
+            StartCoroutine(PlatformBreak());
+        }
+    }*/
+
     IEnumerator PlatformBreak()
     {
         isPlaying = true;
         yield return new WaitForSeconds(breakTimer);
 
         spriteRenderer.color= color2;
-        BoxCollider2D.enabled = false;
+        for(int i = 0; i < BoxCollider2D.Length; i++)
+        {
+            BoxCollider2D[i].enabled = false;
+        }
 
         yield return new WaitForSeconds(respawnTimer);
 
         spriteRenderer.color= color1;
-        BoxCollider2D.enabled = true;
+        for (int i = 0; i < BoxCollider2D.Length; i++)
+        {
+            BoxCollider2D[i].enabled = true;
+        }
 
         isPlaying = false;
     }
