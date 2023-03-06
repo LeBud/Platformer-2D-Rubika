@@ -23,6 +23,17 @@ public class PlayerUI : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (playerController.gliding)
+            glideSlider.gameObject.SetActive(true);
+        else
+            glideSlider.gameObject.SetActive(false);
+
+        Vector2 playerPos = playerController.gameObject.transform.position;
+
+        playerPos.y += 2;
+
+        glideSlider.gameObject.transform.position = playerPos;
+
         glideSlider.value = playerController.glideTime;
         flySlider.value = playerController.flyTime;
         deathCounterTxt.text = "Death : " + playerController.deathCounter;
