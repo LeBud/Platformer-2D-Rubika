@@ -28,6 +28,7 @@ public class CameraController : MonoBehaviour
 
     [Header("Transition speed")]
     [SerializeField] float speed;
+    [SerializeField] float zoomSpeed;
 
 
 
@@ -83,8 +84,8 @@ public class CameraController : MonoBehaviour
                     -10);
             }
 
-            virtualCamera.m_Lens.OrthographicSize = Mathf.MoveTowards(virtualCamera.m_Lens.OrthographicSize, orthographicSize, speed * Time.deltaTime);
-            Camera.main.orthographicSize = Mathf.MoveTowards(Camera.main.orthographicSize, orthographicSize, speed * Time.deltaTime);
+            virtualCamera.m_Lens.OrthographicSize = Mathf.MoveTowards(virtualCamera.m_Lens.OrthographicSize, orthographicSize, zoomSpeed * Time.deltaTime);
+            Camera.main.orthographicSize = Mathf.MoveTowards(Camera.main.orthographicSize, orthographicSize, zoomSpeed * Time.deltaTime);
 
             vcBody.m_TrackedObjectOffset.x = Mathf.MoveTowards(vcBody.m_TrackedObjectOffset.x, targetOffset.x, speed * Time.deltaTime);
             vcBody.m_TrackedObjectOffset.y = Mathf.MoveTowards(vcBody.m_TrackedObjectOffset.y, targetOffset.y, speed * Time.deltaTime);
