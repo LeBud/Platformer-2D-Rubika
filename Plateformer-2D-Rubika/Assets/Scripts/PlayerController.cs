@@ -41,7 +41,8 @@ public class PlayerController : MonoBehaviour
     bool flyRequierement;
     bool airFlowing;
     bool onSlowPlatform;
-    bool slowMov;
+    [HideInInspector]
+    public bool jumpPadOn;
 
     float lastPressedJump;
     float onGround;
@@ -87,8 +88,6 @@ public class PlayerController : MonoBehaviour
         CheckMethods();
 
         if (gliding && !inAirFlow && rb.velocity.y < 0) Glide();
-
-        Debug.Log(Mathf.Round(moveInput.x * 10) / 10);
     }
 
     void MyInputs()
@@ -295,6 +294,8 @@ public class PlayerController : MonoBehaviour
 
     void Movement()
     {
+        if (jumpPadOn) return;
+
         float speedForce;
 
         if (glideSpeed) speedForce = playerControllerData.speed * playerControllerData.glideSpeedMult;
