@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -42,7 +41,8 @@ public class PlayerController : MonoBehaviour
     bool flyRequierement;
     bool airFlowing;
     bool onSlowPlatform;
-    bool slowMov;
+    [HideInInspector]
+    public bool jumpPadOn;
 
     float lastPressedJump;
     float onGround;
@@ -96,6 +96,10 @@ public class PlayerController : MonoBehaviour
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
 
+        if (moveInput.x > .8f && (moveInput.y > .1f || moveInput.y < -.1f))
+            moveInput.x = 1;
+        else if (moveInput.x < -.8f && (moveInput.y > .1f || moveInput.y < -.1f))
+            moveInput.x = -1;
 
         //Fly Input
         if (Input.GetButton("Fire1") && CanFly())
@@ -290,6 +294,8 @@ public class PlayerController : MonoBehaviour
 
     void Movement()
     {
+        if (jumpPadOn) return;
+
         float speedForce;
 
         if (glideSpeed) speedForce = playerControllerData.speed * playerControllerData.glideSpeedMult;
@@ -337,6 +343,7 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(force, ForceMode2D.Force);
     }
 
+    #region Boolean
     bool CanJumpGlide()
     {
         return (!isJumping || rb.velocity.y < 12) && !isFlying && glideJump && onGround < 0;
@@ -356,7 +363,7 @@ public class PlayerController : MonoBehaviour
     {
         return flyTime > 0 && !airFlowing;
     }
-
+    #endregion
     public void Respawn()
     {
         rb.velocity = Vector2.zero;

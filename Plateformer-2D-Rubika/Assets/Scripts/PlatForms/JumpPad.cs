@@ -7,12 +7,16 @@ public class JumpPad : MonoBehaviour
 
     [SerializeField] Vector2 bounceForce;
 
+    PlayerController controller;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
+            controller = rb.GetComponent<PlayerController>();
+
+            StartCoroutine(OnJumpPad());
 
             float xForce = rb.velocity.x;
             float yForce = rb.velocity.y;
@@ -22,8 +26,24 @@ public class JumpPad : MonoBehaviour
 
             yForce = Mathf.Abs(yForce);
 
-            rb.AddForce(new Vector2(xForce + bounceForce.x, yForce + bounceForce.y),ForceMode2D.Impulse);
+            if(bounceForce.x != 0)
+            {
+                if(Mathf.Sign(xForce) < 0 && bounceForce.x > 0) xForce = 0;
+                else if(Mathf.Sign(xForce) > 0 && bounceForce.x < 0) xForce = 0;
+            }
+
+            Vector2 additionalForce = new Vector2(xForce, yForce);
+
+            rb.AddForce(bounceForce + additionalForce,ForceMode2D.Impulse);
         }
+    }
+
+    IEnumerator OnJumpPad()
+    {
+        controller.jumpPadOn = true;
+        yield return new WaitForSeconds(.5f);
+        controller.jumpPadOn = false;
+
     }
 
 }
