@@ -32,7 +32,8 @@ public class PlayerController : MonoBehaviour
     public int deathCounter;
 
     bool jumpCut;
-    bool isJumping;
+    [HideInInspector]
+    public bool isJumping;
     [HideInInspector]
     public bool gliding;
     bool glideJump;
