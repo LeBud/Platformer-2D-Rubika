@@ -12,6 +12,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] Slider glideSlider;
     [SerializeField] Slider flySlider;
     [SerializeField] TextMeshProUGUI deathCounterTxt;
+    [SerializeField] float glideSliderYOffset;
 
     private void Awake()
     {
@@ -23,8 +24,21 @@ public class PlayerUI : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (playerController.gliding)
+            glideSlider.gameObject.SetActive(true);
+        else
+            glideSlider.gameObject.SetActive(false);
+
+        Vector2 playerPos = Camera.main.WorldToScreenPoint(transform.position);
+
+        playerPos.y += glideSliderYOffset;
+
+        glideSlider.transform.position = playerPos;
+
+
         glideSlider.value = playerController.glideTime;
         flySlider.value = playerController.flyTime;
         deathCounterTxt.text = "Death : " + playerController.deathCounter;
     }
+
 }

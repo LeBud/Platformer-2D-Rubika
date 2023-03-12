@@ -22,13 +22,13 @@ public class CameraController : MonoBehaviour
     [SerializeField] Vector2 cameraPos;
 
     [Header("FreezeAxis")]
-    [SerializeField] bool freezeY;
-    [SerializeField] bool freezeX;
-    [SerializeField] float yPos;
+    [SerializeField] CameraFreezeAxis.FreezeAxis axis;
     [SerializeField] float xPos;
+    [SerializeField] float yPos;
 
     [Header("Transition speed")]
     [SerializeField] float speed;
+    [SerializeField] float zoomSpeed;
 
 
 
@@ -60,13 +60,12 @@ public class CameraController : MonoBehaviour
             vcBody.m_DeadZoneWidth = deadZone.x;
             vcBody.m_DeadZoneHeight = deadZone.y;
 
-            if(freezeX || freezeY)
+            if(axis == CameraFreezeAxis.FreezeAxis.x || axis == CameraFreezeAxis.FreezeAxis.y)
             {
-                camFreeze.freezeY = freezeX;
-                camFreeze.freezeX = freezeY;
+                camFreeze.targetX = virtualCamera.transform.position.x;
+                camFreeze.targetY = virtualCamera.transform.position.y;
 
-                camFreeze.yPos = yPos;
-                camFreeze.xPos = xPos;
+                camFreeze.axis = axis;
             }
 
         }
@@ -85,11 +84,18 @@ public class CameraController : MonoBehaviour
                     -10);
             }
 
-            virtualCamera.m_Lens.OrthographicSize = Mathf.MoveTowards(virtualCamera.m_Lens.OrthographicSize, orthographicSize, speed * Time.deltaTime);
-            Camera.main.orthographicSize = Mathf.MoveTowards(Camera.main.orthographicSize, orthographicSize, speed * Time.deltaTime);
+            virtualCamera.m_Lens.OrthographicSize = Mathf.MoveTowards(virtualCamera.m_Lens.OrthographicSize, orthographicSize, zoomSpeed * Time.deltaTime);
+            Camera.main.orthographicSize = Mathf.MoveTowards(Camera.main.orthographicSize, orthographicSize, zoomSpeed * Time.deltaTime);
 
             vcBody.m_TrackedObjectOffset.x = Mathf.MoveTowards(vcBody.m_TrackedObjectOffset.x, targetOffset.x, speed * Time.deltaTime);
             vcBody.m_TrackedObjectOffset.y = Mathf.MoveTowards(vcBody.m_TrackedObjectOffset.y, targetOffset.y, speed * Time.deltaTime);
+
+            if (axis == CameraFreezeAxis.FreezeAxis.x || axis == CameraFreezeAxis.FreezeAxis.y)
+            {
+                camFreeze.targetX = Mathf.MoveTowards(virtualCamera.transform.position.x, xPos, speed * Time.deltaTime);
+                camFreeze.targetY = Mathf.MoveTowards(virtualCamera.transform.position.y, yPos, speed * Time.deltaTime);
+            }
+
         }
     }
 
@@ -99,8 +105,7 @@ public class CameraController : MonoBehaviour
         {
             main.MainSettings();
             inTrigger = false;
-            camFreeze.freezeY = false;
-            camFreeze.freezeX = false;
+            camFreeze.axis = CameraFreezeAxis.FreezeAxis.none;
         }
     }
 
