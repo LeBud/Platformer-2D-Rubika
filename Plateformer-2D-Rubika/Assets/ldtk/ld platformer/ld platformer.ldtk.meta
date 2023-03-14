@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 60913a3befc6b0847ae83b0a8aec2323
+guid: 6c3e29b8f6db6ad4e92d8d9c8d5154b5
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -9,7 +9,7 @@ ScriptedImporter:
   assetBundleVariant: 
   script: {fileID: 11500000, guid: aaa16bfc62c086f4fb45da87b6acf9b1, type: 3}
   _reimportOnDependencyChange: 1
-  _jsonFile: {fileID: -164016180542632921, guid: 60913a3befc6b0847ae83b0a8aec2323, type: 3}
+  _jsonFile: {fileID: -164016180542632921, guid: 6c3e29b8f6db6ad4e92d8d9c8d5154b5, type: 3}
   _pixelsPerUnit: 16
   _atlas: {instanceID: 0}
   _customLevelPrefab: {instanceID: 0}
@@ -19,23 +19,19 @@ ScriptedImporter:
   _createBackgroundColor: 0
   _createLevelBoundsTrigger: 0
   _intGridValues:
-  - _key: Plateforme_1
+  - _key: Ennemis_1
     _asset: {fileID: 11400000, guid: b73ff79e1b696e54cb0633bfb9df6479, type: 2}
-  - _key: Ground_1
-    _asset: {instanceID: 0}
+  - _key: Trampos_1
+    _asset: {fileID: 11400000, guid: b73ff79e1b696e54cb0633bfb9df6479, type: 2}
+  - _key: Actual_platformes_1
+    _asset: {fileID: 11400000, guid: b73ff79e1b696e54cb0633bfb9df6479, type: 2}
+  - _key: LD_1
+    _asset: {fileID: 11400000, guid: b73ff79e1b696e54cb0633bfb9df6479, type: 2}
   _entities:
-  - _key: Puceron
-    _asset: {fileID: 3053425020374100425, guid: a15795f7a324a9a4fa2240fc7fcb76c7, type: 3}
-  - _key: Checkpoint
-    _asset: {fileID: 7353570850285758542, guid: 765ef9a7a5924f647b64f6ec00dc7cb0, type: 3}
-  - _key: Pancarte_up
-    _asset: {instanceID: 0}
-  - _key: Pancarte_right
-    _asset: {instanceID: 0}
   - _key: Pics
     _asset: {fileID: 6748278528884442368, guid: 5be293ae075b36a4ebf2e996b7f08d94, type: 3}
-  - _key: Collectibles
-    _asset: {instanceID: 0}
+  - _key: Checkpoints
+    _asset: {fileID: 7353570850285758542, guid: 765ef9a7a5924f647b64f6ec00dc7cb0, type: 3}
   _enumGenerate: 0
   _enumPath: 
   _enumNamespace: 
