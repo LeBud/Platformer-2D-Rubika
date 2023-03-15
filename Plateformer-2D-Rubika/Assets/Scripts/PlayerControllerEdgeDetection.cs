@@ -25,34 +25,34 @@ public class PlayerControllerEdgeDetection : MonoBehaviour
 
     private void Update()
     {
-        if (controller.isJumping)
+        if (rb.velocity.y >= 0)
         {
             if (Physics2D.OverlapBox(leftEdge.position, edgeCheckSize, 0, edgeCheckLayerMask) && !TopPlayer())
             {
-                MovePlayer(rb.velocity,edgeCheckSize);
+                MovePlayer(rb.velocity,edgeCheckSize.x);
             }
             else if (Physics2D.OverlapBox(rightEdge.position, edgeCheckSize, 0, edgeCheckLayerMask) && !TopPlayer())
             {
-                MovePlayer(rb.velocity, -edgeCheckSize);
+                MovePlayer(rb.velocity, -edgeCheckSize.x);
             }
         }
         
     }
 
-    void MovePlayer(Vector2 velocity, Vector2 pos)
+    void MovePlayer(Vector2 velocity, float pos)
     {
-        rb.velocity = velocity;
-
         Vector2 currentPos = transform.position;
-
-        rb.velocity = velocity;
-
-        currentPos += pos;
-
-        rb.velocity = velocity;
-
+        currentPos.x += pos;
         transform.position = currentPos;
 
+        rb.velocity = velocity;
+
+        StartCoroutine(Velocity(velocity));
+    }
+
+    IEnumerator Velocity(Vector2 velocity)
+    {
+        yield return new WaitForSeconds(.01f);
         rb.velocity = velocity;
     }
 
