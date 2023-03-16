@@ -103,10 +103,10 @@ public class PlayerController : MonoBehaviour
             moveInput.x = -1;
 
         //Fly Input
-        if (Input.GetButton("Fire1") && CanFly())
+        /*if (Input.GetButton("Fire1") && CanFly())
             flyRequierement = true;
         else
-            flyRequierement = false;
+            flyRequierement = false;*/
 
 
         //Jumps Inputs
@@ -216,12 +216,12 @@ public class PlayerController : MonoBehaviour
             glideSpeed = false;
         #endregion
 
-        #region Fly
+        /*#region Fly
         if (flyTime >= 0 && flyRequierement) isFlying = true;
         else isFlying = false;
 
         if (flyTime > playerControllerData.flyMaxTime) flyTime = playerControllerData.flyMaxTime;
-        #endregion
+        #endregion*/
     }
 
     void Jump()
@@ -274,16 +274,16 @@ public class PlayerController : MonoBehaviour
         //Movement
         if (airFlowing)
             AirFlowMovement();
-        else if (flyRequierement && flyTime > 0)
-            Fly();
+        /*else if (flyRequierement && flyTime > 0)
+            Fly();*/
         else
             Movement();
 
         //Set gravity
         if (airFlowing)
             SetGravityScale(playerControllerData.airFlowGravity);
-        else if (isFlying)
-            SetGravityScale(playerControllerData.flyGravity);
+        /*else if (isFlying)
+            SetGravityScale(playerControllerData.flyGravity);*/
         else
             SetGravityScale(playerControllerData.normalGravitysScale);
     }
@@ -327,7 +327,7 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(airFlowDir.normalized * airFlowForce, ForceMode2D.Force);
     }
 
-    void Fly()
+    /*void Fly()
     {
         float speedForce = playerControllerData.speed * playerControllerData.flySpeedMult;
 
@@ -342,7 +342,7 @@ public class PlayerController : MonoBehaviour
         var force = new Vector2(horMov * acceleration, verMov * acceleration);
 
         rb.AddForce(force, ForceMode2D.Force);
-    }
+    }*/
 
     #region Boolean
     bool CanJumpGlide()

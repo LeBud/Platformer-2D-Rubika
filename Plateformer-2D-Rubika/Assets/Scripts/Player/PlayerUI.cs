@@ -7,17 +7,19 @@ using UnityEngine.UI;
 public class PlayerUI : MonoBehaviour
 {
     PlayerController playerController;
+    LadyBugLight ladyLight;
 
     [Header("UI Elements")]
     [SerializeField] Slider glideSlider;
-    [SerializeField] Slider flySlider;
+    [SerializeField] Slider lightSlider;
     [SerializeField] TextMeshProUGUI deathCounterTxt;
     [SerializeField] float glideSliderYOffset;
 
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
-        flySlider.maxValue = playerController.playerControllerData.flyMaxTime;
+        ladyLight = GetComponent<LadyBugLight>();
+        lightSlider.maxValue = playerController.playerControllerData.maxAphid;
         glideSlider.maxValue = playerController.playerControllerData.maxGlideTime;
         deathCounterTxt.text = "Death : " + playerController.deathCounter;
     }
@@ -37,7 +39,7 @@ public class PlayerUI : MonoBehaviour
 
 
         glideSlider.value = playerController.glideTime;
-        flySlider.value = playerController.flyTime;
+        lightSlider.value = ladyLight.aphidCount;
         deathCounterTxt.text = "Death : " + playerController.deathCounter;
     }
 
