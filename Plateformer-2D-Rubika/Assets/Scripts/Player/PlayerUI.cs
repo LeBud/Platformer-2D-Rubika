@@ -19,7 +19,7 @@ public class PlayerUI : MonoBehaviour
     {
         playerController = GetComponent<PlayerController>();
         ladyLight = GetComponent<LadyBugLight>();
-        lightSlider.maxValue = playerController.playerControllerData.maxAphid;
+        lightSlider.maxValue = playerController.playerControllerData.maxAphid * 10;
         glideSlider.maxValue = playerController.playerControllerData.maxGlideTime;
         deathCounterTxt.text = "Death : " + playerController.deathCounter;
     }
@@ -39,7 +39,7 @@ public class PlayerUI : MonoBehaviour
 
 
         glideSlider.value = playerController.glideTime;
-        lightSlider.value = ladyLight.aphidCount;
+        lightSlider.value = ladyLight.aphidCount * 10;
         deathCounterTxt.text = "Death : " + playerController.deathCounter;
     }
 

@@ -21,6 +21,7 @@ public class LadyBugLight : MonoBehaviour
     private void Update()
     {
         MyInputs();
+
     }
 
     void MyInputs()
@@ -49,33 +50,29 @@ public class LadyBugLight : MonoBehaviour
         }
 
         if (ladyLight.intensity > 1) ladyLight.intensity = 1;
+        
+        yield return new WaitForSeconds(playerControllerData.maxTimeLightOn - 2.8f);
 
-        yield return new WaitForSeconds(playerControllerData.maxTimeLightOn - 2);
 
-        for (int i = 0; i < 20; i++)
+        StartCoroutine(FadeLight());
+    }
+
+    IEnumerator FadeLight()
+    {
+        for(int x = 0; x < 3; x++)
         {
-            ladyLight.intensity -= .05f;
-            yield return new WaitForSeconds(.02f);
-        }
+            for (int i = 0; i < 20; i++)
+            {
+                ladyLight.intensity -= .05f;
+                yield return new WaitForSeconds(.02f);
+            }
 
-        for (int i = 0; i < 20; i++)
-        {
-            ladyLight.intensity += .05f;
-            yield return new WaitForSeconds(.02f);
+            for (int i = 0; i < 20; i++)
+            {
+                ladyLight.intensity += .05f;
+                yield return new WaitForSeconds(.02f);
 
-        }
-
-        for (int i = 0; i < 20; i++)
-        {
-            ladyLight.intensity -= .05f;
-            yield return new WaitForSeconds(.02f);
-        }
-
-        for (int i = 0; i < 20; i++)
-        {
-            ladyLight.intensity += .05f;
-            yield return new WaitForSeconds(.02f);
-
+            }
         }
 
         for (int i = 0; i < 20; i++)
