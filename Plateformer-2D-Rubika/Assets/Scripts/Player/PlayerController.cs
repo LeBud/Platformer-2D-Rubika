@@ -23,11 +23,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float slowMultMovement;
     [SerializeField] float slowMultJump;
 
+    [Header("Fade Animation")]
+    [SerializeField] Animation fadeAnim;
+    
     [Header("Clamp Velocity")]
     [SerializeField] float maxVelocity;
 
     [Header("Can Glide")]
     public bool canGlide;
+
+
 
     public int deathCounter;
 
@@ -44,6 +49,8 @@ public class PlayerController : MonoBehaviour
     bool onSlowPlatform;
     [HideInInspector]
     public bool jumpPadOn;
+    bool respawning;
+
 
     float lastPressedJump;
     float onGround;
@@ -76,6 +83,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (PauseMenu.gameIsPause) return;
+
+        if (respawning) return;
+
         //Timers
         onGround -= Time.deltaTime;
         lastPressedJump -= Time.deltaTime;
@@ -271,6 +282,8 @@ public class PlayerController : MonoBehaviour
     
     private void FixedUpdate()
     {
+        if (respawning) return;
+
         //Movement
         if (airFlowing)
             AirFlowMovement();
@@ -365,11 +378,19 @@ public class PlayerController : MonoBehaviour
         return flyTime > 0 && !airFlowing;
     }
     #endregion
-    public void Respawn()
+    public IEnumerator Respawn()
     {
+        respawning = true;
         rb.velocity = Vector2.zero;
-        transform.position = checkPointPos;
         deathCounter++;
+
+        //Animation de mort
+
+        //Animation de fade
+        fadeAnim.Play("FadeIn");
+
+        yield return new WaitForSeconds(1);
+
 
         if(GameObject.FindObjectsOfType<FallingObject>().Length >= 1)
         {
@@ -386,6 +407,14 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+
+        transform.position = checkPointPos;
+
+        yield return new WaitForSeconds(1);
+        //animation de fade
+        fadeAnim.Play("FadeOut");
+
+        respawning = false;
     }
 
     private void OnDrawGizmos()
