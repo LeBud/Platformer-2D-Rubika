@@ -9,13 +9,11 @@ public class PlayerControllerEdgeDetection : MonoBehaviour
     PlayerController controller;
 
     [Header("Edge Check")]
+    [SerializeField] float range;
+    [SerializeField] Vector3 edgeDetectionSize;
     [SerializeField] Transform leftEdge;
     [SerializeField] Transform rightEdge;
-    [SerializeField] Vector2 edgeCheckSize;
-    [SerializeField] Transform topEdge;
-    [SerializeField] Vector2 topCheckSize;
     [SerializeField] LayerMask edgeCheckLayerMask;
-
 
     private void Awake()
     {
@@ -25,49 +23,49 @@ public class PlayerControllerEdgeDetection : MonoBehaviour
 
     private void Update()
     {
-        if (rb.velocity.y >= 0)
+        if (controller.isJumping)
         {
-            if (Physics2D.OverlapBox(leftEdge.position, edgeCheckSize, 0, edgeCheckLayerMask) && !TopPlayer())
-            {
-                MovePlayer(rb.velocity,edgeCheckSize.x);
-            }
-            else if (Physics2D.OverlapBox(rightEdge.position, edgeCheckSize, 0, edgeCheckLayerMask) && !TopPlayer())
-            {
-                MovePlayer(rb.velocity, -edgeCheckSize.x);
-            }
+            if(Physics2D.Raycast(leftEdge.position, Vector2.up, range, edgeCheckLayerMask) && !LeftInnerCheck() && rb.velocity.x < 5)
+                MovePlayer(rb.velocity, edgeDetectionSize.x);
+            else if (Physics2D.Raycast(rightEdge.position, Vector2.up, range, edgeCheckLayerMask) && !RightInnerCheck() && rb.velocity.x > -5)
+                MovePlayer(rb.velocity, -edgeDetectionSize.x);
+
         }
-        
+
+
+        DrawRaycast();
+    }
+
+    void DrawRaycast()
+    {
+        Debug.DrawRay(leftEdge.position, Vector2.up * range, Color.green);
+        Debug.DrawRay(leftEdge.position + edgeDetectionSize, Vector2.up * range, Color.yellow);
+
+        Debug.DrawRay(rightEdge.position, Vector2.up * range, Color.green);
+        Debug.DrawRay(rightEdge.position - edgeDetectionSize, Vector2.up * range, Color.yellow);
     }
 
     void MovePlayer(Vector2 velocity, float pos)
     {
+        rb.velocity = Vector2.zero;
+
         Vector2 currentPos = transform.position;
         currentPos.x += pos;
         transform.position = currentPos;
 
-        rb.velocity = velocity;
+        velocity.x = 0;
 
-        StartCoroutine(Velocity(velocity));
-    }
-
-    IEnumerator Velocity(Vector2 velocity)
-    {
-        yield return new WaitForSeconds(.01f);
         rb.velocity = velocity;
     }
 
-    bool TopPlayer()
+    bool LeftInnerCheck()
     {
-        return Physics2D.OverlapBox(topEdge.position, topCheckSize, 0, edgeCheckLayerMask);
+        return Physics2D.Raycast(leftEdge.position + edgeDetectionSize, Vector2.up, range, edgeCheckLayerMask);
     }
 
-    private void OnDrawGizmos()
+    bool RightInnerCheck()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(leftEdge.position, edgeCheckSize);
-        Gizmos.DrawWireCube(rightEdge.position, edgeCheckSize);
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(topEdge.position, topCheckSize);
+        return Physics2D.Raycast(leftEdge.position - edgeDetectionSize, Vector2.up, range, edgeCheckLayerMask);
     }
 
 }
