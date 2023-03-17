@@ -25,10 +25,14 @@ public class PlayerControllerData : ScriptableObject
     public float curveMult;
     public AnimationCurve glideCurve;
 
-    [Header("Fly Ability")]
+    /*[Header("Fly Ability")]
     public float flyTimePerAphid;
     public float flyMaxTime;
-    public float flySpeedMult;
+    public float flySpeedMult;*/
+
+    [Header("LadyBug Light")]
+    public int maxAphid;
+    public int maxTimeLightOn;
 
     [Header("Air Flow")]
     public float airFlowLerpSpeed = 2;

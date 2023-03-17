@@ -9,12 +9,13 @@ public class AphidCollect : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            PlayerController player = collision.GetComponent<PlayerController>();
+            LadyBugLight lady = collision.GetComponent<LadyBugLight>();
+            PlayerController controller = collision.GetComponent<PlayerController>();
 
-            if (player.flyTime >= player.playerControllerData.flyMaxTime)
+            if (lady.aphidCount >= controller.playerControllerData.maxAphid)
                 return;
 
-            player.flyTime += player.playerControllerData.flyMaxTime / 3;
+            lady.aphidCount++;
 
             StartCoroutine(Respawn());
         }
