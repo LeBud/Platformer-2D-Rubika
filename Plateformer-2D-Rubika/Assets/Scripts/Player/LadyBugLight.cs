@@ -21,6 +21,7 @@ public class LadyBugLight : MonoBehaviour
     private void Update()
     {
         MyInputs();
+
     }
 
     void MyInputs()
@@ -49,8 +50,9 @@ public class LadyBugLight : MonoBehaviour
         }
 
         if (ladyLight.intensity > 1) ladyLight.intensity = 1;
-
+        
         yield return new WaitForSeconds(playerControllerData.maxTimeLightOn - 2.8f);
+
 
         StartCoroutine(FadeLight());
     }
