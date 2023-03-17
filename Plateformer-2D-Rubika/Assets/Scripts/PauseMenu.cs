@@ -9,10 +9,17 @@ public class PauseMenu : MonoBehaviour
     public GameObject inGameHUD;
     public GameObject pauseMenuHUD;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        if (gameIsPause)
+            Pause();
+        else
+            Resume();
+    }
+
     void Update()
     {
-        if (Input.GetButtonDown("Escape"))
+        if (Input.GetButtonDown("Cancel"))
         {
             gameIsPause = !gameIsPause;
 
