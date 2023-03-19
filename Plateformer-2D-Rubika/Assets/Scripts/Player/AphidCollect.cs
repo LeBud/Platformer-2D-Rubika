@@ -5,6 +5,9 @@ using UnityEngine;
 public class AphidCollect : MonoBehaviour
 {
 
+    [SerializeField] float respawnTime;
+    public bool canRespawn;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -17,18 +20,46 @@ public class AphidCollect : MonoBehaviour
 
             lady.aphidCount++;
 
-            StartCoroutine(Respawn());
+            if(canRespawn)
+                StartCoroutine(Respawn());
+            else
+            {
+                foreach (Transform child in transform)
+                {
+                    child.gameObject.SetActive(false);
+                }
+                GetComponent<CircleCollider2D>().enabled = false;
+            }
+
         }
     }
     
     IEnumerator Respawn()
     {
-        gameObject.GetComponent<SpriteRenderer>().enabled = false;
-        gameObject.GetComponent<CircleCollider2D>().enabled = false;
-        yield return new WaitForSeconds(4);
-        gameObject.GetComponent<SpriteRenderer>().enabled = true;
-        gameObject.GetComponent<CircleCollider2D>().enabled = true;
 
+        foreach(Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+        GetComponent<CircleCollider2D>().enabled = false;
+
+        yield return new WaitForSeconds(respawnTime);
+
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+        GetComponent<CircleCollider2D>().enabled = true;
+
+    }
+
+    public void RespawnAphidWhenDead()
+    {
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+        GetComponent<CircleCollider2D>().enabled = true;
     }
 
 }

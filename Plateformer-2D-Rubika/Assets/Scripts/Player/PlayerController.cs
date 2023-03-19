@@ -417,6 +417,22 @@ public class PlayerController : MonoBehaviour
         ladyBugLight.ladyLight.intensity = 0;
         ladyBugLight.ladyLight.enabled = false;
 
+        //RespawnAphid
+        if (GameObject.FindObjectsOfType<AphidCollect>().Length >= 1)
+        {
+            if (GameObject.FindObjectsOfType<AphidCollect>().Length == 1)
+            {
+                GameObject.FindObjectOfType<AphidCollect>().RespawnAphidWhenDead();
+            }
+            else
+            {
+                AphidCollect[] aphids = GameObject.FindObjectsOfType<AphidCollect>();
+                for (int i = 0; i < aphids.Length; i++)
+                {
+                    aphids[i].RespawnAphidWhenDead();
+                }
+            }
+        }
 
         yield return new WaitForSeconds(1);
         //animation de fade
