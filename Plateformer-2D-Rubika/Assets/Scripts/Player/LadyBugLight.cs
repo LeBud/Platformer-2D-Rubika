@@ -8,9 +8,10 @@ public class LadyBugLight : MonoBehaviour
     [Header("Settings")]
     [SerializeField] PlayerControllerData playerControllerData;
     public int aphidCount;
-    [SerializeField] Light2D ladyLight;
+    public Light2D ladyLight;
 
-    bool lightActive;
+    [HideInInspector]
+    public bool lightActive;
 
     private void Awake()
     {

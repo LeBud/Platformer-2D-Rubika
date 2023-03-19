@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Controller Data")]
     public PlayerControllerData playerControllerData;
+    [SerializeField] LadyBugLight ladyBugLight;
 
     [Header("Ground Check")]
     [SerializeField] Transform groundCheckPos;
@@ -77,6 +78,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        ladyBugLight = GetComponent<LadyBugLight>();
         rb = GetComponent<Rigidbody2D>();
         checkPointPos = transform.position;
     }
@@ -409,6 +411,12 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.position = checkPointPos;
+
+        //Reset Light
+        ladyBugLight.lightActive = false;
+        ladyBugLight.ladyLight.intensity = 0;
+        ladyBugLight.ladyLight.enabled = false;
+
 
         yield return new WaitForSeconds(1);
         //animation de fade
