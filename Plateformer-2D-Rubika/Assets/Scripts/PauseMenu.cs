@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
@@ -9,12 +10,17 @@ public class PauseMenu : MonoBehaviour
     public GameObject inGameHUD;
     public GameObject pauseMenuHUD;
 
+    [SerializeField] GameObject firstButton;
+
     private void Start()
     {
         if (gameIsPause)
             Pause();
         else
             Resume();
+
+        EventSystem.current.SetSelectedGameObject(null);
+
     }
 
     void Update()
@@ -40,6 +46,8 @@ public class PauseMenu : MonoBehaviour
 
         inGameHUD.SetActive(true);
         pauseMenuHUD.SetActive(false);
+
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     void Pause()
@@ -51,6 +59,10 @@ public class PauseMenu : MonoBehaviour
 
         inGameHUD.SetActive(false);
         pauseMenuHUD.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(firstButton);
+
     }
 
     public void Option()
@@ -73,5 +85,11 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = true;
 
         SceneManager.LoadScene(0);
+    }
+
+    public void SelectBtt(GameObject button)
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(button);
     }
 }

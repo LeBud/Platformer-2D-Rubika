@@ -6,21 +6,30 @@ public class MantysFollower : MonoBehaviour
 {
 
     [Header("Settings")]
-    [SerializeField] float followSpeed;
+    [SerializeField] float mantysSpeed;
+    [SerializeField] Transform[] mantysTransform;
 
-    PlayerController playerController;
+    int currentWaypoint;
 
-    private void Awake()
+    private void Start()
     {
-        playerController = FindObjectOfType<PlayerController>();
+        currentWaypoint = 0;
     }
 
     private void Update()
     {
-        Vector3 dir = playerController.transform.position - transform.position;
-
-        transform.Translate(dir * followSpeed * Time.deltaTime);
+        if(currentWaypoint < mantysTransform.Length)
+        {
+            if(transform.position != mantysTransform[currentWaypoint].position)
+            {
+                transform.position = new Vector3(
+                    Mathf.MoveTowards(transform.position.x, mantysTransform[currentWaypoint].position.x, mantysSpeed * Time.deltaTime),
+                    Mathf.MoveTowards(transform.position.y, mantysTransform[currentWaypoint].position.y, mantysSpeed * Time.deltaTime),
+                    0);
+            }
+            else
+                currentWaypoint++;
+        }
     }
-
 
 }

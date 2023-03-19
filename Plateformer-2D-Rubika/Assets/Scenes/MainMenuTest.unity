@@ -321,8 +321,8 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 0.8915094, g: 0.9744728, b: 1, a: 1}
     m_HighlightedColor: {r: 0.5446778, g: 0.754717, b: 0.74259937, a: 1}
-    m_PressedColor: {r: 0.12941177, g: 0.16470589, b: 0.18039216, a: 1}
-    m_SelectedColor: {r: 0.12941177, g: 0.16470589, b: 0.18039216, a: 1}
+    m_PressedColor: {r: 0.53733534, g: 0.6509434, b: 0.64301723, a: 1}
+    m_SelectedColor: {r: 0.5372549, g: 0.6509804, b: 0.6431373, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -373,6 +373,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 588976498}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: SelectBtt
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1561407676}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -614,8 +626,8 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 0.8915094, g: 0.9744728, b: 1, a: 1}
     m_HighlightedColor: {r: 0.5446778, g: 0.754717, b: 0.74259937, a: 1}
-    m_PressedColor: {r: 0.12941177, g: 0.16470589, b: 0.18039216, a: 1}
-    m_SelectedColor: {r: 0.12941177, g: 0.16470589, b: 0.18039216, a: 1}
+    m_PressedColor: {r: 0.53733534, g: 0.6509434, b: 0.64301723, a: 1}
+    m_SelectedColor: {r: 0.5372549, g: 0.6509804, b: 0.6431373, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -975,8 +987,8 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 0.8915094, g: 0.9744728, b: 1, a: 1}
     m_HighlightedColor: {r: 0.5446778, g: 0.754717, b: 0.74259937, a: 1}
-    m_PressedColor: {r: 0.12941177, g: 0.16470589, b: 0.18039216, a: 1}
-    m_SelectedColor: {r: 0.12941177, g: 0.16470589, b: 0.18039216, a: 1}
+    m_PressedColor: {r: 0.53733534, g: 0.6509434, b: 0.64301723, a: 1}
+    m_SelectedColor: {r: 0.5372549, g: 0.6509804, b: 0.6431373, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1164,6 +1176,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b908f679bddf6574083ed0c5053a0dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playBtt: {fileID: 344632706}
+  optionsBtt: {fileID: 802089916}
+  creditsBtt: {fileID: 1561407676}
 --- !u!1 &741354487
 GameObject:
   m_ObjectHideFlags: 0
@@ -1227,8 +1242,8 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 0.8915094, g: 0.9744728, b: 1, a: 1}
     m_HighlightedColor: {r: 0.5446778, g: 0.754717, b: 0.74259937, a: 1}
-    m_PressedColor: {r: 0.12941177, g: 0.16470589, b: 0.18039216, a: 1}
-    m_SelectedColor: {r: 0.12941177, g: 0.16470589, b: 0.18039216, a: 1}
+    m_PressedColor: {r: 0.53733534, g: 0.6509434, b: 0.64301723, a: 1}
+    m_SelectedColor: {r: 0.5372549, g: 0.6509804, b: 0.6431373, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1279,6 +1294,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 588976498}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: SelectBtt
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 802089916}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1385,8 +1412,8 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 0.8915094, g: 0.9744728, b: 1, a: 1}
     m_HighlightedColor: {r: 0.5446778, g: 0.754717, b: 0.74259937, a: 1}
-    m_PressedColor: {r: 0.12941177, g: 0.16470589, b: 0.18039216, a: 1}
-    m_SelectedColor: {r: 0.12941177, g: 0.16470589, b: 0.18039216, a: 1}
+    m_PressedColor: {r: 0.53733534, g: 0.6509434, b: 0.64301723, a: 1}
+    m_SelectedColor: {r: 0.5372549, g: 0.6509804, b: 0.6431373, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1437,6 +1464,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 588976498}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: SelectBtt
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 344632706}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2198,8 +2237,8 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 0.8915094, g: 0.9744728, b: 1, a: 1}
     m_HighlightedColor: {r: 0.5446778, g: 0.754717, b: 0.74259937, a: 1}
-    m_PressedColor: {r: 0.12941177, g: 0.16470589, b: 0.18039216, a: 1}
-    m_SelectedColor: {r: 0.12941177, g: 0.16470589, b: 0.18039216, a: 1}
+    m_PressedColor: {r: 0.53733534, g: 0.6509434, b: 0.64301723, a: 1}
+    m_SelectedColor: {r: 0.5372549, g: 0.6509804, b: 0.6431373, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -2250,6 +2289,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 588976498}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: SelectBtt
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 344632706}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
