@@ -595,7 +595,7 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
+  m_PointLightInnerRadius: 0.1
   m_PointLightOuterRadius: 0.2
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
@@ -2188,6 +2188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControllerData: {fileID: 11400000, guid: 7546c6d7360acac458da6905d62b496d, type: 2}
+  ladyBugLight: {fileID: 0}
   groundCheckPos: {fileID: 4493773985485097168}
   groundCheckSize: {x: 0.98, y: 0.04}
   groundCheckLayerMask:
@@ -2264,6 +2265,7 @@ MonoBehaviour:
   playerControllerData: {fileID: 11400000, guid: 7546c6d7360acac458da6905d62b496d, type: 2}
   aphidCount: 0
   ladyLight: {fileID: 7867977260422283217}
+  lightActive: 0
 --- !u!114 &7867977260422283217
 MonoBehaviour:
   m_ObjectHideFlags: 0
