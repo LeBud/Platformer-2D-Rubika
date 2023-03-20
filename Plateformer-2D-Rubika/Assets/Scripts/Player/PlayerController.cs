@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
     AirFlow airFlow;
+    LevelManager levelManager;
 
     [Header("Controller Data")]
     public PlayerControllerData playerControllerData;
@@ -33,7 +34,8 @@ public class PlayerController : MonoBehaviour
     [Header("Can Glide")]
     public bool canGlide;
 
-
+    [HideInInspector]
+    public int checkPointRoom;
 
     public int deathCounter;
 
@@ -78,6 +80,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        levelManager = FindObjectOfType<LevelManager>();
         ladyBugLight = GetComponent<LadyBugLight>();
         rb = GetComponent<Rigidbody2D>();
         checkPointPos = transform.position;
@@ -410,6 +413,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        levelManager.currentRoom = checkPointRoom;
         transform.position = checkPointPos;
 
         //Reset Light
