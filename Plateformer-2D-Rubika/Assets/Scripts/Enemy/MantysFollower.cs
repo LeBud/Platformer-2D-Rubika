@@ -16,6 +16,7 @@ public class MantysFollower : MonoBehaviour
 
     int currentWaypoint;
 
+
     bool respawning;
 
     private void Start()
