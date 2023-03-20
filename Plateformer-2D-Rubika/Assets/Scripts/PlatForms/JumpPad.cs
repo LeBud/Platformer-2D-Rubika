@@ -18,21 +18,7 @@ public class JumpPad : MonoBehaviour
 
             StartCoroutine(OnJumpPad());
 
-            /*float xForce = rb.velocity.x;
-            float yForce = rb.velocity.y;
-
-            if(Mathf.Abs(xForce) < 5) xForce = 0;
-            if(Mathf.Abs(yForce) < 5) yForce = 0;
-
-            yForce = Mathf.Abs(yForce);
-
-            if(bounceForce.x != 0)
-            {
-                if(Mathf.Sign(xForce) < 0 && bounceForce.x > 0) xForce = 0;
-                else if(Mathf.Sign(xForce) > 0 && bounceForce.x < 0) xForce = 0;
-            }*/
-
-            //Vector2 additionalForce = new Vector2(xForce, yForce);
+            rb.velocity = Vector2.zero;
 
             rb.AddForce(bounceForce,ForceMode2D.Impulse);
         }
