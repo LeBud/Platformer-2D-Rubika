@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelRoom : MonoBehaviour
 {
 
-    [SerializeField] int roomNum;
+    public int roomNum;
     LevelManager roomManager;
 
     private void Awake()
