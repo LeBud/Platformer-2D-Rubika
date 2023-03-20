@@ -11,6 +11,7 @@ public class PlayerDeath : MonoBehaviour
     Rigidbody2D rb;
     LevelManager levelManager;
     LadyBugLight ladyBugLight;
+    PlayerController playerController;
 
     [Header("Virtual Camera")]
     [SerializeField] CinemachineVirtualCamera virtualCamera;
@@ -33,6 +34,7 @@ public class PlayerDeath : MonoBehaviour
     {
         levelManager = FindObjectOfType<LevelManager>();
         ladyBugLight = GetComponent<LadyBugLight>();
+        playerController = GetComponent<PlayerController>();
         rb = GetComponent<Rigidbody2D>();
 
         checkPointPos = transform.position;
@@ -51,6 +53,10 @@ public class PlayerDeath : MonoBehaviour
         fadeAnim.Play("FadeIn");
 
         yield return new WaitForSeconds(1);
+
+        playerController.inAirFlow = false;
+        playerController.gliding = false;
+        playerController.glideTime = 0;
 
 
         if (GameObject.FindObjectsOfType<FallingObject>().Length >= 1)
