@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Controller Data")]
     public PlayerControllerData playerControllerData;
-    [SerializeField] LadyBugLight ladyBugLight;
 
     [Header("Ground Check")]
     [SerializeField] Transform groundCheckPos;
@@ -23,9 +22,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask slowPlatformLayerMask;
     [SerializeField] float slowMultMovement;
     [SerializeField] float slowMultJump;
-
-    [Header("Fade Animation")]
-    [SerializeField] Animation fadeAnim;
     
     [Header("Clamp Velocity")]
     [SerializeField] float maxVelocity;
@@ -34,8 +30,6 @@ public class PlayerController : MonoBehaviour
     public bool canGlide;
 
 
-
-    public int deathCounter;
 
     bool jumpCut;
     [HideInInspector]
@@ -50,7 +44,6 @@ public class PlayerController : MonoBehaviour
     bool onSlowPlatform;
     [HideInInspector]
     public bool jumpPadOn;
-    bool respawning;
 
 
     float lastPressedJump;
@@ -64,11 +57,6 @@ public class PlayerController : MonoBehaviour
 
     Vector2 moveInput;
 
-    //CheckPoint settings
-    [HideInInspector]
-    public Vector2 checkPointPos;
-    [HideInInspector]
-    public int currentCheckPoint = 0;
 
     //AirFlow
     [HideInInspector]
@@ -78,16 +66,14 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        ladyBugLight = GetComponent<LadyBugLight>();
         rb = GetComponent<Rigidbody2D>();
-        checkPointPos = transform.position;
     }
 
     private void Update()
     {
         if (PauseMenu.gameIsPause) return;
 
-        if (respawning) return;
+        if (PlayerDeath.respawning) return;
 
         //Timers
         onGround -= Time.deltaTime;
@@ -284,7 +270,7 @@ public class PlayerController : MonoBehaviour
     
     private void FixedUpdate()
     {
-        if (respawning) return;
+        if (PlayerDeath.respawning) return;
 
         //Movement
         if (airFlowing)
@@ -380,66 +366,6 @@ public class PlayerController : MonoBehaviour
         return flyTime > 0 && !airFlowing;
     }
     #endregion
-    public IEnumerator Respawn()
-    {
-        respawning = true;
-        rb.velocity = Vector2.zero;
-        deathCounter++;
-
-        //Animation de mort
-
-        //Animation de fade
-        fadeAnim.Play("FadeIn");
-
-        yield return new WaitForSeconds(1);
-
-
-        if(GameObject.FindObjectsOfType<FallingObject>().Length >= 1)
-        {
-            if(GameObject.FindObjectsOfType<FallingObject>().Length == 1)
-            {
-                GameObject.FindObjectOfType<FallingObject>().ResetFall();
-            }
-            else
-            {
-                FallingObject[] fall = GameObject.FindObjectsOfType<FallingObject>();
-                for(int i = 0; i < fall.Length; i++)
-                {
-                    fall[i].ResetFall();
-                }
-            }
-        }
-
-        transform.position = checkPointPos;
-
-        //Reset Light
-        ladyBugLight.lightActive = false;
-        ladyBugLight.ladyLight.intensity = 0;
-        ladyBugLight.ladyLight.enabled = false;
-
-        //RespawnAphid
-        if (GameObject.FindObjectsOfType<AphidCollect>().Length >= 1)
-        {
-            if (GameObject.FindObjectsOfType<AphidCollect>().Length == 1)
-            {
-                GameObject.FindObjectOfType<AphidCollect>().RespawnAphidWhenDead();
-            }
-            else
-            {
-                AphidCollect[] aphids = GameObject.FindObjectsOfType<AphidCollect>();
-                for (int i = 0; i < aphids.Length; i++)
-                {
-                    aphids[i].RespawnAphidWhenDead();
-                }
-            }
-        }
-
-        yield return new WaitForSeconds(1);
-        //animation de fade
-        fadeAnim.Play("FadeOut");
-
-        respawning = false;
-    }
 
     private void OnDrawGizmos()
     {

@@ -16,6 +16,7 @@ public class MantysFollower : MonoBehaviour
 
     int currentWaypoint;
 
+
     bool respawning;
 
     private void Start()
@@ -70,7 +71,8 @@ public class MantysFollower : MonoBehaviour
 
         if (collision.CompareTag("Player"))
         {
-            StartCoroutine(collision.GetComponent<PlayerController>().Respawn());
+            if(!PlayerDeath.respawning)
+                StartCoroutine(collision.GetComponent<PlayerDeath>().Respawn());
             StartCoroutine(RespawnEnemy());
         }
     }

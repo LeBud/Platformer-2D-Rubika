@@ -1954,7 +1954,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -2025,6 +2025,7 @@ GameObject:
   - component: {fileID: 3833941071312306833}
   - component: {fileID: 4465516358017479062}
   - component: {fileID: 7867977260422283217}
+  - component: {fileID: 8323220711865625380}
   - component: {fileID: 4493773985308631814}
   m_Layer: 0
   m_Name: Controller
@@ -2188,7 +2189,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControllerData: {fileID: 11400000, guid: 7546c6d7360acac458da6905d62b496d, type: 2}
-  ladyBugLight: {fileID: 0}
   groundCheckPos: {fileID: 4493773985485097168}
   groundCheckSize: {x: 0.98, y: 0.04}
   groundCheckLayerMask:
@@ -2202,17 +2202,13 @@ MonoBehaviour:
     m_Bits: 256
   slowMultMovement: 0.4
   slowMultJump: 0.7
-  fadeAnim: {fileID: 5326328158674719823}
   maxVelocity: 60
   canGlide: 1
-  deathCounter: 0
   isJumping: 0
   gliding: 0
   jumpPadOn: 0
   glideTime: 0
   flyTime: 0
-  checkPointPos: {x: 0, y: 0}
-  currentCheckPoint: 0
   inAirFlow: 0
   airFlowDir: {x: 0, y: 0}
 --- !u!114 &1982201182003418347
@@ -2345,6 +2341,24 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &8323220711865625380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4493773985308631816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc736b5843f0994cb7cda0ed4dc389c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  virtualCamera: {fileID: 4493773983549887248}
+  fadeAnim: {fileID: 5326328158674719823}
+  checkPointPos: {x: 0, y: 0}
+  currentCheckPoint: 0
+  checkPointRoom: 0
+  deathCounter: 0
 --- !u!96 &4493773985308631814
 TrailRenderer:
   serializedVersion: 3

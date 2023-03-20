@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PlayerUI : MonoBehaviour
 {
     PlayerController playerController;
+    PlayerDeath playerDeath;
     LadyBugLight ladyLight;
 
     [Header("UI Elements")]
@@ -18,10 +19,11 @@ public class PlayerUI : MonoBehaviour
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
+        playerDeath = GetComponent<PlayerDeath>();
         ladyLight = GetComponent<LadyBugLight>();
         lightSlider.maxValue = playerController.playerControllerData.maxAphid * 10;
         glideSlider.maxValue = playerController.playerControllerData.maxGlideTime;
-        deathCounterTxt.text = "Death : " + playerController.deathCounter;
+        deathCounterTxt.text = "Death : " + playerDeath.deathCounter;
     }
 
     private void LateUpdate()
@@ -40,7 +42,7 @@ public class PlayerUI : MonoBehaviour
 
         glideSlider.value = playerController.glideTime;
         lightSlider.value = ladyLight.aphidCount * 10;
-        deathCounterTxt.text = "Death : " + playerController.deathCounter;
+        deathCounterTxt.text = "Death : " + playerDeath.deathCounter;
     }
 
 }
