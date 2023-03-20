@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour
         
         for(int i = 0; i < levels.Count; i++)
         {
-            levels[i].GetComponent<LevelRoom>().roomNum = i;
+            //levels[i].GetComponent<LevelRoom>().roomNum = i;
             levels[i].SetActive(false);
         }
 
@@ -26,7 +26,6 @@ public class LevelManager : MonoBehaviour
             if (currentRoom + i >= 0 && currentRoom + i < levels.Count)
             {
                 levels[currentRoom + i].SetActive(true);
-                Debug.Log(currentRoom + i);
             }
         }
 
@@ -43,17 +42,19 @@ public class LevelManager : MonoBehaviour
 
     void ManageLevels()
     {
-        for(int i = -1; i < 2; i++)
+
+        for (int i = -1; i < 2; i++)
         {
-            if (currentRoom + i >= 0 && currentRoom + i < levels.Count)
+            if ((currentRoom + i) >= 0 && (currentRoom + i) < levels.Count)
             {
                 levels[currentRoom + i].SetActive(true);
+                Debug.Log(currentRoom + i);
             }
         }
 
         for(int i = 0; i < levels.Count;i++)
         {
-            if(i < currentRoom - 1 || i > currentRoom + 1)
+            if(i < (currentRoom - 1) || i > (currentRoom + 1))
                 levels[i].SetActive(false);
         }
     }
