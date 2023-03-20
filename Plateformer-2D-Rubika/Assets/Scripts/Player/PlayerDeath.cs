@@ -68,8 +68,9 @@ public class PlayerDeath : MonoBehaviour
                 }
             }
         }
+        if(levelManager != null)
+            levelManager.currentRoom = checkPointRoom;
 
-        levelManager.currentRoom = checkPointRoom;
         transform.position = checkPointPos;
         virtualCamera.transform.position = transform.position;
         //Reset Light
@@ -96,6 +97,7 @@ public class PlayerDeath : MonoBehaviour
 
         yield return new WaitForSeconds(1);
         //animation de fade
+        fadeAnim.Play("FadeOut");
         fadeAnim.Play("FadeOut");
 
         respawning = false;

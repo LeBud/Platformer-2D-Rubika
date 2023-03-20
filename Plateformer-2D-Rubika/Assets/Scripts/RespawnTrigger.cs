@@ -7,7 +7,10 @@ public class RespawnTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
-            StartCoroutine(collision.GetComponent<PlayerDeath>().Respawn());
+        {
+            if(!PlayerDeath.respawning)
+                StartCoroutine(collision.GetComponent<PlayerDeath>().Respawn());
+        }
            
     }
 }
