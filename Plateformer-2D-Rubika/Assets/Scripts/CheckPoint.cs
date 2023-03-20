@@ -8,12 +8,12 @@ public class CheckPoint : MonoBehaviour
     public int checkPointNum;
     public int roomNumber;
     SpriteRenderer sprite;
-    PlayerController player;
+    PlayerDeath player;
     
 
     private void Awake()
     {
-        player = FindObjectOfType<PlayerController>();
+        player = FindObjectOfType<PlayerDeath>();
         sprite = GetComponent<SpriteRenderer>();
     }
 
