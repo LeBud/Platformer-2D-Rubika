@@ -18,9 +18,4 @@ public class LevelRoom : MonoBehaviour
         roomManager.currentRoom = roomNum;
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        roomManager.currentRoom = roomNum;
-    }
-
 }
