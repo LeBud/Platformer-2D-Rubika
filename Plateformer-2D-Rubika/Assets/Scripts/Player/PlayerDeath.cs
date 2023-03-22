@@ -58,7 +58,7 @@ public class PlayerDeath : MonoBehaviour
         playerController.gliding = false;
         playerController.glideTime = 0;
 
-
+        #region FallObjectReset
         if (GameObject.FindObjectsOfType<FallingObject>().Length >= 1)
         {
             if (GameObject.FindObjectsOfType<FallingObject>().Length == 1)
@@ -74,7 +74,9 @@ public class PlayerDeath : MonoBehaviour
                 }
             }
         }
-        if(levelManager != null)
+    #endregion
+
+        if (levelManager != null)
             levelManager.currentRoom = checkPointRoom;
 
         transform.position = checkPointPos;
@@ -84,7 +86,7 @@ public class PlayerDeath : MonoBehaviour
         ladyBugLight.ladyLight.intensity = 0;
         ladyBugLight.ladyLight.enabled = false;
 
-        //RespawnAphid
+        #region Aphid
         if (GameObject.FindObjectsOfType<AphidCollect>().Length >= 1)
         {
             if (GameObject.FindObjectsOfType<AphidCollect>().Length == 1)
@@ -100,8 +102,9 @@ public class PlayerDeath : MonoBehaviour
                 }
             }
         }
+        #endregion
 
-        //RespawnCollectable
+        #region collectable
         if (GameObject.FindObjectsOfType<Collectable>().Length >= 1)
         {
             if (GameObject.FindObjectsOfType<Collectable>().Length == 1)
@@ -131,7 +134,7 @@ public class PlayerDeath : MonoBehaviour
                 }
             }
         }
-
+        #endregion
 
         yield return new WaitForSeconds(1);
         //animation de fade
