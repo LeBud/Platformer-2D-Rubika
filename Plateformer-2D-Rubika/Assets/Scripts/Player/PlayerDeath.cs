@@ -101,6 +101,38 @@ public class PlayerDeath : MonoBehaviour
             }
         }
 
+        //RespawnCollectable
+        if (GameObject.FindObjectsOfType<Collectable>().Length >= 1)
+        {
+            if (GameObject.FindObjectsOfType<Collectable>().Length == 1)
+            {
+                if (!GameObject.FindObjectOfType<Collectable>().checkPointSave)
+                {
+                    Collectable collect = GameObject.FindObjectOfType<Collectable>();
+
+                    collect.GetComponent<SpriteRenderer>().enabled = true;
+                    collect.GetComponent<CircleCollider2D>().enabled = true;
+
+                    PlayerCollectable.collectable--;
+                }
+            }
+            else
+            {
+                Collectable[] collect = GameObject.FindObjectsOfType<Collectable>();
+                for (int i = 0; i < collect.Length; i++)
+                {
+                    if (!collect[i].checkPointSave)
+                    {
+                        collect[i].GetComponent<SpriteRenderer>().enabled = true;
+                        collect[i].GetComponent<CircleCollider2D>().enabled = true;
+
+                        PlayerCollectable.collectable--;
+                    }
+                }
+            }
+        }
+
+
         yield return new WaitForSeconds(1);
         //animation de fade
         fadeAnim.Play("FadeOut");
