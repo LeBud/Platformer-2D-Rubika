@@ -15,7 +15,8 @@ public class LevelRoom : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        roomManager.currentRoom = roomNum;
+        if(collision.CompareTag("Player"))
+            roomManager.currentRoom = roomNum;
     }
 
 }
