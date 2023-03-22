@@ -14,6 +14,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] Slider glideSlider;
     [SerializeField] Slider lightSlider;
     [SerializeField] TextMeshProUGUI deathCounterTxt;
+    [SerializeField] TextMeshProUGUI collectablesTxt;
     [SerializeField] float glideSliderYOffset;
 
     private void Awake()
@@ -43,6 +44,7 @@ public class PlayerUI : MonoBehaviour
         glideSlider.value = playerController.glideTime;
         lightSlider.value = ladyLight.aphidCount * 10;
         deathCounterTxt.text = "Death : " + playerDeath.deathCounter;
+        collectablesTxt.text = "Collectable : " + PlayerCollectable.collectable;
     }
 
 }
