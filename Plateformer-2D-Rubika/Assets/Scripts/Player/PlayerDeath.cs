@@ -32,6 +32,8 @@ public class PlayerDeath : MonoBehaviour
 
     private void Awake()
     {
+        respawning = false;
+
         levelManager = FindObjectOfType<LevelManager>();
         ladyBugLight = GetComponent<LadyBugLight>();
         playerController = GetComponent<PlayerController>();
@@ -49,7 +51,6 @@ public class PlayerDeath : MonoBehaviour
 
         //Animation de mort
 
-        //Animation de fade
         fadeAnim.Play("FadeIn");
 
         yield return new WaitForSeconds(1);
@@ -81,6 +82,7 @@ public class PlayerDeath : MonoBehaviour
 
         transform.position = checkPointPos;
         virtualCamera.transform.position = transform.position;
+        
         //Reset Light
         ladyBugLight.lightActive = false;
         ladyBugLight.ladyLight.intensity = 0;
@@ -136,9 +138,13 @@ public class PlayerDeath : MonoBehaviour
         }
         #endregion
 
+        StartCoroutine(FadeOut());
+    }
+
+    IEnumerator FadeOut()
+    {
         yield return new WaitForSeconds(1);
-        //animation de fade
-        fadeAnim.Play("FadeOut");
+
         fadeAnim.Play("FadeOut");
 
         respawning = false;
