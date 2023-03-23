@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+
         if (PauseMenu.gameIsPause) return;
 
         if (PlayerDeath.respawning) return;

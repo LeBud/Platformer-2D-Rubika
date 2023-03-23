@@ -28,6 +28,7 @@ public class CheckPoint : MonoBehaviour
                 player.checkPointPos = transform.position;
                 player.currentCheckPoint = checkPointNum;
                 player.checkPointRoom = roomNumber;
+                FindObjectOfType<PlayerCollectable>().CheckPointSave();
             }
         }
     }

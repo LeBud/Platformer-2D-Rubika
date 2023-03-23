@@ -32,6 +32,8 @@ public class PlayerDeath : MonoBehaviour
 
     private void Awake()
     {
+        respawning = false;
+
         levelManager = FindObjectOfType<LevelManager>();
         ladyBugLight = GetComponent<LadyBugLight>();
         playerController = GetComponent<PlayerController>();
@@ -49,7 +51,6 @@ public class PlayerDeath : MonoBehaviour
 
         //Animation de mort
 
-        //Animation de fade
         fadeAnim.Play("FadeIn");
 
         yield return new WaitForSeconds(1);
@@ -58,7 +59,7 @@ public class PlayerDeath : MonoBehaviour
         playerController.gliding = false;
         playerController.glideTime = 0;
 
-
+        #region FallObjectReset
         if (GameObject.FindObjectsOfType<FallingObject>().Length >= 1)
         {
             if (GameObject.FindObjectsOfType<FallingObject>().Length == 1)
@@ -74,17 +75,20 @@ public class PlayerDeath : MonoBehaviour
                 }
             }
         }
-        if(levelManager != null)
+    #endregion
+
+        if (levelManager != null)
             levelManager.currentRoom = checkPointRoom;
 
         transform.position = checkPointPos;
         virtualCamera.transform.position = transform.position;
+        
         //Reset Light
         ladyBugLight.lightActive = false;
         ladyBugLight.ladyLight.intensity = 0;
         ladyBugLight.ladyLight.enabled = false;
 
-        //RespawnAphid
+        #region Aphid
         if (GameObject.FindObjectsOfType<AphidCollect>().Length >= 1)
         {
             if (GameObject.FindObjectsOfType<AphidCollect>().Length == 1)
@@ -100,10 +104,47 @@ public class PlayerDeath : MonoBehaviour
                 }
             }
         }
+        #endregion
 
+        #region collectable
+        if (GameObject.FindObjectsOfType<Collectable>().Length >= 1)
+        {
+            if (GameObject.FindObjectsOfType<Collectable>().Length == 1)
+            {
+                if (!GameObject.FindObjectOfType<Collectable>().checkPointSave)
+                {
+                    Collectable collect = GameObject.FindObjectOfType<Collectable>();
+
+                    collect.GetComponent<SpriteRenderer>().enabled = true;
+                    collect.GetComponent<CircleCollider2D>().enabled = true;
+
+                    PlayerCollectable.collectable--;
+                }
+            }
+            else
+            {
+                Collectable[] collect = GameObject.FindObjectsOfType<Collectable>();
+                for (int i = 0; i < collect.Length; i++)
+                {
+                    if (!collect[i].checkPointSave)
+                    {
+                        collect[i].GetComponent<SpriteRenderer>().enabled = true;
+                        collect[i].GetComponent<CircleCollider2D>().enabled = true;
+
+                        PlayerCollectable.collectable--;
+                    }
+                }
+            }
+        }
+        #endregion
+
+        StartCoroutine(FadeOut());
+    }
+
+    IEnumerator FadeOut()
+    {
         yield return new WaitForSeconds(1);
-        //animation de fade
-        fadeAnim.Play("FadeOut");
+
         fadeAnim.Play("FadeOut");
 
         respawning = false;
