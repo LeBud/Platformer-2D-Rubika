@@ -27,7 +27,9 @@ public class LadyBugLight : MonoBehaviour
 
     void MyInputs()
     {
-        if (Input.GetButtonDown("Fire1") && aphidCount > 0 && !lightActive)
+        float input = Input.GetAxisRaw("Fire1");
+
+        if (input > .0001f && aphidCount > 0 && !lightActive)
         {
             LadyLight();
         }
