@@ -2971,8 +2971,8 @@ MonoBehaviour:
   axis: 0
   xPos: 0
   yPos: 0
-  speed: 0
-  zoomSpeed: 0
+  speed: 24
+  zoomSpeed: 12
 --- !u!61 &1288313600
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3005,7 +3005,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.1368684e-13}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -3025,7 +3025,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288313597}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
