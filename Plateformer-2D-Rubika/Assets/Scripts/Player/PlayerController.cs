@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     bool glideJump;
     bool glideSpeed;
     bool isFlying;
-    bool flyRequierement;
+    //bool flyRequierement;
     bool airFlowing;
     bool onSlowPlatform;
     [HideInInspector]
@@ -362,10 +362,10 @@ public class PlayerController : MonoBehaviour
         return !isJumping && onGround < 0 && glideTime > 0 && !isFlying && !glideJump && rb.velocity.y <= 0;
     }
 
-    bool CanFly()
+    /*bool CanFly()
     {
         return flyTime > 0 && !airFlowing;
-    }
+    }*/
     #endregion
 
     private void OnDrawGizmos()
