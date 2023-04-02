@@ -2301,8 +2301,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: this platform will slow you down and reduce your jump force
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
+  m_sharedMaterial: {fileID: -2678009682310844100, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2391,7 +2391,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -2678009682310844100, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5849,8 +5849,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Jum pad can also push you sideways
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
+  m_sharedMaterial: {fileID: -2678009682310844100, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5939,7 +5939,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -2678009682310844100, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12724,8 +12724,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Once you have double jumped, hold the jump button to glide
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
+  m_sharedMaterial: {fileID: -2678009682310844100, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -12814,7 +12814,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -2678009682310844100, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13796,6 +13796,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2298258163209654044, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2757990065624099078, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -13932,6 +13936,10 @@ PrefabInstance:
       propertyPath: actualPos.y
       value: 10.08454
       objectReference: {fileID: 0}
+    - target: {fileID: 5376498326108446988, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7946207868781695050, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: m_UiScaleMode
       value: 1
@@ -13945,6 +13953,33 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
+--- !u!4 &1035653309 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4493773985308631817, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
+  m_PrefabInstance: {fileID: 1035653308}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1035653312 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8323220711865625380, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
+  m_PrefabInstance: {fileID: 1035653308}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc736b5843f0994cb7cda0ed4dc389c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1035653314 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4465516358017479062, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
+  m_PrefabInstance: {fileID: 1035653308}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b475ec81890aa6945b372bda7a7e16b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1036484481
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14465,8 +14500,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: you can double jump by pressing "a" again
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
+  m_sharedMaterial: {fileID: -2678009682310844100, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14555,7 +14590,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -2678009682310844100, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15119,8 +15154,8 @@ MonoBehaviour:
 
     you finished the level'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
+  m_sharedMaterial: {fileID: -2678009682310844100, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -15209,7 +15244,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -2678009682310844100, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -16607,8 +16642,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: press "a" to jump
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
+  m_sharedMaterial: {fileID: -2678009682310844100, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -16697,7 +16732,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -2678009682310844100, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -20045,8 +20080,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: congrats !
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
+  m_sharedMaterial: {fileID: -2678009682310844100, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -20135,7 +20170,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -2678009682310844100, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -21921,8 +21956,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: it's a jump pad, just try it
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
+  m_sharedMaterial: {fileID: -2678009682310844100, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -22011,7 +22046,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -2678009682310844100, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24692,6 +24727,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2484376609549600639, guid: 7b1c0bfb4c68c97498d492d70cd8362c, type: 3}
   m_PrefabInstance: {fileID: 1837283388}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1845470888
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1845470890}
+  - component: {fileID: 1845470889}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1845470889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845470888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70ca6172efd0db245beb1ac85e8737bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 1035653309}
+  ladyBugLight: {fileID: 1035653314}
+  deathNumber: {fileID: 1035653312}
+--- !u!4 &1845470890
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845470888}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1879280955
 GameObject:
   m_ObjectHideFlags: 0
@@ -26564,8 +26646,8 @@ MonoBehaviour:
   m_text: the arrow objects are air flow. when you enter them while gliding, you
     are pushed in the direction.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
+  m_sharedMaterial: {fileID: -2678009682310844100, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -26654,7 +26736,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -2678009682310844100, guid: fe360f4bafdd2574c9a0a063bd069e0f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
