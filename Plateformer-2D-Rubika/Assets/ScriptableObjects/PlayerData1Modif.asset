@@ -15,7 +15,7 @@ MonoBehaviour:
   speed: 15
   accel: 10
   deccel: 25
-  jumpForce: 18.65
+  jumpForce: 22
   coyoteTime: 0.15
   jumpBuffer: 0.1
   jumpCutForce: 2
@@ -53,5 +53,5 @@ MonoBehaviour:
   maxTimeLightOn: 5
   airFlowLerpSpeed: 5
   normalGravitysScale: 5
-  airFlowGravity: 0
-  flyGravity: 0
+  airFlowGravity: 1
+  fallGravity: 8

@@ -40,6 +40,7 @@ public class PlayerControllerData : ScriptableObject
     [Header("Gravity")]
     public float normalGravitysScale = 5;
     public float airFlowGravity = 1;
-    public float flyGravity = 0;
+    //public float flyGravity = 0;
+    public float fallGravity = 5;
 
 }

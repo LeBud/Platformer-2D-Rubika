@@ -38,14 +38,14 @@ public class PlayerController : MonoBehaviour
     public bool gliding;
     bool glideJump;
     bool glideSpeed;
-    bool isFlying;
+    //bool isFlying;
     //bool flyRequierement;
     bool airFlowing;
     bool onSlowPlatform;
     [HideInInspector]
     public bool jumpPadOn;
     bool jumpPadDoubleJump;
-
+    bool falling;
 
     float lastPressedJump;
     float onGround;
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
         onGround -= Time.deltaTime;
         lastPressedJump -= Time.deltaTime;
         if (gliding && !inAirFlow && rb.velocity.y < 0) glideTime -= Time.deltaTime;
-        if (isFlying) flyTime -= Time.deltaTime;
+        //if (isFlying) flyTime -= Time.deltaTime;
 
         //ClampVelocity
         rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity);
@@ -152,6 +152,8 @@ public class PlayerController : MonoBehaviour
 
     void CheckMethods()
     {
+        if (rb.velocity.y < 0 && onGround < 0 && !isJumping) falling = true;
+        else falling = false;
 
         #region Jump
         if (!isJumping)
@@ -217,8 +219,10 @@ public class PlayerController : MonoBehaviour
             glideSpeed = false;
         #endregion
 
+        //Jumppad Check for double jump
         if (jumpPadOn) jumpPadDoubleJump = true;
         if (jumpPadDoubleJump && rb.velocity.y <= 0) jumpPadDoubleJump = false;
+
         /*#region Fly
         if (flyTime >= 0 && flyRequierement) isFlying = true;
         else isFlying = false;
@@ -289,6 +293,8 @@ public class PlayerController : MonoBehaviour
             SetGravityScale(playerControllerData.airFlowGravity);
         /*else if (isFlying)
             SetGravityScale(playerControllerData.flyGravity);*/
+        else if (falling)
+            SetGravityScale(playerControllerData.fallGravity);
         else
             SetGravityScale(playerControllerData.normalGravitysScale);
     }
@@ -352,17 +358,17 @@ public class PlayerController : MonoBehaviour
     #region Boolean
     bool CanJumpGlide()
     {
-        return (!isJumping || rb.velocity.y < 12) && !isFlying && glideJump && onGround < 0 && !jumpPadOn && !jumpPadDoubleJump;
+        return (!isJumping || rb.velocity.y < 12) && glideJump && onGround < 0 && !jumpPadOn && !jumpPadDoubleJump;
     }
 
     bool CanJump()
     {
-        return lastPressedJump > 0 && onGround > 0 && !isFlying && !isJumping && !airFlowing;
+        return lastPressedJump > 0 && onGround > 0 && !isJumping && !airFlowing;
     }
 
     bool CanGlide()
     {
-        return !isJumping && onGround < 0 && glideTime > 0 && !isFlying && !glideJump && rb.velocity.y <= 0;
+        return !isJumping && onGround < 0 && glideTime > 0 && !glideJump && rb.velocity.y <= 0;
     }
 
     /*bool CanFly()
