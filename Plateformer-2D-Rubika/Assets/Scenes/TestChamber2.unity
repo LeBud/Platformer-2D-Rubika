@@ -8649,6 +8649,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: JumpPad
       objectReference: {fileID: 0}
+    - target: {fileID: 1567482031931903441, guid: 4c22d0993a5c6ff4da89ad10f8deab31, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1567482031668369751, guid: 4c22d0993a5c6ff4da89ad10f8deab31, type: 3}
     m_RemovedGameObjects: []
@@ -13844,14 +13848,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4493773985308631813, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
-      propertyPath: m_Size.y
-      value: 0.73
-      objectReference: {fileID: 0}
-    - target: {fileID: 4493773985308631813, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.13
-      objectReference: {fileID: 0}
+    - target: {fileID: 4493773985308631815, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
+      propertyPath: playerControllerData
+      value: 
+      objectReference: {fileID: 11400000, guid: 78b632bb86e17d344be3bd6c3153d633, type: 2}
     - target: {fileID: 4493773985414094392, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: m_Name
       value: PlayerInstance
@@ -13862,11 +13862,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4493773985414094393, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -37.9
+      value: 226.1
       objectReference: {fileID: 0}
     - target: {fileID: 4493773985414094393, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.6
+      value: 96
       objectReference: {fileID: 0}
     - target: {fileID: 4493773985414094393, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: m_LocalPosition.z

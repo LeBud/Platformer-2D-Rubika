@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
     bool onSlowPlatform;
     [HideInInspector]
     public bool jumpPadOn;
+    bool jumpPadDoubleJump;
 
 
     float lastPressedJump;
@@ -216,6 +217,8 @@ public class PlayerController : MonoBehaviour
             glideSpeed = false;
         #endregion
 
+        if (jumpPadOn) jumpPadDoubleJump = true;
+        if (jumpPadDoubleJump && rb.velocity.y <= 0) jumpPadDoubleJump = false;
         /*#region Fly
         if (flyTime >= 0 && flyRequierement) isFlying = true;
         else isFlying = false;
@@ -349,7 +352,7 @@ public class PlayerController : MonoBehaviour
     #region Boolean
     bool CanJumpGlide()
     {
-        return (!isJumping || rb.velocity.y < 12) && !isFlying && glideJump && onGround < 0;
+        return (!isJumping || rb.velocity.y < 12) && !isFlying && glideJump && onGround < 0 && !jumpPadOn && !jumpPadDoubleJump;
     }
 
     bool CanJump()

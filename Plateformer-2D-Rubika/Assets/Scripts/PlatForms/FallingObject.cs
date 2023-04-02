@@ -7,7 +7,8 @@ public class FallingObject : MonoBehaviour
 
     [SerializeField] Rigidbody2D rb;
 
-    [SerializeField] float fallGravityScale;
+    [SerializeField] float fallGravityScale = 5;
+    [SerializeField] float delay = 0.1f;
 
     Vector2 startPos;
 
@@ -21,8 +22,14 @@ public class FallingObject : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            rb.gravityScale = fallGravityScale;
+            StartCoroutine(Fall());
         }
+    }
+
+    IEnumerator Fall()
+    {
+        yield return new WaitForSeconds(delay);
+        rb.gravityScale = fallGravityScale;
     }
 
     public void ResetFall()

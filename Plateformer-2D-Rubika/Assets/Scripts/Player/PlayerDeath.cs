@@ -53,7 +53,7 @@ public class PlayerDeath : MonoBehaviour
 
         fadeAnim.Play("FadeIn");
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(.5f);
 
         playerController.inAirFlow = false;
         playerController.gliding = false;
@@ -143,9 +143,11 @@ public class PlayerDeath : MonoBehaviour
 
     IEnumerator FadeOut()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(.5f);
 
         fadeAnim.Play("FadeOut");
+
+        yield return new WaitForSeconds(.4f);
 
         respawning = false;
     }
