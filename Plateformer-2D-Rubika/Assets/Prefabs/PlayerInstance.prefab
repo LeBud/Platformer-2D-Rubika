@@ -270,7 +270,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1961761482190242068
@@ -1042,7 +1042,6 @@ GameObject:
   - component: {fileID: 1886374594769674680}
   - component: {fileID: 4880510191971900791}
   - component: {fileID: 5498372533725319964}
-  - component: {fileID: 6099332109408739769}
   - component: {fileID: 2362167119400745440}
   m_Layer: 0
   m_Name: Sprite
@@ -1131,19 +1130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99c0307711c4805488154f99cec51885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6099332109408739769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1731984070491949225}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2e65937ff4b01945be8367c4704477d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 4493773985308631815}
 --- !u!95 &2362167119400745440
 Animator:
   serializedVersion: 5
@@ -1943,7 +1929,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 9
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2057,11 +2043,11 @@ GameObject:
   - component: {fileID: 4493773985308631813}
   - component: {fileID: 4493773985308631812}
   - component: {fileID: 4493773985308631815}
+  - component: {fileID: 4465516358017479062}
   - component: {fileID: 1982201182003418347}
   - component: {fileID: 3833941071312306833}
-  - component: {fileID: 4465516358017479062}
-  - component: {fileID: 7867977260422283217}
   - component: {fileID: 8323220711865625380}
+  - component: {fileID: 7867977260422283217}
   - component: {fileID: 4493773985308631814}
   m_Layer: 10
   m_Name: Controller
@@ -2240,6 +2226,7 @@ MonoBehaviour:
   slowMultJump: 0.7
   maxVelocity: 60
   canGlide: 1
+  animator: {fileID: 2362167119400745440}
   isJumping: 0
   gliding: 0
   jumpPadOn: 0
@@ -2249,6 +2236,22 @@ MonoBehaviour:
   flyTime: 0
   inAirFlow: 0
   airFlowDir: {x: 0, y: 0}
+--- !u!114 &4465516358017479062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4493773985308631816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b475ec81890aa6945b372bda7a7e16b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerControllerData: {fileID: 11400000, guid: 7546c6d7360acac458da6905d62b496d, type: 2}
+  aphidCount: 0
+  ladyLight: {fileID: 7867977260422283217}
+  lightActive: 0
 --- !u!114 &1982201182003418347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2285,7 +2288,7 @@ MonoBehaviour:
   deathCounterTxt: {fileID: 5471268241740917383}
   collectablesTxt: {fileID: 1584097231694888795}
   glideSliderYOffset: 40
---- !u!114 &4465516358017479062
+--- !u!114 &8323220711865625380
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2294,13 +2297,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4493773985308631816}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b475ec81890aa6945b372bda7a7e16b2, type: 3}
+  m_Script: {fileID: 11500000, guid: bfc736b5843f0994cb7cda0ed4dc389c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerControllerData: {fileID: 11400000, guid: 7546c6d7360acac458da6905d62b496d, type: 2}
-  aphidCount: 0
-  ladyLight: {fileID: 7867977260422283217}
-  lightActive: 0
+  virtualCamera: {fileID: 4493773983549887248}
+  fadeAnim: {fileID: 5326328158674719823}
+  checkPointPos: {x: 0, y: 0}
+  currentCheckPoint: 0
+  checkPointRoom: 0
+  deathCounter: 0
 --- !u!114 &7867977260422283217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2380,24 +2385,6 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!114 &8323220711865625380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4493773985308631816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfc736b5843f0994cb7cda0ed4dc389c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  virtualCamera: {fileID: 4493773983549887248}
-  fadeAnim: {fileID: 5326328158674719823}
-  checkPointPos: {x: 0, y: 0}
-  currentCheckPoint: 0
-  checkPointRoom: 0
-  deathCounter: 0
 --- !u!96 &4493773985308631814
 TrailRenderer:
   serializedVersion: 3

@@ -33,7 +33,8 @@ public class PlayerController : MonoBehaviour
     [Header("Can Glide")]
     public bool canGlide;
 
-
+    [Header("Animator")]
+    [SerializeField] Animator animator;
 
     bool jumpCut;
     [HideInInspector]
@@ -42,8 +43,6 @@ public class PlayerController : MonoBehaviour
     public bool gliding;
     bool glideJump;
     bool glideSpeed;
-    //bool isFlying;
-    //bool flyRequierement;
     bool airFlowing;
     bool onSlowPlatform;
     [HideInInspector]
@@ -90,13 +89,13 @@ public class PlayerController : MonoBehaviour
         onGround -= Time.deltaTime;
         lastPressedJump -= Time.deltaTime;
         if (gliding && !inAirFlow && rb.velocity.y < 0) glideTime -= Time.deltaTime;
-        //if (isFlying) flyTime -= Time.deltaTime;
 
         //ClampVelocity
         rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity);
 
         MyInputs();
         CheckMethods();
+        AnimationController();
 
         if (gliding && !inAirFlow && rb.velocity.y < 0) Glide();
     }
@@ -163,9 +162,6 @@ public class PlayerController : MonoBehaviour
     {
         if (rb.velocity.y < 0 && onGround < 0 && !isJumping) falling = true;
         else falling = false;
-
-        if (Idling()) centerCamTimer -= Time.deltaTime;
-        else centerCamTimer = playerControllerData.timeToRecenter;
 
         #region Jump
         if (!isJumping)
@@ -235,14 +231,10 @@ public class PlayerController : MonoBehaviour
         if (jumpPadOn) jumpPadDoubleJump = true;
         if (jumpPadDoubleJump && rb.velocity.y <= 0) jumpPadDoubleJump = false;
 
-        /*#region Fly
-        if (flyTime >= 0 && flyRequierement) isFlying = true;
-        else isFlying = false;
-
-        if (flyTime > playerControllerData.flyMaxTime) flyTime = playerControllerData.flyMaxTime;
-        #endregion*/
-
         #region MoveCam
+
+        /*if (Idling()) centerCamTimer -= Time.deltaTime;
+e   lse centerCamTimer = playerControllerData.timeToRecenter;
 
         if(rb.velocity.x > .1f)
         {
@@ -253,9 +245,18 @@ public class PlayerController : MonoBehaviour
             vcBody.m_TrackedObjectOffset.x = Mathf.MoveTowards(vcBody.m_TrackedObjectOffset.x, -playerControllerData.camOffsetX, playerControllerData.offsetSpeed * Time.deltaTime);
         }
         else if (Idling() && centerCamTimer < 0)
-            vcBody.m_TrackedObjectOffset.x = Mathf.MoveTowards(vcBody.m_TrackedObjectOffset.x, 0, playerControllerData.offsetSpeed * Time.deltaTime);
+            vcBody.m_TrackedObjectOffset.x = Mathf.MoveTowards(vcBody.m_TrackedObjectOffset.x, 0, playerControllerData.offsetSpeed * Time.deltaTime);*/
 
         #endregion
+    }
+
+    void AnimationController()
+    {
+        if (falling) animator.SetBool("Fall", true);
+        else animator.SetBool("Fall", false);
+
+        if (!Idling()) animator.SetBool("Walk", true);
+        else if (Idling()) animator.SetBool("Walk", false);
     }
 
     void Jump()
@@ -277,6 +278,8 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, 0);
 
         rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+
+        animator.SetTrigger("Jump");
     }
 
     void Glide()
@@ -310,16 +313,12 @@ public class PlayerController : MonoBehaviour
         //Movement
         if (airFlowing)
             AirFlowMovement();
-        /*else if (flyRequierement && flyTime > 0)
-            Fly();*/
         else
             Movement();
 
         //Set gravity
         if (airFlowing)
             SetGravityScale(playerControllerData.airFlowGravity);
-        /*else if (isFlying)
-            SetGravityScale(playerControllerData.flyGravity);*/
         else if (falling)
             SetGravityScale(playerControllerData.fallGravity);
         else
@@ -365,23 +364,6 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(airFlowDir.normalized * airFlowForce, ForceMode2D.Force);
     }
 
-    /*void Fly()
-    {
-        float speedForce = playerControllerData.speed * playerControllerData.flySpeedMult;
-
-        var horMov = moveInput.x * speedForce;
-        var verMov = moveInput.y * speedForce;
-
-        float acceleration = Mathf.Abs(horMov) > .01f || Mathf.Abs(verMov) > .01f ? playerControllerData.accel : playerControllerData.deccel;
-
-        horMov = horMov - rb.velocity.x;
-        verMov = verMov - rb.velocity.y;
-
-        var force = new Vector2(horMov * acceleration, verMov * acceleration);
-
-        rb.AddForce(force, ForceMode2D.Force);
-    }*/
-
     #region Boolean
     bool CanJumpGlide()
     {
@@ -402,11 +384,6 @@ public class PlayerController : MonoBehaviour
     {
         return rb.velocity.x < .1f && rb.velocity.x > -.1f;
     }
-
-    /*bool CanFly()
-    {
-        return flyTime > 0 && !airFlowing;
-    }*/
     #endregion
 
     private void OnDrawGizmos()
