@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 public class BreakPlatform : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class BreakPlatform : MonoBehaviour
 
     private void Start()
     {
+        Application.targetFrameRate = 60;
         spriteRenderer= GetComponent<SpriteRenderer>();
         BoxCollider2D = GetComponents<BoxCollider2D>();
     }
