@@ -46,5 +46,6 @@ public class PlayerControllerData : ScriptableObject
     [Header("CameraOffset")]
     public float camOffsetX;
     public float offsetSpeed;
+    public float timeToRecenter;
 
 }

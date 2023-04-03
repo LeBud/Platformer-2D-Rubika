@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public float onGround;
     float airFlowForce;
+    float centerCamTimer;
 
     [HideInInspector]
     public float glideTime;
@@ -163,6 +164,9 @@ public class PlayerController : MonoBehaviour
         if (rb.velocity.y < 0 && onGround < 0 && !isJumping) falling = true;
         else falling = false;
 
+        if (Idling()) centerCamTimer -= Time.deltaTime;
+        else centerCamTimer = playerControllerData.timeToRecenter;
+
         #region Jump
         if (!isJumping)
         {
@@ -248,7 +252,7 @@ public class PlayerController : MonoBehaviour
         {
             vcBody.m_TrackedObjectOffset.x = Mathf.MoveTowards(vcBody.m_TrackedObjectOffset.x, -playerControllerData.camOffsetX, playerControllerData.offsetSpeed * Time.deltaTime);
         }
-        else
+        else if (Idling() && centerCamTimer < 0)
             vcBody.m_TrackedObjectOffset.x = Mathf.MoveTowards(vcBody.m_TrackedObjectOffset.x, 0, playerControllerData.offsetSpeed * Time.deltaTime);
 
         #endregion
@@ -392,6 +396,11 @@ public class PlayerController : MonoBehaviour
     bool CanGlide()
     {
         return !isJumping && onGround < 0 && glideTime > 0 && !glideJump && rb.velocity.y <= 0;
+    }
+
+    bool Idling()
+    {
+        return rb.velocity.x < .1f && rb.velocity.x > -.1f;
     }
 
     /*bool CanFly()
