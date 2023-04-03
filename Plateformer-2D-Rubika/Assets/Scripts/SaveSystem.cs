@@ -9,6 +9,7 @@ public class SaveSystem : MonoBehaviour
     [SerializeField] Transform playerTransform;
     [SerializeField] LadyBugLight ladyBugLight;
     [SerializeField] PlayerDeath deathNumber;
+    [SerializeField] GameManager gameManager;
 
     private void Update()
     {
@@ -16,9 +17,28 @@ public class SaveSystem : MonoBehaviour
             SaveData();
         if (Input.GetKeyUp(KeyCode.F9))
             LoadData();
+        if (Input.GetKeyUp(KeyCode.F6))
+            SaveDeath();
     }
 
-    void SaveData()
+
+    public void SaveDeath()
+    {
+        //Charger les données
+        string filePath = Application.persistentDataPath + "/SaveFile.json";
+        string jsonData = System.IO.File.ReadAllText(filePath);
+        SavedData loadData = JsonUtility.FromJson<SavedData>(jsonData);
+
+        //Sauvegarder les données
+        SavedData savedData = loadData;
+        savedData.deathNumber = deathNumber.deathCounter;
+
+        //Sauvegarder les données
+        jsonData = JsonUtility.ToJson(savedData);
+        System.IO.File.WriteAllText(filePath, jsonData);
+    }
+
+    public void SaveData()
     {
         //Sauvegarder les données
         SavedData savedData = new SavedData
@@ -26,6 +46,10 @@ public class SaveSystem : MonoBehaviour
             playerPositions = playerTransform.position,
             aphidNumber = ladyBugLight.aphidCount,
             deathNumber = deathNumber.deathCounter,
+            checkPointNum = deathNumber.currentCheckPoint,
+            currentRoomNum = deathNumber.checkPointRoom,
+            collectablesList = gameManager.collectables,
+            collectablesNum = gameManager.collectableNum,
         };
 
         string jsonData = JsonUtility.ToJson(savedData);
@@ -36,7 +60,7 @@ public class SaveSystem : MonoBehaviour
         Debug.Log("Sauvegarde effectué");
     }
 
-    void LoadData()
+    public void LoadData()
     {
         //Récupérer les données sauvegardées
         string filePath = Application.persistentDataPath + "/SaveFile.json";
@@ -48,6 +72,12 @@ public class SaveSystem : MonoBehaviour
         playerTransform.position = savedData.playerPositions;
         ladyBugLight.aphidCount = savedData.aphidNumber;
         deathNumber.deathCounter = savedData.deathNumber;
+        deathNumber.currentCheckPoint = savedData.checkPointNum;
+        deathNumber.checkPointRoom = savedData.currentRoomNum;
+        gameManager.collectables = savedData.collectablesList;
+        gameManager.collectableNum = savedData.collectablesNum;
+
+        gameManager.LoadCollectable();
 
         Debug.Log("Chargement des données terminées");
     }
@@ -58,4 +88,8 @@ public class SavedData
     public Vector2 playerPositions;
     public int aphidNumber;
     public int deathNumber;
+    public int checkPointNum;
+    public int currentRoomNum;
+    public int collectablesNum;
+    public List<Collected> collectablesList;
 }

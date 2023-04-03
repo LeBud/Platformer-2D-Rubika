@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
     AirFlow airFlow;
+
+    CinemachineVirtualCamera virtualCamera;
+    CinemachineFramingTransposer vcBody;
 
     [Header("Controller Data")]
     public PlayerControllerData playerControllerData;
@@ -45,11 +49,14 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public bool jumpPadOn;
     bool jumpPadDoubleJump;
-    bool falling;
+    [HideInInspector]
+    public bool falling;
 
     float lastPressedJump;
-    float onGround;
+    [HideInInspector]
+    public float onGround;
     float airFlowForce;
+    float centerCamTimer;
 
     [HideInInspector]
     public float glideTime;
@@ -68,6 +75,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+        vcBody = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
     }
 
     private void Update()
@@ -155,6 +164,9 @@ public class PlayerController : MonoBehaviour
         if (rb.velocity.y < 0 && onGround < 0 && !isJumping) falling = true;
         else falling = false;
 
+        if (Idling()) centerCamTimer -= Time.deltaTime;
+        else centerCamTimer = playerControllerData.timeToRecenter;
+
         #region Jump
         if (!isJumping)
         {
@@ -229,6 +241,21 @@ public class PlayerController : MonoBehaviour
 
         if (flyTime > playerControllerData.flyMaxTime) flyTime = playerControllerData.flyMaxTime;
         #endregion*/
+
+        #region MoveCam
+
+        if(rb.velocity.x > .1f)
+        {
+            vcBody.m_TrackedObjectOffset.x = Mathf.MoveTowards(vcBody.m_TrackedObjectOffset.x, playerControllerData.camOffsetX, playerControllerData.offsetSpeed * Time.deltaTime);
+        }
+        else if (rb.velocity.x < -.1f)
+        {
+            vcBody.m_TrackedObjectOffset.x = Mathf.MoveTowards(vcBody.m_TrackedObjectOffset.x, -playerControllerData.camOffsetX, playerControllerData.offsetSpeed * Time.deltaTime);
+        }
+        else if (Idling() && centerCamTimer < 0)
+            vcBody.m_TrackedObjectOffset.x = Mathf.MoveTowards(vcBody.m_TrackedObjectOffset.x, 0, playerControllerData.offsetSpeed * Time.deltaTime);
+
+        #endregion
     }
 
     void Jump()
@@ -369,6 +396,11 @@ public class PlayerController : MonoBehaviour
     bool CanGlide()
     {
         return !isJumping && onGround < 0 && glideTime > 0 && !glideJump && rb.velocity.y <= 0;
+    }
+
+    bool Idling()
+    {
+        return rb.velocity.x < .1f && rb.velocity.x > -.1f;
     }
 
     /*bool CanFly()

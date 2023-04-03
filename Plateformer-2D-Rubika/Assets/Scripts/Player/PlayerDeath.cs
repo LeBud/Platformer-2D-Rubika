@@ -49,6 +49,8 @@ public class PlayerDeath : MonoBehaviour
         rb.velocity = Vector2.zero;
         deathCounter++;
 
+        FindObjectOfType<SaveSystem>().SaveDeath();
+
         //Animation de mort
 
         fadeAnim.Play("FadeIn");
@@ -106,37 +108,8 @@ public class PlayerDeath : MonoBehaviour
         }
         #endregion
 
-        #region collectable
-        if (GameObject.FindObjectsOfType<Collectable>().Length >= 1)
-        {
-            if (GameObject.FindObjectsOfType<Collectable>().Length == 1)
-            {
-                if (!GameObject.FindObjectOfType<Collectable>().checkPointSave)
-                {
-                    Collectable collect = GameObject.FindObjectOfType<Collectable>();
-
-                    collect.GetComponent<SpriteRenderer>().enabled = true;
-                    collect.GetComponent<CircleCollider2D>().enabled = true;
-
-                    PlayerCollectable.collectable--;
-                }
-            }
-            else
-            {
-                Collectable[] collect = GameObject.FindObjectsOfType<Collectable>();
-                for (int i = 0; i < collect.Length; i++)
-                {
-                    if (!collect[i].checkPointSave)
-                    {
-                        collect[i].GetComponent<SpriteRenderer>().enabled = true;
-                        collect[i].GetComponent<CircleCollider2D>().enabled = true;
-
-                        PlayerCollectable.collectable--;
-                    }
-                }
-            }
-        }
-        #endregion
+        
+        FindObjectOfType<SaveSystem>().LoadData();
 
         StartCoroutine(FadeOut());
     }
