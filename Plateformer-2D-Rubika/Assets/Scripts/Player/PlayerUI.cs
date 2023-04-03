@@ -9,6 +9,7 @@ public class PlayerUI : MonoBehaviour
     PlayerController playerController;
     PlayerDeath playerDeath;
     LadyBugLight ladyLight;
+    GameManager gameManager;
 
     [Header("UI Elements")]
     [SerializeField] Slider glideSlider;
@@ -19,6 +20,7 @@ public class PlayerUI : MonoBehaviour
 
     private void Awake()
     {
+        gameManager = FindObjectOfType<GameManager>();
         playerController = GetComponent<PlayerController>();
         playerDeath = GetComponent<PlayerDeath>();
         ladyLight = GetComponent<LadyBugLight>();
@@ -44,7 +46,7 @@ public class PlayerUI : MonoBehaviour
         glideSlider.value = playerController.glideTime;
         lightSlider.value = ladyLight.aphidCount * 10;
         deathCounterTxt.text = "Death : " + playerDeath.deathCounter;
-        collectablesTxt.text = "Collectable : " + PlayerCollectable.collectable;
+        collectablesTxt.text = "Collectable : " + gameManager.collectableNum;
     }
 
 }
