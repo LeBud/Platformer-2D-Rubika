@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {
-
+    GameManager gameManager;
+    [HideInInspector]
     public bool taken;
-    public bool checkPointSave;
+    [HideInInspector]
+    public int num;
 
-    private void OnEnable()
+    private void Awake()
     {
-        taken = false;
+        gameManager = FindObjectOfType<GameManager>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            PlayerCollectable.collectable++;
+            gameManager.collectableNum++;
             taken = true;
-            FindObjectOfType<PlayerCollectable>().collectablesList.Add(this);
-            GetComponent<SpriteRenderer>().enabled = false;
-            GetComponent<CircleCollider2D>().enabled = false;
+
+            gameManager.collectables[num].taken = taken;
+
+            gameObject.SetActive(false);
         }
     }
 
