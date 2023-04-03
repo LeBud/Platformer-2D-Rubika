@@ -13849,6 +13849,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 911950811746840095, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1563438320019859320, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -13865,29 +13869,9 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3614885301926329794, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
-      propertyPath: damping.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3614885301926329794, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
-      propertyPath: orthographicSize
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 4493773983549887248, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: m_Lens.OrthographicSize
       value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 4493773983549887251, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4493773983549887251, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4493773983549887251, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 4493773983595351271, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: m_XDamping
@@ -13968,14 +13952,6 @@ PrefabInstance:
     - target: {fileID: 4610043457168008705, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: speed
       value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610043457168008705, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
-      propertyPath: targetX
-      value: 215.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4610043457168008705, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
-      propertyPath: targetY
-      value: 36.93597
       objectReference: {fileID: 0}
     - target: {fileID: 4610043457168008705, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
       propertyPath: freezeXPos
@@ -16827,7 +16803,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1248572525
 Transform:
   m_ObjectHideFlags: 0
