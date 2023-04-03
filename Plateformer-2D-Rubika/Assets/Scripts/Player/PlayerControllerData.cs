@@ -43,4 +43,8 @@ public class PlayerControllerData : ScriptableObject
     //public float flyGravity = 0;
     public float fallGravity = 5;
 
+    [Header("CameraOffset")]
+    public float camOffsetX;
+    public float offsetSpeed;
+
 }
