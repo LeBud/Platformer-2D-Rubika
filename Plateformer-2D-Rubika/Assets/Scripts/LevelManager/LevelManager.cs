@@ -48,7 +48,6 @@ public class LevelManager : MonoBehaviour
             if ((currentRoom + i) >= 0 && (currentRoom + i) < levels.Count)
             {
                 levels[currentRoom + i].SetActive(true);
-                Debug.Log(currentRoom + i);
             }
         }
 
