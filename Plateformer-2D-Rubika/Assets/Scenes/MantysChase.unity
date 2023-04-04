@@ -208,6 +208,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2286016771729557629, guid: 15cdd92d098bb4044b5ead9ff1d9d058, type: 3}
+      propertyPath: collectables.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2286016771729557629, guid: 15cdd92d098bb4044b5ead9ff1d9d058, type: 3}
+      propertyPath: collectables.Array.data[0].collectable
+      value: 
+      objectReference: {fileID: 1591913084}
     - target: {fileID: 2286016771729557630, guid: 15cdd92d098bb4044b5ead9ff1d9d058, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -16867,6 +16875,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7867977260422283217, guid: 974ba4d00f0aa7f4eacb0dc17a8c16e7, type: 3}
+      propertyPath: m_PointLightInnerRadius
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28580,6 +28592,17 @@ PrefabInstance:
       addedObject: {fileID: 2063671782}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f800c928ff9aaf14cb2dcab4e1aed25f, type: 3}
+--- !u!114 &1591913084 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8022834483342752011, guid: 9cc0541539905634f86875d66acf75f2, type: 3}
+  m_PrefabInstance: {fileID: 38275121}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be5c5b24f13ebcd4bb4a7e4c87e33449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1633381546
 GameObject:
   m_ObjectHideFlags: 0
