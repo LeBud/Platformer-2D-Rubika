@@ -10,6 +10,16 @@ public class SaveSystem : MonoBehaviour
     [SerializeField] LadyBugLight ladyBugLight;
     [SerializeField] PlayerDeath deathNumber;
     [SerializeField] GameManager gameManager;
+    [SerializeField] LevelManager levelManager;
+
+    private void Awake()
+    {
+        ladyBugLight = FindObjectOfType<LadyBugLight>();
+        deathNumber= FindObjectOfType<PlayerDeath>();
+        levelManager = FindObjectOfType<LevelManager>();
+        gameManager = GetComponent<GameManager>();
+        playerTransform = ladyBugLight.transform;
+    }
 
     private void Update()
     {
@@ -50,6 +60,7 @@ public class SaveSystem : MonoBehaviour
             currentRoomNum = deathNumber.checkPointRoom,
             collectablesList = gameManager.collectables,
             collectablesNum = gameManager.collectableNum,
+            currentRoom = levelManager.currentRoom,
         };
 
         string jsonData = JsonUtility.ToJson(savedData);
@@ -76,6 +87,7 @@ public class SaveSystem : MonoBehaviour
         deathNumber.checkPointRoom = savedData.currentRoomNum;
         gameManager.collectables = savedData.collectablesList;
         gameManager.collectableNum = savedData.collectablesNum;
+        levelManager.currentRoom = savedData.currentRoom;
 
         gameManager.LoadCollectable();
 
@@ -92,4 +104,5 @@ public class SavedData
     public int currentRoomNum;
     public int collectablesNum;
     public List<Collected> collectablesList;
+    public int currentRoom;
 }

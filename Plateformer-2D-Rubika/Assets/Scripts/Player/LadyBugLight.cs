@@ -54,7 +54,7 @@ public class LadyBugLight : MonoBehaviour
 
         if (ladyLight.intensity > 1) ladyLight.intensity = 1;
         
-        yield return new WaitForSeconds(playerControllerData.maxTimeLightOn - 2.8f);
+        yield return new WaitForSeconds(playerControllerData.maxTimeLightOn - .7f);
 
 
         StartCoroutine(FadeLight());
@@ -67,13 +67,13 @@ public class LadyBugLight : MonoBehaviour
             for (int i = 0; i < 20; i++)
             {
                 ladyLight.intensity -= .05f;
-                yield return new WaitForSeconds(.02f);
+                yield return new WaitForSeconds(.005f);
             }
 
             for (int i = 0; i < 20; i++)
             {
                 ladyLight.intensity += .05f;
-                yield return new WaitForSeconds(.02f);
+                yield return new WaitForSeconds(.005f);
 
             }
         }
@@ -81,7 +81,7 @@ public class LadyBugLight : MonoBehaviour
         for (int i = 0; i < 20; i++)
         {
             ladyLight.intensity -= .05f;
-            yield return new WaitForSeconds(.02f);
+            yield return new WaitForSeconds(.005f);
         }
 
         lightActive = false;
