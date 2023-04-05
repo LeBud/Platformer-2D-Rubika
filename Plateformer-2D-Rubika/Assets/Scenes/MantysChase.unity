@@ -3474,7 +3474,7 @@ GameObject:
   - component: {fileID: 198216078}
   - component: {fileID: 198216077}
   m_Layer: 0
-  m_Name: Light 2D (3)
+  m_Name: GlobalLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3584,7 +3584,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &209758863
 GameObject:
@@ -6758,6 +6758,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5658746198743641112, guid: fa386e8514580ce419d7c04f8090c147, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1056385630}
+    - targetCorrespondingSourceObject: {fileID: 5658746198743641112, guid: fa386e8514580ce419d7c04f8090c147, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1983903428}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7193992676088138839, guid: fa386e8514580ce419d7c04f8090c147, type: 3}
       insertIndex: -1
@@ -15393,6 +15396,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2535608770411176732, guid: 1356337895af6e9499bfe0500d804f67, type: 3}
       insertIndex: -1
       addedObject: {fileID: 362007246}
+    - targetCorrespondingSourceObject: {fileID: 2535608770411176732, guid: 1356337895af6e9499bfe0500d804f67, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2136178476}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -7825302295441280094, guid: 1356337895af6e9499bfe0500d804f67, type: 3}
       insertIndex: -1
@@ -37413,7 +37419,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1182606563
 PrefabInstance:
@@ -37518,7 +37524,7 @@ Transform:
   m_Children:
   - {fileID: 209758864}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1205741279
 PrefabInstance:
@@ -37680,7 +37686,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1211559935 stripped
 GameObject:
@@ -39831,7 +39837,7 @@ GameObject:
   - component: {fileID: 1525081584}
   - component: {fileID: 1525081583}
   m_Layer: 0
-  m_Name: Light 2D (5)
+  m_Name: GlobalLightDarkLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39854,7 +39860,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.15
+  m_Intensity: 0.08
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -39941,7 +39947,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1548158347 stripped
 Transform:
@@ -46280,13 +46286,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1983903426}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 624.1, y: -114.6, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 16.099976, y: 13.400002, z: 0}
   m_LocalScale: {x: 24, y: 64, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 241105258}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!19719996 &1997224987 stripped
 TilemapCollider2D:
@@ -46915,11 +46921,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2136178474}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 654.51, y: -85.12, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 14.51001, y: 7.8799973, z: 0}
   m_LocalScale: {x: 12, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_Father: {fileID: 714097373}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
