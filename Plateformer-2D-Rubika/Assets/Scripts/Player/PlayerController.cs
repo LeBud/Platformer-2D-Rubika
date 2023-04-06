@@ -41,7 +41,8 @@ public class PlayerController : MonoBehaviour
     public bool isJumping;
     [HideInInspector]
     public bool gliding;
-    bool glideJump;
+    [HideInInspector]
+    public bool glideJump;
     bool glideSpeed;
     bool airFlowing;
     bool onSlowPlatform;
@@ -229,7 +230,7 @@ public class PlayerController : MonoBehaviour
 
         //Jumppad Check for double jump
         if (jumpPadOn) jumpPadDoubleJump = true;
-        if (jumpPadDoubleJump && rb.velocity.y <= 0) jumpPadDoubleJump = false;
+        if (jumpPadDoubleJump && rb.velocity.y <= 12) jumpPadDoubleJump = false;
 
         #region MoveCam
 
@@ -301,6 +302,8 @@ e   lse centerCamTimer = playerControllerData.timeToRecenter;
 
         float upForce = playerControllerData.glideJumpForce;
         if (rb.velocity.y < 0)
+            upForce -= rb.velocity.y;
+        if(rb.velocity.y > 0)
             upForce -= rb.velocity.y;
 
         rb.AddForce(Vector2.up * upForce, ForceMode2D.Impulse);
