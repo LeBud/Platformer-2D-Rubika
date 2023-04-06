@@ -8,9 +8,6 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     AirFlow airFlow;
 
-    CinemachineVirtualCamera virtualCamera;
-    CinemachineFramingTransposer vcBody;
-
     [Header("Controller Data")]
     public PlayerControllerData playerControllerData;
 
@@ -56,7 +53,6 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public float onGround;
     float airFlowForce;
-    float centerCamTimer;
 
     [HideInInspector]
     public float glideTime;
@@ -75,8 +71,6 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
-        vcBody = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
     }
 
     private void Update()
@@ -111,13 +105,6 @@ public class PlayerController : MonoBehaviour
             moveInput.x = 1;
         else if (moveInput.x < -.8f && (moveInput.y > .1f || moveInput.y < -.1f))
             moveInput.x = -1;
-
-        //Fly Input
-        /*if (Input.GetButton("Fire1") && CanFly())
-            flyRequierement = true;
-        else
-            flyRequierement = false;*/
-
 
         //Jumps Inputs
         if (Input.GetButtonDown("Jump")) 

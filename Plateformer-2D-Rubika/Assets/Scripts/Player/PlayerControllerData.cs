@@ -25,11 +25,6 @@ public class PlayerControllerData : ScriptableObject
     public float curveMult;
     public AnimationCurve glideCurve;
 
-    /*[Header("Fly Ability")]
-    public float flyTimePerAphid;
-    public float flyMaxTime;
-    public float flySpeedMult;*/
-
     [Header("LadyBug Light")]
     public int maxAphid;
     public int maxTimeLightOn;
@@ -39,12 +34,12 @@ public class PlayerControllerData : ScriptableObject
 
     [Header("Gravity")]
     public float normalGravitysScale = 5;
-    public float airFlowGravity = 1;
-    //public float flyGravity = 0;
+    public float airFlowGravity = 0;
     public float fallGravity = 5;
 
     [Header("CameraOffset")]
     public float camOffsetX;
+    public float camOffsetY;
     public float offsetSpeed;
     public float timeToRecenter;
 
