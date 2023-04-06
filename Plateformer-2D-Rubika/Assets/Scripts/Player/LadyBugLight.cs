@@ -21,6 +21,13 @@ public class LadyBugLight : MonoBehaviour
 
     private void Update()
     {
+        if (PlayerDeath.respawning)
+        {
+            StopAllCoroutines();
+            return;
+        }
+        if (PauseMenu.gameIsPause) return;
+
         MyInputs();
 
     }

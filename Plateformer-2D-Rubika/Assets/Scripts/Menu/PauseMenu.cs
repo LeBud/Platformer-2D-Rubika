@@ -25,6 +25,8 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
+        if (PlayerDeath.respawning) return;
+
         if (Input.GetButtonDown("Cancel"))
         {
             gameIsPause = !gameIsPause;
