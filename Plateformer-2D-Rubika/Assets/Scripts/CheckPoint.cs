@@ -17,6 +17,14 @@ public class CheckPoint : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
     }
 
+    private void OnEnable()
+    {
+        if(checkPointNum <= player.currentCheckPoint)
+        {
+            Active();
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
@@ -24,13 +32,18 @@ public class CheckPoint : MonoBehaviour
         {
             if(checkPointNum > player.currentCheckPoint)
             {
-                sprite.color = new Vector4(1, 1, 0.1568628f, 1);
-                player.checkPointPos = transform.position;
-                player.currentCheckPoint = checkPointNum;
-                player.checkPointRoom = roomNumber;
+                Active();
                 FindObjectOfType<SaveSystem>().SaveData();
             }
         }
+    }
+
+    public void Active()
+    {
+        sprite.color = new Vector4(1, 1, 0.1568628f, 1);
+        player.checkPointPos = transform.position;
+        player.currentCheckPoint = checkPointNum;
+        player.checkPointRoom = roomNumber;
     }
 
 }

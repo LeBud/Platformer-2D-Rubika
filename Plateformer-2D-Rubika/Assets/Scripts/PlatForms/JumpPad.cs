@@ -26,8 +26,11 @@ public class JumpPad : MonoBehaviour
 
     IEnumerator OnJumpPad()
     {
+        controller.glideJump = true;
+        controller.glideTime = controller.playerControllerData.maxGlideTime;
+
         controller.jumpPadOn = true;
-        yield return new WaitForSeconds(.25f);
+        yield return new WaitForSeconds(.5f);
         controller.jumpPadOn = false;
 
     }
