@@ -11,7 +11,6 @@ public class SaveSystem : MonoBehaviour
     [SerializeField] PlayerDeath deathNumber;
     [SerializeField] GameManager gameManager;
     [SerializeField] LevelManager levelManager;
-    List<CheckPoint> checkPoints = new List<CheckPoint>();
     private void Awake()
     {
         ladyBugLight = FindObjectOfType<LadyBugLight>();
@@ -20,11 +19,6 @@ public class SaveSystem : MonoBehaviour
         gameManager = GetComponent<GameManager>();
         playerTransform = ladyBugLight.transform;
 
-        CheckPoint[] check = FindObjectsOfType<CheckPoint>();
-        for(int i = 0; i < check.Length; i++)
-        {
-            checkPoints.Add(check[i]);
-        }
     }
 
     private void Update()
@@ -67,6 +61,7 @@ public class SaveSystem : MonoBehaviour
             collectablesList = gameManager.collectables,
             collectablesNum = gameManager.collectableNum,
             currentRoom = levelManager.currentRoom,
+            lightCheckPoint = deathNumber.lightCheckPoint,
         };
 
         string jsonData = JsonUtility.ToJson(savedData);
@@ -94,6 +89,7 @@ public class SaveSystem : MonoBehaviour
         gameManager.collectables = savedData.collectablesList;
         gameManager.collectableNum = savedData.collectablesNum;
         levelManager.currentRoom = savedData.currentRoom;
+        deathNumber.lightCheckPoint = savedData.lightCheckPoint;
 
         gameManager.LoadCollectable();
         ActivatePreviousCheckPoints();
@@ -123,4 +119,5 @@ public class SavedData
     public int collectablesNum;
     public List<Collected> collectablesList;
     public int currentRoom;
+    public bool lightCheckPoint;
 }

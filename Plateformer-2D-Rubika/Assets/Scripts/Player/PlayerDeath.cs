@@ -26,6 +26,8 @@ public class PlayerDeath : MonoBehaviour
     public int currentCheckPoint = 0;
     [HideInInspector]
     public int checkPointRoom;
+    [HideInInspector]
+    public bool lightCheckPoint;
 
     [HideInInspector]
     public int deathCounter;
@@ -110,6 +112,9 @@ public class PlayerDeath : MonoBehaviour
 
         
         FindObjectOfType<SaveSystem>().LoadData();
+
+        if (lightCheckPoint && ladyBugLight.aphidCount < 1)
+            ladyBugLight.aphidCount = 1;
 
         StartCoroutine(FadeOut());
     }
