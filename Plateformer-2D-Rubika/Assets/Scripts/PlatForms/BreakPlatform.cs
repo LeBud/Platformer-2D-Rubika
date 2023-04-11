@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Scripting;
 
 public class BreakPlatform : MonoBehaviour
 {
@@ -32,14 +30,6 @@ public class BreakPlatform : MonoBehaviour
         }
     }
 
-    /*private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player") && !isPlaying)
-        {
-            StartCoroutine(PlatformBreak());
-        }
-    }*/
-
     IEnumerator PlatformBreak()
     {
         isPlaying = true;
@@ -53,13 +43,28 @@ public class BreakPlatform : MonoBehaviour
 
         yield return new WaitForSeconds(respawnTimer);
 
-        spriteRenderer.color= color1;
+        ReactivePlatform();
+        
+        isPlaying = false;
+
+        for (int i = 0; i < BoxCollider2D.Length; i++)
+        {
+            if (!BoxCollider2D[i].enabled)
+            {
+                ReactivePlatform();
+            }
+        }
+
+    }
+
+    void ReactivePlatform()
+    {
+        spriteRenderer.color = color1;
         for (int i = 0; i < BoxCollider2D.Length; i++)
         {
             BoxCollider2D[i].enabled = true;
         }
 
-        isPlaying = false;
     }
 
 }

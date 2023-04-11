@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [Header("First Selected Button in each Menu")]
-    [SerializeField] GameObject playBtt, optionsBtt, creditsBtt;
+    [SerializeField] GameObject playBtt, optionsBtt, creditsBtt, continueBtt, newGameBtt;
 
     private void Start()
     {

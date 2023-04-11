@@ -11,6 +11,7 @@ public class FallingObject : MonoBehaviour
     [SerializeField] float delay = 0.1f;
 
     Vector2 startPos;
+    bool resetting;
 
     private void Awake()
     {
@@ -20,7 +21,7 @@ public class FallingObject : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !resetting)
         {
             StartCoroutine(Fall());
         }
@@ -32,10 +33,14 @@ public class FallingObject : MonoBehaviour
         rb.gravityScale = fallGravityScale;
     }
 
-    public void ResetFall()
+    public IEnumerator ResetFall()
     {
+        resetting= true;
+        yield return new WaitForSeconds(.01f);
         rb.gravityScale = 0;
         rb.position = startPos;
+        yield return new WaitForSeconds(.01f);
+        resetting= false;
     }
 
 }
