@@ -23,8 +23,6 @@ public class CameraControllerMain : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float zoomSpeed;
 
-    Vector3 postPos;
-
     [HideInInspector]
     public bool inMain;
 
@@ -40,7 +38,21 @@ public class CameraControllerMain : MonoBehaviour
     {
         if (inMain)
         {
-            if (!followPlayer)
+
+            float distance = Vector2.Distance(playerPos.position, virtualCamera.transform.position);
+
+            if (followPlayer && distance < .15f)
+            {
+                virtualCamera.enabled = followPlayer;
+            }
+            else if (distance > .15f)
+            {
+                virtualCamera.transform.position = new Vector3(
+                Mathf.MoveTowards(virtualCamera.transform.position.x, playerPos.position.x + targetOffset.x, speed * Time.deltaTime),
+                Mathf.MoveTowards(virtualCamera.transform.position.y, playerPos.position.y + targetOffset.y, speed * Time.deltaTime),
+                -10);
+            }
+            else if (!followPlayer)
             {
                 virtualCamera.enabled = false;
                 virtualCamera.transform.position = new Vector3(
@@ -48,7 +60,6 @@ public class CameraControllerMain : MonoBehaviour
                     Mathf.MoveTowards(virtualCamera.transform.position.y, cameraPos.y, speed * Time.deltaTime),
                     -10);
             }
-
 
             virtualCamera.m_Lens.OrthographicSize = Mathf.MoveTowards(virtualCamera.m_Lens.OrthographicSize, orthographicSize, zoomSpeed * Time.deltaTime);
             Camera.main.orthographicSize = Mathf.MoveTowards(Camera.main.orthographicSize, orthographicSize, zoomSpeed * Time.deltaTime);
@@ -61,10 +72,6 @@ public class CameraControllerMain : MonoBehaviour
     public void MainSettings()
     {
         inMain = true;
-
-        postPos = virtualCamera.transform.position;
-
-        virtualCamera.enabled = followPlayer;
         
         vcBody.m_XDamping = damping.x;
         vcBody.m_YDamping = damping.y;
