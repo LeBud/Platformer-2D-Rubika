@@ -20,7 +20,6 @@ public class BreakPlatform : MonoBehaviour
 
     private void Start()
     {
-        Application.targetFrameRate = 60;
         spriteRenderer= GetComponent<SpriteRenderer>();
         BoxCollider2D = GetComponents<BoxCollider2D>();
     }
