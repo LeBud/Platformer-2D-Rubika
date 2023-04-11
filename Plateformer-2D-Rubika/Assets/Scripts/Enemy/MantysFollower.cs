@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class MantysFollower : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class MantysFollower : MonoBehaviour
     [SerializeField] float mantysFasterSpeed;
     [SerializeField] float mantysSprintSpeed;
     [SerializeField] Transform[] mantysTransform;
+    [SerializeField] GameObject vCam;
 
     float actualSpeed;
     float newSpeed;
@@ -23,6 +25,11 @@ public class MantysFollower : MonoBehaviour
     {
         actualSpeed = mantysSpeed;
         currentWaypoint = 0;
+        StartCoroutine(ChangeSpeed());
+    }
+
+    private void OnEnable()
+    {
         StartCoroutine(ChangeSpeed());
     }
 
@@ -77,19 +84,18 @@ public class MantysFollower : MonoBehaviour
         }
     }
 
-    IEnumerator RespawnEnemy()
+    public IEnumerator RespawnEnemy()
     {
         respawning = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(.1f);
 
         currentWaypoint = 0;
         transform.position = mantysTransform[currentWaypoint].position;
         actualSpeed = mantysSpeed;
-
-        yield return new WaitForSeconds(2);
         respawning = false;
 
-        StartCoroutine(ChangeSpeed());
+        vCam.SetActive(false);
+        this.gameObject.SetActive(false);
     }
 
 }

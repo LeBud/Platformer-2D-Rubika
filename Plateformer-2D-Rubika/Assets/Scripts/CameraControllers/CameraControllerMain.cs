@@ -49,17 +49,6 @@ public class CameraControllerMain : MonoBehaviour
                     -10);
             }
 
-            //Ca marche pas
-            /*else if(postPos != playerPos.position)
-            {
-                virtualCamera.enabled = true;
-                virtualCamera.transform.position = new Vector3(
-                    Mathf.MoveTowards(postPos.x, playerPos.position.x, speed * Time.deltaTime), 
-                    Mathf.MoveTowards(postPos.y, playerPos.position.y, speed * Time.deltaTime), 
-                    -10);
-            }
-
-            virtualCamera.transform.position = postPos;*/
 
             virtualCamera.m_Lens.OrthographicSize = Mathf.MoveTowards(virtualCamera.m_Lens.OrthographicSize, orthographicSize, zoomSpeed * Time.deltaTime);
             Camera.main.orthographicSize = Mathf.MoveTowards(Camera.main.orthographicSize, orthographicSize, zoomSpeed * Time.deltaTime);
