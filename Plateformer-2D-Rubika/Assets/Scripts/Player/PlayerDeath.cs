@@ -59,6 +59,12 @@ public class PlayerDeath : MonoBehaviour
 
         yield return new WaitForSeconds(.5f);
 
+        if(MantysEnablerDisabler.mantisEnable)
+        {
+            MantysFollower mantis = FindObjectOfType<MantysFollower>();
+            StartCoroutine(mantis.RespawnEnemy());
+        }
+
         playerController.inAirFlow = false;
         playerController.gliding = false;
         playerController.glideTime = 0;
