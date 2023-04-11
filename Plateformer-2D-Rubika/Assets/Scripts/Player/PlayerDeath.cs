@@ -74,14 +74,14 @@ public class PlayerDeath : MonoBehaviour
         {
             if (GameObject.FindObjectsOfType<FallingObject>().Length == 1)
             {
-                GameObject.FindObjectOfType<FallingObject>().ResetFall();
+                StartCoroutine(GameObject.FindObjectOfType<FallingObject>().ResetFall());
             }
             else
             {
                 FallingObject[] fall = GameObject.FindObjectsOfType<FallingObject>();
                 for (int i = 0; i < fall.Length; i++)
                 {
-                    fall[i].ResetFall();
+                    StartCoroutine(fall[i].ResetFall());
                 }
             }
         }
