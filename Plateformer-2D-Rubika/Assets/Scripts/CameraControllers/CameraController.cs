@@ -13,9 +13,9 @@ public class CameraController : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] bool followPlayer;
-    [SerializeField] float orthographicSize;
-    [SerializeField] Vector2 damping;
-    [SerializeField] Vector2 deadZone;
+    [SerializeField] float orthographicSize = 10;
+    [SerializeField] Vector2 damping = new Vector2(.15f, .15f);
+    [SerializeField] Vector2 deadZone = new Vector2(.01f, .02f);
 
     [Header("Position")]
     [SerializeField] Vector3 targetOffset;
@@ -27,8 +27,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] float yPos;
 
     [Header("Transition speed")]
-    [SerializeField] float speed;
-    [SerializeField] float zoomSpeed;
+    [SerializeField] float speed = 8;
+    [SerializeField] float zoomSpeed = 8;
 
 
 
@@ -39,6 +39,7 @@ public class CameraController : MonoBehaviour
         main = FindObjectOfType<CameraControllerMain>();
         virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
         vcBody = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+
         camFreeze = virtualCamera.GetComponent<CameraFreezeAxis>();
     }
 
