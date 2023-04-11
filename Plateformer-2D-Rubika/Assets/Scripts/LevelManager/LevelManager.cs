@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour
         
         for(int i = 0; i < levels.Count; i++)
         {
-            levels[i].GetComponent<LevelRoom>().roomNum = i;
+            //levels[i].GetComponent<LevelRoom>().roomNum = i;
             levels[i].SetActive(false);
         }
 
