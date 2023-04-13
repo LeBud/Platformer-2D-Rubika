@@ -35,6 +35,14 @@ public class SettingsMenu : MonoBehaviour
             LoadSettings();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F5))
+            SaveSettings();
+        if (Input.GetKeyDown(KeyCode.F9))
+            LoadSettings();
+    }
+
     void CheckAllRes()
     {
         resolutions = Screen.resolutions;
