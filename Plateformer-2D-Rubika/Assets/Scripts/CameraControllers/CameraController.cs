@@ -52,9 +52,9 @@ public class CameraController : MonoBehaviour
             main.inMain = false;
 
             if(!followPlayer)
-            {
                 virtualCamera.enabled = false;
-            }
+            else
+                virtualCamera.enabled = true;
 
             vcBody.m_XDamping = damping.x;
             vcBody.m_YDamping = damping.y;
@@ -76,6 +76,8 @@ public class CameraController : MonoBehaviour
     {
         if (inTrigger)
         {
+            Debug.Log(gameObject.name);
+
             if (!followPlayer)
             {
                 virtualCamera.enabled = false;
@@ -104,9 +106,9 @@ public class CameraController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            main.MainSettings();
             inTrigger = false;
             camFreeze.axis = CameraFreezeAxis.FreezeAxis.none;
+            main.MainSettings();
         }
     }
 
