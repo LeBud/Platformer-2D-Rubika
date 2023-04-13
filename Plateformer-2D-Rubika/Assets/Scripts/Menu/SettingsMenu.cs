@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -14,10 +15,12 @@ public class SettingsMenu : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] AudioMixer audioMixer;
-    [SerializeField] TMP_Text volume;
     [SerializeField] Slider masterSlider;
     [SerializeField] Slider SFXSlider;
     [SerializeField] Slider musicSlider;
+    [SerializeField] TMP_Text masterVolumeTxt;
+    [SerializeField] TMP_Text SFXVolumeTxt;
+    [SerializeField] TMP_Text musicVolumeTxt;
     public string masterVolume;
     public string SFXVolume;
     public string musicVolume;
@@ -26,8 +29,8 @@ public class SettingsMenu : MonoBehaviour
 
     private void Awake()
     {
-     
         CheckAllRes();
+        LoadSettings();
 
         masterSlider.onValueChanged.AddListener(SetVolume);
         SFXSlider.onValueChanged.AddListener(SetVolume);
@@ -78,12 +81,68 @@ public class SettingsMenu : MonoBehaviour
         Screen.fullScreen = isFullscreen;
     }
 
-    public void SetVolume(float sliderValue)
+    public void SetMasterVolume(float sliderValue)
     {
         audioMixer.SetFloat("Master", Mathf.Log10(sliderValue) * 20);
 
         displayNumber = sliderValue * 100;
-        //volume.text = displayNumber.ToString("F0");
+        masterVolumeTxt.text = displayNumber.ToString("F0");
     }
 
+    public void SetSFXVolume(float sliderValue)
+    {
+        audioMixer.SetFloat("Master", Mathf.Log10(sliderValue) * 20);
+
+        displayNumber = sliderValue * 100;
+        SFXVolumeTxt.text = displayNumber.ToString("F0");
+    }
+
+    public void SetMusicVolume(float sliderValue)
+    {
+        audioMixer.SetFloat("Master", Mathf.Log10(sliderValue) * 20);
+
+        displayNumber = sliderValue * 100;
+        musicVolumeTxt.text = displayNumber.ToString("F0");
+    }
+
+
+    void SaveSettings()
+    {
+
+        SavedSettings savedSettings = new SavedSettings
+        {
+            isFullscreen = Screen.fullScreen,
+            qualityLevel = QualitySettings.GetQualityLevel(),
+            resolution = Screen.currentResolution,
+        };
+
+        string jsonData = JsonUtility.ToJson(savedSettings);
+        string filePath = Application.persistentDataPath+ "/Settings.json";
+
+        System.IO.File.WriteAllText(filePath, jsonData);
+
+    }
+
+    void LoadSettings()
+    {
+        string filePath = Application.persistentDataPath + "/Settings.json";
+        string jsonData = System.IO.File.ReadAllText(filePath);
+
+        SavedSettings savedSettings = JsonUtility.FromJson<SavedSettings>(jsonData);
+
+        Screen.fullScreen = savedSettings.isFullscreen;
+        QualitySettings.SetQualityLevel(savedSettings.qualityLevel);
+        Screen.SetResolution(savedSettings.resolution.width, savedSettings.resolution.height, Screen.fullScreen);
+    }
+
+}
+
+public class SavedSettings
+{
+    public bool isFullscreen;
+    public int qualityLevel;
+    public Resolution resolution;
+    public float masterAudio;
+    public float SFXAudio;
+    public float musicAudio;
 }
