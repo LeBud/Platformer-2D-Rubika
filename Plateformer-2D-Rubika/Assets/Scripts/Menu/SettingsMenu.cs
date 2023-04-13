@@ -18,23 +18,24 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] Slider masterSlider;
     [SerializeField] Slider SFXSlider;
     [SerializeField] Slider musicSlider;
+
+    [Header("Text")]
     [SerializeField] TMP_Text masterVolumeTxt;
     [SerializeField] TMP_Text SFXVolumeTxt;
     [SerializeField] TMP_Text musicVolumeTxt;
-    public string masterVolume;
-    public string SFXVolume;
-    public string musicVolume;
 
-    float displayNumber;
+    float masterSound;
+    float SFXSound;
+    float musicSound;
 
     private void Awake()
     {
         CheckAllRes();
-        LoadSettings();
+        //LoadSettings();
 
-        masterSlider.onValueChanged.AddListener(SetVolume);
-        SFXSlider.onValueChanged.AddListener(SetVolume);
-        musicSlider.onValueChanged.AddListener(SetVolume);
+        masterSlider.onValueChanged.AddListener(SetMasterVolume);
+        SFXSlider.onValueChanged.AddListener(SetSFXVolume);
+        musicSlider.onValueChanged.AddListener(SetMasterVolume);
 
     }
 
@@ -85,24 +86,30 @@ public class SettingsMenu : MonoBehaviour
     {
         audioMixer.SetFloat("Master", Mathf.Log10(sliderValue) * 20);
 
-        displayNumber = sliderValue * 100;
-        masterVolumeTxt.text = displayNumber.ToString("F0");
+        float displayNumber = sliderValue * 100;
+        masterVolumeTxt.text = "Master : " + displayNumber.ToString("F0");
+
+        masterSound = sliderValue;
     }
 
     public void SetSFXVolume(float sliderValue)
     {
-        audioMixer.SetFloat("Master", Mathf.Log10(sliderValue) * 20);
+        audioMixer.SetFloat("SFX", Mathf.Log10(sliderValue) * 20);
 
-        displayNumber = sliderValue * 100;
-        SFXVolumeTxt.text = displayNumber.ToString("F0");
+        float displayNumber = sliderValue * 100;
+        SFXVolumeTxt.text = "SFX : " + displayNumber.ToString("F0");
+
+        SFXSound = sliderValue;
     }
 
     public void SetMusicVolume(float sliderValue)
     {
-        audioMixer.SetFloat("Master", Mathf.Log10(sliderValue) * 20);
+        audioMixer.SetFloat("Music", Mathf.Log10(sliderValue) * 20);
 
-        displayNumber = sliderValue * 100;
-        musicVolumeTxt.text = displayNumber.ToString("F0");
+        float displayNumber = sliderValue * 100;
+        musicVolumeTxt.text = "music : " + displayNumber.ToString("F0");
+
+        musicSound = sliderValue;
     }
 
 
@@ -114,6 +121,9 @@ public class SettingsMenu : MonoBehaviour
             isFullscreen = Screen.fullScreen,
             qualityLevel = QualitySettings.GetQualityLevel(),
             resolution = Screen.currentResolution,
+            masterAudio = masterSound,
+            SFXAudio = SFXSound,
+            musicAudio = musicSound,
         };
 
         string jsonData = JsonUtility.ToJson(savedSettings);
@@ -133,6 +143,13 @@ public class SettingsMenu : MonoBehaviour
         Screen.fullScreen = savedSettings.isFullscreen;
         QualitySettings.SetQualityLevel(savedSettings.qualityLevel);
         Screen.SetResolution(savedSettings.resolution.width, savedSettings.resolution.height, Screen.fullScreen);
+        audioMixer.SetFloat("Master", Mathf.Log10(savedSettings.masterAudio) * 20);
+        audioMixer.SetFloat("SFX", Mathf.Log10(savedSettings.SFXAudio) * 20);
+        audioMixer.SetFloat("Music", Mathf.Log10(savedSettings.musicAudio) * 20);
+
+        masterVolumeTxt.text = "Master : " + (savedSettings.masterAudio * 100).ToString("F0");
+        SFXVolumeTxt.text = "SFX : " + (savedSettings.SFXAudio * 100).ToString("F0");
+        musicVolumeTxt.text = "music : " + (savedSettings.musicAudio * 100).ToString("F0");
     }
 
 }
