@@ -31,11 +31,11 @@ public class SettingsMenu : MonoBehaviour
     private void Awake()
     {
         CheckAllRes();
-        //LoadSettings();
+        LoadSettings();
 
         masterSlider.onValueChanged.AddListener(SetMasterVolume);
         SFXSlider.onValueChanged.AddListener(SetSFXVolume);
-        musicSlider.onValueChanged.AddListener(SetMasterVolume);
+        musicSlider.onValueChanged.AddListener(SetMusicVolume);
 
     }
 
@@ -69,17 +69,20 @@ public class SettingsMenu : MonoBehaviour
     public void Graphics(int graphicsIndex)
     {
         QualitySettings.SetQualityLevel(graphicsIndex);
+        SaveSettings();
     }
 
     public void Resolution(int resoltionIndex)
     {
         Resolution resolution = resolutions[resoltionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        SaveSettings();
     }
 
     public void Fullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
+        SaveSettings();
     }
 
     public void SetMasterVolume(float sliderValue)
@@ -90,6 +93,8 @@ public class SettingsMenu : MonoBehaviour
         masterVolumeTxt.text = "Master : " + displayNumber.ToString("F0");
 
         masterSound = sliderValue;
+
+        SaveSettings();
     }
 
     public void SetSFXVolume(float sliderValue)
@@ -100,6 +105,8 @@ public class SettingsMenu : MonoBehaviour
         SFXVolumeTxt.text = "SFX : " + displayNumber.ToString("F0");
 
         SFXSound = sliderValue;
+
+        SaveSettings();
     }
 
     public void SetMusicVolume(float sliderValue)
@@ -110,6 +117,8 @@ public class SettingsMenu : MonoBehaviour
         musicVolumeTxt.text = "music : " + displayNumber.ToString("F0");
 
         musicSound = sliderValue;
+
+        SaveSettings();
     }
 
 
@@ -120,7 +129,8 @@ public class SettingsMenu : MonoBehaviour
         {
             isFullscreen = Screen.fullScreen,
             qualityLevel = QualitySettings.GetQualityLevel(),
-            resolution = Screen.currentResolution,
+            resolutionWidth = Screen.currentResolution.width,
+            resolutionHeight = Screen.currentResolution.height,
             masterAudio = masterSound,
             SFXAudio = SFXSound,
             musicAudio = musicSound,
@@ -135,6 +145,9 @@ public class SettingsMenu : MonoBehaviour
 
     void LoadSettings()
     {
+        if (!System.IO.File.Exists(Application.persistentDataPath + "/Settings.json"))
+            return;
+
         string filePath = Application.persistentDataPath + "/Settings.json";
         string jsonData = System.IO.File.ReadAllText(filePath);
 
@@ -142,7 +155,9 @@ public class SettingsMenu : MonoBehaviour
 
         Screen.fullScreen = savedSettings.isFullscreen;
         QualitySettings.SetQualityLevel(savedSettings.qualityLevel);
-        Screen.SetResolution(savedSettings.resolution.width, savedSettings.resolution.height, Screen.fullScreen);
+        Screen.SetResolution(savedSettings.resolutionWidth, savedSettings.resolutionHeight, Screen.fullScreen);
+
+        //Audio Mixer Load
         audioMixer.SetFloat("Master", Mathf.Log10(savedSettings.masterAudio) * 20);
         audioMixer.SetFloat("SFX", Mathf.Log10(savedSettings.SFXAudio) * 20);
         audioMixer.SetFloat("Music", Mathf.Log10(savedSettings.musicAudio) * 20);
@@ -150,6 +165,10 @@ public class SettingsMenu : MonoBehaviour
         masterVolumeTxt.text = "Master : " + (savedSettings.masterAudio * 100).ToString("F0");
         SFXVolumeTxt.text = "SFX : " + (savedSettings.SFXAudio * 100).ToString("F0");
         musicVolumeTxt.text = "music : " + (savedSettings.musicAudio * 100).ToString("F0");
+
+        masterSlider.value = savedSettings.masterAudio;
+        SFXSlider.value = savedSettings.SFXAudio;
+        musicSlider.value = savedSettings.musicAudio;
     }
 
 }
@@ -158,7 +177,8 @@ public class SavedSettings
 {
     public bool isFullscreen;
     public int qualityLevel;
-    public Resolution resolution;
+    public int resolutionWidth;
+    public int resolutionHeight;
     public float masterAudio;
     public float SFXAudio;
     public float musicAudio;
