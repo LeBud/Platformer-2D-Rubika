@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
     public static bool gameIsPause = false;
     public GameObject inGameHUD;
     public GameObject pauseMenuHUD;
+    public GameObject optionsMenuHUD;
 
     [SerializeField] GameObject firstButton;
 
@@ -48,6 +49,7 @@ public class PauseMenu : MonoBehaviour
 
         inGameHUD.SetActive(true);
         pauseMenuHUD.SetActive(false);
+        optionsMenuHUD.SetActive(false);
 
         EventSystem.current.SetSelectedGameObject(null);
     }
@@ -61,15 +63,11 @@ public class PauseMenu : MonoBehaviour
 
         inGameHUD.SetActive(false);
         pauseMenuHUD.SetActive(true);
+        optionsMenuHUD.SetActive(false);
 
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(firstButton);
 
-    }
-
-    public void Option()
-    {
-        Debug.Log("Loading Option");
     }
 
     public void ExitGame()

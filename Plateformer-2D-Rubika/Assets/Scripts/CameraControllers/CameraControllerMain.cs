@@ -8,6 +8,7 @@ public class CameraControllerMain : MonoBehaviour
     CinemachineVirtualCamera virtualCamera;
     CinemachineFramingTransposer vcBody;
     Transform playerPos;
+    CameraFreezeAxis camFreeze;
 
     [Header("Settings")]
     [SerializeField] bool followPlayer;
@@ -31,6 +32,7 @@ public class CameraControllerMain : MonoBehaviour
         playerPos = FindObjectOfType<PlayerController>().transform;
         virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
         vcBody = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+        camFreeze = virtualCamera.GetComponent<CameraFreezeAxis>();
         MainSettings();
     }
 
@@ -72,7 +74,9 @@ public class CameraControllerMain : MonoBehaviour
     public void MainSettings()
     {
         inMain = true;
-        
+
+        camFreeze.axis = 0;
+
         vcBody.m_XDamping = damping.x;
         vcBody.m_YDamping = damping.y;
         vcBody.m_DeadZoneWidth = deadZone.x;
