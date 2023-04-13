@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -12,6 +11,8 @@ public class SettingsMenu : MonoBehaviour
 
     [Header("Graphics")]
     [SerializeField] TMP_Dropdown resolutionDropDown;
+    [SerializeField] TMP_Dropdown qualityDropDown;
+    [SerializeField] Toggle fullscreenToggle;
 
     [Header("Audio")]
     [SerializeField] AudioMixer audioMixer;
@@ -30,13 +31,8 @@ public class SettingsMenu : MonoBehaviour
 
     private void Awake()
     {
-        CheckAllRes();
-        LoadSettings();
-
-        masterSlider.onValueChanged.AddListener(SetMasterVolume);
-        SFXSlider.onValueChanged.AddListener(SetSFXVolume);
-        musicSlider.onValueChanged.AddListener(SetMusicVolume);
-
+        if (System.IO.File.Exists(Application.persistentDataPath + "/Settings.json"))
+            LoadSettings();
     }
 
     void CheckAllRes()
@@ -93,7 +89,6 @@ public class SettingsMenu : MonoBehaviour
         masterVolumeTxt.text = "Master : " + displayNumber.ToString("F0");
 
         masterSound = sliderValue;
-
         SaveSettings();
     }
 
@@ -105,8 +100,8 @@ public class SettingsMenu : MonoBehaviour
         SFXVolumeTxt.text = "SFX : " + displayNumber.ToString("F0");
 
         SFXSound = sliderValue;
-
         SaveSettings();
+
     }
 
     public void SetMusicVolume(float sliderValue)
@@ -117,8 +112,8 @@ public class SettingsMenu : MonoBehaviour
         musicVolumeTxt.text = "music : " + displayNumber.ToString("F0");
 
         musicSound = sliderValue;
-
         SaveSettings();
+
     }
 
 
@@ -131,6 +126,7 @@ public class SettingsMenu : MonoBehaviour
             qualityLevel = QualitySettings.GetQualityLevel(),
             resolutionWidth = Screen.currentResolution.width,
             resolutionHeight = Screen.currentResolution.height,
+            resolutionNum = resolutionDropDown.value,
             masterAudio = masterSound,
             SFXAudio = SFXSound,
             musicAudio = musicSound,
@@ -145,8 +141,6 @@ public class SettingsMenu : MonoBehaviour
 
     void LoadSettings()
     {
-        if (!System.IO.File.Exists(Application.persistentDataPath + "/Settings.json"))
-            return;
 
         string filePath = Application.persistentDataPath + "/Settings.json";
         string jsonData = System.IO.File.ReadAllText(filePath);
@@ -169,6 +163,14 @@ public class SettingsMenu : MonoBehaviour
         masterSlider.value = savedSettings.masterAudio;
         SFXSlider.value = savedSettings.SFXAudio;
         musicSlider.value = savedSettings.musicAudio;
+
+        qualityDropDown.value = savedSettings.qualityLevel;
+
+        CheckAllRes();
+
+        resolutionDropDown.value = savedSettings.resolutionNum;
+
+        fullscreenToggle.isOn = savedSettings.isFullscreen;
     }
 
 }
@@ -179,6 +181,7 @@ public class SavedSettings
     public int qualityLevel;
     public int resolutionWidth;
     public int resolutionHeight;
+    public int resolutionNum;
     public float masterAudio;
     public float SFXAudio;
     public float musicAudio;
