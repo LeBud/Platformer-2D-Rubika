@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 2286016771729557628}
   - component: {fileID: 2286016771729557631}
   - component: {fileID: 2286016771729557629}
+  - component: {fileID: 3079271723670867493}
+  - component: {fileID: 8480157210655324425}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -31,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2286016771729557631
 MonoBehaviour:
@@ -49,6 +51,7 @@ MonoBehaviour:
   ladyBugLight: {fileID: 0}
   deathNumber: {fileID: 0}
   gameManager: {fileID: 2286016771729557629}
+  levelManager: {fileID: 0}
 --- !u!114 &2286016771729557629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,3 +66,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectableNum: 0
   collectables: []
+--- !u!114 &3079271723670867493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2286016771729557630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c376a16d9c0a5478636e655cccce0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levels: []
+  startingRoom: 0
+  currentRoom: 0
+--- !u!114 &8480157210655324425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2286016771729557630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec246dfefae53ae4ab1609a047eda47e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -13,7 +13,6 @@ public class Collectable : MonoBehaviour
     private void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
-        gameManager = FindObjectOfType<GameManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
