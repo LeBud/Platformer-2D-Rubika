@@ -125,7 +125,7 @@ public class SettingsMenu : MonoBehaviour
     }
 
 
-    void SaveSettings()
+    public void SaveSettings()
     {
 
         SavedSettings savedSettings = new SavedSettings
