@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class CheckPoint : MonoBehaviour
 {
@@ -11,14 +12,20 @@ public class CheckPoint : MonoBehaviour
     [Header("Light Level")]
     public bool lightLevel;
 
-    SpriteRenderer sprite;
+    [SerializeField] SpriteRenderer sprite;
     PlayerDeath player;
-    
+
+    [SerializeField] Sprite unCheck;
+    [SerializeField] Sprite check;
+
+    Light2D lightSpot;
 
     private void Awake()
     {
         player = FindObjectOfType<PlayerDeath>();
-        sprite = GetComponent<SpriteRenderer>();
+        sprite.sprite = unCheck;
+        lightSpot = GetComponentInChildren<Light2D>();
+        lightSpot.enabled = false;
     }
 
     private void OnEnable()
@@ -44,13 +51,16 @@ public class CheckPoint : MonoBehaviour
 
     public void Active()
     {
-        sprite.color = new Vector4(1, 1, 0.1568628f, 1);
+        sprite.sprite = check;
         player.checkPointPos = transform.position;
         player.currentCheckPoint = checkPointNum;
         player.checkPointRoom = roomNumber;
 
         if (lightLevel)
+        {
             player.lightCheckPoint = true;
+            lightSpot.enabled = true;
+        }
         else
             player.lightCheckPoint = false;
     }
