@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        if (MainMenu.ereaseSave) FindObjectOfType<SaveSystem>().SaveData();
+        else if (MainMenu.loadSave) FindObjectOfType<SaveSystem>().LoadData();
+
         Collectable[] collectable = FindObjectsOfType<Collectable>();
 
         for (int i = 0; i < collectable.Length; i++)
