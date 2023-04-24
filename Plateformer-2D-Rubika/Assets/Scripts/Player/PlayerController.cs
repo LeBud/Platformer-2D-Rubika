@@ -299,8 +299,10 @@ e   lse centerCamTimer = playerControllerData.timeToRecenter;
             upForce -= rb.velocity.y;
 
         rb.AddForce(Vector2.up * upForce, ForceMode2D.Impulse);
+
+        animator.SetTrigger("GlideJump");
     }
-    
+
     private void FixedUpdate()
     {
         if (PlayerDeath.respawning) return;
