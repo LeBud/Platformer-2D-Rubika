@@ -8,36 +8,34 @@ public class MantysFollower : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] float mantysSpeed;
-    [SerializeField] float mantysFasterSpeed;
-    [SerializeField] float mantysSprintSpeed;
-    [SerializeField] Transform[] mantysTransform;
+    [SerializeField] float mantysMaxSpeed;
+    [SerializeField] float mantysMinSpeed;
+    [SerializeField] public Transform[] mantysTransform;
     [SerializeField] GameObject vCam;
 
     float actualSpeed;
-    float newSpeed;
 
-    int currentWaypoint;
-
+    [HideInInspector]
+    public int currentWaypoint;
 
     bool respawning;
 
+    GameObject playerController;
+
     private void Start()
     {
+        playerController = GameObject.FindGameObjectWithTag("Player");
         actualSpeed = mantysSpeed;
         currentWaypoint = 0;
-        StartCoroutine(ChangeSpeed());
     }
 
-    private void OnEnable()
-    {
-        StartCoroutine(ChangeSpeed());
-    }
 
     private void Update()
     {
         if (PauseMenu.gameIsPause) return;
 
         if (respawning) return;
+
 
         if(currentWaypoint < mantysTransform.Length)
         {
@@ -49,27 +47,33 @@ public class MantysFollower : MonoBehaviour
                     0);
             }
             else
+            {
+                if (!MantysEnablerDisabler.mantisEnable) return;
                 currentWaypoint++;
+            }
         }
 
-        actualSpeed = Mathf.MoveTowards(actualSpeed, newSpeed, 20f * Time.deltaTime);
+        actualSpeed = Mathf.MoveTowards(actualSpeed, mantysSpeed, 2f * Time.deltaTime);
 
+        ChangeSpeed();
     }
 
-    IEnumerator ChangeSpeed()
+    void ChangeSpeed()
     {
 
-        if (respawning) yield break;
-        
-        newSpeed = mantysSpeed;
+        if (respawning) return;
 
-        yield return new WaitForSeconds(1);
+        float distance = Vector2.Distance(transform.position, playerController.transform.position);
 
-        newSpeed = mantysFasterSpeed;
+        Debug.Log(distance);
 
-        yield return new WaitForSeconds(1);
+        if (distance < 12)
+            mantysSpeed = mantysMinSpeed;
+        else if(distance > 18)
+            mantysSpeed = mantysMaxSpeed;
+        else
+            mantysSpeed = (mantysMinSpeed + mantysMaxSpeed) / 2.4f ;
 
-        StartCoroutine(ChangeSpeed());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
