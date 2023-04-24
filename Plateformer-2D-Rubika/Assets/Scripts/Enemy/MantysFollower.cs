@@ -17,6 +17,8 @@ public class MantysFollower : MonoBehaviour
 
     //[HideInInspector]
     public int currentWaypoint;
+    [HideInInspector]
+    public int respawnCheckPoint;
 
     bool respawning;
 
@@ -96,7 +98,7 @@ public class MantysFollower : MonoBehaviour
         respawning = true;
         yield return new WaitForSeconds(.1f);
 
-        currentWaypoint = 0;
+        currentWaypoint = respawnCheckPoint;
         transform.position = mantysTransform[currentWaypoint].position;
         actualSpeed = mantysSpeed;
         respawning = false;

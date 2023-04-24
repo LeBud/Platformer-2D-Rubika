@@ -85,6 +85,7 @@ public class SaveSystem : MonoBehaviour
         ladyBugLight.aphidCount = savedData.aphidNumber;
         deathNumber.deathCounter = savedData.deathNumber;
         deathNumber.currentCheckPoint = savedData.checkPointNum;
+        ActivatePreviousCheckPoints();
         deathNumber.checkPointRoom = savedData.currentRoomNum;
         gameManager.collectables = savedData.collectablesList;
         gameManager.collectableNum = savedData.collectablesNum;
@@ -92,7 +93,6 @@ public class SaveSystem : MonoBehaviour
         deathNumber.lightCheckPoint = savedData.lightCheckPoint;
 
         gameManager.LoadCollectable();
-        ActivatePreviousCheckPoints();
 
         Debug.Log("Chargement des données terminées");
     }
