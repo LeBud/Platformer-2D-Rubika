@@ -23,12 +23,14 @@ public class MantysEnablerDisabler : MonoBehaviour
                 mantis.GetComponent<MantysFollower>().currentWaypoint = waypointStart;
                 mantis.transform.position = mantis.GetComponent<MantysFollower>().mantysTransform[waypointStart].position;
                 vCam.SetActive(true);
+                Debug.Log(2);
             }
             else
             {
                 mantisEnable = false;
                 //mantis.GetComponent<MantysFollower>().enabled= false;
                 vCam.SetActive(false);
+                Debug.Log(3);
             }
         }
     }
