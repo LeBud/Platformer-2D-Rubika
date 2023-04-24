@@ -240,7 +240,12 @@ e   lse centerCamTimer = playerControllerData.timeToRecenter;
 
     void AnimationController()
     {
-        if (falling) animator.SetBool("Fall", true);
+        if (gliding) animator.SetBool("Gliding", true);
+        else if (falling)
+        {
+            animator.SetBool("Gliding", false);
+            animator.SetBool("Fall", true);
+        } 
         else animator.SetBool("Fall", false);
 
         if (!Idling()) animator.SetBool("Walk", true);
@@ -294,8 +299,10 @@ e   lse centerCamTimer = playerControllerData.timeToRecenter;
             upForce -= rb.velocity.y;
 
         rb.AddForce(Vector2.up * upForce, ForceMode2D.Impulse);
+
+        animator.SetTrigger("GlideJump");
     }
-    
+
     private void FixedUpdate()
     {
         if (PlayerDeath.respawning) return;
