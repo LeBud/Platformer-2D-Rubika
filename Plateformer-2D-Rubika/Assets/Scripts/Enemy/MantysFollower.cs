@@ -15,8 +15,10 @@ public class MantysFollower : MonoBehaviour
 
     float actualSpeed;
 
-    [HideInInspector]
+    //[HideInInspector]
     public int currentWaypoint;
+    [HideInInspector]
+    public int respawnCheckPoint;
 
     bool respawning;
 
@@ -39,12 +41,16 @@ public class MantysFollower : MonoBehaviour
 
         if(currentWaypoint < mantysTransform.Length)
         {
-            if(transform.position != mantysTransform[currentWaypoint].position)
+
+            float distance = Vector2.Distance(transform.position, mantysTransform[currentWaypoint].position);
+            
+            if(distance > .1f)
             {
                 transform.position = new Vector3(
                     Mathf.MoveTowards(transform.position.x, mantysTransform[currentWaypoint].position.x, actualSpeed * Time.deltaTime),
                     Mathf.MoveTowards(transform.position.y, mantysTransform[currentWaypoint].position.y, actualSpeed * Time.deltaTime),
                     0);
+                Debug.Log(1);
             }
             else
             {
@@ -65,7 +71,7 @@ public class MantysFollower : MonoBehaviour
 
         float distance = Vector2.Distance(transform.position, playerController.transform.position);
 
-        Debug.Log(distance);
+        
 
         if (distance < 12)
             mantysSpeed = mantysMinSpeed;
@@ -78,13 +84,12 @@ public class MantysFollower : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("resapwn");
+        Debug.Log("respawn");
 
         if (collision.CompareTag("Player"))
         {
             if(!PlayerDeath.respawning)
                 StartCoroutine(collision.GetComponent<PlayerDeath>().Respawn());
-            StartCoroutine(RespawnEnemy());
         }
     }
 
@@ -93,7 +98,7 @@ public class MantysFollower : MonoBehaviour
         respawning = true;
         yield return new WaitForSeconds(.1f);
 
-        currentWaypoint = 0;
+        currentWaypoint = respawnCheckPoint;
         transform.position = mantysTransform[currentWaypoint].position;
         actualSpeed = mantysSpeed;
         respawning = false;

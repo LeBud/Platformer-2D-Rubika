@@ -55,6 +55,8 @@ public class PlayerDeath : MonoBehaviour
 
         //Animation de mort
 
+        yield return new WaitForEndOfFrame();
+        
         fadeAnim.Play("FadeIn");
 
         yield return new WaitForSeconds(.5f);
