@@ -48,6 +48,7 @@ public class PlayerDeath : MonoBehaviour
     public IEnumerator Respawn()
     {
         respawning = true;
+        rb.simulated = false;
         rb.velocity = Vector2.zero;
         deathCounter++;
 
@@ -118,8 +119,11 @@ public class PlayerDeath : MonoBehaviour
         }
         #endregion
 
-        
+
         FindObjectOfType<SaveSystem>().LoadData();
+
+        rb.velocity = Vector2.zero;
+        rb.simulated = true;
 
         if (lightCheckPoint && ladyBugLight.aphidCount < 1)
             ladyBugLight.aphidCount = 1;
