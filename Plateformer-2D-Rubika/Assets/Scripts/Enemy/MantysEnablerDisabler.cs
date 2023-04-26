@@ -7,6 +7,7 @@ public class MantysEnablerDisabler : MonoBehaviour
     public bool Enabler;
     public static bool mantisEnable;
     public int waypointStart;
+    public int jumpPointReset;
 
 
     [SerializeField] GameObject mantis;
@@ -20,48 +21,21 @@ public class MantysEnablerDisabler : MonoBehaviour
             {
                 mantisEnable = true;
                 mantis.SetActive(true);
+                vCam.SetActive(true);
 
                 MantysFollower script = mantis.GetComponent<MantysFollower>();
 
                 script.respawnCheckPoint = waypointStart;
                 script.currentWaypoint = waypointStart;
-                mantis.transform.position = script.mantysTransform[waypointStart].position;
-                vCam.SetActive(true);
-                Debug.Log(2);
+                script.jumpPointNum = jumpPointReset;
+                mantis.transform.position = script.respawnPos[waypointStart].position;
             }
             else
             {
-                mantisEnable = false;
+                //mantisEnable = false;
                 vCam.SetActive(false);
-                Debug.Log(3);
             }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            if (Enabler)
-            {
-                mantisEnable = true;
-                mantis.SetActive(true);
-
-                MantysFollower script = mantis.GetComponent<MantysFollower>();
-
-                script.respawnCheckPoint = waypointStart;
-                script.currentWaypoint = waypointStart;
-                mantis.transform.position = script.mantysTransform[waypointStart].position;
-                vCam.SetActive(true);
-                Debug.Log(2);
-            }
-            else
-            {
-                mantisEnable = false;
-                vCam.SetActive(false);
-                Debug.Log(3);
-            }
-        }
-
-    }
 }
