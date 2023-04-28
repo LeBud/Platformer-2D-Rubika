@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class AchievementsCheck : MonoBehaviour
 {
-    public List<Achievement> achievements;
+    public static List<Achievement> achievements;
+    public static List<AchievementData> achievementsData;
     public Sprite tempSprite;
 
     SaveSystem saveSystem;
@@ -17,11 +18,13 @@ public class AchievementsCheck : MonoBehaviour
     [HideInInspector]
     public bool airFlowUse, jumpPadUse, breakPlatformUse, aphidUse, fallObjectUse, fallInCatacomb, surviveChase, exitCatacomb, endGame;
 
-
     private void Awake()
     {
         saveSystem = FindObjectOfType<SaveSystem>();
         display = FindObjectOfType<AchievementsDisplay>();
+
+        InitializeAchievements();
+        RefreshData();
     }
 
     public bool AchievementUnlocked(string achievementName)
@@ -42,11 +45,6 @@ public class AchievementsCheck : MonoBehaviour
         return result;
     }
 
-    private void Start()
-    {
-        InitializeAchievements();
-    }
-
     private void InitializeAchievements()
     {
         if (achievements == null)
@@ -56,7 +54,6 @@ public class AchievementsCheck : MonoBehaviour
             achievements.Add(new Achievement("Jump", "Jump 100 time.", tempSprite, (object o) => jumpCount >= 100));
             achievements.Add(new Achievement("Jumping a lot !", "Jump 1000 time.", tempSprite, (object o) => jumpCount >= 1000));
             achievements.Add(new Achievement("First time ?", "Die for the 1st time.", tempSprite, (object o) => deathCount >= 1));
-            achievements.Add(new Achievement("Second time ?", "Die for the 2nd time.", tempSprite, (object o) => deathCount >= 2));
             achievements.Add(new Achievement("It's not that hard !", "Die 100 time.", tempSprite, (object o) => deathCount >= 100));
             //collectables Achievements
             achievements.Add(new Achievement("Nice !", "Find your 1st collectables", tempSprite, (object o) => collectableCount >= 1));
@@ -87,6 +84,7 @@ public class AchievementsCheck : MonoBehaviour
     private void Update()
     {
         CheckAchievementCompletion();
+        RefreshData();
     }
 
     private void CheckAchievementCompletion()
@@ -99,6 +97,34 @@ public class AchievementsCheck : MonoBehaviour
             achievement.UpdateCompletion();
         }
     }
+
+    public void RefreshData()
+    {
+        achievementsData = new List<AchievementData>();
+
+        for(int i = 0;i < achievements.Count;i++)
+        {
+            achievementsData.Add(new AchievementData(achievements[i].title, achievements[i].achieved));
+        }
+
+    }
+
+    public void CheckAchivementCompletion(List<AchievementData> data)
+    {
+
+        for(int i = 0; i < data.Count;i++)
+        {
+            if (data[i].achieved == true)
+            {
+                if (data[i].title == achievements[i].title)
+                    achievements[i].achieved = true;
+            }            
+        }
+
+        
+
+    }
+
 }
 
 public class Achievement
@@ -106,6 +132,7 @@ public class Achievement
 
     public SaveSystem saveSystem;
     public AchievementsDisplay display;
+
     public Achievement(string title, string description, Sprite sprite, Predicate<object> requirement) 
     {
         this.title = title;
@@ -139,5 +166,18 @@ public class Achievement
     public bool RequirementMet()
     {
         return requirement.Invoke(null);
+    }
+}
+
+[Serializable]
+public struct AchievementData
+{
+    public string title;
+    public bool achieved;
+
+    public AchievementData(string title, bool achieved)
+    {
+        this.title = title;
+        this.achieved = achieved;
     }
 }

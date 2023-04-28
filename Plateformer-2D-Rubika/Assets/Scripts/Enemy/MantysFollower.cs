@@ -106,7 +106,6 @@ public class MantysFollower : MonoBehaviour
 
     void Flip()
     {
-        camFreeze.targetY = playerController.transform.position.y;
 
         Vector2 dir = transform.position - playerController.transform.position;
 
@@ -120,6 +119,11 @@ public class MantysFollower : MonoBehaviour
             sprite.flipX = true;
             vBody.m_TrackedObjectOffset = new Vector3(-15.5f, 2, 0);
         }
+    }
+
+    private void LateUpdate()
+    {
+        camFreeze.targetY = playerController.transform.position.y;
     }
 
     /*void WaypointsMovement()
