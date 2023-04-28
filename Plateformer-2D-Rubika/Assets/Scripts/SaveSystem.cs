@@ -63,7 +63,10 @@ public class SaveSystem : MonoBehaviour
 
         //Sauvegarder les données
         SavedData savedData = loadData;
-        savedData.achievementsList = AchievementsCheck.achievementsData;
+        
+        //Problem ici
+        if(AchievementsCheck.achievements.Count > 0)
+            savedData.achievementsList = AchievementsCheck.achievementsData;
 
         //Sauvegarder les données
         jsonData = JsonUtility.ToJson(savedData);
@@ -84,9 +87,10 @@ public class SaveSystem : MonoBehaviour
             collectablesNum = gameManager.collectableNum,
             currentRoom = levelManager.currentRoom,
             lightCheckPoint = deathNumber.lightCheckPoint,
-            achievementsList = AchievementsCheck.achievementsData,
         };
 
+        if (AchievementsCheck.achievements.Count > 0)
+            savedData.achievementsList = AchievementsCheck.achievementsData;
         achievements.collectableCount = gameManager.collectableNum;
 
         string jsonData = JsonUtility.ToJson(savedData);
@@ -119,7 +123,7 @@ public class SaveSystem : MonoBehaviour
 
         gameManager.LoadCollectable();
 
-        achievements.CheckAchivementCompletion(savedData.achievementsList);
+        achievements.CheckCompletion(savedData.achievementsList);
 
         Debug.Log("Chargement des données terminées");
     }

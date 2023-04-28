@@ -24,7 +24,6 @@ public class AchievementsCheck : MonoBehaviour
         display = FindObjectOfType<AchievementsDisplay>();
 
         InitializeAchievements();
-        RefreshData();
     }
 
     public bool AchievementUnlocked(string achievementName)
@@ -68,8 +67,6 @@ public class AchievementsCheck : MonoBehaviour
             achievements.Add(new Achievement("Better luck next time !", "Bounce on a jump pad fort the 1st time.", tempSprite, (object o) => surviveChase == true));
             achievements.Add(new Achievement("Out of there !", "Bounce on a jump pad fort the 1st time.", tempSprite, (object o) => exitCatacomb == true));
             achievements.Add(new Achievement("Congratulations !", "Bounce on a jump pad fort the 1st time.", tempSprite, (object o) => endGame == true));
-
-            saveSystem.SaveAchievements();
         }
 
         foreach(Achievement achi in achievements)
@@ -78,13 +75,14 @@ public class AchievementsCheck : MonoBehaviour
             achi.display = display;
         }
 
+
+        RefreshData();
     }
 
 
     private void Update()
     {
         CheckAchievementCompletion();
-        RefreshData();
     }
 
     private void CheckAchievementCompletion()
@@ -98,20 +96,21 @@ public class AchievementsCheck : MonoBehaviour
         }
     }
 
-    public void RefreshData()
+    public static void RefreshData()
     {
         achievementsData = new List<AchievementData>();
 
+        achievementsData.Clear();
+        
         for(int i = 0;i < achievements.Count;i++)
         {
             achievementsData.Add(new AchievementData(achievements[i].title, achievements[i].achieved));
+            Debug.Log(achievements[i].achieved);
         }
-
     }
 
-    public void CheckAchivementCompletion(List<AchievementData> data)
+    public void CheckCompletion(List<AchievementData> data)
     {
-
         for(int i = 0; i < data.Count;i++)
         {
             if (data[i].achieved == true)
@@ -120,9 +119,6 @@ public class AchievementsCheck : MonoBehaviour
                     achievements[i].achieved = true;
             }            
         }
-
-        
-
     }
 
 }
@@ -158,6 +154,9 @@ public class Achievement
         {
             Debug.Log($"{title} : {description}");
             achieved = true;
+
+            AchievementsCheck.RefreshData();
+
             saveSystem.SaveAchievements();
             display.DisplayAchievement(title, description, sprite);
         }
