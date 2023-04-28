@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
     AirFlow airFlow;
+    AchievementsCheck achievements;
 
     [Header("Controller Data")]
     public PlayerControllerData playerControllerData;
@@ -71,11 +72,11 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        achievements = FindObjectOfType<AchievementsCheck>();
     }
 
     private void Update()
     {
-
         if (PauseMenu.gameIsPause) return;
 
         if (PlayerDeath.respawning) return;
@@ -172,6 +173,9 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / playerControllerData.jumpCutForce);
             jumpCut = false;
         }
+
+        if (onGround > 0) gliding = false;
+
         #endregion
 
         #region AirFlow
@@ -236,6 +240,11 @@ e   lse centerCamTimer = playerControllerData.timeToRecenter;
             vcBody.m_TrackedObjectOffset.x = Mathf.MoveTowards(vcBody.m_TrackedObjectOffset.x, 0, playerControllerData.offsetSpeed * Time.deltaTime);*/
 
         #endregion
+
+        #region achievements
+        if (airFlowing) achievements.airFlowUse = true;
+        if (jumpPadOn) achievements.jumpPadUse = true;
+        #endregion
     }
 
     void AnimationController()
@@ -273,6 +282,8 @@ e   lse centerCamTimer = playerControllerData.timeToRecenter;
         rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
 
         animator.SetTrigger("Jump");
+
+        achievements.jumpCount++;
     }
 
     void Glide()

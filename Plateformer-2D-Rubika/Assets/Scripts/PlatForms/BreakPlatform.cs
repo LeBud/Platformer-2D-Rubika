@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BreakPlatform : MonoBehaviour
 {
+    AchievementsCheck achievements;
 
     [SerializeField] float breakTimer;
     [SerializeField] float respawnTimer;
@@ -18,6 +19,7 @@ public class BreakPlatform : MonoBehaviour
 
     private void Start()
     {
+        achievements = FindObjectOfType<AchievementsCheck>();
         spriteRenderer= GetComponent<SpriteRenderer>();
         BoxCollider2D = GetComponents<BoxCollider2D>();
     }
@@ -40,6 +42,8 @@ public class BreakPlatform : MonoBehaviour
         {
             BoxCollider2D[i].enabled = false;
         }
+
+        achievements.breakPlatformUse = true;
 
         yield return new WaitForSeconds(respawnTimer);
 
