@@ -5,6 +5,7 @@ using UnityEngine;
 public class Collectable : MonoBehaviour
 {
     GameManager gameManager;
+
     [HideInInspector]
     public bool taken;
     [HideInInspector]

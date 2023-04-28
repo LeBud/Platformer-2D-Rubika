@@ -12,6 +12,7 @@ public class PlayerDeath : MonoBehaviour
     LevelManager levelManager;
     LadyBugLight ladyBugLight;
     PlayerController playerController;
+    AchievementsCheck achievements;
 
     [Header("Virtual Camera")]
     [SerializeField] CinemachineVirtualCamera virtualCamera;
@@ -37,12 +38,12 @@ public class PlayerDeath : MonoBehaviour
         respawning = false;
 
         levelManager = FindObjectOfType<LevelManager>();
+        achievements = FindObjectOfType<AchievementsCheck>();
         ladyBugLight = GetComponent<LadyBugLight>();
         playerController = GetComponent<PlayerController>();
         rb = GetComponent<Rigidbody2D>();
 
         checkPointPos = transform.position;
-
     }
 
     public IEnumerator Respawn()
@@ -51,6 +52,8 @@ public class PlayerDeath : MonoBehaviour
         rb.simulated = false;
         rb.velocity = Vector2.zero;
         deathCounter++;
+
+        achievements.deathCount = deathCounter;
 
         FindObjectOfType<SaveSystem>().SaveDeath();
 

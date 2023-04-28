@@ -11,11 +11,15 @@ public class SaveSystem : MonoBehaviour
     [SerializeField] PlayerDeath deathNumber;
     [SerializeField] GameManager gameManager;
     [SerializeField] LevelManager levelManager;
+
+    AchievementsCheck achievements;
+
     private void Awake()
     {
         ladyBugLight = FindObjectOfType<LadyBugLight>();
         deathNumber= FindObjectOfType<PlayerDeath>();
         levelManager = FindObjectOfType<LevelManager>();
+        achievements = FindObjectOfType<AchievementsCheck>();
         gameManager = GetComponent<GameManager>();
         playerTransform = ladyBugLight.transform;
 
@@ -48,6 +52,22 @@ public class SaveSystem : MonoBehaviour
         System.IO.File.WriteAllText(filePath, jsonData);
     }
 
+    public void SaveAchievements()
+    {
+        //Charger les données
+        string filePath = Application.persistentDataPath + "/SaveFile.json";
+        string jsonData = System.IO.File.ReadAllText(filePath);
+        SavedData loadData = JsonUtility.FromJson<SavedData>(jsonData);
+
+        //Sauvegarder les données
+        SavedData savedData = loadData;
+        savedData.achievements = AchievementsCheck.achievements;
+
+        //Sauvegarder les données
+        jsonData = JsonUtility.ToJson(savedData);
+        System.IO.File.WriteAllText(filePath, jsonData);
+    }
+
     public void SaveData()
     {
         //Sauvegarder les données
@@ -62,7 +82,10 @@ public class SaveSystem : MonoBehaviour
             collectablesNum = gameManager.collectableNum,
             currentRoom = levelManager.currentRoom,
             lightCheckPoint = deathNumber.lightCheckPoint,
+            achievements = AchievementsCheck.achievements,
         };
+
+        achievements.collectableCount = gameManager.collectableNum;
 
         string jsonData = JsonUtility.ToJson(savedData);
         string filePath = Application.persistentDataPath + "/SaveFile.json";
@@ -92,6 +115,8 @@ public class SaveSystem : MonoBehaviour
         levelManager.currentRoom = savedData.currentRoom;
         deathNumber.lightCheckPoint = savedData.lightCheckPoint;
 
+        AchievementsCheck.achievements = savedData.achievements;
+
         gameManager.LoadCollectable();
 
         Debug.Log("Chargement des données terminées");
@@ -120,4 +145,5 @@ public class SavedData
     public List<Collected> collectablesList;
     public int currentRoom;
     public bool lightCheckPoint;
+    public List<Achievement> achievements;
 }

@@ -5,6 +5,9 @@ using UnityEngine.Rendering.Universal;
 
 public class LadyBugLight : MonoBehaviour
 {
+
+    AchievementsCheck achievements;
+
     [Header("Settings")]
     [SerializeField] PlayerControllerData playerControllerData;
     public int aphidCount;
@@ -15,6 +18,8 @@ public class LadyBugLight : MonoBehaviour
 
     private void Awake()
     {
+        achievements = FindObjectOfType<AchievementsCheck>();
+
         ladyLight.intensity = 0;
         ladyLight.enabled = false;
     }
@@ -48,6 +53,9 @@ public class LadyBugLight : MonoBehaviour
         aphidCount--;
         ladyLight.intensity = 0;
         ladyLight.enabled = true;
+
+        achievements.aphidUse = true;
+
         StartCoroutine(LightOn());
     }
 

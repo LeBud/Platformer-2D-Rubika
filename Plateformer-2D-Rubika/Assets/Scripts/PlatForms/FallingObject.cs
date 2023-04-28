@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FallingObject : MonoBehaviour
 {
+    AchievementsCheck achievements;
 
     [SerializeField] Rigidbody2D rb;
 
@@ -31,15 +32,19 @@ public class FallingObject : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         rb.gravityScale = fallGravityScale;
+
+        achievements.fallObjectUse = true;
     }
 
     public IEnumerator ResetFall()
     {
         resetting= true;
-        yield return new WaitForSeconds(.01f);
+
         rb.gravityScale = 0;
         rb.position = startPos;
+
         yield return new WaitForSeconds(.01f);
+        
         resetting= false;
     }
 

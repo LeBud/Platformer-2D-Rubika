@@ -33,6 +33,7 @@ public class SettingsMenu : MonoBehaviour
     {
         if (System.IO.File.Exists(Application.persistentDataPath + "/Settings.json"))
             LoadSettings();
+        CheckAllRes();
     }
 
     private void Update()
@@ -130,11 +131,7 @@ public class SettingsMenu : MonoBehaviour
 
         SavedSettings savedSettings = new SavedSettings
         {
-            isFullscreen = Screen.fullScreen,
             qualityLevel = QualitySettings.GetQualityLevel(),
-            resolutionWidth = Screen.currentResolution.width,
-            resolutionHeight = Screen.currentResolution.height,
-            resolutionNum = resolutionDropDown.value,
             masterAudio = masterSound,
             SFXAudio = SFXSound,
             musicAudio = musicSound,
@@ -155,9 +152,7 @@ public class SettingsMenu : MonoBehaviour
 
         SavedSettings savedSettings = JsonUtility.FromJson<SavedSettings>(jsonData);
 
-        Screen.fullScreen = savedSettings.isFullscreen;
         QualitySettings.SetQualityLevel(savedSettings.qualityLevel);
-        Screen.SetResolution(savedSettings.resolutionWidth, savedSettings.resolutionHeight, Screen.fullScreen);
 
         //Audio Mixer Load
         audioMixer.SetFloat("Master", Mathf.Log10(savedSettings.masterAudio) * 20);
@@ -174,22 +169,14 @@ public class SettingsMenu : MonoBehaviour
 
         qualityDropDown.value = savedSettings.qualityLevel;
 
-        CheckAllRes();
-
-        resolutionDropDown.value = savedSettings.resolutionNum;
-
-        fullscreenToggle.isOn = savedSettings.isFullscreen;
+        fullscreenToggle.isOn = Screen.fullScreen;
     }
 
 }
 
 public class SavedSettings
 {
-    public bool isFullscreen;
     public int qualityLevel;
-    public int resolutionWidth;
-    public int resolutionHeight;
-    public int resolutionNum;
     public float masterAudio;
     public float SFXAudio;
     public float musicAudio;
