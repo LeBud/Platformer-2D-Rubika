@@ -5,15 +5,11 @@ using UnityEngine;
 
 public class AchievementsCheck : MonoBehaviour
 {
-    public static List<Achievement> achievements;
+    public List<Achievement> achievements;
     public Sprite tempSprite;
 
     SaveSystem saveSystem;
     AchievementsDisplay display;
-
-    PlayerController playerController;
-    LadyBugLight LadyBugLight;
-    PlayerDeath PlayerDeath;
 
     [HideInInspector]
     public int jumpCount, deathCount, collectableCount;
@@ -21,11 +17,9 @@ public class AchievementsCheck : MonoBehaviour
     [HideInInspector]
     public bool airFlowUse, jumpPadUse, breakPlatformUse, aphidUse, fallObjectUse, fallInCatacomb, surviveChase, exitCatacomb, endGame;
 
+
     private void Awake()
     {
-        playerController = FindObjectOfType<PlayerController>();
-        LadyBugLight = FindObjectOfType<LadyBugLight>();
-        PlayerDeath = FindObjectOfType<PlayerDeath>();
         saveSystem = FindObjectOfType<SaveSystem>();
         display = FindObjectOfType<AchievementsDisplay>();
     }
@@ -62,6 +56,7 @@ public class AchievementsCheck : MonoBehaviour
             achievements.Add(new Achievement("Jump", "Jump 100 time.", tempSprite, (object o) => jumpCount >= 100));
             achievements.Add(new Achievement("Jumping a lot !", "Jump 1000 time.", tempSprite, (object o) => jumpCount >= 1000));
             achievements.Add(new Achievement("First time ?", "Die for the 1st time.", tempSprite, (object o) => deathCount >= 1));
+            achievements.Add(new Achievement("Second time ?", "Die for the 2nd time.", tempSprite, (object o) => deathCount >= 2));
             achievements.Add(new Achievement("It's not that hard !", "Die 100 time.", tempSprite, (object o) => deathCount >= 100));
             //collectables Achievements
             achievements.Add(new Achievement("Nice !", "Find your 1st collectables", tempSprite, (object o) => collectableCount >= 1));
@@ -76,6 +71,8 @@ public class AchievementsCheck : MonoBehaviour
             achievements.Add(new Achievement("Better luck next time !", "Bounce on a jump pad fort the 1st time.", tempSprite, (object o) => surviveChase == true));
             achievements.Add(new Achievement("Out of there !", "Bounce on a jump pad fort the 1st time.", tempSprite, (object o) => exitCatacomb == true));
             achievements.Add(new Achievement("Congratulations !", "Bounce on a jump pad fort the 1st time.", tempSprite, (object o) => endGame == true));
+
+            saveSystem.SaveAchievements();
         }
 
         foreach(Achievement achi in achievements)
@@ -85,6 +82,7 @@ public class AchievementsCheck : MonoBehaviour
         }
 
     }
+
 
     private void Update()
     {

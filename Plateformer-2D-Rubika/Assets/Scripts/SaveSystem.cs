@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SaveSystem : MonoBehaviour
@@ -61,7 +63,7 @@ public class SaveSystem : MonoBehaviour
 
         //Sauvegarder les données
         SavedData savedData = loadData;
-        savedData.achievements = AchievementsCheck.achievements;
+        savedData.achievementsList = achievements.achievements;
 
         //Sauvegarder les données
         jsonData = JsonUtility.ToJson(savedData);
@@ -82,7 +84,7 @@ public class SaveSystem : MonoBehaviour
             collectablesNum = gameManager.collectableNum,
             currentRoom = levelManager.currentRoom,
             lightCheckPoint = deathNumber.lightCheckPoint,
-            achievements = AchievementsCheck.achievements,
+            achievementsList = achievements.achievements,
         };
 
         achievements.collectableCount = gameManager.collectableNum;
@@ -114,8 +116,7 @@ public class SaveSystem : MonoBehaviour
         gameManager.collectableNum = savedData.collectablesNum;
         levelManager.currentRoom = savedData.currentRoom;
         deathNumber.lightCheckPoint = savedData.lightCheckPoint;
-
-        AchievementsCheck.achievements = savedData.achievements;
+        //achievements.achievements = savedData.achievementsList;
 
         gameManager.LoadCollectable();
 
@@ -145,5 +146,5 @@ public class SavedData
     public List<Collected> collectablesList;
     public int currentRoom;
     public bool lightCheckPoint;
-    public List<Achievement> achievements;
+    public List<Achievement> achievementsList;
 }
