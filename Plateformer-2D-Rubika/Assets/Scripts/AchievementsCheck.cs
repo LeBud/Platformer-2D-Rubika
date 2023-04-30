@@ -56,6 +56,8 @@ public class AchievementsCheck : MonoBehaviour
             achievements.Add(new Achievement("It's not that hard !", "Die 100 time.", tempSprite, (object o) => deathCount >= 100));
             //collectables Achievements
             achievements.Add(new Achievement("Nice !", "Find your 1st collectables", tempSprite, (object o) => collectableCount >= 1));
+            achievements.Add(new Achievement("Moooore !", "Find half of the collectables", tempSprite, (object o) => collectableCount >= 5));
+            achievements.Add(new Achievement("All of them !", "Find all the collectables", tempSprite, (object o) => collectableCount >= 10));
             //gamplay Achievments
             achievements.Add(new Achievement("Flying !", "Get in an aitflow for the 1st time.", tempSprite, (object o) => airFlowUse == true));
             achievements.Add(new Achievement("Bouncy", "Bounce on a jump pad fort the 1st time.", tempSprite, (object o) => jumpPadUse == true));
