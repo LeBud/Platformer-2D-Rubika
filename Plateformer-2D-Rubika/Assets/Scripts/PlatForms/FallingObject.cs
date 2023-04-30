@@ -16,6 +16,7 @@ public class FallingObject : MonoBehaviour
 
     private void Awake()
     {
+        achievements = FindObjectOfType<AchievementsCheck>();
         rb.gravityScale = 0;
         startPos = rb.position;
     }

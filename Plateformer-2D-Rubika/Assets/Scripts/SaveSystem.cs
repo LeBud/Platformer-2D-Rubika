@@ -64,13 +64,33 @@ public class SaveSystem : MonoBehaviour
         //Sauvegarder les données
         SavedData savedData = loadData;
         
-        //Problem ici
         if(AchievementsCheck.achievements.Count > 0)
             savedData.achievementsList = AchievementsCheck.achievementsData;
 
         //Sauvegarder les données
         jsonData = JsonUtility.ToJson(savedData);
         System.IO.File.WriteAllText(filePath, jsonData);
+    }
+
+    public void SaveCollectable()
+    {
+        //Charger les données
+        string filePath = Application.persistentDataPath + "/SaveFile.json";
+        string jsonData = System.IO.File.ReadAllText(filePath);
+        SavedData loadData = JsonUtility.FromJson<SavedData>(jsonData);
+
+        //Sauvegarder les données
+        SavedData savedData = loadData;
+
+        savedData.collectablesList = gameManager.collectables;
+        savedData.collectablesNum = gameManager.collectableNum;
+
+        achievements.collectableCount = gameManager.collectableNum;
+
+        //Sauvegarder les données
+        jsonData = JsonUtility.ToJson(savedData);
+        System.IO.File.WriteAllText(filePath, jsonData);
+
     }
 
     public void SaveData()
@@ -91,6 +111,7 @@ public class SaveSystem : MonoBehaviour
 
         if (AchievementsCheck.achievements.Count > 0)
             savedData.achievementsList = AchievementsCheck.achievementsData;
+
         achievements.collectableCount = gameManager.collectableNum;
 
         string jsonData = JsonUtility.ToJson(savedData);

@@ -23,10 +23,12 @@ public class CheckPoint : MonoBehaviour
     private void Awake()
     {
         player = FindObjectOfType<PlayerDeath>();
-        sprite.sprite = unCheck;
         lightSpot = GetComponentInChildren<Light2D>();
+        roomNumber = transform.parent.GetComponentInParent<LevelRoom>().roomNum;
+        sprite.sprite = unCheck;
         lightSpot.enabled = false;
     }
+
 
     private void OnEnable()
     {

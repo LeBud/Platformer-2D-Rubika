@@ -25,6 +25,8 @@ public class Collectable : MonoBehaviour
 
             gameManager.collectables[num].taken = taken;
 
+            FindObjectOfType<SaveSystem>().SaveCollectable();
+
             gameObject.SetActive(false);
         }
     }
