@@ -7,8 +7,7 @@ public class LevelManager : MonoBehaviour
 {
 
     [SerializeField] List<GameObject> levels;
-    [SerializeField] int startingRoom;
-
+    public int startingRoom;
     public int currentRoom;
 
     private void Awake()
