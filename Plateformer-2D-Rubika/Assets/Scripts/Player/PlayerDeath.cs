@@ -67,8 +67,12 @@ public class PlayerDeath : MonoBehaviour
 
         if(MantysEnablerDisabler.mantisEnable)
         {
-            MantysFollower mantis = FindObjectOfType<MantysFollower>();
-            StartCoroutine(mantis.RespawnEnemy());
+            if (FindObjectOfType<MantysFollower>())
+            {
+                MantysFollower mantis = FindObjectOfType<MantysFollower>();
+                StartCoroutine(mantis.RespawnEnemy());
+            }
+                
         }
 
         playerController.inAirFlow = false;
