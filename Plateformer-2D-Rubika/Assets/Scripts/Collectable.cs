@@ -18,12 +18,12 @@ public class Collectable : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !taken)
         {
             gameManager.collectableNum++;
-            taken = true;
 
-            gameManager.collectables[num].taken = taken;
+            gameManager.collectableList[num].taken = true;
+            gameManager.RefreshList();
 
             FindObjectOfType<SaveSystem>().SaveCollectable();
 

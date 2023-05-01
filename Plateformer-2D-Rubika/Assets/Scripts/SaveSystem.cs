@@ -27,6 +27,16 @@ public class SaveSystem : MonoBehaviour
 
     }
 
+    void GetComponents()
+    {
+        ladyBugLight = FindObjectOfType<LadyBugLight>();
+        deathNumber = FindObjectOfType<PlayerDeath>();
+        levelManager = FindObjectOfType<LevelManager>();
+        achievements = FindObjectOfType<AchievementsCheck>();
+        gameManager = GetComponent<GameManager>();
+        playerTransform = ladyBugLight.transform;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F5))
@@ -124,6 +134,10 @@ public class SaveSystem : MonoBehaviour
 
     public void LoadData()
     {
+
+        GetComponents();
+        gameManager.GetCollectables();
+
         //Récupérer les données sauvegardées
         string filePath = Application.persistentDataPath + "/SaveFile.json";
         string jsonData = System.IO.File.ReadAllText(filePath);
@@ -139,6 +153,7 @@ public class SaveSystem : MonoBehaviour
         deathNumber.checkPointRoom = savedData.currentRoomNum;
         gameManager.collectables = savedData.collectablesList;
         gameManager.collectableNum = savedData.collectablesNum;
+        levelManager.startingRoom = savedData.currentRoomNum;
         levelManager.currentRoom = savedData.currentRoom;
         deathNumber.lightCheckPoint = savedData.lightCheckPoint;
 
@@ -159,6 +174,13 @@ public class SaveSystem : MonoBehaviour
         }
     }
 
+
+    public void EreaseSave()
+    {
+        string filePath = Application.persistentDataPath + "/SaveFile.json";
+
+        System.IO.File.Delete(filePath);
+    }
 }
 
 public class SavedData

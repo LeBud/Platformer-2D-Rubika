@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,40 +7,67 @@ public class GameManager : MonoBehaviour
 {
     public int collectableNum;
 
+    public List<Collectable> collectableList = new List<Collectable>();
     public List<Collected> collectables = new List<Collected>();
 
     private void Awake()
     {
-        if (MainMenu.ereaseSave) FindObjectOfType<SaveSystem>().SaveData();
+        if (MainMenu.ereaseSave) FindObjectOfType<SaveSystem>().EreaseSave();
         else if (MainMenu.loadSave) FindObjectOfType<SaveSystem>().LoadData();
 
-        Collectable[] collectable = FindObjectsOfType<Collectable>();
+        Collectable[] col = FindObjectsOfType<Collectable>();
 
-        for (int i = 0; i < collectable.Length; i++)
+        foreach(Collectable coll in col)
         {
-            collectables.Add(new Collected { collectable = collectable[i], taken = collectable[i].taken });
-            collectable[i].num = i;
+            collectableList.Add(coll);
         }
 
-            LoadCollectable();
+        if(MainMenu.ereaseSave)
+            RefreshList();
+
+        LoadCollectable();
+    }
+
+    public void GetCollectables()
+    {
+        collectableList.Clear();
+
+        Collectable[] col = FindObjectsOfType<Collectable>();
+
+        foreach (Collectable coll in col)
+        {
+            collectableList.Add(coll);
+        }
     }
 
     public void LoadCollectable()
     {
-        for(int i = 0; i < collectables.Count; i++)
+        /*for(int i = 0; i < collectables.Count; i++)
         {
-
             if (collectables[i].taken)
-                collectables[i].collectable.gameObject.SetActive(false);
+                collectableList[i].gameObject.SetActive(false);
             else
-                collectables[i].collectable.gameObject.SetActive(true);
-        }
+                collectableList[i].gameObject.SetActive(true);
+        }*/
     }
+
+    public void RefreshList()
+    {
+        collectables.Clear();
+
+        for (int i = 0; i < collectableList.Count; i++)
+        {
+            collectables.Add(new Collected { ID = i, taken = collectableList[i].taken });
+            collectableList[i].num = i;
+        }
+
+    }
+
 }
 
-[System.Serializable]
-public class Collected
+[Serializable]
+public struct Collected
 {
-    public Collectable collectable;
+    public int ID;
     public bool taken;
 }
