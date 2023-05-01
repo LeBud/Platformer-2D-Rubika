@@ -42,13 +42,13 @@ public class GameManager : MonoBehaviour
 
     public void LoadCollectable()
     {
-        for(int i = 0; i < collectables.Count; i++)
+        /*for(int i = 0; i < collectables.Count; i++)
         {
             if (collectables[i].taken)
                 collectableList[i].gameObject.SetActive(false);
             else
                 collectableList[i].gameObject.SetActive(true);
-        }
+        }*/
     }
 
     public void RefreshList()
