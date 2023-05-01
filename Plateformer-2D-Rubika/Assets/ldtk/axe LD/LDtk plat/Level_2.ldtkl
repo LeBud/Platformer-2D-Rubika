@@ -5,7 +5,7 @@
 		"doc": "https://ldtk.io/json",
 		"schema": "https://ldtk.io/files/JSON_SCHEMA.json",
 		"appAuthor": "Sebastien 'deepnight' Benard",
-		"appVersion": "1.2.5",
+		"appVersion": "1.3.0",
 		"url": "https://ldtk.io"
 	},
 	"identifier": "Level_2",
@@ -28,6 +28,46 @@
 	"externalRelPath": null,
 	"fieldInstances": [],
 	"layerInstances": [
+		{
+			"__identifier": "Checkpoint",
+			"__type": "Entities",
+			"__cWid": 68,
+			"__cHei": 53,
+			"__gridSize": 16,
+			"__opacity": 1,
+			"__pxTotalOffsetX": 0,
+			"__pxTotalOffsetY": 0,
+			"__tilesetDefUid": null,
+			"__tilesetRelPath": null,
+			"iid": "4d70a7a0-c640-11ed-b843-dfbda261cdf4",
+			"levelId": 17,
+			"layerDefUid": 36,
+			"pxOffsetX": 0,
+			"pxOffsetY": 0,
+			"visible": true,
+			"optionalRules": [],
+			"intGridCsv": [],
+			"autoLayerTiles": [],
+			"seed": 2634380,
+			"overrideTilesetUid": null,
+			"gridTiles": [],
+			"entityInstances": [
+				{
+					"__identifier": "Checkpoints",
+					"__grid": [3,49],
+					"__pivot": [0.5,0.5],
+					"__tags": ["checkpoints"],
+					"__tile": null,
+					"__smartColor": "#D77643",
+					"iid": "02034f10-c640-11ed-b843-fd9362c3b964",
+					"width": 16,
+					"height": 32,
+					"defUid": 8,
+					"px": [56,792],
+					"fieldInstances": []
+				}
+			]
+		},
 		{
 			"__identifier": "Blocs_speciaux",
 			"__type": "Entities",
@@ -344,20 +384,6 @@
 					"height": 16,
 					"defUid": 7,
 					"px": [1048,824],
-					"fieldInstances": []
-				},
-				{
-					"__identifier": "Checkpoints",
-					"__grid": [3,49],
-					"__pivot": [0.5,0.5],
-					"__tags": ["blocs_speciaux"],
-					"__tile": null,
-					"__smartColor": "#D77643",
-					"iid": "07d1f980-c640-11ed-9728-e5308a9e46eb",
-					"width": 16,
-					"height": 32,
-					"defUid": 8,
-					"px": [56,792],
 					"fieldInstances": []
 				}
 			]
