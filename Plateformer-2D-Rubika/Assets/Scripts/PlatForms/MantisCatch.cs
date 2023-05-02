@@ -17,7 +17,7 @@ public class MantisCatch : MonoBehaviour
     private void Start()
     {
         death = FindObjectOfType<PlayerDeath>();
-        sprite = GetComponent<SpriteRenderer>();
+        sprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 
     private void Update()
