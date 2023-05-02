@@ -76,8 +76,6 @@ public class CameraController : MonoBehaviour
     {
         if (inTrigger)
         {
-            Debug.Log(gameObject.name);
-
             if (!followPlayer)
             {
                 virtualCamera.enabled = false;
