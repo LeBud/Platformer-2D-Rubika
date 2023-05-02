@@ -73,6 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         achievements = FindObjectOfType<AchievementsCheck>();
+        playerControllerData.fallSpeedYDampingChangeThreshold = CameraManager.instance.fallSpeedYDampingChangeThreshold;
     }
 
     private void Update()
@@ -151,6 +152,18 @@ public class PlayerController : MonoBehaviour
     {
         if (rb.velocity.y < 0 && onGround < 0 && !isJumping) falling = true;
         else falling = false;
+
+        if(rb.velocity.y < playerControllerData.fallSpeedYDampingChangeThreshold && !CameraManager.instance.isLerpingYDamping && !CameraManager.instance.lerpedFromPlayerFalling)
+        {
+            CameraManager.instance.LerpYDamping(true);
+        }
+
+        if (rb.velocity.y >= 0 && !CameraManager.instance.isLerpingYDamping && CameraManager.instance.lerpedFromPlayerFalling)
+        {
+            CameraManager.instance.lerpedFromPlayerFalling = false;
+
+            CameraManager.instance.LerpYDamping(false);
+        }
 
         #region Jump
         if (!isJumping)

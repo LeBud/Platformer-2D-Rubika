@@ -37,6 +37,9 @@ public class PlayerControllerData : ScriptableObject
     public float airFlowGravity = 0;
     public float fallGravity = 5;
 
+    [Header("Camera Controls")]
+    public float fallSpeedYDampingChangeThreshold;
+
     [Header("CameraOffset")]
     public float camOffsetX;
     public float camOffsetY;

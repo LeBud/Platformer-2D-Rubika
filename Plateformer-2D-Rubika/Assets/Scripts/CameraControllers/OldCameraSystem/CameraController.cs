@@ -74,7 +74,7 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (inTrigger)
+        /*if (inTrigger)
         {
             if (!followPlayer)
             {
@@ -97,7 +97,7 @@ public class CameraController : MonoBehaviour
                 camFreeze.targetY = Mathf.MoveTowards(virtualCamera.transform.position.y, yPos, speed * Time.deltaTime);
             }
 
-        }
+        }*/
     }
 
     private void OnTriggerExit2D(Collider2D collision)

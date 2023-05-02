@@ -5,25 +5,48 @@ using UnityEngine;
 public class SpriteFlip : MonoBehaviour
 {
     Rigidbody2D rb;
-    Vector3 spriteTransform;
+    
+    [HideInInspector]
+    public bool facingRight;
+
+    CameraFollowObject followObject;
 
     void Awake()
     {
         rb = GetComponentInParent<Rigidbody2D>();
-        spriteTransform = transform.localPosition;
+        followObject = FindObjectOfType<CameraFollowObject>();
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
-        if(rb.velocity.x > 0.5f)
+        TurnCheck();
+    }
+
+    void TurnCheck()
+    {
+        if (rb.velocity.x > 0.25f && !facingRight)
+            Turn();
+        else if (rb.velocity.x < -0.25f && facingRight)
+            Turn();
+    }
+
+    void Turn()
+    {
+        if (facingRight)
         {
-            transform.localScale = new Vector3(1, 1, 1);
-            transform.localPosition = spriteTransform;
+            Vector3 rotation = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
+            transform.rotation = Quaternion.Euler(rotation);
+            facingRight = !facingRight;
+
+            followObject.CallTurn();
         }
-        else if(rb.velocity.x < -0.5f)
+        else
         {
-            transform.localScale = new Vector3(-1, 1, 1);
-            transform.localPosition = new Vector3(-spriteTransform.x, spriteTransform.y, spriteTransform.z);
+            Vector3 rotation = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
+            transform.rotation = Quaternion.Euler(rotation);
+            facingRight = !facingRight;
+
+            followObject.CallTurn();
         }
     }
 
