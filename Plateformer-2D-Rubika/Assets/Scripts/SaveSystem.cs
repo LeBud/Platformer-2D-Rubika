@@ -77,6 +77,8 @@ public class SaveSystem : MonoBehaviour
         if(AchievementsCheck.achievements.Count > 0)
             savedData.achievementsList = AchievementsCheck.achievementsData;
 
+        achievements.CheckCompletion(savedData.achievementsList);
+
         //Sauvegarder les données
         jsonData = JsonUtility.ToJson(savedData);
         System.IO.File.WriteAllText(filePath, jsonData);
