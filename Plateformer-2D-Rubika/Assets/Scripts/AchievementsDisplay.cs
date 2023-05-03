@@ -20,6 +20,8 @@ public class AchievementsDisplay : MonoBehaviour
         descriptionTxt.text = description;
         achievementIMG.sprite = sprite;
 
+        Debug.LogError("display");
+
         StartCoroutine(AnimateDisplay());
     }
 

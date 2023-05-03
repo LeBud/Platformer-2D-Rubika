@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AchievementsCheck : MonoBehaviour
@@ -20,7 +21,7 @@ public class AchievementsCheck : MonoBehaviour
 
     private void Awake()
     {
-        saveSystem = FindObjectOfType<SaveSystem>();
+        saveSystem = GetComponent<SaveSystem>();
         display = FindObjectOfType<AchievementsDisplay>();
 
         InitializeAchievements();
@@ -48,27 +49,29 @@ public class AchievementsCheck : MonoBehaviour
     {
         if (achievements == null)
         {
-            achievements = new List<Achievement>();
-            //general Achievements
-            achievements.Add(new Achievement("Jump", "Jump 100 time.", tempSprite, (object o) => jumpCount >= 100));
-            achievements.Add(new Achievement("Jumping a lot !", "Jump 1000 time.", tempSprite, (object o) => jumpCount >= 1000));
-            achievements.Add(new Achievement("First time ?", "Die for the 1st time.", tempSprite, (object o) => deathCount >= 1));
-            achievements.Add(new Achievement("It's not that hard !", "Die 100 time.", tempSprite, (object o) => deathCount >= 100));
-            //collectables Achievements
-            achievements.Add(new Achievement("Nice !", "Find your 1st collectables", tempSprite, (object o) => collectableCount >= 1));
-            achievements.Add(new Achievement("Moooore !", "Find half of the collectables", tempSprite, (object o) => collectableCount >= 5));
-            achievements.Add(new Achievement("All of them !", "Find all the collectables", tempSprite, (object o) => collectableCount >= 10));
-            //gamplay Achievments
-            achievements.Add(new Achievement("Flying !", "Get in an aitflow for the 1st time.", tempSprite, (object o) => airFlowUse == true));
-            achievements.Add(new Achievement("Bouncy", "Bounce on a jump pad fort the 1st time.", tempSprite, (object o) => jumpPadUse == true));
-            achievements.Add(new Achievement("Too heavy !", "Bounce on a jump pad fort the 1st time.", tempSprite, (object o) => breakPlatformUse == true));
-            achievements.Add(new Achievement("Lumios !", "Bounce on a jump pad fort the 1st time.", tempSprite, (object o) => aphidUse == true));
-            achievements.Add(new Achievement("Watch out !", "Bounce on a jump pad fort the 1st time.", tempSprite, (object o) => fallObjectUse == true));
-            //story Achivements
-            achievements.Add(new Achievement("How did we get here ?", "Bounce on a jump pad fort the 1st time.", tempSprite, (object o) => fallInCatacomb == true));
-            achievements.Add(new Achievement("Better luck next time !", "Bounce on a jump pad fort the 1st time.", tempSprite, (object o) => surviveChase == true));
-            achievements.Add(new Achievement("Out of there !", "Bounce on a jump pad fort the 1st time.", tempSprite, (object o) => exitCatacomb == true));
-            achievements.Add(new Achievement("Congratulations !", "Bounce on a jump pad fort the 1st time.", tempSprite, (object o) => endGame == true));
+            achievements = new List<Achievement>
+            {
+                //general Achievements
+                new Achievement("Jump", "Jump 100 time.", tempSprite, (object o) => jumpCount >= 100),
+                new Achievement("Jumping a lot !", "Jump 1000 time.", tempSprite, (object o) => jumpCount >= 1000),
+                new Achievement("First time ?", "Die for the 1st time.", tempSprite, (object o) => deathCount >= 1),
+                new Achievement("It's not that hard !", "Die 100 time.", tempSprite, (object o) => deathCount >= 100),
+                //collectables Achievements
+                new Achievement("Nice !", "Find your 1st collectables", tempSprite, (object o) => collectableCount >= 1),
+                new Achievement("Moooore !", "Find half of the collectables", tempSprite, (object o) => collectableCount >= 5),
+                new Achievement("All of them !", "Find all the collectables", tempSprite, (object o) => collectableCount >= 10),
+                //gamplay Achievments
+                new Achievement("Flying !", "Get in an aitflow for the 1st time.", tempSprite, (object o) => airFlowUse == true),
+                new Achievement("Bouncy", "Bounce on a jump pad fort the 1st time.", tempSprite, (object o) => jumpPadUse == true),
+                new Achievement("Too heavy !", "Bounce on a jump pad fort the 1st time.", tempSprite, (object o) => breakPlatformUse == true),
+                new Achievement("Lumios !", "Bounce on a jump pad fort the 1st time.", tempSprite, (object o) => aphidUse == true),
+                new Achievement("Watch out !", "Bounce on a jump pad fort the 1st time.", tempSprite, (object o) => fallObjectUse == true),
+                //story Achivements
+                new Achievement("How did we get here ?", "Bounce on a jump pad fort the 1st time.", tempSprite, (object o) => fallInCatacomb == true),
+                new Achievement("Better luck next time !", "Bounce on a jump pad fort the 1st time.", tempSprite, (object o) => surviveChase == true),
+                new Achievement("Out of there !", "Bounce on a jump pad fort the 1st time.", tempSprite, (object o) => exitCatacomb == true),
+                new Achievement("Congratulations !", "Bounce on a jump pad fort the 1st time.", tempSprite, (object o) => endGame == true)
+            };
         }
 
         foreach(Achievement achi in achievements)
@@ -89,7 +92,7 @@ public class AchievementsCheck : MonoBehaviour
 
     private void CheckAchievementCompletion()
     {
-        if (achievements == null)
+        if (achievements.Count < 1)
             return;
 
         foreach (var achievement in achievements)
@@ -150,10 +153,11 @@ public class Achievement
 
     public void UpdateCompletion()
     {
-        if (achieved) return;
-
-        if (RequirementMet())
+        
+        if (RequirementMet() && !achieved)
         {
+            Debug.LogError("achievement");
+
             Debug.Log($"{title} : {description}");
             achieved = true;
 

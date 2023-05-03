@@ -10,9 +10,13 @@ public class GameManager : MonoBehaviour
     public List<Collectable> collectableList = new List<Collectable>();
     public List<Collected> collectables = new List<Collected>();
 
+    SaveSystem saveSystem;
+
     private void Awake()
     {
-        if (MainMenu.ereaseSave) FindObjectOfType<SaveSystem>().EreaseSave();
+        saveSystem = GetComponent<SaveSystem>();
+
+        if (MainMenu.ereaseSave) saveSystem.EreaseSave();
         else if (MainMenu.loadSave) FindObjectOfType<SaveSystem>().LoadData();
 
         Collectable[] col = FindObjectsOfType<Collectable>();
@@ -26,6 +30,11 @@ public class GameManager : MonoBehaviour
             RefreshList();
 
         LoadCollectable();
+    }
+
+    private void Start()
+    {
+        if (MainMenu.ereaseSave) saveSystem.SaveData();
     }
 
     public void GetCollectables()

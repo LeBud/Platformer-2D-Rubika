@@ -64,6 +64,10 @@ public class AchievementMenuDisplay : MonoBehaviour
     {
         //Récupérer les données sauvegardées
         string filePath = Application.persistentDataPath + "/SaveFile.json";
+
+        if (!System.IO.File.Exists(filePath))
+            return;
+
         string jsonData = System.IO.File.ReadAllText(filePath);
 
         SavedData savedData = JsonUtility.FromJson<SavedData>(jsonData);
