@@ -73,6 +73,10 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         achievements = FindObjectOfType<AchievementsCheck>();
+    }
+
+    private void Start()
+    {
         playerControllerData.fallSpeedYDampingChangeThreshold = CameraManager.instance.fallSpeedYDampingChangeThreshold;
     }
 
