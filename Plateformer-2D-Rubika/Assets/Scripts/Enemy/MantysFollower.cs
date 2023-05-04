@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -35,6 +36,7 @@ public class MantysFollower : MonoBehaviour
 
     bool respawning;
 
+
     GameObject playerController;
 
     private void Start()
@@ -63,8 +65,32 @@ public class MantysFollower : MonoBehaviour
             return;
         }
 
+
+        if(!respawning && MantysEnablerDisabler.mantisEnable)
+        {
+
+            Vector2 dir = transform.position - playerController.transform.position;
+
+            if ((rb.velocity.x < .01f && rb.velocity.x > -.01f) && rb.velocity.y <= 0)
+            {
+                Jump();
+            }
+        }
+
         NewMovementSystem();
         ChangeSpeed();
+
+    }
+
+    void Jump()
+    {
+        Debug.Log("jumping");
+
+        float force = jumpForce;
+        if (rb.velocity.y < 0)
+            force -= rb.velocity.y;
+
+        rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
 
     }
 
@@ -193,5 +219,4 @@ public class MantysFollower : MonoBehaviour
         vCam.SetActive(false);
         this.gameObject.SetActive(false);
     }
-
 }

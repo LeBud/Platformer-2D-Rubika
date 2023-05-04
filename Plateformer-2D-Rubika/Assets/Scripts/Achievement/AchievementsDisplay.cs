@@ -12,7 +12,14 @@ public class AchievementsDisplay : MonoBehaviour
     [SerializeField] TextMeshProUGUI descriptionTxt;
     [SerializeField] Image achievementIMG;
     [SerializeField] Animator animator;
-
+    Sprite sp;
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.V))
+        {
+            DisplayAchievement("test", "ceci est une test", sp);
+        }
+    }
 
     public void DisplayAchievement(string title, string description, Sprite sprite)
     {

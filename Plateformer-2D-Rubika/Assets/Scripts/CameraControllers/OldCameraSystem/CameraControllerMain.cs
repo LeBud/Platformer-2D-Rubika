@@ -33,12 +33,12 @@ public class CameraControllerMain : MonoBehaviour
         virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
         vcBody = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
         camFreeze = virtualCamera.GetComponent<CameraFreezeAxis>();
-        MainSettings();
+        //MainSettings();
     }
 
     private void LateUpdate()
     {
-        if (inMain)
+        /*if (inMain)
         {
 
             float distance = Vector2.Distance(playerPos.position, virtualCamera.transform.position);
@@ -68,7 +68,7 @@ public class CameraControllerMain : MonoBehaviour
 
             vcBody.m_TrackedObjectOffset.x = Mathf.MoveTowards(vcBody.m_TrackedObjectOffset.x, targetOffset.x, speed * Time.deltaTime);
             vcBody.m_TrackedObjectOffset.y = Mathf.MoveTowards(vcBody.m_TrackedObjectOffset.y, targetOffset.y, speed * Time.deltaTime);
-        }
+        }*/
     }
 
     public void MainSettings()
