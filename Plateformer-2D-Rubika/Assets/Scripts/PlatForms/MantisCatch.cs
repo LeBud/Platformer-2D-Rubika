@@ -6,7 +6,8 @@ using UnityEngine.Rendering;
 public class MantisCatch : MonoBehaviour
 {
 
-    [SerializeField] float rate;
+    [SerializeField] float activeTime;
+    [SerializeField] float deactiveTime;
 
     float nextTimeTo;
     bool isActive;
@@ -25,24 +26,21 @@ public class MantisCatch : MonoBehaviour
         
         if(Time.time >= nextTimeTo)
         {
-            nextTimeTo = Time.time + rate;
-            Catch();
+            nextTimeTo = Time.time + deactiveTime;
+            StartCoroutine(Catch());
         }
 
     }
 
-    void Catch()
+    IEnumerator Catch()
     {
-        if(isActive)
-        {
-            sprite.enabled = false;
-            isActive = false;
-        }
-        else
-        {
-            sprite.enabled = true;
-            isActive = true;
-        }
+        sprite.enabled = true;
+        isActive = true;
+
+        yield return new WaitForSeconds(activeTime);
+        
+        sprite.enabled = false;
+        isActive = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
