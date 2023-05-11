@@ -4,7 +4,107 @@ using UnityEngine;
 
 public class MantisAI : MonoBehaviour
 {
+    Transform playerController;
 
+    [Header("WayPoint")]
+    public Transform[] waypoints;
+    public int currentWP;
+    public int respawnWP;
+
+    [Header("Parameters")]
+    [SerializeField] float minSpeed;
+    [SerializeField] float midSpeed;
+    [SerializeField] float maxSpeed;
+    float currentSpeed;
+    float targetSpeed;
+
+    public static bool respawning;
+
+    private void Start()
+    {
+        playerController = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    private void Update()
+    {
+        if (PauseMenu.gameIsPause) return;
+        if (!MantysEnablerDisabler.mantisEnable) return;
+
+        WaypointsMovement();
+        ChangeSpeed();
+    }
+
+    void WaypointsMovement()
+    {
+        if (currentWP < waypoints.Length)
+        {
+            float distance = Vector2.Distance(transform.position, waypoints[currentWP].position);
+
+            NextWaypoint(currentWP, distance);
+
+            if (distance > .1f)
+            {
+                transform.position = new Vector3(
+                    Mathf.MoveTowards(transform.position.x, waypoints[currentWP].position.x, currentSpeed * Time.deltaTime),
+                    Mathf.MoveTowards(transform.position.y, waypoints[currentWP].position.y, currentSpeed * Time.deltaTime),
+                    0);
+            }
+            else
+            {
+                if (!MantysEnablerDisabler.mantisEnable) return;
+                currentWP++;
+            }
+        }
+    }
+
+    void NextWaypoint(int actualWP, float distanceWP)
+    {
+        if(distanceWP < .2f && actualWP < waypoints.Length)
+        {
+            currentWP = actualWP + 1;
+        }
+    }
+
+    void ChangeSpeed()
+    {
+
+        float distance = Vector2.Distance(transform.position, playerController.transform.position);
+
+        if (distance < 8)
+            targetSpeed = minSpeed;
+        else if (distance > 18)
+            targetSpeed = maxSpeed;
+        else
+            targetSpeed = midSpeed;
+
+        currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, 40f * Time.deltaTime);
+
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            if (!PlayerDeath.respawning)
+                StartCoroutine(collision.GetComponent<PlayerDeath>().Respawn());
+        }
+    }
+
+    public IEnumerator Respawn()
+    {
+        respawning = true;
+
+        yield return new WaitForSeconds(.1f);
+
+        transform.position = waypoints[respawnWP].position;
+
+        currentSpeed = minSpeed;
+
+        respawning = false;
+
+        gameObject.SetActive(false);
+    }
 
 
 }
