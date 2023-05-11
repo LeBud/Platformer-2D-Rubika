@@ -5,9 +5,10 @@ using UnityEngine;
 public class AxelleParralax : MonoBehaviour
 {
 
-    Transform camTrans;
-    Vector3 lastCamPos;
-    float textureUnitSize;
+    Transform    camTrans;
+    Vector3      lastCamPos;
+    float        textureUnitSize;
+    public float ypos;
 
     [SerializeField] float parallaxEffectMult = .1f;
 
@@ -23,15 +24,15 @@ public class AxelleParralax : MonoBehaviour
     private void LateUpdate()
     {
         Vector3 deltaMovement = camTrans.position - lastCamPos;
-        transform.position += new Vector3(deltaMovement.x * parallaxEffectMult, deltaMovement.y, deltaMovement.z);
+        transform.position += new Vector3(deltaMovement.x * parallaxEffectMult, 0, deltaMovement.z);
 
         lastCamPos = camTrans.position;
 
-        if(Mathf.Abs(camTrans.position.x - transform.position.x) >= textureUnitSize)
+        /*if(Mathf.Abs(camTrans.position.x - transform.position.x) >= textureUnitSize)
         {
             float offsetPos = (camTrans.position.x - transform.position.x) % textureUnitSize;
             transform.position = new Vector3(camTrans.position.x + offsetPos, transform.position.y, transform.position.z);
-        }
+        }*/
     }
 
 }
