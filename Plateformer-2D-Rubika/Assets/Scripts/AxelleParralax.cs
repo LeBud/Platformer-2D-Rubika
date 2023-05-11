@@ -8,7 +8,6 @@ public class AxelleParralax : MonoBehaviour
     Transform    camTrans;
     Vector3      lastCamPos;
     float        textureUnitSize;
-    public float ypos;
 
     [SerializeField] float parallaxEffectMult = .1f;
 
