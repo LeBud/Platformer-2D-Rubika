@@ -42,7 +42,7 @@ public class MantisAI : MonoBehaviour
 
             NextWaypoint(currentWP, distance);
 
-            if (distance > .1f)
+            if (distance > .01f)
             {
                 transform.position = new Vector3(
                     Mathf.MoveTowards(transform.position.x, waypoints[currentWP].position.x, currentSpeed * Time.deltaTime),
@@ -59,7 +59,7 @@ public class MantisAI : MonoBehaviour
 
     void NextWaypoint(int actualWP, float distanceWP)
     {
-        if(distanceWP < .2f && actualWP < waypoints.Length)
+        if(distanceWP < .05f && actualWP < waypoints.Length)
         {
             currentWP = actualWP + 1;
         }
@@ -70,7 +70,7 @@ public class MantisAI : MonoBehaviour
 
         float distance = Vector2.Distance(transform.position, playerController.transform.position);
 
-        if (distance < 8)
+        if (distance < 12)
             targetSpeed = minSpeed;
         else if (distance > 18)
             targetSpeed = maxSpeed;
@@ -93,6 +93,8 @@ public class MantisAI : MonoBehaviour
 
     public IEnumerator Respawn()
     {
+        Debug.Log("die");
+
         respawning = true;
 
         yield return new WaitForSeconds(.1f);
