@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class MantysFollower : MonoBehaviour
 {
@@ -57,7 +55,6 @@ public class MantysFollower : MonoBehaviour
     {
         if (PauseMenu.gameIsPause) return;
         
-        Flip();
 
         if (!MantysEnablerDisabler.mantisEnable)
         {
@@ -65,6 +62,7 @@ public class MantysFollower : MonoBehaviour
             return;
         }
 
+        Flip();
 
         if(!respawning && MantysEnablerDisabler.mantisEnable)
         {

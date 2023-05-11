@@ -29,9 +29,13 @@ public class PlayerDeath : MonoBehaviour
     public int checkPointRoom;
     [HideInInspector]
     public bool lightCheckPoint;
-
     [HideInInspector]
     public int deathCounter;
+
+
+    FallingObject[] fallObjects;
+    AphidCollect[] aphid;
+    MantysEnablerDisabler[] mantisEnablers;
 
     private void Awake()
     {
@@ -44,6 +48,24 @@ public class PlayerDeath : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         checkPointPos = transform.position;
+    }
+
+    private void Start()
+    {
+        if(GameObject.FindObjectsOfType<FallingObject>().Length >= 1)
+        {
+            fallObjects = GameObject.FindObjectsOfType<FallingObject>();
+        }
+
+        if (GameObject.FindObjectsOfType<AphidCollect>().Length >= 1)
+        {
+            aphid = GameObject.FindObjectsOfType<AphidCollect>();
+        }
+
+        if(GameObject.FindObjectsOfType<MantysEnablerDisabler>().Length >= 1)
+        {
+            mantisEnablers = GameObject.FindObjectsOfType<MantysEnablerDisabler>();
+        }
     }
 
     public IEnumerator Respawn()
@@ -65,12 +87,19 @@ public class PlayerDeath : MonoBehaviour
 
         yield return new WaitForSeconds(.5f);
 
+        CameraManager.instance.ResetCam();
+
+        foreach(var obj in mantisEnablers)
+        {
+            obj.used = false;
+        }
+
         if(MantysEnablerDisabler.mantisEnable)
         {
-            if (FindObjectOfType<MantysFollower>())
+            if (FindObjectOfType<MantisAI>())
             {
-                MantysFollower mantis = FindObjectOfType<MantysFollower>();
-                StartCoroutine(mantis.RespawnEnemy());
+                MantisAI mantis = FindObjectOfType<MantisAI>();
+                StartCoroutine(mantis.Respawn());
             }
                 
         }

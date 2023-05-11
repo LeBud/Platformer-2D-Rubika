@@ -175,4 +175,29 @@ public class CameraManager : MonoBehaviour
     }
 
     #endregion
+
+    #region ResetCam
+
+    public void ResetCam()
+    {
+        CinemachineVirtualCamera currentCam = allVirtualCam[0];
+
+        for (int i = 0; i < allVirtualCam.Length; i++)
+        {
+            if (allVirtualCam[i].enabled)
+            {
+                currentCam = allVirtualCam[i];
+            }
+        }
+
+        allVirtualCam[0].enabled = true;
+
+        currentCam.enabled = false;
+
+        currentCamera = allVirtualCam[0];
+
+        framingTransposer = currentCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+    }
+
+    #endregion
 }
