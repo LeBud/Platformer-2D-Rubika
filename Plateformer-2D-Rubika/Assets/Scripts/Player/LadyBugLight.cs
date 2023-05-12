@@ -5,20 +5,28 @@ using UnityEngine.Rendering.Universal;
 
 public class LadyBugLight : MonoBehaviour
 {
-
     AchievementsCheck achievements;
-
-    [Header("Settings")]
-    [SerializeField] PlayerControllerData playerControllerData;
-    public int aphidCount;
-    public Light2D ladyLight;
+    PlayerControllerData playerControllerData;
 
     [HideInInspector]
     public bool lightActive;
 
-    private void Awake()
+    [Header("Settings")]
+    public int aphidCount;
+    public Light2D ladyLight;
+
+
+    [Header("New Settings")]
+    public float aphidCharge;
+    public bool oldSystem;
+    bool inputing;
+
+    float currentLightLevel;
+
+    private void Start()
     {
         achievements = FindObjectOfType<AchievementsCheck>();
+        playerControllerData = GetComponent<PlayerController>().playerControllerData;
 
         ladyLight.intensity = 0;
         ladyLight.enabled = false;
@@ -35,17 +43,54 @@ public class LadyBugLight : MonoBehaviour
 
         MyInputs();
 
+        LightSystem();
+
+        currentLightLevel = Mathf.Clamp(currentLightLevel, 0, 1);
+        ladyLight.intensity = currentLightLevel;
     }
 
     void MyInputs()
     {
         float input = Input.GetAxisRaw("Fire1");
 
-        if (input > .0001f && aphidCount > 0 && !lightActive)
+        if (oldSystem)
         {
-            LadyLight();
+            if (input > .0001f && aphidCount > 0 && !lightActive)
+                LadyLight();
+        }
+        else
+        {
+            if (input > .0001f && aphidCharge > 0 && !lightActive)
+                inputing = true;
+            else
+                inputing = false;
         }
     }
+
+
+    void LightSystem()
+    {
+        if (inputing && aphidCharge > 0)
+        {
+            while(currentLightLevel < 1)
+            {
+                currentLightLevel += Time.deltaTime * playerControllerData.timeToLightMult;
+            }
+            
+
+            aphidCharge -= Time.deltaTime * playerControllerData.lightConsMult;
+
+        }
+        else
+        {
+            while (currentLightLevel > 0)
+            {
+                currentLightLevel += Time.deltaTime * playerControllerData.timeToLightMult;
+            }
+        }
+    }
+
+    //OldSystem
 
     void LadyLight()
     {
@@ -58,6 +103,9 @@ public class LadyBugLight : MonoBehaviour
 
         StartCoroutine(LightOn());
     }
+
+
+
 
     IEnumerator LightOn()
     {
