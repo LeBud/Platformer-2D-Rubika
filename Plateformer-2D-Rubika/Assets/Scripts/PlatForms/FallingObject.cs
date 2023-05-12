@@ -44,7 +44,7 @@ public class FallingObject : MonoBehaviour
         rb.gravityScale = 0;
         rb.position = startPos;
 
-        yield return new WaitForSeconds(.01f);
+        yield return new WaitForSeconds(1);
         
         resetting= false;
     }

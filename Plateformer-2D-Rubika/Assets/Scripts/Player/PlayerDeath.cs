@@ -32,6 +32,8 @@ public class PlayerDeath : MonoBehaviour
     [HideInInspector]
     public int deathCounter;
 
+    List<FallingObject> fallingObjects = new List<FallingObject>();
+    List<MantysEnablerDisabler> mantysEnablerDisablers = new List<MantysEnablerDisabler>();
 
     private void Awake()
     {
@@ -44,42 +46,38 @@ public class PlayerDeath : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         checkPointPos = transform.position;
+
+        if(GameObject.FindObjectsOfType<FallingObject>().Length >= 1)
+        {
+            FallingObject[] fall = GameObject.FindObjectsOfType<FallingObject>();
+            for (int i = 0; i < fall.Length; i++)
+            {
+                fallingObjects.Add(fall[i]);
+            }
+        }
+
+        if (GameObject.FindObjectsOfType<MantysEnablerDisabler>().Length >= 1)
+        {
+            MantysEnablerDisabler[] mantys = GameObject.FindObjectsOfType<MantysEnablerDisabler>();
+            for (int i = 0; i < mantys.Length; i++)
+            {
+                mantysEnablerDisablers.Add(mantys[i]);
+            }
+        }
+
     }
 
     IEnumerator RespawnPlatforms()
     {
-        //FallObject
-        if (GameObject.FindObjectsOfType<FallingObject>().Length >= 1)
+
+        for (int i = 0; i < fallingObjects.Count; i++)
         {
-            if (GameObject.FindObjectsOfType<FallingObject>().Length == 1)
-            {
-                StartCoroutine(GameObject.FindObjectOfType<FallingObject>().ResetFall());
-            }
-            else
-            {
-                FallingObject[] fall = GameObject.FindObjectsOfType<FallingObject>();
-                for (int i = 0; i < fall.Length; i++)
-                {
-                    StartCoroutine(fall[i].ResetFall());
-                }
-            }
+            StartCoroutine(fallingObjects[i].ResetFall());
         }
 
-        //Mantis
-        if (GameObject.FindObjectsOfType<MantysEnablerDisabler>().Length >= 1)
+        for(int i = 0; i < mantysEnablerDisablers.Count; i++)
         {
-            if (GameObject.FindObjectsOfType<MantysEnablerDisabler>().Length == 1)
-            {
-                GameObject.FindObjectOfType<MantysEnablerDisabler>().used = false;
-            }
-            else
-            {
-                MantysEnablerDisabler[] mantis = GameObject.FindObjectsOfType<MantysEnablerDisabler>();
-                for (int i = 0; i < mantis.Length; i++)
-                {
-                    mantis[i].used = false;
-                }
-            }
+            mantysEnablerDisablers[i].used = false;
         }
 
         yield return null;
@@ -94,6 +92,10 @@ public class PlayerDeath : MonoBehaviour
 
         achievements.deathCount = deathCounter;
 
+        LevelManager.respawning = true;
+
+        levelManager.ActiveAllLevel();
+
         FindObjectOfType<SaveSystem>().SaveDeath();
 
         //Animation de mort
@@ -102,16 +104,17 @@ public class PlayerDeath : MonoBehaviour
         
         fadeAnim.Play("FadeIn");
 
+
         yield return new WaitForSeconds(.5f);
 
-        CameraManager.instance.ResetCam();
+        StartCoroutine(RespawnPlatforms());
 
+        CameraManager.instance.ResetCam();
 
         playerController.inAirFlow = false;
         playerController.gliding = false;
         playerController.glideTime = 0;
 
-        StartCoroutine(RespawnPlatforms());
 
         if (levelManager != null)
             levelManager.currentRoom = checkPointRoom;
@@ -133,8 +136,6 @@ public class PlayerDeath : MonoBehaviour
         if (lightCheckPoint && ladyBugLight.aphidCount < 1)
             ladyBugLight.aphidCount = 1;
 
-        StartCoroutine(RespawnPlatforms());
-
         StartCoroutine(FadeOut());
     }
 
@@ -142,9 +143,13 @@ public class PlayerDeath : MonoBehaviour
     {
         yield return new WaitForSeconds(.5f);
 
+        StartCoroutine(RespawnPlatforms());
+
         fadeAnim.Play("FadeOut");
 
         yield return new WaitForSeconds(.4f);
+
+        LevelManager.respawning = false;
 
         respawning = false;
     }
