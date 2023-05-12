@@ -15,10 +15,15 @@ public class AphidCollect : MonoBehaviour
             LadyBugLight lady = collision.GetComponent<LadyBugLight>();
             PlayerController controller = collision.GetComponent<PlayerController>();
 
-            if (lady.aphidCount >= controller.playerControllerData.maxAphid)
+            /*if (lady.aphidCount >= controller.playerControllerData.maxAphid)
                 return;
 
-            lady.aphidCount++;
+            lady.aphidCount++;*/
+
+            if (lady.aphidCharge >= controller.playerControllerData.maxAphidCharge)
+                return;
+
+            lady.aphidCharge += 100;
 
             if(canRespawn)
                 StartCoroutine(Respawn());

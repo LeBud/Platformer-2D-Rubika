@@ -28,6 +28,9 @@ public class PlayerControllerData : ScriptableObject
     [Header("LadyBug Light")]
     public int maxAphid;
     public int maxTimeLightOn;
+    public float maxAphidCharge;
+    public float timeToLightMult;
+    public float lightConsMult;
 
     [Header("Air Flow")]
     public float airFlowLerpSpeed = 2;
@@ -39,11 +42,5 @@ public class PlayerControllerData : ScriptableObject
 
     [Header("Camera Controls")]
     public float fallSpeedYDampingChangeThreshold;
-
-    [Header("CameraOffset")]
-    public float camOffsetX;
-    public float camOffsetY;
-    public float offsetSpeed;
-    public float timeToRecenter;
 
 }
