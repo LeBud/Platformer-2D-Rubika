@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    PlayerControllerData controllerData;
+    /*PlayerControllerData controllerData;
 
     CinemachineVirtualCamera virtualCamera;
     CinemachineFramingTransposer vcBody;
@@ -52,5 +52,5 @@ public class PlayerCamera : MonoBehaviour
                 vcBody.m_TrackedObjectOffset.x = 0;
         }
 
-    }
+    }*/
 }
