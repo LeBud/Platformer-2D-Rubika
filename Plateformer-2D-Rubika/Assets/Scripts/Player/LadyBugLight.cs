@@ -30,6 +30,9 @@ public class LadyBugLight : MonoBehaviour
 
         ladyLight.intensity = 0;
         ladyLight.enabled = false;
+
+        if(!oldSystem)
+            ladyLight.enabled = true;
     }
 
     private void Update()
@@ -46,7 +49,8 @@ public class LadyBugLight : MonoBehaviour
         LightSystem();
 
         currentLightLevel = Mathf.Clamp(currentLightLevel, 0, 1);
-        ladyLight.intensity = currentLightLevel;
+        if(!oldSystem)
+            ladyLight.intensity = currentLightLevel;
     }
 
     void MyInputs()
@@ -72,10 +76,8 @@ public class LadyBugLight : MonoBehaviour
     {
         if (inputing && aphidCharge > 0)
         {
-            while(currentLightLevel < 1)
-            {
+            if (currentLightLevel < 1)
                 currentLightLevel += Time.deltaTime * playerControllerData.timeToLightMult;
-            }
             
 
             aphidCharge -= Time.deltaTime * playerControllerData.lightConsMult;
@@ -83,9 +85,9 @@ public class LadyBugLight : MonoBehaviour
         }
         else
         {
-            while (currentLightLevel > 0)
+            if (currentLightLevel > 0)
             {
-                currentLightLevel += Time.deltaTime * playerControllerData.timeToLightMult;
+                currentLightLevel -= Time.deltaTime * playerControllerData.timeToLightMult;
             }
         }
     }
