@@ -46,7 +46,8 @@ public class LadyBugLight : MonoBehaviour
         LightSystem();
 
         currentLightLevel = Mathf.Clamp(currentLightLevel, 0, 1);
-        ladyLight.intensity = currentLightLevel;
+        if(!oldSystem)
+            ladyLight.intensity = currentLightLevel;
     }
 
     void MyInputs()
