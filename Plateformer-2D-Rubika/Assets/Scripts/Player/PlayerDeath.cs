@@ -33,10 +33,6 @@ public class PlayerDeath : MonoBehaviour
     public int deathCounter;
 
 
-    FallingObject[] fallObjects;
-    AphidCollect[] aphid;
-    MantysEnablerDisabler[] mantisEnablers;
-
     private void Awake()
     {
         respawning = false;
@@ -50,22 +46,43 @@ public class PlayerDeath : MonoBehaviour
         checkPointPos = transform.position;
     }
 
-    private void Start()
+    IEnumerator RespawnPlatforms()
     {
-        if(GameObject.FindObjectsOfType<FallingObject>().Length >= 1)
+        //FallObject
+        if (GameObject.FindObjectsOfType<FallingObject>().Length >= 1)
         {
-            fallObjects = GameObject.FindObjectsOfType<FallingObject>();
+            if (GameObject.FindObjectsOfType<FallingObject>().Length == 1)
+            {
+                StartCoroutine(GameObject.FindObjectOfType<FallingObject>().ResetFall());
+            }
+            else
+            {
+                FallingObject[] fall = GameObject.FindObjectsOfType<FallingObject>();
+                for (int i = 0; i < fall.Length; i++)
+                {
+                    StartCoroutine(fall[i].ResetFall());
+                }
+            }
         }
 
-        if (GameObject.FindObjectsOfType<AphidCollect>().Length >= 1)
+        //Mantis
+        if (GameObject.FindObjectsOfType<MantysEnablerDisabler>().Length >= 1)
         {
-            aphid = GameObject.FindObjectsOfType<AphidCollect>();
+            if (GameObject.FindObjectsOfType<MantysEnablerDisabler>().Length == 1)
+            {
+                GameObject.FindObjectOfType<MantysEnablerDisabler>().used = false;
+            }
+            else
+            {
+                MantysEnablerDisabler[] mantis = GameObject.FindObjectsOfType<MantysEnablerDisabler>();
+                for (int i = 0; i < mantis.Length; i++)
+                {
+                    mantis[i].used = false;
+                }
+            }
         }
 
-        if(GameObject.FindObjectsOfType<MantysEnablerDisabler>().Length >= 1)
-        {
-            mantisEnablers = GameObject.FindObjectsOfType<MantysEnablerDisabler>();
-        }
+        yield return null;
     }
 
     public IEnumerator Respawn()
@@ -89,53 +106,12 @@ public class PlayerDeath : MonoBehaviour
 
         CameraManager.instance.ResetCam();
 
-        if(mantisEnablers != null)
-        {
-            foreach(var obj in mantisEnablers)
-            {
-                obj.used = false;
-            }
-        }
-
-        if(MantysEnablerDisabler.mantisEnable)
-        {
-            if (FindObjectOfType<MantisAI>())
-            {
-                MantisAI mantis = FindObjectOfType<MantisAI>();
-                StartCoroutine(mantis.Respawn());
-            }
-                
-        }
 
         playerController.inAirFlow = false;
         playerController.gliding = false;
         playerController.glideTime = 0;
 
-        #region FallObjectReset
-        /*if (GameObject.FindObjectsOfType<FallingObject>().Length >= 1)
-        {
-            if (GameObject.FindObjectsOfType<FallingObject>().Length == 1)
-            {
-                StartCoroutine(GameObject.FindObjectOfType<FallingObject>().ResetFall());
-            }
-            else
-            {
-                FallingObject[] fall = GameObject.FindObjectsOfType<FallingObject>();
-                for (int i = 0; i < fall.Length; i++)
-                {
-                    StartCoroutine(fall[i].ResetFall());
-                }
-            }
-        }*/
-
-        if(fallObjects != null)
-        {
-            foreach(var obj in fallObjects)
-            {
-                obj.ResetFall();
-            }
-        }
-    #endregion
+        StartCoroutine(RespawnPlatforms());
 
         if (levelManager != null)
             levelManager.currentRoom = checkPointRoom;
@@ -148,24 +124,6 @@ public class PlayerDeath : MonoBehaviour
         ladyBugLight.ladyLight.intensity = 0;
         ladyBugLight.ladyLight.enabled = false;
 
-        #region Aphid
-        /*if (GameObject.FindObjectsOfType<AphidCollect>().Length >= 1)
-        {
-            if (GameObject.FindObjectsOfType<AphidCollect>().Length == 1)
-            {
-                GameObject.FindObjectOfType<AphidCollect>().RespawnAphidWhenDead();
-            }
-            else
-            {
-                AphidCollect[] aphids = GameObject.FindObjectsOfType<AphidCollect>();
-                for (int i = 0; i < aphids.Length; i++)
-                {
-                    aphids[i].RespawnAphidWhenDead();
-                }
-            }
-        }*/
-        #endregion
-
 
         FindObjectOfType<SaveSystem>().LoadData();
 
@@ -174,6 +132,8 @@ public class PlayerDeath : MonoBehaviour
 
         if (lightCheckPoint && ladyBugLight.aphidCount < 1)
             ladyBugLight.aphidCount = 1;
+
+        StartCoroutine(RespawnPlatforms());
 
         StartCoroutine(FadeOut());
     }

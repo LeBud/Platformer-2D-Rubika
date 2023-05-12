@@ -64,7 +64,7 @@ public class LadyBugLight : MonoBehaviour
         }
         else
         {
-            if (input > .0001f && aphidCharge > 0 && !lightActive)
+            if (input > .0001f && aphidCharge > 0)
                 inputing = true;
             else
                 inputing = false;
@@ -74,7 +74,7 @@ public class LadyBugLight : MonoBehaviour
 
     void LightSystem()
     {
-        if (inputing && aphidCharge > 0)
+        if (inputing)
         {
             if (currentLightLevel < 1)
                 currentLightLevel += Time.deltaTime * playerControllerData.timeToLightMult;
