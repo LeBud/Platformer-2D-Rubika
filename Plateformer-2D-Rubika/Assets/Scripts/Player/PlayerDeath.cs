@@ -89,9 +89,12 @@ public class PlayerDeath : MonoBehaviour
 
         CameraManager.instance.ResetCam();
 
-        foreach(var obj in mantisEnablers)
+        if(mantisEnablers != null)
         {
-            obj.used = false;
+            foreach(var obj in mantisEnablers)
+            {
+                obj.used = false;
+            }
         }
 
         if(MantysEnablerDisabler.mantisEnable)
@@ -109,7 +112,7 @@ public class PlayerDeath : MonoBehaviour
         playerController.glideTime = 0;
 
         #region FallObjectReset
-        if (GameObject.FindObjectsOfType<FallingObject>().Length >= 1)
+        /*if (GameObject.FindObjectsOfType<FallingObject>().Length >= 1)
         {
             if (GameObject.FindObjectsOfType<FallingObject>().Length == 1)
             {
@@ -122,6 +125,14 @@ public class PlayerDeath : MonoBehaviour
                 {
                     StartCoroutine(fall[i].ResetFall());
                 }
+            }
+        }*/
+
+        if(fallObjects != null)
+        {
+            foreach(var obj in fallObjects)
+            {
+                obj.ResetFall();
             }
         }
     #endregion
@@ -138,7 +149,7 @@ public class PlayerDeath : MonoBehaviour
         ladyBugLight.ladyLight.enabled = false;
 
         #region Aphid
-        if (GameObject.FindObjectsOfType<AphidCollect>().Length >= 1)
+        /*if (GameObject.FindObjectsOfType<AphidCollect>().Length >= 1)
         {
             if (GameObject.FindObjectsOfType<AphidCollect>().Length == 1)
             {
@@ -152,7 +163,7 @@ public class PlayerDeath : MonoBehaviour
                     aphids[i].RespawnAphidWhenDead();
                 }
             }
-        }
+        }*/
         #endregion
 
 
