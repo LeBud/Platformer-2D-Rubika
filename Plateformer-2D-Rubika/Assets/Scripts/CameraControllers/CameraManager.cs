@@ -190,9 +190,9 @@ public class CameraManager : MonoBehaviour
             }
         }
 
-        allVirtualCam[0].enabled = true;
-
         currentCam.enabled = false;
+
+        allVirtualCam[0].enabled = true;
 
         currentCamera = allVirtualCam[0];
 
