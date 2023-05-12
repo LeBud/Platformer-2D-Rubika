@@ -10,6 +10,8 @@ public class LevelManager : MonoBehaviour
     public int startingRoom;
     public int currentRoom;
 
+    public static bool respawning;
+
     private void Awake()
     {
         currentRoom = startingRoom;
@@ -33,7 +35,7 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        
+        if (respawning) return;
         ManageLevels();
 
     }
@@ -56,6 +58,14 @@ public class LevelManager : MonoBehaviour
                 levels[i].SetActive(false);
         }
     }
-
   
+    public void ActiveAllLevel()
+    {
+        for (int i = 0; i < levels.Count; i++)
+        {
+            levels[i].SetActive(true);
+        }
+
+    }
+
 }
