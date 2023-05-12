@@ -72,7 +72,6 @@ public class PlayerDeath : MonoBehaviour
 
         for (int i = 0; i < fallingObjects.Count; i++)
         {
-            fallingObjects[i].gameObject.SetActive(true);
             StartCoroutine(fallingObjects[i].ResetFall());
         }
 
@@ -97,8 +96,6 @@ public class PlayerDeath : MonoBehaviour
 
         levelManager.ActiveAllLevel();
 
-        StartCoroutine(RespawnPlatforms());
-
         FindObjectOfType<SaveSystem>().SaveDeath();
 
         //Animation de mort
@@ -109,6 +106,8 @@ public class PlayerDeath : MonoBehaviour
 
 
         yield return new WaitForSeconds(.5f);
+
+        StartCoroutine(RespawnPlatforms());
 
         CameraManager.instance.ResetCam();
 
@@ -137,8 +136,6 @@ public class PlayerDeath : MonoBehaviour
         if (lightCheckPoint && ladyBugLight.aphidCount < 1)
             ladyBugLight.aphidCount = 1;
 
-        LevelManager.respawning = false;
-
         StartCoroutine(FadeOut());
     }
 
@@ -146,9 +143,13 @@ public class PlayerDeath : MonoBehaviour
     {
         yield return new WaitForSeconds(.5f);
 
+        StartCoroutine(RespawnPlatforms());
+
         fadeAnim.Play("FadeOut");
 
         yield return new WaitForSeconds(.4f);
+
+        LevelManager.respawning = false;
 
         respawning = false;
     }
