@@ -112,6 +112,7 @@ public class SaveSystem : MonoBehaviour
         {
             playerPositions = playerTransform.position,
             aphidNumber = ladyBugLight.aphidCount,
+            aphidCharge = ladyBugLight.aphidCharge,
             deathNumber = deathNumber.deathCounter,
             checkPointNum = deathNumber.currentCheckPoint,
             currentRoomNum = deathNumber.checkPointRoom,
@@ -149,6 +150,7 @@ public class SaveSystem : MonoBehaviour
         //Charger les données sauvergardées
         playerTransform.position = savedData.playerPositions;
         ladyBugLight.aphidCount = savedData.aphidNumber;
+        ladyBugLight.aphidCharge= savedData.aphidCharge;
         deathNumber.deathCounter = savedData.deathNumber;
         deathNumber.currentCheckPoint = savedData.checkPointNum;
         ActivatePreviousCheckPoints();
@@ -189,6 +191,7 @@ public class SavedData
 {
     public Vector2 playerPositions;
     public int aphidNumber;
+    public float aphidCharge;
     public int deathNumber;
     public int checkPointNum;
     public int currentRoomNum;

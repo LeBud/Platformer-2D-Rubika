@@ -125,7 +125,7 @@ public class PlayerDeath : MonoBehaviour
         //Reset Light
         ladyBugLight.lightActive = false;
         ladyBugLight.ladyLight.intensity = 0;
-        ladyBugLight.ladyLight.enabled = false;
+        //ladyBugLight.ladyLight.enabled = false;
 
 
         FindObjectOfType<SaveSystem>().LoadData();
