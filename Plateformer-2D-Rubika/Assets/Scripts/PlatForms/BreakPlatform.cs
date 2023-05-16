@@ -16,12 +16,14 @@ public class BreakPlatform : MonoBehaviour
 
     SpriteRenderer spriteRenderer;
     BoxCollider2D[] BoxCollider2D;
+    Animator animator;
 
     private void Start()
     {
         achievements = FindObjectOfType<AchievementsCheck>();
         spriteRenderer= GetComponent<SpriteRenderer>();
         BoxCollider2D = GetComponents<BoxCollider2D>();
+        animator = GetComponent<Animator>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -37,7 +39,9 @@ public class BreakPlatform : MonoBehaviour
         isPlaying = true;
         yield return new WaitForSeconds(breakTimer);
 
-        spriteRenderer.color= color2;
+        //spriteRenderer.color= color2;
+        animator.Play("PlatformBreak");
+
         for(int i = 0; i < BoxCollider2D.Length; i++)
         {
             BoxCollider2D[i].enabled = false;
@@ -46,6 +50,8 @@ public class BreakPlatform : MonoBehaviour
         achievements.breakPlatformUse = true;
 
         yield return new WaitForSeconds(respawnTimer);
+
+        animator.Play("PlatformRespawn");
 
         ReactivePlatform();
         
@@ -63,7 +69,7 @@ public class BreakPlatform : MonoBehaviour
 
     void ReactivePlatform()
     {
-        spriteRenderer.color = color1;
+        //spriteRenderer.color = color1;
         for (int i = 0; i < BoxCollider2D.Length; i++)
         {
             BoxCollider2D[i].enabled = true;

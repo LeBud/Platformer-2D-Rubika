@@ -8,6 +8,12 @@ public class JumpPad : MonoBehaviour
     [SerializeField] Vector2 bounceForce;
 
     PlayerController controller;
+    Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -21,6 +27,8 @@ public class JumpPad : MonoBehaviour
             rb.velocity = Vector2.zero;
 
             rb.AddForce(bounceForce,ForceMode2D.Impulse);
+
+            animator.Play("Bumper");
         }
     }
 

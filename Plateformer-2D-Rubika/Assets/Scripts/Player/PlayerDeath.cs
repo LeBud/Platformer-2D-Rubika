@@ -47,23 +47,24 @@ public class PlayerDeath : MonoBehaviour
 
         checkPointPos = transform.position;
 
-        if(GameObject.FindObjectsOfType<FallingObject>().Length >= 1)
+        if(FindObjectsOfType<FallingObject>().Length >= 1)
         {
-            FallingObject[] fall = GameObject.FindObjectsOfType<FallingObject>();
+            FallingObject[] fall = FindObjectsOfType<FallingObject>();
             for (int i = 0; i < fall.Length; i++)
             {
                 fallingObjects.Add(fall[i]);
             }
         }
 
-        if (GameObject.FindObjectsOfType<MantysEnablerDisabler>().Length >= 1)
+        if (FindObjectsOfType<MantysEnablerDisabler>().Length >= 1)
         {
-            MantysEnablerDisabler[] mantys = GameObject.FindObjectsOfType<MantysEnablerDisabler>();
+            MantysEnablerDisabler[] mantys = FindObjectsOfType<MantysEnablerDisabler>();
             for (int i = 0; i < mantys.Length; i++)
             {
                 mantysEnablerDisablers.Add(mantys[i]);
             }
         }
+
 
     }
 
@@ -78,6 +79,15 @@ public class PlayerDeath : MonoBehaviour
         for(int i = 0; i < mantysEnablerDisablers.Count; i++)
         {
             mantysEnablerDisablers[i].used = false;
+        }
+
+        if (FindObjectsOfType<AphidCollect>().Length > 0)
+        {
+            AphidCollect[] aphids = FindObjectsOfType<AphidCollect>();
+            for (int i = 0; i < aphids.Length; i++)
+            {
+                aphids[i].RespawnAphidWhenDead();
+            }
         }
 
         yield return null;
@@ -104,7 +114,6 @@ public class PlayerDeath : MonoBehaviour
         
         fadeAnim.Play("FadeIn");
 
-
         yield return new WaitForSeconds(.5f);
 
         StartCoroutine(RespawnPlatforms());
@@ -114,7 +123,6 @@ public class PlayerDeath : MonoBehaviour
         playerController.inAirFlow = false;
         playerController.gliding = false;
         playerController.glideTime = 0;
-
 
         if (levelManager != null)
             levelManager.currentRoom = checkPointRoom;
@@ -126,7 +134,6 @@ public class PlayerDeath : MonoBehaviour
         ladyBugLight.lightActive = false;
         ladyBugLight.ladyLight.intensity = 0;
         //ladyBugLight.ladyLight.enabled = false;
-
 
         FindObjectOfType<SaveSystem>().LoadData();
 
