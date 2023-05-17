@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4829722767761991653}
   - component: {fileID: 4384436608333616404}
   m_Layer: 6
-  m_Name: BreakPlatform (5)
+  m_Name: 5x1 breakplat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,12 +77,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 609150842, guid: cc5fcb24c9dfad449a215c0ed3b12a2c, type: 3}
+  m_Sprite: {fileID: 1065877116, guid: 89f0ef694a05ed3469a2a6a772f9ab17, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 6, y: 6}
+  m_Size: {x: 5.09, y: 1.19}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -120,18 +120,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.1673685}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.16, y: 1.54}
-    newSize: {x: 6, y: 6}
+    oldSize: {x: 5.1, y: 1.19}
+    newSize: {x: 5.09, y: 1.19}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5, y: 1.0065634}
+  m_Size: {x: 5, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &2484376609549600636
 MonoBehaviour:
@@ -181,18 +181,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0003424883, y: 0.36012366}
+  m_Offset: {x: 0, y: 0.58}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.16, y: 1.54}
-    newSize: {x: 6, y: 6}
+    oldSize: {x: 5.1, y: 1.19}
+    newSize: {x: 5.09, y: 1.19}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.9993896, y: 0.049999893}
+  m_Size: {x: 4.9, y: 0.05}
   m_EdgeRadius: 0
 --- !u!95 &4384436608333616404
 Animator:
