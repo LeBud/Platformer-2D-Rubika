@@ -20,6 +20,7 @@ public class CheckPoint : MonoBehaviour
 
     Light2D lightSpot;
 
+    Animator animator;
     private void Awake()
     {
         player = FindObjectOfType<PlayerDeath>();
@@ -27,6 +28,7 @@ public class CheckPoint : MonoBehaviour
         roomNumber = transform.parent.GetComponentInParent<LevelRoom>().roomNum;
         sprite.sprite = unCheck;
         lightSpot.enabled = false;
+        animator = GetComponent<Animator>();
     }
 
 
@@ -53,10 +55,12 @@ public class CheckPoint : MonoBehaviour
 
     public void Active()
     {
-        sprite.sprite = check;
+        //sprite.sprite = check;
         player.checkPointPos = transform.position;
         player.currentCheckPoint = checkPointNum;
         player.checkPointRoom = roomNumber;
+
+        animator.Play("Checkpoint");
 
         if (lightLevel)
         {
