@@ -5,7 +5,7 @@
 		"doc": "https://ldtk.io/json",
 		"schema": "https://ldtk.io/files/JSON_SCHEMA.json",
 		"appAuthor": "Sebastien 'deepnight' Benard",
-		"appVersion": "1.3.3",
+		"appVersion": "1.2.5",
 		"url": "https://ldtk.io"
 	},
 	"identifier": "Fin_4",
@@ -53,20 +53,6 @@
 			"gridTiles": [],
 			"entityInstances": [
 				{
-					"__identifier": "Break_platform_5",
-					"__grid": [42,27],
-					"__pivot": [0.5,0.5],
-					"__tags": ["bloc_speciaux"],
-					"__tile": null,
-					"__smartColor": "#E77B09",
-					"iid": "ac0f6fb0-c640-11ed-9206-e940736b8010",
-					"width": 80,
-					"height": 16,
-					"defUid": 26,
-					"px": [680,440],
-					"fieldInstances": []
-				},
-				{
 					"__identifier": "Jump_pad_3",
 					"__grid": [54,23],
 					"__pivot": [0.5,0.5],
@@ -92,6 +78,20 @@
 					"height": 16,
 					"defUid": 23,
 					"px": [1912,488],
+					"fieldInstances": []
+				},
+				{
+					"__identifier": "Jardin_break_plat_5",
+					"__grid": [42,27],
+					"__pivot": [0.5,0.5],
+					"__tags": ["bloc_speciaux"],
+					"__tile": null,
+					"__smartColor": "#F77622",
+					"iid": "b0dc87f0-ed50-11ed-9bca-17579f54dde8",
+					"width": 80,
+					"height": 16,
+					"defUid": 71,
+					"px": [680,440],
 					"fieldInstances": []
 				}
 			]

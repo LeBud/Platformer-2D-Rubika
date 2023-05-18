@@ -5,7 +5,7 @@
 		"doc": "https://ldtk.io/json",
 		"schema": "https://ldtk.io/files/JSON_SCHEMA.json",
 		"appAuthor": "Sebastien 'deepnight' Benard",
-		"appVersion": "1.3.3",
+		"appVersion": "1.2.5",
 		"url": "https://ldtk.io"
 	},
 	"identifier": "Fin_2",
@@ -53,34 +53,6 @@
 			"gridTiles": [],
 			"entityInstances": [
 				{
-					"__identifier": "Break_platform_5",
-					"__grid": [68,26],
-					"__pivot": [0.5,0.5],
-					"__tags": ["bloc_speciaux"],
-					"__tile": null,
-					"__smartColor": "#E77B09",
-					"iid": "058e35f0-c640-11ed-bd11-7d39086c68d4",
-					"width": 80,
-					"height": 16,
-					"defUid": 26,
-					"px": [1096,424],
-					"fieldInstances": []
-				},
-				{
-					"__identifier": "Break_platform_5",
-					"__grid": [80,6],
-					"__pivot": [0.5,0.5],
-					"__tags": ["bloc_speciaux"],
-					"__tile": null,
-					"__smartColor": "#E77B09",
-					"iid": "0905d080-c640-11ed-bd11-b5ce3fb1194d",
-					"width": 80,
-					"height": 16,
-					"defUid": 26,
-					"px": [1288,104],
-					"fieldInstances": []
-				},
-				{
 					"__identifier": "Jump_pad_3",
 					"__grid": [90,19],
 					"__pivot": [0.5,0.5],
@@ -109,20 +81,6 @@
 					"fieldInstances": []
 				},
 				{
-					"__identifier": "Break_platform_5",
-					"__grid": [115,28],
-					"__pivot": [0.5,0.5],
-					"__tags": ["bloc_speciaux"],
-					"__tile": null,
-					"__smartColor": "#E77B09",
-					"iid": "320caec0-c640-11ed-9206-d7f716186650",
-					"width": 80,
-					"height": 16,
-					"defUid": 26,
-					"px": [1848,456],
-					"fieldInstances": []
-				},
-				{
 					"__identifier": "Jump_pad_5",
 					"__grid": [8,29],
 					"__pivot": [0.5,0.5],
@@ -134,6 +92,48 @@
 					"height": 16,
 					"defUid": 69,
 					"px": [136,472],
+					"fieldInstances": []
+				},
+				{
+					"__identifier": "Jardin_break_plat_5",
+					"__grid": [68,26],
+					"__pivot": [0.5,0.5],
+					"__tags": ["bloc_speciaux"],
+					"__tile": null,
+					"__smartColor": "#F77622",
+					"iid": "a8195620-ed50-11ed-9bca-87c1d975304e",
+					"width": 80,
+					"height": 16,
+					"defUid": 71,
+					"px": [1096,424],
+					"fieldInstances": []
+				},
+				{
+					"__identifier": "Jardin_break_plat_5",
+					"__grid": [80,6],
+					"__pivot": [0.5,0.5],
+					"__tags": ["bloc_speciaux"],
+					"__tile": null,
+					"__smartColor": "#F77622",
+					"iid": "a8dd6970-ed50-11ed-9bca-7bba55c05355",
+					"width": 80,
+					"height": 16,
+					"defUid": 71,
+					"px": [1288,104],
+					"fieldInstances": []
+				},
+				{
+					"__identifier": "Jardin_break_plat_5",
+					"__grid": [115,28],
+					"__pivot": [0.5,0.5],
+					"__tags": ["bloc_speciaux"],
+					"__tile": null,
+					"__smartColor": "#F77622",
+					"iid": "a9adffe0-ed50-11ed-9bca-6b2f4fa66969",
+					"width": 80,
+					"height": 16,
+					"defUid": 71,
+					"px": [1848,456],
 					"fieldInstances": []
 				}
 			]
