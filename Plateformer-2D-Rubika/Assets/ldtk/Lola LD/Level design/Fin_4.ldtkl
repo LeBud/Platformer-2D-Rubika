@@ -5,7 +5,7 @@
 		"doc": "https://ldtk.io/json",
 		"schema": "https://ldtk.io/files/JSON_SCHEMA.json",
 		"appAuthor": "Sebastien 'deepnight' Benard",
-		"appVersion": "1.2.5",
+		"appVersion": "1.3.3",
 		"url": "https://ldtk.io"
 	},
 	"identifier": "Fin_4",
@@ -54,20 +54,6 @@
 			"entityInstances": [
 				{
 					"__identifier": "Jump_pad_3",
-					"__grid": [54,23],
-					"__pivot": [0.5,0.5],
-					"__tags": ["bloc_speciaux"],
-					"__tile": null,
-					"__smartColor": "#0099DB",
-					"iid": "c70faaf0-c640-11ed-9206-23e7988b266e",
-					"width": 48,
-					"height": 16,
-					"defUid": 23,
-					"px": [872,376],
-					"fieldInstances": []
-				},
-				{
-					"__identifier": "Jump_pad_3",
 					"__grid": [119,30],
 					"__pivot": [0.5,0.5],
 					"__tags": ["bloc_speciaux"],
@@ -92,6 +78,20 @@
 					"height": 16,
 					"defUid": 71,
 					"px": [680,440],
+					"fieldInstances": []
+				},
+				{
+					"__identifier": "Horizontal_jump_pad_3",
+					"__grid": [54,23],
+					"__pivot": [0.5,0.5],
+					"__tags": ["bloc_speciaux"],
+					"__tile": null,
+					"__smartColor": "#DA10E3",
+					"iid": "b691c810-ed50-11ed-91d9-4bf99016e2a6",
+					"width": 48,
+					"height": 16,
+					"defUid": 72,
+					"px": [872,376],
 					"fieldInstances": []
 				}
 			]
