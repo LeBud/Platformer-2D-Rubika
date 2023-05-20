@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 5928356628805876566}
   - component: {fileID: 4209697073742772215}
   - component: {fileID: 3429407994319076658}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -480,6 +480,8 @@ GameObject:
   - component: {fileID: 7455873351806595632}
   - component: {fileID: 4731553497834877726}
   - component: {fileID: 8071824411792210010}
+  - component: {fileID: 1189426387182126087}
+  - component: {fileID: 5095818829371370365}
   m_Layer: 0
   m_Name: Tuto_Saut_1
   m_TagString: Untagged
@@ -553,6 +555,64 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _iid: 245526b1-9f30-11ed-9e8e-5d46090c3ae0
+--- !u!114 &1189426387182126087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2369151261369496480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 712f203006772094fb7fb80f6baaeb39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomNum: 0
+--- !u!61 &5095818829371370365
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2369151261369496480}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 64, y: 20}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 128, y: 40}
+  m_EdgeRadius: 0
 --- !u!1 &2589699493701285366
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,7 +627,7 @@ GameObject:
   - component: {fileID: 4595274845445746212}
   - component: {fileID: 467880248369475974}
   - component: {fileID: 2376460355288629849}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IntGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7153,7 +7213,7 @@ GameObject:
   - component: {fileID: 2818717727446986091}
   - component: {fileID: 1061329089995840060}
   - component: {fileID: 7148818360482296329}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7293,6 +7353,8 @@ GameObject:
   - component: {fileID: 2979363222326787824}
   - component: {fileID: 5066411046303474642}
   - component: {fileID: 714308926503615259}
+  - component: {fileID: 413310949868552125}
+  - component: {fileID: 267078823464190691}
   m_Layer: 0
   m_Name: Tuto_Saut_2
   m_TagString: Untagged
@@ -7386,6 +7448,64 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _iid: 07b28470-c640-11ed-8f46-3571ff43c555
+--- !u!114 &413310949868552125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3882555149937759590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 712f203006772094fb7fb80f6baaeb39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomNum: 0
+--- !u!61 &267078823464190691
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3882555149937759590}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 76, y: 20}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 152, y: 40}
+  m_EdgeRadius: 0
 --- !u!1 &4164569634320622724
 GameObject:
   m_ObjectHideFlags: 0
@@ -7462,7 +7582,7 @@ GameObject:
   - component: {fileID: 4636026558024404348}
   - component: {fileID: 3910731519931501450}
   - component: {fileID: 6030807053435732468}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IntGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16737,7 +16857,7 @@ GameObject:
   - component: {fileID: 410973857352508350}
   - component: {fileID: 1129423638206698573}
   - component: {fileID: 5298394987251032766}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17267,7 +17387,7 @@ GameObject:
   - component: {fileID: 3196921012919739234}
   - component: {fileID: 8539796078988445338}
   - component: {fileID: 7855651558552561723}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IntGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24734,6 +24854,8 @@ GameObject:
   - component: {fileID: 5420309890012449678}
   - component: {fileID: 9185071298074860760}
   - component: {fileID: 7786440852449625202}
+  - component: {fileID: 1494128058076581522}
+  - component: {fileID: 3082055219549566068}
   m_Layer: 0
   m_Name: Tuto_Saut_3
   m_TagString: Untagged
@@ -24825,6 +24947,64 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _iid: ec6f5750-c640-11ed-8f46-cde395708d0e
+--- !u!114 &1494128058076581522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8270485501438743575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 712f203006772094fb7fb80f6baaeb39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomNum: 0
+--- !u!61 &3082055219549566068
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8270485501438743575}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 43.5, y: 20}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 87, y: 40}
+  m_EdgeRadius: 0
 --- !u!1 &8481546867911562113
 GameObject:
   m_ObjectHideFlags: 0
