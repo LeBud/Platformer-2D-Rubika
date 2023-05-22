@@ -39,10 +39,12 @@ public class JumpPad : MonoBehaviour
 
         if(bounceForce.x != 0)
             controller.jumpPadOn = true;
+        controller.jumpPadVer = true;
 
         yield return new WaitForSeconds(.5f);
 
         controller.jumpPadOn = false;
+        controller.jumpPadVer = false;
     }
 
 }
