@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public int collectableNum;
+    public int collectableCount;
 
-    public List<Collectable> collectableList = new List<Collectable>();
-    public List<Collected> collectables = new List<Collected>();
+    public List<Collectable> inGameCollectibles = new List<Collectable>();
+    [HideInInspector]
+    public List<Collected> collectiblesSaveList = new List<Collected>();
 
     SaveSystem saveSystem;
 
@@ -19,13 +20,7 @@ public class GameManager : MonoBehaviour
         if (MainMenu.ereaseSave) saveSystem.EreaseSave();
         else if (MainMenu.loadSave) FindObjectOfType<SaveSystem>().LoadData();
 
-        Collectable[] col = FindObjectsOfType<Collectable>();
-
-        foreach(Collectable coll in col)
-        {
-            collectableList.Add(coll);
-        }
-
+        
         if(MainMenu.ereaseSave)
             RefreshList();
 
@@ -37,37 +32,25 @@ public class GameManager : MonoBehaviour
         if (MainMenu.ereaseSave) saveSystem.SaveData();
     }
 
-    public void GetCollectables()
-    {
-        collectableList.Clear();
-
-        Collectable[] col = FindObjectsOfType<Collectable>();
-
-        foreach (Collectable coll in col)
-        {
-            collectableList.Add(coll);
-        }
-    }
-
     public void LoadCollectable()
     {
-        /*for(int i = 0; i < collectables.Count; i++)
+        for(int i = 0; i < collectiblesSaveList.Count; i++)
         {
-            if (collectables[i].taken)
-                collectableList[i].gameObject.SetActive(false);
+            if (collectiblesSaveList[i].taken)
+                inGameCollectibles[i].gameObject.SetActive(false);
             else
-                collectableList[i].gameObject.SetActive(true);
-        }*/
+                inGameCollectibles[i].gameObject.SetActive(true);
+        }
     }
 
     public void RefreshList()
     {
-        collectables.Clear();
+        collectiblesSaveList.Clear();
 
-        for (int i = 0; i < collectableList.Count; i++)
+        for (int i = 0; i < inGameCollectibles.Count; i++)
         {
-            collectables.Add(new Collected { ID = i, taken = collectableList[i].taken });
-            collectableList[i].num = i;
+            Debug.Log(i);
+            collectiblesSaveList.Add(new Collected { ID = inGameCollectibles[i].ID, taken = inGameCollectibles[i].taken });
         }
 
     }
