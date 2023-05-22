@@ -17,7 +17,12 @@ public class GameManager : MonoBehaviour
     {
         saveSystem = GetComponent<SaveSystem>();
 
-        if (MainMenu.ereaseSave) saveSystem.EreaseSave();
+        if (MainMenu.ereaseSave)
+        {
+            saveSystem.EreaseSave();
+            FindObjectOfType<PlayerController>().canGlide = false;
+            FindObjectOfType<PlayerController>().gardenAnimator = true;
+        }
         else if (MainMenu.loadSave) FindObjectOfType<SaveSystem>().LoadData();
 
         

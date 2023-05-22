@@ -71,6 +71,15 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public Vector2 airFlowDir;
 
+    [Header("Animator Controllers")]
+    public AnimatorOverrideController outch;
+    public AnimatorOverrideController blue;
+    public AnimatorOverrideController garden;
+
+    [HideInInspector]
+    public bool gardenAnimator;
+    public bool blueAnimator;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -266,6 +275,17 @@ e   lse centerCamTimer = playerControllerData.timeToRecenter;
         #region achievements
         if (airFlowing) achievements.airFlowUse = true;
         if (jumpPadOn) achievements.jumpPadUse = true;
+        #endregion
+
+        #region Animator
+
+        if (gardenAnimator)
+            animator.runtimeAnimatorController = garden;
+        else if (blueAnimator)
+            animator.runtimeAnimatorController = blue;
+        else
+            animator.runtimeAnimatorController = outch;
+
         #endregion
     }
 
