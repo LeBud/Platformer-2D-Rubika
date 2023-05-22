@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     public bool canGlide;
 
     [Header("Animator")]
-    [SerializeField] Animator animator;
+    public Animator animator;
 
     bool jumpCut;
     [HideInInspector]
@@ -46,6 +46,8 @@ public class PlayerController : MonoBehaviour
     bool onSlowPlatform;
     [HideInInspector]
     public bool jumpPadOn;
+    [HideInInspector]
+    public bool jumpPadVer;
     bool jumpPadDoubleJump;
     [HideInInspector]
     public bool falling;
@@ -157,7 +159,8 @@ public class PlayerController : MonoBehaviour
         if (rb.velocity.y < 0 && onGround < 0 && !isJumping) falling = true;
         else falling = false;
 
-        if(rb.velocity.y < playerControllerData.fallSpeedYDampingChangeThreshold && !CameraManager.instance.isLerpingYDamping && !CameraManager.instance.lerpedFromPlayerFalling)
+        #region CameraManager
+        if (rb.velocity.y < playerControllerData.fallSpeedYDampingChangeThreshold && !CameraManager.instance.isLerpingYDamping && !CameraManager.instance.lerpedFromPlayerFalling)
         {
             CameraManager.instance.LerpYDamping(true);
         }
@@ -168,6 +171,7 @@ public class PlayerController : MonoBehaviour
 
             CameraManager.instance.LerpYDamping(false);
         }
+        #endregion
 
         #region Jump
         if (!isJumping)
@@ -178,6 +182,7 @@ public class PlayerController : MonoBehaviour
                 jumpCut = false;
                 glideTime = playerControllerData.maxGlideTime;
                 glideJump = true;
+                gliding = false;
             }
         }
 
@@ -392,7 +397,7 @@ e   lse centerCamTimer = playerControllerData.timeToRecenter;
     #region Boolean
     bool CanJumpGlide()
     {
-        return (!isJumping || rb.velocity.y < 12) && glideJump && onGround < 0 && !jumpPadOn && !jumpPadDoubleJump;
+        return (!isJumping || rb.velocity.y < 4) && glideJump && onGround < 0 && !jumpPadOn && !jumpPadDoubleJump && !jumpPadVer;
     }
 
     bool CanJump()
@@ -402,7 +407,7 @@ e   lse centerCamTimer = playerControllerData.timeToRecenter;
 
     bool CanGlide()
     {
-        return !isJumping && onGround < 0 && glideTime > 0 && !glideJump && rb.velocity.y <= 0;
+        return !isJumping && onGround < 0 && glideTime > 0 && !glideJump && rb.velocity.y <= 0 && !jumpPadVer;
     }
 
     bool Idling()

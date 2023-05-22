@@ -18,6 +18,11 @@ public class BreakPlatform : MonoBehaviour
     BoxCollider2D[] BoxCollider2D;
     Animator animator;
 
+
+    public string breakplat;
+    public string respawnplat;
+        
+
     private void Start()
     {
         achievements = FindObjectOfType<AchievementsCheck>();
@@ -40,7 +45,8 @@ public class BreakPlatform : MonoBehaviour
         yield return new WaitForSeconds(breakTimer);
 
         //spriteRenderer.color= color2;
-        animator.Play("PlatformBreak");
+        //animator.Play("PlatformBreak");
+        animator.Play(breakplat);
 
         for(int i = 0; i < BoxCollider2D.Length; i++)
         {
@@ -51,7 +57,7 @@ public class BreakPlatform : MonoBehaviour
 
         yield return new WaitForSeconds(respawnTimer);
 
-        animator.Play("PlatformRespawn");
+        animator.Play(respawnplat);
 
         ReactivePlatform();
         

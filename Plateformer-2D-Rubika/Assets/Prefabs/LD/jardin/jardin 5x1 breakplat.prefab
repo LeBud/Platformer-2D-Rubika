@@ -82,7 +82,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 6, y: 6}
+  m_Size: {x: 5.16, y: 1.54}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -125,7 +125,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 5.16, y: 1.54}
-    newSize: {x: 6, y: 6}
+    newSize: {x: 5.16, y: 1.54}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -149,6 +149,8 @@ MonoBehaviour:
   respawnTimer: 2
   color1: {r: 1, g: 1, b: 1, a: 1}
   color2: {r: 1, g: 1, b: 1, a: 0.25490198}
+  breakplat: jardin 5 BreakPlat
+  respawnplat: jardin 5 RespawnPlat
 --- !u!61 &4829722767761991653
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -186,7 +188,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 5.16, y: 1.54}
-    newSize: {x: 6, y: 6}
+    newSize: {x: 5.16, y: 1.54}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -204,7 +206,7 @@ Animator:
   m_GameObject: {fileID: 2484376609549600638}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6c9e99311614b5b48807814245ed271a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8ad1163fa782dc946b4881edf4bed35a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

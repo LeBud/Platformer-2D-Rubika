@@ -94,10 +94,10 @@ public class SaveSystem : MonoBehaviour
         //Sauvegarder les données
         SavedData savedData = loadData;
 
-        savedData.collectablesList = gameManager.collectables;
-        savedData.collectablesNum = gameManager.collectableNum;
+        savedData.collectablesList = gameManager.collectiblesSaveList;
+        savedData.collectablesNum = gameManager.collectableCount;
 
-        achievements.collectableCount = gameManager.collectableNum;
+        achievements.collectableCount = gameManager.collectableCount;
 
         //Sauvegarder les données
         jsonData = JsonUtility.ToJson(savedData);
@@ -116,8 +116,8 @@ public class SaveSystem : MonoBehaviour
             deathNumber = deathNumber.deathCounter,
             checkPointNum = deathNumber.currentCheckPoint,
             currentRoomNum = deathNumber.checkPointRoom,
-            collectablesList = gameManager.collectables,
-            collectablesNum = gameManager.collectableNum,
+            collectablesList = gameManager.collectiblesSaveList,
+            collectablesNum = gameManager.collectableCount,
             currentRoom = levelManager.currentRoom,
             lightCheckPoint = deathNumber.lightCheckPoint,
         };
@@ -125,7 +125,7 @@ public class SaveSystem : MonoBehaviour
         if (AchievementsCheck.achievements.Count > 0)
             savedData.achievementsList = AchievementsCheck.achievementsData;
 
-        achievements.collectableCount = gameManager.collectableNum;
+        achievements.collectableCount = gameManager.collectableCount;
 
         string jsonData = JsonUtility.ToJson(savedData);
         string filePath = Application.persistentDataPath + "/SaveFile.json";
@@ -139,7 +139,6 @@ public class SaveSystem : MonoBehaviour
     {
 
         GetComponents();
-        gameManager.GetCollectables();
 
         //Récupérer les données sauvegardées
         string filePath = Application.persistentDataPath + "/SaveFile.json";
@@ -155,8 +154,8 @@ public class SaveSystem : MonoBehaviour
         deathNumber.currentCheckPoint = savedData.checkPointNum;
         ActivatePreviousCheckPoints();
         deathNumber.checkPointRoom = savedData.currentRoomNum;
-        gameManager.collectables = savedData.collectablesList;
-        gameManager.collectableNum = savedData.collectablesNum;
+        gameManager.collectiblesSaveList = savedData.collectablesList;
+        gameManager.collectableCount = savedData.collectablesNum;
         levelManager.startingRoom = savedData.currentRoomNum;
         levelManager.currentRoom = savedData.currentRoom;
         deathNumber.lightCheckPoint = savedData.lightCheckPoint;
