@@ -13,7 +13,7 @@ public class SaveSystem : MonoBehaviour
     [SerializeField] PlayerDeath deathNumber;
     [SerializeField] GameManager gameManager;
     [SerializeField] LevelManager levelManager;
-
+    [SerializeField] PlayerController playerController;
     AchievementsCheck achievements;
 
     private void Awake()
@@ -23,6 +23,7 @@ public class SaveSystem : MonoBehaviour
         levelManager = FindObjectOfType<LevelManager>();
         achievements = FindObjectOfType<AchievementsCheck>();
         gameManager = GetComponent<GameManager>();
+        playerController = FindObjectOfType<PlayerController>();
         playerTransform = ladyBugLight.transform;
 
     }
@@ -34,6 +35,7 @@ public class SaveSystem : MonoBehaviour
         levelManager = FindObjectOfType<LevelManager>();
         achievements = FindObjectOfType<AchievementsCheck>();
         gameManager = GetComponent<GameManager>();
+        playerController = FindObjectOfType<PlayerController>();
         playerTransform = ladyBugLight.transform;
     }
 
@@ -120,6 +122,7 @@ public class SaveSystem : MonoBehaviour
             collectablesNum = gameManager.collectableCount,
             currentRoom = levelManager.currentRoom,
             lightCheckPoint = deathNumber.lightCheckPoint,
+            canGlide = playerController.canGlide,
         };
 
         if (AchievementsCheck.achievements.Count > 0)
@@ -160,6 +163,8 @@ public class SaveSystem : MonoBehaviour
         levelManager.currentRoom = savedData.currentRoom;
         deathNumber.lightCheckPoint = savedData.lightCheckPoint;
 
+        playerController.canGlide = savedData.canGlide;
+        
         gameManager.LoadCollectable();
 
         achievements.CheckCompletion(savedData.achievementsList);
@@ -189,6 +194,7 @@ public class SaveSystem : MonoBehaviour
 public class SavedData
 {
     public Vector2 playerPositions;
+    public bool canGlide;
     public int aphidNumber;
     public float aphidCharge;
     public int deathNumber;
