@@ -54494,7 +54494,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8154523274963992028}
   m_LocalRotation: {x: -0, y: -0, z: 0.21213204, w: 0.97724104}
-  m_LocalPosition: {x: 25.9, y: 44.9, z: 0}
+  m_LocalPosition: {x: 25.9, y: 44.17, z: 0}
   m_LocalScale: {x: 10.381525, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -54871,7 +54871,7 @@ Transform:
   m_GameObject: {fileID: 8473485119234556295}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 35, y: 23.994171, z: 0}
-  m_LocalScale: {x: 8, y: 4, z: 1}
+  m_LocalScale: {x: 12.8, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8473485118762212032}
@@ -78539,11 +78539,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1567482031668369746, guid: b21e80164ef693741be96d316982c794, type: 3}
       propertyPath: bounceForce.x
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1567482031668369746, guid: b21e80164ef693741be96d316982c794, type: 3}
       propertyPath: bounceForce.y
-      value: 38
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1567482031668369772, guid: b21e80164ef693741be96d316982c794, type: 3}
       propertyPath: m_Name
@@ -81638,7 +81638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1567482031668369746, guid: b21e80164ef693741be96d316982c794, type: 3}
       propertyPath: bounceForce.y
-      value: 48
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 1567482031668369772, guid: b21e80164ef693741be96d316982c794, type: 3}
       propertyPath: m_Name
@@ -86806,6 +86806,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1567482031668369746, guid: b21e80164ef693741be96d316982c794, type: 3}
+      propertyPath: bounceForce.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1567482031668369746, guid: b21e80164ef693741be96d316982c794, type: 3}
+      propertyPath: bounceForce.y
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 1567482031668369772, guid: b21e80164ef693741be96d316982c794, type: 3}
       propertyPath: m_Name
       value: Horizontal_jump_pad_5_8e762470-ed50-11ed-91d9-cf144a99a76b
@@ -90646,6 +90654,14 @@ PrefabInstance:
     - target: {fileID: 1567482031668369744, guid: b21e80164ef693741be96d316982c794, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1567482031668369746, guid: b21e80164ef693741be96d316982c794, type: 3}
+      propertyPath: bounceForce.x
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1567482031668369746, guid: b21e80164ef693741be96d316982c794, type: 3}
+      propertyPath: bounceForce.y
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 1567482031668369772, guid: b21e80164ef693741be96d316982c794, type: 3}
       propertyPath: m_Name
