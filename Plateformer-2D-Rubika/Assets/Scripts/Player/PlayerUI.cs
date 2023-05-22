@@ -52,7 +52,7 @@ public class PlayerUI : MonoBehaviour
             lightSlider.value = ladyLight.aphidCharge;
 
         deathCounterTxt.text = "Death : " + playerDeath.deathCounter;
-        collectablesTxt.text = "Collectable : " + gameManager.collectableNum;
+        collectablesTxt.text = "Collectable : " + gameManager.collectableCount;
     }
 
 }

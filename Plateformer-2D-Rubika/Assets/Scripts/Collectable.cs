@@ -9,7 +9,7 @@ public class Collectable : MonoBehaviour
     [HideInInspector]
     public bool taken;
     [HideInInspector]
-    public int num;
+    public int ID;
 
     private void Awake()
     {
@@ -20,9 +20,9 @@ public class Collectable : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !taken)
         {
-            gameManager.collectableNum++;
+            gameManager.collectableCount++;
 
-            gameManager.collectableList[num].taken = true;
+            gameManager.inGameCollectibles[ID].taken = true;
             gameManager.RefreshList();
 
             FindObjectOfType<SaveSystem>().SaveCollectable();
