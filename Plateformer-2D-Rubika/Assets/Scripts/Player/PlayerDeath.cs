@@ -100,6 +100,8 @@ public class PlayerDeath : MonoBehaviour
         rb.velocity = Vector2.zero;
         deathCounter++;
 
+        playerController.animator.SetTrigger("Death");
+
         achievements.deathCount = deathCounter;
 
         LevelManager.respawning = true;
@@ -110,7 +112,7 @@ public class PlayerDeath : MonoBehaviour
 
         //Animation de mort
 
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(.25f);
         
         fadeAnim.Play("FadeIn");
 
@@ -153,7 +155,7 @@ public class PlayerDeath : MonoBehaviour
         StartCoroutine(RespawnPlatforms());
 
         fadeAnim.Play("FadeOut");
-
+        playerController.animator.SetTrigger("Respawn");
         yield return new WaitForSeconds(.4f);
 
         LevelManager.respawning = false;
