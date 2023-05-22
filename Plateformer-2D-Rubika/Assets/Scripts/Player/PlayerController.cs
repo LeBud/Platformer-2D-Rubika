@@ -276,8 +276,12 @@ e   lse centerCamTimer = playerControllerData.timeToRecenter;
         {
             animator.SetBool("Gliding", false);
             animator.SetBool("Fall", true);
+        }
+        else
+        {
+            animator.SetBool("Fall", false);
+            animator.SetBool("Gliding", false);
         } 
-        else animator.SetBool("Fall", false);
 
         if (!Idling()) animator.SetBool("Walk", true);
         else if (Idling()) animator.SetBool("Walk", false);

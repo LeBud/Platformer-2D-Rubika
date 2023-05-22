@@ -24,9 +24,9 @@ public class SpriteFlip : MonoBehaviour
 
     void TurnCheck()
     {
-        if (rb.velocity.x > 0.25f && !facingRight)
+        if (rb.velocity.x > .1f && !facingRight)
             Turn();
-        else if (rb.velocity.x < -0.25f && facingRight)
+        else if (rb.velocity.x < -0.1f && facingRight)
             Turn();
     }
 
