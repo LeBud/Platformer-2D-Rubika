@@ -8,7 +8,6 @@ public class Collectable : MonoBehaviour
 
     [HideInInspector]
     public bool taken;
-    [HideInInspector]
     public int ID;
 
     private void Awake()
@@ -22,7 +21,9 @@ public class Collectable : MonoBehaviour
         {
             gameManager.collectableCount++;
 
-            gameManager.inGameCollectibles[ID].taken = true;
+            int listNum = ID - 1;
+
+            gameManager.inGameCollectibles[listNum].taken = true;
             gameManager.RefreshList();
 
             FindObjectOfType<SaveSystem>().SaveCollectable();
