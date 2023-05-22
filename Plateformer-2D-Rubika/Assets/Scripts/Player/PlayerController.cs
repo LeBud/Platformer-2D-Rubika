@@ -159,7 +159,8 @@ public class PlayerController : MonoBehaviour
         if (rb.velocity.y < 0 && onGround < 0 && !isJumping) falling = true;
         else falling = false;
 
-        if(rb.velocity.y < playerControllerData.fallSpeedYDampingChangeThreshold && !CameraManager.instance.isLerpingYDamping && !CameraManager.instance.lerpedFromPlayerFalling)
+        #region CameraManager
+        if (rb.velocity.y < playerControllerData.fallSpeedYDampingChangeThreshold && !CameraManager.instance.isLerpingYDamping && !CameraManager.instance.lerpedFromPlayerFalling)
         {
             CameraManager.instance.LerpYDamping(true);
         }
@@ -170,6 +171,7 @@ public class PlayerController : MonoBehaviour
 
             CameraManager.instance.LerpYDamping(false);
         }
+        #endregion
 
         #region Jump
         if (!isJumping)
@@ -180,6 +182,7 @@ public class PlayerController : MonoBehaviour
                 jumpCut = false;
                 glideTime = playerControllerData.maxGlideTime;
                 glideJump = true;
+                gliding = false;
             }
         }
 
