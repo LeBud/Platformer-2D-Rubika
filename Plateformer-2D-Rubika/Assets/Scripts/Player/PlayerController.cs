@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     public bool canGlide;
 
     [Header("Animator")]
-    [SerializeField] Animator animator;
+    public Animator animator;
 
     bool jumpCut;
     [HideInInspector]
@@ -46,6 +46,8 @@ public class PlayerController : MonoBehaviour
     bool onSlowPlatform;
     [HideInInspector]
     public bool jumpPadOn;
+    [HideInInspector]
+    public bool jumpPadVer;
     bool jumpPadDoubleJump;
     [HideInInspector]
     public bool falling;
@@ -392,7 +394,7 @@ e   lse centerCamTimer = playerControllerData.timeToRecenter;
     #region Boolean
     bool CanJumpGlide()
     {
-        return (!isJumping || rb.velocity.y < 12) && glideJump && onGround < 0 && !jumpPadOn && !jumpPadDoubleJump;
+        return (!isJumping || rb.velocity.y < 4) && glideJump && onGround < 0 && !jumpPadOn && !jumpPadDoubleJump && !jumpPadVer;
     }
 
     bool CanJump()
@@ -402,7 +404,7 @@ e   lse centerCamTimer = playerControllerData.timeToRecenter;
 
     bool CanGlide()
     {
-        return !isJumping && onGround < 0 && glideTime > 0 && !glideJump && rb.velocity.y <= 0;
+        return !isJumping && onGround < 0 && glideTime > 0 && !glideJump && rb.velocity.y <= 0 && !jumpPadVer;
     }
 
     bool Idling()
