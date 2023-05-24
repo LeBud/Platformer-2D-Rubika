@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -77,8 +78,9 @@ public class PlayerController : MonoBehaviour
     public AnimatorOverrideController garden;
 
     [HideInInspector]
-    public bool gardenAnimator;
-    public bool blueAnimator;
+    public bool gardenAnimator, blueAnimator;
+
+    [SerializeField] Light2D blueLight;
 
     private void Awake()
     {
@@ -285,6 +287,9 @@ e   lse centerCamTimer = playerControllerData.timeToRecenter;
             animator.runtimeAnimatorController = blue;
         else
             animator.runtimeAnimatorController = outch;
+
+        if (blueAnimator) blueLight.enabled = true;
+        else blueLight.enabled = false;
 
         #endregion
     }

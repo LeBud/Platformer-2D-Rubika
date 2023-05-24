@@ -15,14 +15,20 @@ public class ScriptDoorController : MonoBehaviour
     [Header("Glide Control")]
     public bool canGlide = true;
 
-    PlayerController playerController;
+    [Header("Parallax")]
+    public bool swapParallax;
+    public ParallaxSwap.Parallax parallaxRight;
+    public ParallaxSwap.Parallax parallaxLeft;
 
+    PlayerController playerController;
+    ParallaxSwap parallaxSwap;
     Collider2D coll;
 
     private void Awake()
     {
         playerController = FindObjectOfType<PlayerController>();
         coll= GetComponent<Collider2D>();
+        parallaxSwap = FindObjectOfType<ParallaxSwap>();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -49,6 +55,9 @@ public class ScriptDoorController : MonoBehaviour
                     playerController.blueAnimator = false;
                     playerController.gardenAnimator = false;
                 }
+
+                if(swapParallax)
+                    parallaxSwap.parallax = parallaxRight;
             }
 
             if(exitDirection.x < 0 )
@@ -70,9 +79,13 @@ public class ScriptDoorController : MonoBehaviour
                     playerController.gardenAnimator = false;
                 }
 
+                if(swapParallax)
+                    parallaxSwap.parallax = parallaxLeft;
+
             }
 
 
+            parallaxSwap.ParallaxSwapFonction();
 
             if (canGlide)
                 playerController.canGlide = true;
