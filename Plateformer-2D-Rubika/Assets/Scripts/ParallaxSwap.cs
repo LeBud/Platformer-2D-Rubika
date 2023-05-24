@@ -10,60 +10,61 @@ public class ParallaxSwap : MonoBehaviour
 
     [SerializeField] Transform garden, catacombs, termite;
 
-
-
-    void Update()
+    private void Start()
     {
-     
-        
-        if(parallax == Parallax.gardenParallax)
+        ParallaxSwapFonction();
+    }
+
+    public void ParallaxSwapFonction()
+    {
+        if (parallax == Parallax.gardenParallax)
         {
-            foreach(SpriteRenderer child in garden)
+            foreach (Transform child in garden)
             {
-                child.enabled = true;
+                child.GetComponent<SpriteRenderer>().enabled = true;
             }
-            foreach (SpriteRenderer child in catacombs)
+            foreach (Transform child in catacombs)
             {
-                child.enabled = false;
+                child.GetComponent<SpriteRenderer>().enabled = false;
             }
-            foreach (SpriteRenderer child in termite)
+            foreach (Transform child in termite)
             {
-                child.enabled = false;
+                child.GetComponent<SpriteRenderer>().enabled = false;
             }
         }
         else if (parallax == Parallax.catacombsParallax)
         {
-            foreach (SpriteRenderer child in garden)
+            foreach (Transform child in garden)
             {
-                child.enabled = false;
+                child.GetComponent<SpriteRenderer>().enabled = false;
             }
-            foreach (SpriteRenderer child in catacombs)
+            foreach (Transform child in catacombs)
             {
-                child.enabled = true;
+                child.GetComponent<SpriteRenderer>().enabled = true;
             }
-            foreach (SpriteRenderer child in termite)
+            foreach (Transform child in termite)
             {
-                child.enabled = false;
+                child.GetComponent<SpriteRenderer>().enabled = false;
             }
 
         }
-        else if(parallax == Parallax.termiteParallax)
+        else if (parallax == Parallax.termiteParallax)
         {
-            foreach (SpriteRenderer child in garden)
+            foreach (Transform child in garden)
             {
-                child.enabled = false;
+                child.GetComponent<SpriteRenderer>().enabled = false;
             }
-            foreach (SpriteRenderer child in catacombs)
+            foreach (Transform child in catacombs)
             {
-                child.enabled = false;
+                child.GetComponent<SpriteRenderer>().enabled = false;
             }
-            foreach (SpriteRenderer child in termite)
+            foreach (Transform child in termite)
             {
-                child.enabled = true;
+                child.GetComponent<SpriteRenderer>().enabled = true;
             }
 
         }
-
 
     }
+
 }
