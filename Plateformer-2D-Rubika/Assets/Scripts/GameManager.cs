@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
             saveSystem.EreaseSave();
             FindObjectOfType<PlayerController>().canGlide = false;
             FindObjectOfType<PlayerController>().gardenAnimator = true;
+            FindObjectOfType<ParallaxSwap>().parallax = ParallaxSwap.Parallax.gardenParallax;
         }
         else if (MainMenu.loadSave) FindObjectOfType<SaveSystem>().LoadData();
 
