@@ -85,6 +85,7 @@ public class ScriptDoorController : MonoBehaviour
             }
 
 
+            parallaxSwap.ParallaxSwapFonction();
 
             if (canGlide)
                 playerController.canGlide = true;
