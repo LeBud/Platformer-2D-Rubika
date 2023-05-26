@@ -33,9 +33,9 @@ public class AchievementsCheck : MonoBehaviour
             achievements = new List<Achievement>
             {
                 //general Achievements
-                new Achievement("Jump", "Jump 100 time.", tempSprite, o => jumpCount >= 100),
+                new Achievement("Jump", "Jump 100 time.", tempSprite, o => {return jumpCount >= 100; }),
                 new Achievement("Jumping a lot !", "Jump 1000 time.", tempSprite, o => jumpCount >= 1000),
-                new Achievement("First time ?", "Die for the 1st time.", tempSprite, o => deathCount >= 1),
+                new Achievement("First time ?", "Die for the 1st time.", tempSprite, o => {return deathCount >= 1; }),
                 new Achievement("It's not that hard !", "Die 100 time.", tempSprite, o => deathCount >= 100),
                 //collectables Achievements
                 new Achievement("Nice !", "Find your 1st collectables", tempSprite, o => collectableCount >= 1),
@@ -74,12 +74,13 @@ public class AchievementsCheck : MonoBehaviour
 
     private void CheckAchievementCompletion()
     {
-        if (achievements.Count < 1)
-            return;
-
-        foreach (var achievement in achievements)
+        foreach (Achievement achievement in achievements)
         {
-            achievement.UpdateCompletion();
+            if(achievement.requirement.Invoke(null) == true)
+            {
+                achievement.requirementMet = true;
+                achievement.UpdateCompletion();
+            }
         }
     }
 
@@ -117,7 +118,7 @@ public class Achievement : MonoBehaviour
     public AchievementsDisplay display;
     public AchievementsCheck achievementsCheck;
 
-    public Achievement(string title, string description, Sprite sprite, Predicate<AchievementsCheck> requirement) 
+    public Achievement(string title, string description, Sprite sprite, Predicate<object> requirement) 
     {
         this.title = title;
         this.description = description;
@@ -129,17 +130,30 @@ public class Achievement : MonoBehaviour
     public string description;
     public Sprite sprite;
 
-    public Predicate<AchievementsCheck> requirement;
+    public Predicate<object> requirement;
+
+    public bool requirementMet = false;
 
     public bool achieved;
+
+    private void Update()
+    {
+        if (requirement(true))
+        {
+            requirementMet = true;
+        }
+        UpdateCompletion();
+    }
 
     public void UpdateCompletion()
     {
         if (achieved)
             return;
 
-        if (RequirementMet())
+        if (requirementMet)
         {
+            Debug.LogError("Working Achievement");
+
             Debug.Log($"{title} : {description}");
             achieved = true;
 
@@ -150,10 +164,10 @@ public class Achievement : MonoBehaviour
         }
     }
 
-    public bool RequirementMet()
+    /*public bool RequirementMet()
     {
-        return requirement(achievementsCheck) && !achieved;
-    }
+        return requirement.Invoke(achievementsCheck) && !achieved;
+    }*/
 }
 
 [Serializable]
