@@ -15,7 +15,7 @@ public class SaveSystem : MonoBehaviour
     [SerializeField] LevelManager levelManager;
     [SerializeField] PlayerController playerController;
     AchievementsCheck achievements;
-
+    ParallaxSwap parallax;
     private void Awake()
     {
         ladyBugLight = FindObjectOfType<LadyBugLight>();
@@ -25,7 +25,7 @@ public class SaveSystem : MonoBehaviour
         gameManager = GetComponent<GameManager>();
         playerController = FindObjectOfType<PlayerController>();
         playerTransform = ladyBugLight.transform;
-
+        parallax = FindObjectOfType<ParallaxSwap>();
     }
 
     void GetComponents()
@@ -37,6 +37,7 @@ public class SaveSystem : MonoBehaviour
         gameManager = GetComponent<GameManager>();
         playerController = FindObjectOfType<PlayerController>();
         playerTransform = ladyBugLight.transform;
+        parallax = FindObjectOfType<ParallaxSwap>();
     }
 
     private void Update()
@@ -123,6 +124,9 @@ public class SaveSystem : MonoBehaviour
             currentRoom = levelManager.currentRoom,
             lightCheckPoint = deathNumber.lightCheckPoint,
             canGlide = playerController.canGlide,
+            parallaxNum = parallax.parallax,
+            gardenAnim = playerController.gardenAnimator,
+            blueAnim = playerController.blueAnimator,
         };
 
         if (AchievementsCheck.achievements.Count > 0)
@@ -164,7 +168,11 @@ public class SaveSystem : MonoBehaviour
         deathNumber.lightCheckPoint = savedData.lightCheckPoint;
 
         playerController.canGlide = savedData.canGlide;
-        
+        playerController.blueAnimator = savedData.blueAnim;
+        playerController.gardenAnimator = savedData.gardenAnim;
+
+        parallax.parallax = savedData.parallaxNum;
+
         gameManager.LoadCollectable();
 
         achievements.CheckCompletion(savedData.achievementsList);
@@ -205,4 +213,6 @@ public class SavedData
     public int currentRoom;
     public bool lightCheckPoint;
     public List<AchievementData> achievementsList;
+    public ParallaxSwap.Parallax parallaxNum;
+    public bool gardenAnim, blueAnim;
 }
