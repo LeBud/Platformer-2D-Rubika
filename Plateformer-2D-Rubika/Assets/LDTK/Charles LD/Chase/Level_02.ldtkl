@@ -11,7 +11,7 @@
 	"identifier": "Level_02",
 	"iid": "19547df9-c640-11ed-8428-3fc9054d090f",
 	"uid": 34,
-	"worldX": -12064,
+	"worldX": -11040,
 	"worldY": -1536,
 	"worldDepth": 0,
 	"pxWid": 2048,
@@ -519,7 +519,36 @@
 			"seed": 4206786,
 			"overrideTilesetUid": null,
 			"gridTiles": [],
-			"entityInstances": []
+			"entityInstances": [
+				{
+					"__identifier": "Checkpoint",
+					"__grid": [118,25],
+					"__pivot": [0.5,1],
+					"__tags": ["Checkpoint"],
+					"__tile": null,
+					"__smartColor": "#BE4A2F",
+					"iid": "a7f6b040-ed50-11ed-9c4a-21534b12938e",
+					"width": 16,
+					"height": 16,
+					"defUid": 2,
+					"px": [1896,416],
+					"fieldInstances": []
+				},
+				{
+					"__identifier": "Checkpoint",
+					"__grid": [2,21],
+					"__pivot": [0.5,1],
+					"__tags": ["Checkpoint"],
+					"__tile": null,
+					"__smartColor": "#BE4A2F",
+					"iid": "3caca870-ed50-11ed-9c4a-3d7b059eb32b",
+					"width": 16,
+					"height": 16,
+					"defUid": 2,
+					"px": [40,352],
+					"fieldInstances": []
+				}
+			]
 		},
 		{
 			"__identifier": "Ground",
@@ -666,5 +695,5 @@
 			"entityInstances": []
 		}
 	],
-	"__neighbours": [ { "levelIid": "bd88a327-c640-11ed-8428-a1edd3d0ee04", "dir": "e" }, { "levelIid": "2e90b310-c640-11ed-8428-6ff6b35bfb0d", "dir": "w" } ]
+	"__neighbours": [ { "levelIid": "01ce2660-ed50-11ed-9c4a-4b63fe894496", "dir": "w" }, { "levelIid": "bd88a327-c640-11ed-8428-a1edd3d0ee04", "dir": "e" } ]
 }
