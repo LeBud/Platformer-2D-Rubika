@@ -24,6 +24,8 @@ public class BreakPlatform : MonoBehaviour
 
     AudioSource source;
     [SerializeField] AudioClip sound;
+    ParticleSystem particles;
+
     private void Start()
     {
         achievements = FindObjectOfType<AchievementsCheck>();
@@ -31,6 +33,7 @@ public class BreakPlatform : MonoBehaviour
         BoxCollider2D = GetComponents<BoxCollider2D>();
         animator = GetComponent<Animator>();
         source = GetComponent<AudioSource>();
+        particles = GetComponentInChildren<ParticleSystem>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -50,6 +53,7 @@ public class BreakPlatform : MonoBehaviour
         //animator.Play("PlatformBreak");
         animator.Play(breakplat);
         source.PlayOneShot(sound);
+        particles.Stop();
 
         for(int i = 0; i < BoxCollider2D.Length; i++)
         {
@@ -63,7 +67,8 @@ public class BreakPlatform : MonoBehaviour
         animator.Play(respawnplat);
 
         ReactivePlatform();
-        
+        particles.Play();
+
         isPlaying = false;
 
         for (int i = 0; i < BoxCollider2D.Length; i++)
