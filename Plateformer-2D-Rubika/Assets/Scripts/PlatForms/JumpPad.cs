@@ -9,10 +9,12 @@ public class JumpPad : MonoBehaviour
 
     PlayerController controller;
     Animator animator;
-
+    AudioSource source;
+    public AudioClip sound;
     private void Start()
     {
         animator = GetComponent<Animator>();
+        source = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -29,6 +31,7 @@ public class JumpPad : MonoBehaviour
             rb.AddForce(bounceForce,ForceMode2D.Impulse);
 
             animator.Play("Bumper");
+            source.PlayOneShot(sound);
         }
     }
 

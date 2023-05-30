@@ -77,6 +77,16 @@ public class PlayerController : MonoBehaviour
     public AnimatorOverrideController blue;
     public AnimatorOverrideController garden;
 
+    AudioSource source;
+    [Header("Audio")]
+    [SerializeField] AudioClip jumpSound;
+    [SerializeField] AudioClip glideSound;
+    [SerializeField] AudioClip fallSound;
+    public AudioClip deathSound;
+    [SerializeField] AudioClip moveSound;
+
+    bool glideSoundPlaying, moveSoundPlaying;
+
     [HideInInspector]
     public bool gardenAnimator, blueAnimator;
 
@@ -86,6 +96,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         achievements = FindObjectOfType<AchievementsCheck>();
+        source = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -194,6 +205,7 @@ public class PlayerController : MonoBehaviour
                 glideTime = playerControllerData.maxGlideTime;
                 glideJump = true;
                 gliding = false;
+                StopCoroutine(GlideSound());
             }
         }
 
@@ -335,6 +347,8 @@ e   lse centerCamTimer = playerControllerData.timeToRecenter;
         animator.SetTrigger("Jump");
 
         achievements.jumpCount++;
+
+        source.PlayOneShot(jumpSound);
     }
 
     void Glide()
@@ -344,10 +358,20 @@ e   lse centerCamTimer = playerControllerData.timeToRecenter;
             if (!gliding || inAirFlow)
                 break;
 
+            if(!glideSoundPlaying)
+                StartCoroutine(GlideSound());
             float strenght = playerControllerData.glideCurve.Evaluate(glideTime / playerControllerData.maxGlideTime);
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Lerp(rb.velocity.y, -strenght * playerControllerData.curveMult, playerControllerData.maxGlideTime));
             return;
         }
+    }
+
+    IEnumerator GlideSound()
+    {
+        glideSoundPlaying= true;
+        source.PlayOneShot(glideSound);
+        yield return new WaitForSeconds(glideSound.length);
+        glideSoundPlaying = false;
     }
 
     void GlideJump()
@@ -363,6 +387,8 @@ e   lse centerCamTimer = playerControllerData.timeToRecenter;
         rb.AddForce(Vector2.up * upForce, ForceMode2D.Impulse);
 
         animator.SetTrigger("GlideJump");
+
+        source.PlayOneShot(jumpSound);
     }
 
     private void FixedUpdate()
@@ -411,6 +437,16 @@ e   lse centerCamTimer = playerControllerData.timeToRecenter;
 
         rb.AddForce(force, ForceMode2D.Force);
 
+        if(!moveSoundPlaying)
+            StartCoroutine(PlayMoveSound());
+    }
+
+    IEnumerator PlayMoveSound()
+    {
+        moveSoundPlaying = true;
+        source.PlayOneShot(moveSound);
+        yield return new WaitForSeconds(moveSound.length);
+        moveSoundPlaying = false;
     }
 
     void AirFlowMovement()

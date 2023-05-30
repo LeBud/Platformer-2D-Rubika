@@ -21,6 +21,10 @@ public class CheckPoint : MonoBehaviour
     Light2D lightSpot;
 
     Animator animator;
+
+    AudioSource source;
+    public AudioClip sound;
+
     private void Awake()
     {
         player = FindObjectOfType<PlayerDeath>();
@@ -33,6 +37,7 @@ public class CheckPoint : MonoBehaviour
     private void Start()
     {
         roomNumber = transform.parent.GetComponentInParent<LevelRoom>().roomNum;
+        source= GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -62,6 +67,8 @@ public class CheckPoint : MonoBehaviour
         player.checkPointPos = transform.position;
         player.currentCheckPoint = checkPointNum;
         player.checkPointRoom = roomNumber;
+
+        source.PlayOneShot(sound);
 
         animator.Play("Checkpoint");
 
