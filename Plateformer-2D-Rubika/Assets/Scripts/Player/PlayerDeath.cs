@@ -34,6 +34,8 @@ public class PlayerDeath : MonoBehaviour
 
     List<FallingObject> fallingObjects = new List<FallingObject>();
     List<MantysEnablerDisabler> mantysEnablerDisablers = new List<MantysEnablerDisabler>();
+    
+    AudioSource source;
 
     private void Awake()
     {
@@ -65,7 +67,7 @@ public class PlayerDeath : MonoBehaviour
             }
         }
 
-
+        source = GetComponent<AudioSource>();
     }
 
     IEnumerator RespawnPlatforms()
@@ -101,6 +103,7 @@ public class PlayerDeath : MonoBehaviour
         deathCounter++;
 
         playerController.animator.SetTrigger("Death");
+        source.PlayOneShot(playerController.deathSound);
 
         achievements.deathCount = deathCounter;
 

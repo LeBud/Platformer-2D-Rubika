@@ -7,6 +7,13 @@ public class AphidCollect : MonoBehaviour
 
     [SerializeField] float respawnTime;
     public bool canRespawn;
+    AudioSource source;
+    public AudioClip sound;
+
+    private void Start()
+    {
+        source = GetComponent<AudioSource>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -26,7 +33,7 @@ public class AphidCollect : MonoBehaviour
             {
                 if (lady.aphidCharge >= controller.playerControllerData.maxAphidCharge)
                     return;
-
+                source.PlayOneShot(sound);
                 lady.aphidCharge += 100;
             }
 
