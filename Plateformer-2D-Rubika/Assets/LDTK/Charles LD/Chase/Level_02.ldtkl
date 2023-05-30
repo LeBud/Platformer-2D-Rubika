@@ -29,6 +29,88 @@
 	"fieldInstances": [],
 	"layerInstances": [
 		{
+			"__identifier": "Spikes",
+			"__type": "Entities",
+			"__cWid": 128,
+			"__cHei": 32,
+			"__gridSize": 16,
+			"__opacity": 1,
+			"__pxTotalOffsetX": 0,
+			"__pxTotalOffsetY": 0,
+			"__tilesetDefUid": null,
+			"__tilesetRelPath": null,
+			"iid": "465187d0-ed50-11ed-94f9-b7a4c74ba909",
+			"levelId": 34,
+			"layerDefUid": 45,
+			"pxOffsetX": 0,
+			"pxOffsetY": 0,
+			"visible": true,
+			"optionalRules": [],
+			"intGridCsv": [],
+			"autoLayerTiles": [],
+			"seed": 4046423,
+			"overrideTilesetUid": null,
+			"gridTiles": [],
+			"entityInstances": [
+				{
+					"__identifier": "Seamless_3x1",
+					"__grid": [27,31],
+					"__pivot": [0,0],
+					"__tags": ["spike"],
+					"__tile": null,
+					"__smartColor": "#FF0000",
+					"iid": "63092520-ed50-11ed-94f9-035a41f139bc",
+					"width": 48,
+					"height": 16,
+					"defUid": 35,
+					"px": [432,496],
+					"fieldInstances": []
+				},
+				{
+					"__identifier": "Seamless_3x1",
+					"__grid": [31,31],
+					"__pivot": [0,0],
+					"__tags": ["spike"],
+					"__tile": null,
+					"__smartColor": "#FF0000",
+					"iid": "63927960-ed50-11ed-94f9-f7eed077125b",
+					"width": 48,
+					"height": 16,
+					"defUid": 35,
+					"px": [496,496],
+					"fieldInstances": []
+				},
+				{
+					"__identifier": "Seamless_1x1",
+					"__grid": [30,31],
+					"__pivot": [0,0],
+					"__tags": ["spike"],
+					"__tile": null,
+					"__smartColor": "#FF0000",
+					"iid": "832200c0-ed50-11ed-94f9-fd349dae5754",
+					"width": 16,
+					"height": 16,
+					"defUid": 50,
+					"px": [480,496],
+					"fieldInstances": []
+				},
+				{
+					"__identifier": "Pas_seamless_3x1",
+					"__grid": [63,20],
+					"__pivot": [0,0],
+					"__tags": ["spike"],
+					"__tile": null,
+					"__smartColor": "#FF0000",
+					"iid": "882b37d0-ed50-11ed-94f9-851c6676047f",
+					"width": 48,
+					"height": 16,
+					"defUid": 46,
+					"px": [1008,320],
+					"fieldInstances": []
+				}
+			]
+		},
+		{
 			"__identifier": "Mantis",
 			"__type": "Entities",
 			"__cWid": 128,
@@ -335,22 +417,7 @@
 			"seed": 9014327,
 			"overrideTilesetUid": null,
 			"gridTiles": [],
-			"entityInstances": [
-				{
-					"__identifier": "Spike",
-					"__grid": [63,20],
-					"__pivot": [0,0],
-					"__tags": ["Spike"],
-					"__tile": null,
-					"__smartColor": "#EA0000",
-					"iid": "005daa70-c640-11ed-8428-594f5429f973",
-					"width": 48,
-					"height": 16,
-					"defUid": 8,
-					"px": [1008,320],
-					"fieldInstances": []
-				}
-			]
+			"entityInstances": []
 		},
 		{
 			"__identifier": "Airflow",
