@@ -91,6 +91,7 @@ public class PlayerController : MonoBehaviour
     public bool gardenAnimator, blueAnimator;
 
     [SerializeField] Light2D blueLight;
+    [SerializeField] Light2D eyeLight;
 
     private void Awake()
     {
@@ -300,8 +301,14 @@ e   lse centerCamTimer = playerControllerData.timeToRecenter;
         else
             animator.runtimeAnimatorController = outch;
 
-        if (blueAnimator) blueLight.enabled = true;
-        else blueLight.enabled = false;
+        if (blueAnimator)
+        {
+            blueLight.enabled = true; eyeLight.enabled = true;
+        }
+        else
+        {
+            blueLight.enabled = false; eyeLight.enabled = false;
+        } 
 
         #endregion
     }
