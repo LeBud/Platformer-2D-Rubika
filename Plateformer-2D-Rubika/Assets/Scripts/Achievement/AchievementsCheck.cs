@@ -18,8 +18,6 @@ public class AchievementsCheck : MonoBehaviour
     [HideInInspector]
     public bool airFlowUse, jumpPadUse, breakPlatformUse, aphidUse, fallObjectUse, fallInCatacomb, surviveChase, exitCatacomb, endGame;
 
-    bool jumpCountOneHundred, jumpCountOneThousand, deathOne, deathOneHundred, collectableOne, collectableHalf, collectableAll;
-
     private void Awake()
     {
         saveSystem = GetComponent<SaveSystem>();
@@ -35,25 +33,25 @@ public class AchievementsCheck : MonoBehaviour
             achievements = new List<Achievement>
             {
                 //general Achievements
-                new Achievement("Jump", "Jump 100 time.", tempSprite, jumpCountOneHundred),
-                new Achievement("Jumping a lot !", "Jump 1000 time.", tempSprite, jumpCountOneThousand),
-                new Achievement("First time ?", "Die for the 1st time.", tempSprite, deathOne),
-                new Achievement("It's not that hard !", "Die 100 time.", tempSprite, deathOneHundred),
+                new Achievement("Jump", "Jump 100 time.", tempSprite, o => {return jumpCount >= 100; }),
+                new Achievement("Jumping a lot !", "Jump 1000 time.", tempSprite, o => jumpCount >= 1000),
+                new Achievement("First time ?", "Die for the 1st time.", tempSprite, o => {return deathCount >= 1; }),
+                new Achievement("It's not that hard !", "Die 100 time.", tempSprite, o => deathCount >= 100),
                 //collectables Achievements
-                new Achievement("Nice !", "Find your 1st collectables", tempSprite, collectableOne),
-                new Achievement("Moooore !", "Find half of the collectables", tempSprite, collectableHalf),
-                new Achievement("All of them !", "Find all the collectables", tempSprite, collectableAll),
+                new Achievement("Nice !", "Find your 1st collectables", tempSprite, o => collectableCount >= 1),
+                new Achievement("Moooore !", "Find half of the collectables", tempSprite, o => collectableCount >= 2),
+                new Achievement("All of them !", "Find all the collectables", tempSprite, o => collectableCount >= 3),
                 //gamplay Achievments
-                new Achievement("Flying !", "Get in an aitflow for the 1st time.", tempSprite, airFlowUse),
-                new Achievement("Bouncy", "Bounce on a jump pad fort the 1st time.", tempSprite, jumpPadUse),
-                new Achievement("Too heavy !", "Bounce on a jump pad fort the 1st time.", tempSprite, breakPlatformUse),
-                new Achievement("Lumios !", "Bounce on a jump pad fort the 1st time.", tempSprite, aphidUse),
-                new Achievement("Watch out !", "Bounce on a jump pad fort the 1st time.", tempSprite, fallObjectUse),
+                new Achievement("Flying !", "Get in an aitflow for the 1st time.", tempSprite, o => airFlowUse == true),
+                new Achievement("Bouncy", "Bounce on a jump pad fort the 1st time.", tempSprite, o => jumpPadUse == true),
+                new Achievement("Too heavy !", "Bounce on a jump pad fort the 1st time.", tempSprite, o => breakPlatformUse == true),
+                new Achievement("Lumios !", "Bounce on a jump pad fort the 1st time.", tempSprite, o => aphidUse == true),
+                new Achievement("Watch out !", "Bounce on a jump pad fort the 1st time.", tempSprite, o => fallObjectUse == true),
                 //story Achivements
-                new Achievement("How did we get here ?", "Bounce on a jump pad fort the 1st time.", tempSprite, fallInCatacomb),
-                new Achievement("Better luck next time !", "Bounce on a jump pad fort the 1st time.", tempSprite, surviveChase),
-                new Achievement("Out of there !", "Bounce on a jump pad fort the 1st time.", tempSprite, exitCatacomb),
-                new Achievement("Congratulations !", "Bounce on a jump pad fort the 1st time.", tempSprite, endGame)
+                new Achievement("How did we get here ?", "Fall in the catacombs.", tempSprite, o => fallInCatacomb == true),
+                new Achievement("Better luck next time !", "Bounce on a jump pad fort the 1st time.", tempSprite, o => surviveChase == true),
+                new Achievement("Out of there !", "Bounce on a jump pad fort the 1st time.", tempSprite, o => exitCatacomb == true),
+                new Achievement("Congratulations !", "Bounce on a jump pad fort the 1st time.", tempSprite, o => endGame == true)
             };
         }
 
@@ -71,28 +69,18 @@ public class AchievementsCheck : MonoBehaviour
 
     private void Update()
     {
-        if (jumpCount > 99)
-            jumpCountOneHundred = true;
-        if(jumpCount > 999)
-            jumpCountOneThousand= true;
-        if (deathCount > 0)
-            deathOne = true;
-        if (deathCount > 99)
-            deathOneHundred = true;
-        if (collectableCount > 0)
-            collectableOne = true;
-
         CheckAchievementCompletion();
     }
 
     private void CheckAchievementCompletion()
     {
-        if (achievements.Count < 1)
-            return;
-
-        foreach (var achievement in achievements)
+        foreach (Achievement achievement in achievements)
         {
-            achievement.UpdateCompletion();
+            if(achievement.requirement.Invoke(null))
+            {
+                achievement.requirementMet = true;
+                achievement.UpdateCompletion();
+            }
         }
     }
 
@@ -123,39 +111,49 @@ public class AchievementsCheck : MonoBehaviour
 
 }
 
-public class Achievement
+public class Achievement : MonoBehaviour
 {
 
     public SaveSystem saveSystem;
     public AchievementsDisplay display;
+    public AchievementsCheck achievementsCheck;
 
-    public Achievement(string title, string description, Sprite sprite, bool require) 
+    public Achievement(string title, string description, Sprite sprite, Predicate<object> requirement) 
     {
         this.title = title;
         this.description = description;
         this.sprite = sprite;
-        this.require = require;
+        this.requirement = requirement;
     }
 
     public string title;
     public string description;
     public Sprite sprite;
 
-    public AchievementsCheck achievementsCheck;
+    public Predicate<object> requirement;
 
-    //public Predicate<AchievementsCheck> requirement;
-
-    public bool require;
+    public bool requirementMet = false;
 
     public bool achieved;
+
+    private void Update()
+    {
+        if (requirement(true))
+        {
+            requirementMet = true;
+        }
+        UpdateCompletion();
+    }
 
     public void UpdateCompletion()
     {
         if (achieved)
             return;
 
-        if (require)
+        if (requirementMet)
         {
+            Debug.LogError("Working Achievement");
+
             Debug.Log($"{title} : {description}");
             achieved = true;
 
@@ -168,7 +166,7 @@ public class Achievement
 
     /*public bool RequirementMet()
     {
-        return requirement(achievementsCheck) && !achieved;
+        return requirement.Invoke(achievementsCheck) && !achieved;
     }*/
 }
 
