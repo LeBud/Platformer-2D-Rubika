@@ -14,11 +14,15 @@ public class FallingObject : MonoBehaviour
     Vector2 startPos;
     bool resetting;
 
+    AudioSource source;
+    public AudioClip sound;
+
     private void Awake()
     {
         achievements = FindObjectOfType<AchievementsCheck>();
         rb.gravityScale = 0;
         startPos = rb.position;
+        source= GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -33,6 +37,8 @@ public class FallingObject : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         rb.gravityScale = fallGravityScale;
+
+        source.PlayOneShot(sound);
 
         achievements.fallObjectUse = true;
     }

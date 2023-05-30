@@ -21,14 +21,16 @@ public class BreakPlatform : MonoBehaviour
 
     public string breakplat;
     public string respawnplat;
-        
 
+    AudioSource source;
+    [SerializeField] AudioClip sound;
     private void Start()
     {
         achievements = FindObjectOfType<AchievementsCheck>();
         spriteRenderer= GetComponent<SpriteRenderer>();
         BoxCollider2D = GetComponents<BoxCollider2D>();
         animator = GetComponent<Animator>();
+        source = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -47,6 +49,7 @@ public class BreakPlatform : MonoBehaviour
         //spriteRenderer.color= color2;
         //animator.Play("PlatformBreak");
         animator.Play(breakplat);
+        source.PlayOneShot(sound);
 
         for(int i = 0; i < BoxCollider2D.Length; i++)
         {
