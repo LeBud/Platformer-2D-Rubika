@@ -42,10 +42,10 @@ public class GameManager : MonoBehaviour
     {
         for(int i = 0; i < collectiblesSaveList.Count; i++)
         {
-            if (collectiblesSaveList[i].taken)
-                inGameCollectibles[i].gameObject.SetActive(false);
+            if (collectiblesSaveList[collectiblesSaveList[i].ID].taken)
+                inGameCollectibles[collectiblesSaveList[i].ID].gameObject.SetActive(false);
             else
-                inGameCollectibles[i].gameObject.SetActive(true);
+                inGameCollectibles[collectiblesSaveList[i].ID].gameObject.SetActive(true);
         }
     }
 
