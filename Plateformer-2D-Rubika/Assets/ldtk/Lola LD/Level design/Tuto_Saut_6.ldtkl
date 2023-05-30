@@ -689,6 +689,62 @@
 					"defUid": 87,
 					"px": [872,520],
 					"fieldInstances": []
+				},
+				{
+					"__identifier": "Pic_up_jardin_verti_d",
+					"__grid": [46,32],
+					"__pivot": [0.5,0.5],
+					"__tags": ["tilemap_pics_jardin"],
+					"__tile": null,
+					"__smartColor": "#9A0909",
+					"iid": "652d8490-ed50-11ed-b386-4dcb5b9d0483",
+					"width": 16,
+					"height": 16,
+					"defUid": 85,
+					"px": [744,520],
+					"fieldInstances": []
+				},
+				{
+					"__identifier": "Pic_jardin_verti_d",
+					"__grid": [46,34],
+					"__pivot": [0.5,0.5],
+					"__tags": ["tilemap_pics_jardin"],
+					"__tile": null,
+					"__smartColor": "#9A0909",
+					"iid": "6eb12030-ed50-11ed-b386-a7cfd0c9e840",
+					"width": 16,
+					"height": 48,
+					"defUid": 107,
+					"px": [744,552],
+					"fieldInstances": []
+				},
+				{
+					"__identifier": "Pic_down_jardin_verti_d",
+					"__grid": [46,37],
+					"__pivot": [0.5,0.5],
+					"__tags": ["tilemap_pics_jardin"],
+					"__tile": null,
+					"__smartColor": "#9A0909",
+					"iid": "71a69270-ed50-11ed-b386-03cbed867295",
+					"width": 16,
+					"height": 16,
+					"defUid": 105,
+					"px": [744,600],
+					"fieldInstances": []
+				},
+				{
+					"__identifier": "Pic_1_jardin_verti_d",
+					"__grid": [46,36],
+					"__pivot": [0.5,0.5],
+					"__tags": ["tilemap_pics_jardin"],
+					"__tile": null,
+					"__smartColor": "#9A0909",
+					"iid": "68553f80-ed50-11ed-b386-abe79d314da1",
+					"width": 16,
+					"height": 16,
+					"defUid": 106,
+					"px": [744,584],
+					"fieldInstances": []
 				}
 			]
 		},
@@ -717,7 +773,7 @@
 			"gridTiles": [],
 			"entityInstances": [
 				{
-					"__identifier": "Jump_pad_3",
+					"__identifier": "Jump_pad_3_j",
 					"__grid": [15,33],
 					"__pivot": [0.5,0.5],
 					"__tags": ["bloc_speciaux"],
@@ -745,7 +801,7 @@
 					"fieldInstances": []
 				},
 				{
-					"__identifier": "Jump_pad_3",
+					"__identifier": "Jump_pad_3_j",
 					"__grid": [42,25],
 					"__pivot": [0.5,0.5],
 					"__tags": ["bloc_speciaux"],
@@ -773,7 +829,7 @@
 					"fieldInstances": []
 				},
 				{
-					"__identifier": "Jump_pad_3",
+					"__identifier": "Jump_pad_3_j",
 					"__grid": [52,37],
 					"__pivot": [0.5,0.5],
 					"__tags": ["bloc_speciaux"],
@@ -787,7 +843,7 @@
 					"fieldInstances": []
 				},
 				{
-					"__identifier": "Horizontal_jump_pad_3",
+					"__identifier": "Horizontal_jump_pad_3_j",
 					"__grid": [65,20],
 					"__pivot": [0.5,0.5],
 					"__tags": ["bloc_speciaux"],
@@ -1336,36 +1392,7 @@
 			"seed": 3983232,
 			"overrideTilesetUid": null,
 			"gridTiles": [],
-			"entityInstances": [
-				{
-					"__identifier": "Pics_verticaux_right",
-					"__grid": [46,33],
-					"__pivot": [0.5,0.5],
-					"__tags": ["pics_3_pas_seamless"],
-					"__tile": null,
-					"__smartColor": "#C01C1C",
-					"iid": "d3ee7960-ed50-11ed-9fe8-1fffe6c1e1eb",
-					"width": 16,
-					"height": 48,
-					"defUid": 78,
-					"px": [744,536],
-					"fieldInstances": []
-				},
-				{
-					"__identifier": "Pics_verticaux_right",
-					"__grid": [46,36],
-					"__pivot": [0.5,0.5],
-					"__tags": ["pics_3_pas_seamless"],
-					"__tile": null,
-					"__smartColor": "#C01C1C",
-					"iid": "d4702c80-ed50-11ed-9fe8-05e9ea051340",
-					"width": 16,
-					"height": 48,
-					"defUid": 78,
-					"px": [744,584],
-					"fieldInstances": []
-				}
-			]
+			"entityInstances": []
 		}
 	],
 	"__neighbours": [{ "levelIid": "982212a0-c640-11ed-8f46-1785410656e9", "dir": "w" }]
