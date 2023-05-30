@@ -76,7 +76,7 @@ public class AchievementsCheck : MonoBehaviour
     {
         foreach (Achievement achievement in achievements)
         {
-            if(achievement.requirement.Invoke(null) == true)
+            if(achievement.requirement.Invoke(null))
             {
                 achievement.requirementMet = true;
                 achievement.UpdateCompletion();
