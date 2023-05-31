@@ -138,16 +138,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9ef2d13e51f3524fb4c52acdb3a3b4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resolutionDropDown: {fileID: 0}
-  qualityDropDown: {fileID: 0}
-  fullscreenToggle: {fileID: 0}
+  resolutionDropDown: {fileID: 729276220740838790}
+  qualityDropDown: {fileID: 6810000596676618051}
+  fullscreenToggle: {fileID: 1357179628946170222}
   audioMixer: {fileID: 24100000, guid: 7cef9701255d7f34a89a45f370066fb1, type: 2}
-  masterSlider: {fileID: 0}
-  SFXSlider: {fileID: 0}
-  musicSlider: {fileID: 0}
-  masterVolumeTxt: {fileID: 0}
-  SFXVolumeTxt: {fileID: 0}
-  musicVolumeTxt: {fileID: 0}
+  masterSlider: {fileID: 6840624448428637229}
+  SFXSlider: {fileID: 8449661725476866987}
+  musicSlider: {fileID: 4781539890359466647}
+  masterVolumeTxt: {fileID: 5538937092276958049}
+  SFXVolumeTxt: {fileID: 5799143642476137011}
+  musicVolumeTxt: {fileID: 4823333983623461282}
 --- !u!114 &3001127640249912216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3310,7 +3310,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4753571210738335779}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: Fullscreen
         m_Mode: 0
@@ -3930,7 +3930,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4753571210738335779}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: Resolution
         m_Mode: 0
@@ -10149,7 +10149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4493773985029801115}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 54.690605, y: -25.79999, z: -10}
+  m_LocalPosition: {x: 1, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10191,7 +10191,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 11
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -10508,7 +10508,7 @@ MonoBehaviour:
   jumpSound: {fileID: 0}
   glideSound: {fileID: 0}
   fallSound: {fileID: 0}
-  deathSound: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: 7d4b6bb04e071fc4399ec00667b1b959, type: 3}
   moveSound: {fileID: 0}
   gardenAnimator: 0
   blueAnimator: 0
@@ -10926,7 +10926,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parallax: 0
   garden: {fileID: 5970433752117652592}
-  catacombs: {fileID: 0}
   termite: {fileID: 6987401589579308114}
 --- !u!1 &4493773985485097171
 GameObject:
@@ -11234,7 +11233,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4753571210738335779}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: SetMasterVolume
         m_Mode: 0
@@ -11518,7 +11517,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4753571210738335779}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: Graphics
         m_Mode: 0
@@ -12868,7 +12867,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4753571210738335779}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: SetMusicVolume
         m_Mode: 0
@@ -15282,7 +15281,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4753571210738335779}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: SetSFXVolume
         m_Mode: 0

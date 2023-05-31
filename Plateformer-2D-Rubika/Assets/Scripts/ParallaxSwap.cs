@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class ParallaxSwap : MonoBehaviour
 {
-    public enum Parallax { gardenParallax, catacombsParallax, termiteParallax };
+    public enum Parallax { gardenParallax, termiteParallax };
 
     public Parallax parallax;
 
-    [SerializeField] Transform garden, catacombs, termite;
+    [SerializeField] Transform garden, termite;
 
     private void Start()
     {
@@ -23,38 +23,15 @@ public class ParallaxSwap : MonoBehaviour
             {
                 child.GetComponent<SpriteRenderer>().enabled = true;
             }
-            foreach (Transform child in catacombs)
-            {
-                child.GetComponent<SpriteRenderer>().enabled = false;
-            }
             foreach (Transform child in termite)
             {
                 child.GetComponent<SpriteRenderer>().enabled = false;
             }
         }
-        else if (parallax == Parallax.catacombsParallax)
-        {
-            foreach (Transform child in garden)
-            {
-                child.GetComponent<SpriteRenderer>().enabled = false;
-            }
-            foreach (Transform child in catacombs)
-            {
-                child.GetComponent<SpriteRenderer>().enabled = true;
-            }
-            foreach (Transform child in termite)
-            {
-                child.GetComponent<SpriteRenderer>().enabled = false;
-            }
-
-        }
+        
         else if (parallax == Parallax.termiteParallax)
         {
             foreach (Transform child in garden)
-            {
-                child.GetComponent<SpriteRenderer>().enabled = false;
-            }
-            foreach (Transform child in catacombs)
             {
                 child.GetComponent<SpriteRenderer>().enabled = false;
             }
