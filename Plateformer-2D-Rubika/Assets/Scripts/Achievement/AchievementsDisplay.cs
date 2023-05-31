@@ -8,11 +8,15 @@ public class AchievementsDisplay : MonoBehaviour
 {
 
     [Header("References")]
-    [SerializeField] TextMeshProUGUI titleTxt;
-    [SerializeField] TextMeshProUGUI descriptionTxt;
-    [SerializeField] Image achievementIMG;
-    [SerializeField] Animator animator;
+    //[SerializeField] TextMeshProUGUI titleTxt;
+    //[SerializeField] TextMeshProUGUI descriptionTxt;
+    //[SerializeField] Image achievementIMG;
+    //[SerializeField] Animator animator;
+    [SerializeField] GameObject prefab;
+    [SerializeField] Transform UI;
     Sprite sp;
+
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.V))
@@ -23,20 +27,24 @@ public class AchievementsDisplay : MonoBehaviour
 
     public void DisplayAchievement(string title, string description, Sprite sprite)
     {
-        titleTxt.text = title;
-        descriptionTxt.text = description;
-        achievementIMG.sprite = sprite;
 
-        StartCoroutine(AnimateDisplay());
+        GameObject achievement = Instantiate(prefab, UI);
+        achievement.transform.GetChild(0).transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = title;
+        achievement.transform.GetChild(0).transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = description;
+        achievement.transform.GetChild(0).transform.GetChild(1).GetComponent<Image>().sprite = sprite;
+
+        Destroy(achievement, 6);
+
+        StartCoroutine(AnimateDisplay(achievement));
     }
 
-    IEnumerator AnimateDisplay()
+    IEnumerator AnimateDisplay(GameObject achi)
     {
-        animator.Play("ShowUp");
+        achi.transform.GetChild(0).GetComponent<Animator>().Play("SlideOn");
 
         yield return new WaitForSeconds(5);
 
-        animator.Play("ShowDown");
+        achi.transform.GetChild(0).GetComponent<Animator>().Play("SlideOff");
     }
 
 }
