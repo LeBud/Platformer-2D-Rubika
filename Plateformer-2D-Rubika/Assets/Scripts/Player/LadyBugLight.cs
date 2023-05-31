@@ -5,7 +5,7 @@ using UnityEngine.Rendering.Universal;
 
 public class LadyBugLight : MonoBehaviour
 {
-    AchievementsCheck achievements;
+    NewAchievementSystem achievements;
     PlayerControllerData playerControllerData;
 
     [HideInInspector]
@@ -25,7 +25,7 @@ public class LadyBugLight : MonoBehaviour
 
     private void Start()
     {
-        achievements = FindObjectOfType<AchievementsCheck>();
+        achievements = FindObjectOfType<NewAchievementSystem>();
         playerControllerData = GetComponent<PlayerController>().playerControllerData;
 
         ladyLight.intensity = 0;
