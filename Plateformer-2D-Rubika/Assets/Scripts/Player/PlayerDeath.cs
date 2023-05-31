@@ -12,7 +12,7 @@ public class PlayerDeath : MonoBehaviour
     LevelManager levelManager;
     LadyBugLight ladyBugLight;
     PlayerController playerController;
-    AchievementsCheck achievements;
+    NewAchievementSystem achievements;
 
     [Header("Virtual Camera")]
     [SerializeField] CinemachineVirtualCamera virtualCamera;
@@ -42,7 +42,7 @@ public class PlayerDeath : MonoBehaviour
         respawning = false;
 
         levelManager = FindObjectOfType<LevelManager>();
-        achievements = FindObjectOfType<AchievementsCheck>();
+        achievements = FindObjectOfType<NewAchievementSystem>();
         ladyBugLight = GetComponent<LadyBugLight>();
         playerController = GetComponent<PlayerController>();
         rb = GetComponent<Rigidbody2D>();

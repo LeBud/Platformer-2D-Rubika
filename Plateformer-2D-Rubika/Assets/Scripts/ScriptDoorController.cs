@@ -20,21 +20,41 @@ public class ScriptDoorController : MonoBehaviour
     public ParallaxSwap.Parallax parallaxRight;
     public ParallaxSwap.Parallax parallaxLeft;
 
+    [Header("Achievements Unlocks")]
+    public bool unlockAchievement;
+    public enum AchievementEnum { fallInCatacombs, SurviveChase, ExitCatacombs, FinishGame }
+    public AchievementEnum achievement;
+
     PlayerController playerController;
     ParallaxSwap parallaxSwap;
     Collider2D coll;
+    NewAchievementSystem achievementSystem;
 
     private void Awake()
     {
         playerController = FindObjectOfType<PlayerController>();
         coll= GetComponent<Collider2D>();
         parallaxSwap = FindObjectOfType<ParallaxSwap>();
+        achievementSystem = FindObjectOfType<NewAchievementSystem>();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
+
+            if(unlockAchievement)
+            {
+                if (achievement == AchievementEnum.FinishGame)
+                    achievementSystem.endGame = true;
+                if (achievement == AchievementEnum.fallInCatacombs)
+                    achievementSystem.fallInCatacomb = true;
+                if (achievement == AchievementEnum.SurviveChase)
+                    achievementSystem.surviveChase = true;
+                if (achievement == AchievementEnum.ExitCatacombs)
+                    achievementSystem.exitCatacomb = true;
+            }
+
 
             Vector2 exitDirection = (collision.transform.position - coll.bounds.center).normalized;
 

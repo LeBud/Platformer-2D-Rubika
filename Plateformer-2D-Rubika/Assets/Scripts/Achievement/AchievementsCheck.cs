@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AchievementsCheck : MonoBehaviour
 {
-    public static List<Achievement> achievements;
+    /*public static List<Achievement> achievements;
     public static List<AchievementData> achievementsData;
     public Sprite tempSprite;
 
@@ -108,7 +108,7 @@ public class AchievementsCheck : MonoBehaviour
             }            
         }
     }
-
+    */
 }
 
 public class Achievement : MonoBehaviour
@@ -157,9 +157,9 @@ public class Achievement : MonoBehaviour
             Debug.Log($"{title} : {description}");
             achieved = true;
 
-            AchievementsCheck.RefreshData();
+            //AchievementsCheck.RefreshData();
 
-            saveSystem.SaveAchievements();
+            //saveSystem.SaveAchievements();
             display.DisplayAchievement(title, description, sprite);
         }
     }
@@ -168,17 +168,4 @@ public class Achievement : MonoBehaviour
     {
         return requirement.Invoke(achievementsCheck) && !achieved;
     }*/
-}
-
-[Serializable]
-public struct AchievementData
-{
-    public string title;
-    public bool achieved;
-
-    public AchievementData(string title, bool achieved)
-    {
-        this.title = title;
-        this.achieved = achieved;
-    }
 }
