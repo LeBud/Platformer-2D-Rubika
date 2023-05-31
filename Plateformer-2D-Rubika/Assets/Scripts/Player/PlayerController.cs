@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
     AirFlow airFlow;
-    AchievementsCheck achievements;
+    NewAchievementSystem achievements;
 
     [Header("Controller Data")]
     public PlayerControllerData playerControllerData;
@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        achievements = FindObjectOfType<AchievementsCheck>();
+        achievements = FindObjectOfType<NewAchievementSystem>();
         source = GetComponent<AudioSource>();
     }
 

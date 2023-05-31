@@ -12,21 +12,23 @@ public class AchievementMenuDisplay : MonoBehaviour
     [SerializeField] Sprite lockedAchievement;
     [SerializeField] TextMeshProUGUI successTxt;
     [SerializeField] List<GameObject> achievementDisplay;
-    List<Achievement> achievementsList;
+    List<AchievementsSO> achievementsList;
+
+    NewAchievementSystem achievementSystem;
 
     List<string> successName = new List<string>();
 
-    AchievementsCheck achievements;
+    //AchievementsCheck achievements;
 
     private void Awake()
     {
-        achievements = GetComponent<AchievementsCheck>();
+        achievementSystem = GetComponent<NewAchievementSystem>();
         LoadAchievement();
     }
 
     private void Start()
     {
-        achievementsList = AchievementsCheck.achievements;
+        achievementsList = achievementSystem.achievements;
 
         RefreshAchievement();
     }
@@ -39,8 +41,8 @@ public class AchievementMenuDisplay : MonoBehaviour
 
             if (achievementsList[i].achieved)
             {
-                achievementDisplay[i].transform.GetChild(0).GetComponent<Image>().sprite = achievementsList[i].sprite;
-                successName.Add(achievementsList[i].title + "\n" + achievementsList[i].description);
+                achievementDisplay[i].transform.GetChild(0).GetComponent<Image>().sprite = achievementsList[i].image;
+                successName.Add(achievementsList[i].achievementName + "\n" + achievementsList[i].description);
             }
             else
             {
@@ -73,7 +75,7 @@ public class AchievementMenuDisplay : MonoBehaviour
         SavedData savedData = JsonUtility.FromJson<SavedData>(jsonData);
 
         //Charger les données sauvergardées
-        achievements.CheckCompletion(savedData.achievementsList);
+        achievementSystem.CheckCompletion(savedData.achievementsData);
 
         Debug.Log("Chargement des données terminées");
     }

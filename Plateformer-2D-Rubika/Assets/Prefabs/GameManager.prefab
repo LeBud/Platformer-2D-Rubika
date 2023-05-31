@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2286016771729557631}
   - component: {fileID: 2286016771729557629}
   - component: {fileID: 3079271723670867493}
-  - component: {fileID: 8480157210655324425}
+  - component: {fileID: 8221836003047788426}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -52,6 +52,7 @@ MonoBehaviour:
   deathNumber: {fileID: 0}
   gameManager: {fileID: 2286016771729557629}
   levelManager: {fileID: 3079271723670867493}
+  playerController: {fileID: 0}
 --- !u!114 &2286016771729557629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,9 +65,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f45edb55eed13645a7e586edfb1399e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectableNum: 0
-  collectableList: []
-  collectables: []
+  collectableCount: 0
+  inGameCollectibles: []
+  collectiblesSaveList: []
 --- !u!114 &3079271723670867493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +83,7 @@ MonoBehaviour:
   levels: []
   startingRoom: 0
   currentRoom: 0
---- !u!114 &8480157210655324425
+--- !u!114 &8221836003047788426
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,10 +92,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 2286016771729557630}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec246dfefae53ae4ab1609a047eda47e, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b44b128588c81b42b8e2744505326fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tempSprite: {fileID: 21300000, guid: 236b4fda5f9803b4c8e501ed28d21a6f, type: 3}
+  achievements:
+  - {fileID: 11400000, guid: 417ff85a01b921747ab19735ef068848, type: 2}
+  - {fileID: 11400000, guid: e79f3334dc0661445bd6f8ced4404fbf, type: 2}
+  - {fileID: 11400000, guid: c1ebb3de8425a034f80da96f2fbbb245, type: 2}
+  - {fileID: 11400000, guid: c06cead4a790dd34d9156df2388595bf, type: 2}
+  - {fileID: 11400000, guid: e2d65a7f4a95d9542a38832b8d3c07bf, type: 2}
+  - {fileID: 11400000, guid: ead385ef5c7456f42882a127765e2734, type: 2}
+  - {fileID: 11400000, guid: 717c6a08d48a9f04a88c3ece573e42d2, type: 2}
+  - {fileID: 11400000, guid: a962dbf0429366840bf19c8418f18b0a, type: 2}
+  - {fileID: 11400000, guid: c02ee3d8ff46a2043951aff68a8e7c1c, type: 2}
+  - {fileID: 11400000, guid: 327a457f5302c90439fb0fe811a0e310, type: 2}
+  - {fileID: 11400000, guid: 12a9e804c486aaf48ade294136f763ab, type: 2}
+  - {fileID: 11400000, guid: ee61c70acb272aa4691dae6e6bb5637c, type: 2}
+  - {fileID: 11400000, guid: be03564f1ff7aa54b83512c0330a85de, type: 2}
+  - {fileID: 11400000, guid: 61e1e854e7bd12e43ac4a1628231c789, type: 2}
+  - {fileID: 11400000, guid: 121f5b7f0e66c4147b604c8c6146eeaa, type: 2}
+  - {fileID: 11400000, guid: e9ef103c2da37234eaa424fca0b948c1, type: 2}
   jumpCount: 0
   deathCount: 0
   collectableCount: 0

@@ -4158,8 +4158,8 @@ GameObject:
   - component: {fileID: 588976494}
   - component: {fileID: 588976498}
   - component: {fileID: 588976499}
-  - component: {fileID: 588976500}
   - component: {fileID: 588976501}
+  - component: {fileID: 588976502}
   m_Layer: 5
   m_Name: MainMenuHUD
   m_TagString: Untagged
@@ -4294,31 +4294,6 @@ MonoBehaviour:
   masterVolumeTxt: {fileID: 2036160708}
   SFXVolumeTxt: {fileID: 1573141316}
   musicVolumeTxt: {fileID: 53596743}
---- !u!114 &588976500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 588976493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec246dfefae53ae4ab1609a047eda47e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tempSprite: {fileID: 21300000, guid: 236b4fda5f9803b4c8e501ed28d21a6f, type: 3}
-  jumpCount: 0
-  deathCount: 0
-  collectableCount: 0
-  airFlowUse: 0
-  jumpPadUse: 0
-  breakPlatformUse: 0
-  aphidUse: 0
-  fallObjectUse: 0
-  fallInCatacomb: 0
-  surviveChase: 0
-  exitCatacomb: 0
-  endGame: 0
 --- !u!114 &588976501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4350,6 +4325,47 @@ MonoBehaviour:
   - {fileID: 609027778}
   - {fileID: 605182709}
   - {fileID: 623321908}
+--- !u!114 &588976502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588976493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b44b128588c81b42b8e2744505326fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  achievements:
+  - {fileID: 11400000, guid: 417ff85a01b921747ab19735ef068848, type: 2}
+  - {fileID: 11400000, guid: e79f3334dc0661445bd6f8ced4404fbf, type: 2}
+  - {fileID: 11400000, guid: c1ebb3de8425a034f80da96f2fbbb245, type: 2}
+  - {fileID: 11400000, guid: c06cead4a790dd34d9156df2388595bf, type: 2}
+  - {fileID: 11400000, guid: e2d65a7f4a95d9542a38832b8d3c07bf, type: 2}
+  - {fileID: 11400000, guid: ead385ef5c7456f42882a127765e2734, type: 2}
+  - {fileID: 11400000, guid: 717c6a08d48a9f04a88c3ece573e42d2, type: 2}
+  - {fileID: 11400000, guid: a962dbf0429366840bf19c8418f18b0a, type: 2}
+  - {fileID: 11400000, guid: c02ee3d8ff46a2043951aff68a8e7c1c, type: 2}
+  - {fileID: 11400000, guid: 327a457f5302c90439fb0fe811a0e310, type: 2}
+  - {fileID: 11400000, guid: 12a9e804c486aaf48ade294136f763ab, type: 2}
+  - {fileID: 11400000, guid: ee61c70acb272aa4691dae6e6bb5637c, type: 2}
+  - {fileID: 11400000, guid: be03564f1ff7aa54b83512c0330a85de, type: 2}
+  - {fileID: 11400000, guid: 61e1e854e7bd12e43ac4a1628231c789, type: 2}
+  - {fileID: 11400000, guid: 121f5b7f0e66c4147b604c8c6146eeaa, type: 2}
+  - {fileID: 11400000, guid: e9ef103c2da37234eaa424fca0b948c1, type: 2}
+  jumpCount: 0
+  deathCount: 0
+  collectableCount: 0
+  airFlowUse: 0
+  jumpPadUse: 0
+  breakPlatformUse: 0
+  aphidUse: 0
+  fallObjectUse: 0
+  fallInCatacomb: 0
+  surviveChase: 0
+  exitCatacomb: 0
+  endGame: 0
 --- !u!1 &594360892
 GameObject:
   m_ObjectHideFlags: 0
