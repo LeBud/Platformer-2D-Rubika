@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FallingObject : MonoBehaviour
 {
-    AchievementsCheck achievements;
+    NewAchievementSystem achievements;
 
     [SerializeField] Rigidbody2D rb;
 
@@ -19,7 +19,7 @@ public class FallingObject : MonoBehaviour
 
     private void Awake()
     {
-        achievements = FindObjectOfType<AchievementsCheck>();
+        achievements = FindObjectOfType<NewAchievementSystem>();
         rb.gravityScale = 0;
         startPos = rb.position;
         source= GetComponent<AudioSource>();
