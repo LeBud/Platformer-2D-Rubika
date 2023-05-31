@@ -6,6 +6,7 @@ using UnityEngine;
 public class NewAchievementSystem : MonoBehaviour
 {
     AchievementsDisplay display;
+    GameManager manager;
 
     public List<AchievementsSO> achievements;
     public static List<AchievementData> achievementsData;
@@ -19,7 +20,9 @@ public class NewAchievementSystem : MonoBehaviour
     private void Start()
     {
         display = FindObjectOfType<AchievementsDisplay>();
+        manager = GetComponent<GameManager>();
         RefreshData();
+        collectableCount = manager.collectableCount;
     }
 
     public void UpdateValue()

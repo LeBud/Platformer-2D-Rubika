@@ -61,6 +61,7 @@ public class SaveSystem : MonoBehaviour
         //Sauvegarder les données
         SavedData savedData = loadData;
         savedData.deathNumber = deathNumber.deathCounter;
+        savedData.achievementIntJump = achievements.jumpCount;
 
         //Sauvegarder les données
         jsonData = JsonUtility.ToJson(savedData);
@@ -127,6 +128,7 @@ public class SaveSystem : MonoBehaviour
             parallaxNum = parallax.parallax,
             gardenAnim = playerController.gardenAnimator,
             blueAnim = playerController.blueAnimator,
+            achievementIntJump = achievements.jumpCount,
         };
 
         if (achievements.achievements.Count > 0)
@@ -175,6 +177,8 @@ public class SaveSystem : MonoBehaviour
 
         gameManager.LoadCollectable();
 
+        achievements.jumpCount = savedData.achievementIntJump;
+
         NewAchievementSystem.achievementsData = savedData.achievementsData;
         achievements.CheckCompletion(savedData.achievementsData);
 
@@ -216,4 +220,6 @@ public class SavedData
     public ParallaxSwap.Parallax parallaxNum;
     public bool gardenAnim, blueAnim;
     public List<AchievementData> achievementsData;
+    public int achievementIntJump;
+    public int achievementInt;
 }
