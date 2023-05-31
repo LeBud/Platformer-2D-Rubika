@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public List<Collected> collectiblesSaveList = new List<Collected>();
 
     SaveSystem saveSystem;
+    NewAchievementSystem achievementSystem;
 
     private void Awake()
     {
@@ -23,6 +24,11 @@ public class GameManager : MonoBehaviour
             FindObjectOfType<PlayerController>().canGlide = false;
             FindObjectOfType<PlayerController>().gardenAnimator = true;
             FindObjectOfType<ParallaxSwap>().parallax = ParallaxSwap.Parallax.gardenParallax;
+            foreach(var achievement in achievementSystem.achievements)
+            {
+                achievement.actualValue = 0;
+                achievement.achieved = false;
+            }
         }
         else if (MainMenu.loadSave) FindObjectOfType<SaveSystem>().LoadData();
 

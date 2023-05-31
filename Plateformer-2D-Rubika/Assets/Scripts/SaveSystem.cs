@@ -14,14 +14,14 @@ public class SaveSystem : MonoBehaviour
     [SerializeField] GameManager gameManager;
     [SerializeField] LevelManager levelManager;
     [SerializeField] PlayerController playerController;
-    AchievementsCheck achievements;
+    NewAchievementSystem achievements;
     ParallaxSwap parallax;
     private void Awake()
     {
         ladyBugLight = FindObjectOfType<LadyBugLight>();
         deathNumber= FindObjectOfType<PlayerDeath>();
         levelManager = FindObjectOfType<LevelManager>();
-        achievements = FindObjectOfType<AchievementsCheck>();
+        achievements = FindObjectOfType<NewAchievementSystem>();
         gameManager = GetComponent<GameManager>();
         playerController = FindObjectOfType<PlayerController>();
         playerTransform = ladyBugLight.transform;
@@ -33,7 +33,7 @@ public class SaveSystem : MonoBehaviour
         ladyBugLight = FindObjectOfType<LadyBugLight>();
         deathNumber = FindObjectOfType<PlayerDeath>();
         levelManager = FindObjectOfType<LevelManager>();
-        achievements = FindObjectOfType<AchievementsCheck>();
+        achievements = FindObjectOfType<NewAchievementSystem>();
         gameManager = GetComponent<GameManager>();
         playerController = FindObjectOfType<PlayerController>();
         playerTransform = ladyBugLight.transform;
@@ -77,10 +77,10 @@ public class SaveSystem : MonoBehaviour
         //Sauvegarder les données
         SavedData savedData = loadData;
         
-        if(AchievementsCheck.achievements.Count > 0)
-            savedData.achievementsList = AchievementsCheck.achievementsData;
+        if(achievements.achievements.Count > 0)
+            savedData.achievementsData = NewAchievementSystem.achievementsData;
 
-        achievements.CheckCompletion(savedData.achievementsList);
+        achievements.CheckCompletion(savedData.achievementsData);
 
         //Sauvegarder les données
         jsonData = JsonUtility.ToJson(savedData);
@@ -129,8 +129,8 @@ public class SaveSystem : MonoBehaviour
             blueAnim = playerController.blueAnimator,
         };
 
-        if (AchievementsCheck.achievements.Count > 0)
-            savedData.achievementsList = AchievementsCheck.achievementsData;
+        if (achievements.achievements.Count > 0)
+            savedData.achievementsData = NewAchievementSystem.achievementsData;
 
         achievements.collectableCount = gameManager.collectableCount;
 
@@ -175,7 +175,8 @@ public class SaveSystem : MonoBehaviour
 
         gameManager.LoadCollectable();
 
-        achievements.CheckCompletion(savedData.achievementsList);
+        NewAchievementSystem.achievementsData = savedData.achievementsData;
+        achievements.CheckCompletion(savedData.achievementsData);
 
         Debug.Log("Chargement des données terminées");
     }
@@ -212,7 +213,7 @@ public class SavedData
     public List<Collected> collectablesList;
     public int currentRoom;
     public bool lightCheckPoint;
-    public List<AchievementData> achievementsList;
     public ParallaxSwap.Parallax parallaxNum;
     public bool gardenAnim, blueAnim;
+    public List<AchievementData> achievementsData;
 }

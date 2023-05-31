@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BreakPlatform : MonoBehaviour
 {
-    AchievementsCheck achievements;
+    NewAchievementSystem achievements;
 
     [SerializeField] float breakTimer;
     [SerializeField] float respawnTimer;
@@ -28,7 +28,7 @@ public class BreakPlatform : MonoBehaviour
 
     private void Start()
     {
-        achievements = FindObjectOfType<AchievementsCheck>();
+        achievements = FindObjectOfType<NewAchievementSystem>();
         spriteRenderer= GetComponent<SpriteRenderer>();
         BoxCollider2D = GetComponents<BoxCollider2D>();
         animator = GetComponent<Animator>();
