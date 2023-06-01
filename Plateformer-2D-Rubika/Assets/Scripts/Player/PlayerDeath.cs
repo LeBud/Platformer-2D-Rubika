@@ -145,8 +145,8 @@ public class PlayerDeath : MonoBehaviour
         rb.velocity = Vector2.zero;
         rb.simulated = true;
 
-        if (lightCheckPoint && ladyBugLight.aphidCount < 1)
-            ladyBugLight.aphidCount = 1;
+        if (lightCheckPoint && ladyBugLight.aphidCharge < 100)
+            ladyBugLight.aphidCharge = 100;
 
         StartCoroutine(FadeOut());
     }
