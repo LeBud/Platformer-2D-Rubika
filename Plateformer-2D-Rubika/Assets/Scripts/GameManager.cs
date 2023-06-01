@@ -13,6 +13,13 @@ public class GameManager : MonoBehaviour
 
     SaveSystem saveSystem;
     NewAchievementSystem achievementSystem;
+    AudioSource source;
+    PlayerController controller;
+
+    [SerializeField] AudioClip garden;
+    [SerializeField] AudioClip catacombs;
+
+    bool audioPlaying;
 
     private void Awake()
     {
@@ -38,7 +45,8 @@ public class GameManager : MonoBehaviour
             RefreshList();
 
         LoadCollectable();
-
+        source = GetComponent<AudioSource>();
+        controller = FindObjectOfType<PlayerController>();
     }
 
     private void Start()
@@ -67,6 +75,45 @@ public class GameManager : MonoBehaviour
             collectiblesSaveList.Add(new Collected { ID = inGameCollectibles[i].ID, taken = inGameCollectibles[i].taken });
         }
 
+    }
+
+    private void Update()
+    {
+
+        StartCoroutine(AudioPlay());
+
+    }
+
+    IEnumerator AudioPlay()
+    {
+        if (controller.gardenAnimator)
+        {
+            if (audioPlaying) yield break;
+            if (!controller.gardenAnimator)
+            {
+                source.Stop();
+                audioPlaying = false;
+                yield break;
+            }
+            source.PlayOneShot(garden);
+            audioPlaying = true;
+            yield return new WaitForSeconds(garden.length);
+            audioPlaying = false;
+        }
+        else
+        {
+            if (audioPlaying) yield break;
+            if (controller.gardenAnimator)
+            {
+                source.Stop();
+                audioPlaying = false;
+                yield break;
+            }
+            source.PlayOneShot(catacombs);
+            audioPlaying = true;
+            yield return new WaitForSeconds(catacombs.length);
+            audioPlaying = false;
+        }
     }
 
 }
