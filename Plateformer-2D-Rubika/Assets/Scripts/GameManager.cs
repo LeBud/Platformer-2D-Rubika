@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         saveSystem = GetComponent<SaveSystem>();
+        achievementSystem = GetComponent<NewAchievementSystem>();
 
         if (MainMenu.ereaseSave)
         {
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
             RefreshList();
 
         LoadCollectable();
+
     }
 
     private void Start()
@@ -48,10 +50,10 @@ public class GameManager : MonoBehaviour
     {
         for(int i = 0; i < collectiblesSaveList.Count; i++)
         {
-            if (collectiblesSaveList[collectiblesSaveList[i].ID].taken)
-                inGameCollectibles[collectiblesSaveList[i].ID].gameObject.SetActive(false);
+            if (collectiblesSaveList[i].taken)
+                inGameCollectibles[i].gameObject.SetActive(false);
             else
-                inGameCollectibles[collectiblesSaveList[i].ID].gameObject.SetActive(true);
+                inGameCollectibles[i].gameObject.SetActive(true);
         }
     }
 
