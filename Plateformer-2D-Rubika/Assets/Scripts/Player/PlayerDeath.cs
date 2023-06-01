@@ -109,17 +109,15 @@ public class PlayerDeath : MonoBehaviour
 
         LevelManager.respawning = true;
 
-        levelManager.ActiveAllLevel();
-
         FindObjectOfType<SaveSystem>().SaveDeath();
-
-        //Animation de mort
 
         yield return new WaitForSeconds(.25f);
         
         fadeAnim.Play("FadeIn");
 
         yield return new WaitForSeconds(.5f);
+
+        levelManager.ActiveAllLevel();
 
         StartCoroutine(RespawnPlatforms());
 

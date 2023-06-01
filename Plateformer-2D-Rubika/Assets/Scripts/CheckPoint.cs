@@ -30,7 +30,7 @@ public class CheckPoint : MonoBehaviour
         player = FindObjectOfType<PlayerDeath>();
         lightSpot = GetComponentInChildren<Light2D>();
         sprite.sprite = unCheck;
-        lightSpot.enabled = false;
+        //lightSpot.enabled = false;
         animator = GetComponent<Animator>();
     }
 
@@ -77,8 +77,8 @@ public class CheckPoint : MonoBehaviour
             player.lightCheckPoint = true;
             lightSpot.enabled = true;
         }
-        else
-            player.lightCheckPoint = false;
+        /*else
+            player.lightCheckPoint = false;*/
     }
 
 }

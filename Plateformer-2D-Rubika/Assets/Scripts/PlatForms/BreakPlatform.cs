@@ -47,12 +47,12 @@ public class BreakPlatform : MonoBehaviour
     IEnumerator PlatformBreak()
     {
         isPlaying = true;
+        source.PlayOneShot(sound);
         yield return new WaitForSeconds(breakTimer);
 
         //spriteRenderer.color= color2;
         //animator.Play("PlatformBreak");
         animator.Play(breakplat);
-        source.PlayOneShot(sound);
         particles.Stop();
 
         for(int i = 0; i < BoxCollider2D.Length; i++)
