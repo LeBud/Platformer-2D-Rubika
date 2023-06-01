@@ -52,6 +52,8 @@ public class PauseMenu : MonoBehaviour
         optionsMenuHUD.SetActive(false);
 
         EventSystem.current.SetSelectedGameObject(null);
+
+        FindObjectOfType<SettingsMenu>().SaveSettings();
     }
 
     void Pause()

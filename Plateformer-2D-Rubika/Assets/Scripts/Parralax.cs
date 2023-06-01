@@ -38,11 +38,11 @@ public class Parralax : MonoBehaviour
             offsetPosX = (camTrans.position.x - transform.position.x) % textureUnitSize;
             transform.position = new Vector3(camTrans.position.x + offsetPosX, transform.position.y, transform.position.z);
         }
-        if (Mathf.Abs(camTrans.position.y - transform.position.y) >= textureUnitSizeY / 3)
+        /*if (Mathf.Abs(camTrans.position.y - transform.position.y) >= textureUnitSizeY / 3)
         {
             offsetPosY = (camTrans.position.y - transform.position.y) % textureUnitSizeY;
             transform.position = new Vector3(transform.position.x, camTrans.position.y + offsetPosY, transform.position.z);
-        }
+        }*/
 
     }
 
