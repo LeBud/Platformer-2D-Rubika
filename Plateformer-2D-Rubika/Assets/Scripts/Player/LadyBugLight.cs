@@ -7,6 +7,7 @@ public class LadyBugLight : MonoBehaviour
 {
     NewAchievementSystem achievements;
     PlayerControllerData playerControllerData;
+    PlayerController controller;
 
     [HideInInspector]
     public bool lightActive;
@@ -27,7 +28,7 @@ public class LadyBugLight : MonoBehaviour
     {
         achievements = FindObjectOfType<NewAchievementSystem>();
         playerControllerData = GetComponent<PlayerController>().playerControllerData;
-
+        controller= GetComponent<PlayerController>();
         ladyLight.intensity = 0;
         ladyLight.enabled = false;
 
@@ -48,9 +49,10 @@ public class LadyBugLight : MonoBehaviour
 
         LightSystem();
 
-        currentLightLevel = Mathf.Clamp(currentLightLevel, 0, 1);
+        currentLightLevel = Mathf.Clamp(currentLightLevel, 0, 2);
         if(!oldSystem)
             ladyLight.intensity = currentLightLevel;
+
     }
 
     void MyInputs()
@@ -74,18 +76,30 @@ public class LadyBugLight : MonoBehaviour
 
     void LightSystem()
     {
+
+        if (!controller.blueAnimator)
+        {
+            currentLightLevel = 0;
+            return;
+        }
+
         if (inputing)
         {
-            if (currentLightLevel < 1)
+            if (currentLightLevel < 2)
                 currentLightLevel += Time.deltaTime * playerControllerData.timeToLightMult;
             
 
             aphidCharge -= Time.deltaTime * playerControllerData.lightConsMult;
 
         }
-        else
+        else if(!inputing)
         {
-            if (currentLightLevel > 0)
+            if(controller.blueAnimator && !inputing && currentLightLevel < .5f)
+            {
+                currentLightLevel += Time.deltaTime * playerControllerData.timeToLightMult;
+            }
+
+            if (currentLightLevel > .5f)
             {
                 currentLightLevel -= Time.deltaTime * playerControllerData.timeToLightMult;
             }
@@ -98,7 +112,7 @@ public class LadyBugLight : MonoBehaviour
     {
         lightActive = true;
         aphidCount--;
-        ladyLight.intensity = 0;
+        ladyLight.intensity = 2;
         ladyLight.enabled = true;
 
         achievements.aphidUse = true;
@@ -117,7 +131,7 @@ public class LadyBugLight : MonoBehaviour
             yield return new WaitForSeconds(.04f);
         }
 
-        if (ladyLight.intensity > 1) ladyLight.intensity = 1;
+        if (ladyLight.intensity > 2) ladyLight.intensity = 2;
         
         yield return new WaitForSeconds(playerControllerData.maxTimeLightOn - .7f);
 
