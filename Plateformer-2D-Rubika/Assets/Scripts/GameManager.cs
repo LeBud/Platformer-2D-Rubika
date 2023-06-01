@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
 
         LoadCollectable();
         source = GetComponent<AudioSource>();
+        controller = FindObjectOfType<PlayerController>();
     }
 
     private void Start()
