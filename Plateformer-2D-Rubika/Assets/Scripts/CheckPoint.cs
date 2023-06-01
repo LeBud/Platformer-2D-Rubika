@@ -68,7 +68,7 @@ public class CheckPoint : MonoBehaviour
         player.currentCheckPoint = checkPointNum;
         player.checkPointRoom = roomNumber;
 
-        source.PlayOneShot(sound);
+        //source.PlayOneShot(sound);
 
         animator.Play("Checkpoint");
 

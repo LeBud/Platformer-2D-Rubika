@@ -34,6 +34,7 @@ public class PlayerDeath : MonoBehaviour
 
     List<FallingObject> fallingObjects = new List<FallingObject>();
     List<MantysEnablerDisabler> mantysEnablerDisablers = new List<MantysEnablerDisabler>();
+    List<BreakPlatform> breakPlat = new List<BreakPlatform>();
     
     AudioSource source;
 
@@ -67,6 +68,15 @@ public class PlayerDeath : MonoBehaviour
             }
         }
 
+        if(FindObjectsOfType<BreakPlatform>().Length > 1)
+        {
+            BreakPlatform[] plat = FindObjectsOfType<BreakPlatform>();
+            for(int i = 0; i < plat.Length; i++)
+            {
+                breakPlat.Add(plat[i]);
+            }
+        }
+
         source = GetComponent<AudioSource>();
     }
 
@@ -83,6 +93,11 @@ public class PlayerDeath : MonoBehaviour
             mantysEnablerDisablers[i].used = false;
         }
 
+        for (int i = 0; i < breakPlat.Count; i++)
+        {
+            breakPlat[i].ReactivePlatform();
+        }
+
         if (FindObjectsOfType<AphidCollect>().Length > 0)
         {
             AphidCollect[] aphids = FindObjectsOfType<AphidCollect>();
@@ -91,6 +106,8 @@ public class PlayerDeath : MonoBehaviour
                 aphids[i].RespawnAphidWhenDead();
             }
         }
+
+
 
         yield return null;
     }

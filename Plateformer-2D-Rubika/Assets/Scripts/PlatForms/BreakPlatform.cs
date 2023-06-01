@@ -81,7 +81,7 @@ public class BreakPlatform : MonoBehaviour
 
     }
 
-    void ReactivePlatform()
+    public void ReactivePlatform()
     {
         //spriteRenderer.color = color1;
         for (int i = 0; i < BoxCollider2D.Length; i++)
