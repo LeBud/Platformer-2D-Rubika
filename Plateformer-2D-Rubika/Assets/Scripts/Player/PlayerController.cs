@@ -492,7 +492,7 @@ e   lse centerCamTimer = playerControllerData.timeToRecenter;
     #region Boolean
     bool CanJumpGlide()
     {
-        return (!isJumping || rb.velocity.y < 4) && glideJump && onGround < 0 && !jumpPadOn && !jumpPadDoubleJump && !jumpPadVer;
+        return (!isJumping || rb.velocity.y < 8) && glideJump && onGround < 0 && !jumpPadOn && !jumpPadDoubleJump && !jumpPadVer;
     }
 
     bool CanJump()

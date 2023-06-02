@@ -29,6 +29,31 @@
 	"fieldInstances": [],
 	"layerInstances": [
 		{
+			"__identifier": "Fall",
+			"__type": "Entities",
+			"__cWid": 32,
+			"__cHei": 128,
+			"__gridSize": 16,
+			"__opacity": 1,
+			"__pxTotalOffsetX": 0,
+			"__pxTotalOffsetY": 0,
+			"__tilesetDefUid": null,
+			"__tilesetRelPath": null,
+			"iid": "63117110-ed50-11ed-9b2f-e5cd79a8c73b",
+			"levelId": 6,
+			"layerDefUid": 55,
+			"pxOffsetX": 0,
+			"pxOffsetY": 0,
+			"visible": true,
+			"optionalRules": [],
+			"intGridCsv": [],
+			"autoLayerTiles": [],
+			"seed": 4036170,
+			"overrideTilesetUid": null,
+			"gridTiles": [],
+			"entityInstances": []
+		},
+		{
 			"__identifier": "Spikes",
 			"__type": "Entities",
 			"__cWid": 32,
@@ -1148,8 +1173,8 @@
 			"entityInstances": [
 				{
 					"__identifier": "Checkpoint",
-					"__grid": [23,9],
-					"__pivot": [0.5,1],
+					"__grid": [23,10],
+					"__pivot": [0.5,0.5],
 					"__tags": ["Checkpoint"],
 					"__tile": null,
 					"__smartColor": "#BE4A2F",
