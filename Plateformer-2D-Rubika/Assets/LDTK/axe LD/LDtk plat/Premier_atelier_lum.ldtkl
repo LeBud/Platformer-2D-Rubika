@@ -29,6 +29,88 @@
 	"fieldInstances": [],
 	"layerInstances": [
 		{
+			"__identifier": "Jump_pads",
+			"__type": "Entities",
+			"__cWid": 32,
+			"__cHei": 128,
+			"__gridSize": 16,
+			"__opacity": 1,
+			"__pxTotalOffsetX": 0,
+			"__pxTotalOffsetY": 0,
+			"__tilesetDefUid": null,
+			"__tilesetRelPath": null,
+			"iid": "cc76fd10-ed50-11ed-a14f-5d204647a805",
+			"levelId": 33,
+			"layerDefUid": 57,
+			"pxOffsetX": 0,
+			"pxOffsetY": 0,
+			"visible": true,
+			"optionalRules": [],
+			"intGridCsv": [],
+			"autoLayerTiles": [],
+			"seed": 8300650,
+			"overrideTilesetUid": null,
+			"gridTiles": [],
+			"entityInstances": [
+				{
+					"__identifier": "Jump_pad_3_cata",
+					"__grid": [2,112],
+					"__pivot": [0.5,0.5],
+					"__tags": ["jump_pads"],
+					"__tile": null,
+					"__smartColor": "#0099DB",
+					"iid": "d929dfa0-ed50-11ed-a14f-a7e88f482469",
+					"width": 48,
+					"height": 16,
+					"defUid": 11,
+					"px": [40,1800],
+					"fieldInstances": []
+				},
+				{
+					"__identifier": "Jump_pad_3_cata",
+					"__grid": [17,64],
+					"__pivot": [0.5,0.5],
+					"__tags": ["jump_pads"],
+					"__tile": null,
+					"__smartColor": "#0099DB",
+					"iid": "021185d0-ed50-11ed-a14f-ebc0d08fceea",
+					"width": 48,
+					"height": 16,
+					"defUid": 11,
+					"px": [280,1032],
+					"fieldInstances": []
+				},
+				{
+					"__identifier": "Jump_pad_3_cata_hori",
+					"__grid": [27,92],
+					"__pivot": [0.5,0.5],
+					"__tags": ["jump_pads"],
+					"__tile": null,
+					"__smartColor": "#0099DB",
+					"iid": "96c6d400-ed50-11ed-a14f-8fcd89307b65",
+					"width": 48,
+					"height": 16,
+					"defUid": 56,
+					"px": [440,1480],
+					"fieldInstances": []
+				},
+				{
+					"__identifier": "Jump_pad_3_cata_hori",
+					"__grid": [2,41],
+					"__pivot": [0.5,0.5],
+					"__tags": ["jump_pads"],
+					"__tile": null,
+					"__smartColor": "#0099DB",
+					"iid": "ebc39d20-ed50-11ed-a14f-d96b22c65ab3",
+					"width": 48,
+					"height": 16,
+					"defUid": 56,
+					"px": [40,664],
+					"fieldInstances": []
+				}
+			]
+		},
+		{
 			"__identifier": "Pics",
 			"__type": "Entities",
 			"__cWid": 32,
@@ -287,20 +369,6 @@
 					"fieldInstances": []
 				},
 				{
-					"__identifier": "Jump_pad",
-					"__grid": [2,112],
-					"__pivot": [0.5,0.5],
-					"__tags": ["blocs_speciaux"],
-					"__tile": null,
-					"__smartColor": "#0099DB",
-					"iid": "8e369470-c640-11ed-8293-55e6838f28d0",
-					"width": 48,
-					"height": 16,
-					"defUid": 11,
-					"px": [40,1800],
-					"fieldInstances": []
-				},
-				{
 					"__identifier": "Lumiere",
 					"__grid": [18,95],
 					"__pivot": [0.5,0.5],
@@ -326,20 +394,6 @@
 					"height": 16,
 					"defUid": 28,
 					"px": [408,2024],
-					"fieldInstances": []
-				},
-				{
-					"__identifier": "Jump_pad",
-					"__grid": [17,64],
-					"__pivot": [0.5,0.5],
-					"__tags": ["blocs_speciaux"],
-					"__tile": null,
-					"__smartColor": "#0099DB",
-					"iid": "f9bd4860-c640-11ed-8293-a56d0530fa7a",
-					"width": 48,
-					"height": 16,
-					"defUid": 11,
-					"px": [280,1032],
 					"fieldInstances": []
 				},
 				{
@@ -371,20 +425,6 @@
 					"fieldInstances": []
 				},
 				{
-					"__identifier": "Jump_pad",
-					"__grid": [27,92],
-					"__pivot": [0.5,0.5],
-					"__tags": ["blocs_speciaux"],
-					"__tile": null,
-					"__smartColor": "#0099DB",
-					"iid": "aa8c35a0-ed50-11ed-a06e-5f2e0657da61",
-					"width": 48,
-					"height": 16,
-					"defUid": 11,
-					"px": [440,1480],
-					"fieldInstances": []
-				},
-				{
 					"__identifier": "Break_platform_3",
 					"__grid": [2,83],
 					"__pivot": [0.5,0.5],
@@ -396,20 +436,6 @@
 					"height": 16,
 					"defUid": 43,
 					"px": [40,1336],
-					"fieldInstances": []
-				},
-				{
-					"__identifier": "Jump_pad",
-					"__grid": [2,41],
-					"__pivot": [0.5,0.5],
-					"__tags": ["blocs_speciaux"],
-					"__tile": null,
-					"__smartColor": "#0099DB",
-					"iid": "26e4a330-ed50-11ed-a06e-45406275aedb",
-					"width": 48,
-					"height": 16,
-					"defUid": 11,
-					"px": [40,664],
 					"fieldInstances": []
 				}
 			]
