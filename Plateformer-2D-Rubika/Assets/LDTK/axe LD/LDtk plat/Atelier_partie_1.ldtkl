@@ -51,7 +51,36 @@
 			"seed": 2381745,
 			"overrideTilesetUid": null,
 			"gridTiles": [],
-			"entityInstances": []
+			"entityInstances": [
+				{
+					"__identifier": "Jump_pad_3_cata",
+					"__grid": [110,25],
+					"__pivot": [0.5,0.5],
+					"__tags": ["jump_pads"],
+					"__tile": null,
+					"__smartColor": "#0099DB",
+					"iid": "4537da10-ed50-11ed-a14f-29473e29f9bb",
+					"width": 48,
+					"height": 16,
+					"defUid": 11,
+					"px": [1768,408],
+					"fieldInstances": []
+				},
+				{
+					"__identifier": "Jump_pad_3_cata",
+					"__grid": [5,5],
+					"__pivot": [0.5,0.5],
+					"__tags": ["jump_pads"],
+					"__tile": null,
+					"__smartColor": "#0099DB",
+					"iid": "4f9de670-ed50-11ed-a14f-778f18cca337",
+					"width": 48,
+					"height": 16,
+					"defUid": 11,
+					"px": [88,88],
+					"fieldInstances": []
+				}
+			]
 		},
 		{
 			"__identifier": "Pics",
@@ -704,34 +733,6 @@
 					"fieldInstances": []
 				},
 				{
-					"__identifier": "Jump_pad_3_cata",
-					"__grid": [110,25],
-					"__pivot": [0.5,0.5],
-					"__tags": ["jump_pads"],
-					"__tile": null,
-					"__smartColor": "#0099DB",
-					"iid": "cfec5b50-c640-11ed-942c-8709f94abff1",
-					"width": 48,
-					"height": 16,
-					"defUid": 11,
-					"px": [1768,408],
-					"fieldInstances": []
-				},
-				{
-					"__identifier": "Jump_pad_3_cata",
-					"__grid": [5,5],
-					"__pivot": [0.5,0.5],
-					"__tags": ["jump_pads"],
-					"__tile": null,
-					"__smartColor": "#0099DB",
-					"iid": "209eb9a0-c640-11ed-b4f4-7134f2ab767c",
-					"width": 48,
-					"height": 16,
-					"defUid": 11,
-					"px": [88,88],
-					"fieldInstances": []
-				},
-				{
 					"__identifier": "Break_platform_3",
 					"__grid": [62,8],
 					"__pivot": [0.5,0.5],
@@ -757,6 +758,20 @@
 					"height": 16,
 					"defUid": 43,
 					"px": [536,152],
+					"fieldInstances": []
+				},
+				{
+					"__identifier": "Collectable",
+					"__grid": [125,29],
+					"__pivot": [0.5,0.5],
+					"__tags": ["blocs_speciaux"],
+					"__tile": null,
+					"__smartColor": "#68386C",
+					"iid": "5b4c9f70-ed50-11ed-a14f-d76648e15242",
+					"width": 16,
+					"height": 16,
+					"defUid": 28,
+					"px": [2008,472],
 					"fieldInstances": []
 				}
 			]
