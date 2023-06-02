@@ -14,11 +14,13 @@ public class MantisCatch : MonoBehaviour
 
     PlayerDeath death;
     SpriteRenderer sprite;
+    Animator anim;
 
     private void Start()
     {
         death = FindObjectOfType<PlayerDeath>();
         sprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        anim= GetComponent<Animator>();
     }
 
     private void Update()
@@ -34,12 +36,11 @@ public class MantisCatch : MonoBehaviour
 
     IEnumerator Catch()
     {
-        sprite.enabled = true;
         isActive = true;
-
+        anim.Play("MantisPawOn");
         yield return new WaitForSeconds(activeTime);
         
-        sprite.enabled = false;
+        anim.Play("MantisPawOff");
         isActive = false;
     }
 
