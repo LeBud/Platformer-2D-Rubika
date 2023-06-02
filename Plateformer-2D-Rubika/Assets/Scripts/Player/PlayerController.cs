@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
@@ -9,6 +10,10 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     AirFlow airFlow;
     NewAchievementSystem achievements;
+
+    InputController inputController;
+    [HideInInspector]
+    public InputAction move, jumpBtt, lightBtt;
 
     [Header("Controller Data")]
     public PlayerControllerData playerControllerData;
@@ -98,6 +103,22 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         achievements = FindObjectOfType<NewAchievementSystem>();
         source = GetComponent<AudioSource>();
+
+        inputController = new InputController();
+    }
+
+    private void OnEnable()
+    {
+        move = inputController.Player.Movement;
+        inputController.Enable();
+
+        jumpBtt = inputController.Player.Jump;
+        lightBtt = inputController.Player.Light;
+    }
+
+    private void OnDisable()
+    {
+        move.Disable();
     }
 
     private void Start()
@@ -129,8 +150,10 @@ public class PlayerController : MonoBehaviour
     void MyInputs()
     {
         //Movements Input
-        moveInput.x = Input.GetAxisRaw("Horizontal");
-        moveInput.y = Input.GetAxisRaw("Vertical");
+        //moveInput.x = Input.GetAxisRaw("Horizontal");
+        //moveInput.y = Input.GetAxisRaw("Vertical");
+
+        moveInput = move.ReadValue<Vector2>();
 
         if (moveInput.x > .8f && (moveInput.y > .1f || moveInput.y < -.1f))
             moveInput.x = 1;
@@ -138,13 +161,13 @@ public class PlayerController : MonoBehaviour
             moveInput.x = -1;
 
         //Jumps Inputs
-        if (Input.GetButtonDown("Jump")) 
+        if (jumpBtt.WasPressedThisFrame()) 
             lastPressedJump = playerControllerData.jumpBuffer;
 
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0) jumpCut = true;
+        if (jumpBtt.WasReleasedThisFrame() && rb.velocity.y > 0) jumpCut = true;
 
         //AirFlow Inputs
-        if (Input.GetButton("Jump") && inAirFlow && gliding)
+        if (jumpBtt.IsPressed() && inAirFlow && gliding)
         {
             airFlowing = true;
         }
@@ -155,15 +178,15 @@ public class PlayerController : MonoBehaviour
         if (!canGlide) return;
         if (playerControllerData.canGlideJump)
         {
-            if (Input.GetButtonDown("Jump") && CanJumpGlide())
+            if (jumpBtt.WasPressedThisFrame() && CanJumpGlide())
                     GlideJump();
         }
 
         if (playerControllerData.holdBtt)
         {
-            if (Input.GetButton("Jump") && CanGlide())
+            if (jumpBtt.IsPressed() && CanGlide())
                 gliding = true;
-            else if ((Input.GetButtonUp("Jump") && gliding) || glideTime <= 0)
+            else if ((jumpBtt.WasReleasedThisFrame() && gliding) || glideTime <= 0)
                 gliding = false;
         }
         /*else

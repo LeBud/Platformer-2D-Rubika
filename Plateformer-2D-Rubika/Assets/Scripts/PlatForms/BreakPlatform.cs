@@ -26,7 +26,7 @@ public class BreakPlatform : MonoBehaviour
     [SerializeField] AudioClip sound;
     ParticleSystem particles;
 
-    private void Start()
+    private void Awake()
     {
         achievements = FindObjectOfType<NewAchievementSystem>();
         spriteRenderer= GetComponent<SpriteRenderer>();

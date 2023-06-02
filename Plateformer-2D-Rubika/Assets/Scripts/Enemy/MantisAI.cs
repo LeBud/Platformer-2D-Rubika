@@ -70,12 +70,12 @@ public class MantisAI : MonoBehaviour
 
         float distance = Vector2.Distance(transform.position, playerController.transform.position);
 
-        if (distance < 12)
-            targetSpeed = minSpeed;
-        else if (distance > 18)
-            targetSpeed = maxSpeed;
+        if (distance < 8)
+            targetSpeed = 10;
+        else if (distance > 15)
+            targetSpeed = 20;
         else
-            targetSpeed = midSpeed;
+            targetSpeed = 14;
 
         currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, 40f * Time.deltaTime);
 
