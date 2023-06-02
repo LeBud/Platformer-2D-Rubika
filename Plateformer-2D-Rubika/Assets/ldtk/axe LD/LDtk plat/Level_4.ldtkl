@@ -29,6 +29,31 @@
 	"fieldInstances": [],
 	"layerInstances": [
 		{
+			"__identifier": "Jump_pads",
+			"__type": "Entities",
+			"__cWid": 128,
+			"__cHei": 32,
+			"__gridSize": 16,
+			"__opacity": 1,
+			"__pxTotalOffsetX": 0,
+			"__pxTotalOffsetY": 0,
+			"__tilesetDefUid": null,
+			"__tilesetRelPath": null,
+			"iid": "cc5cbe50-ed50-11ed-a14f-03ed72f4f002",
+			"levelId": 20,
+			"layerDefUid": 57,
+			"pxOffsetX": 0,
+			"pxOffsetY": 0,
+			"visible": true,
+			"optionalRules": [],
+			"intGridCsv": [],
+			"autoLayerTiles": [],
+			"seed": 1965073,
+			"overrideTilesetUid": null,
+			"gridTiles": [],
+			"entityInstances": []
+		},
+		{
 			"__identifier": "Pics",
 			"__type": "Entities",
 			"__cWid": 128,
@@ -103,10 +128,10 @@
 			"gridTiles": [],
 			"entityInstances": [
 				{
-					"__identifier": "Jump_pad",
+					"__identifier": "Jump_pad_3_cata",
 					"__grid": [32,20],
 					"__pivot": [0.5,0.5],
-					"__tags": ["blocs_speciaux"],
+					"__tags": ["jump_pads"],
 					"__tile": null,
 					"__smartColor": "#0099DB",
 					"iid": "7ff14c30-c640-11ed-8a6f-432b59992167",
@@ -159,10 +184,10 @@
 					"fieldInstances": []
 				},
 				{
-					"__identifier": "Jump_pad",
+					"__identifier": "Jump_pad_3_cata",
 					"__grid": [113,10],
 					"__pivot": [0.5,0.5],
-					"__tags": ["blocs_speciaux"],
+					"__tags": ["jump_pads"],
 					"__tile": null,
 					"__smartColor": "#0099DB",
 					"iid": "dd5560f0-c640-11ed-8a6f-1d953295e9ab",
