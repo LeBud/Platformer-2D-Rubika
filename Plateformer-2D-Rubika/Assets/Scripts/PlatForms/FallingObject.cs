@@ -13,6 +13,7 @@ public class FallingObject : MonoBehaviour
 
     Vector2 startPos;
     bool resetting;
+    bool falled;
 
     AudioSource source;
     public AudioClip sound;
@@ -27,7 +28,7 @@ public class FallingObject : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && !resetting)
+        if (collision.CompareTag("Player") && !resetting && !falled)
         {
             StartCoroutine(Fall());
         }
@@ -35,6 +36,7 @@ public class FallingObject : MonoBehaviour
 
     IEnumerator Fall()
     {
+        falled = true;
         yield return new WaitForSeconds(delay);
         rb.gravityScale = fallGravityScale;
 
@@ -51,7 +53,8 @@ public class FallingObject : MonoBehaviour
         rb.position = startPos;
 
         yield return new WaitForSeconds(1);
-        
+
+        falled = false;
         resetting= false;
     }
 

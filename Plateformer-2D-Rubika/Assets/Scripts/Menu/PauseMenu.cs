@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
@@ -11,7 +12,25 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuHUD;
     public GameObject optionsMenuHUD;
 
+    [HideInInspector]
+    public InputController inputController;
+    [HideInInspector]
+    public InputAction pauseBtt, saveBtt, loadBtt;
+
     [SerializeField] GameObject firstButton;
+
+    private void Awake()
+    {
+        inputController = new InputController();
+    }
+
+    private void OnEnable()
+    {
+        inputController.Enable();
+        pauseBtt = inputController.UI.Pause;
+        saveBtt= inputController.UI.Save;
+        loadBtt= inputController.UI.Load;
+    }
 
     private void Start()
     {
@@ -28,7 +47,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (PlayerDeath.respawning) return;
 
-        if (Input.GetButtonDown("Cancel"))
+        if (pauseBtt.WasPressedThisFrame())
         {
             gameIsPause = !gameIsPause;
 
