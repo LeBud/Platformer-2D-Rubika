@@ -16,6 +16,7 @@ public class SaveSystem : MonoBehaviour
     [SerializeField] PlayerController playerController;
     NewAchievementSystem achievements;
     ParallaxSwap parallax;
+    PauseMenu pauseMenu;
     private void Awake()
     {
         ladyBugLight = FindObjectOfType<LadyBugLight>();
@@ -26,6 +27,7 @@ public class SaveSystem : MonoBehaviour
         playerController = FindObjectOfType<PlayerController>();
         playerTransform = ladyBugLight.transform;
         parallax = FindObjectOfType<ParallaxSwap>();
+        pauseMenu = FindObjectOfType<PauseMenu>();
     }
 
     void GetComponents()
@@ -42,12 +44,10 @@ public class SaveSystem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F5))
+        if (pauseMenu.saveBtt.WasPressedThisFrame())
             SaveData();
-        if (Input.GetKeyUp(KeyCode.F9))
+        if (pauseMenu.loadBtt.WasPressedThisFrame())
             LoadData();
-        if (Input.GetKeyUp(KeyCode.F6))
-            SaveDeath();
     }
 
 
