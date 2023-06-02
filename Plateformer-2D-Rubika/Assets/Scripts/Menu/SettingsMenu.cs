@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
@@ -29,19 +30,16 @@ public class SettingsMenu : MonoBehaviour
     float SFXSound;
     float musicSound;
 
+    PauseMenu pauseMenu;
+
     private void Awake()
     {
         if (System.IO.File.Exists(Application.persistentDataPath + "/Settings.json"))
             LoadSettings();
         CheckAllRes();
-    }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F5))
-            SaveSettings();
-        if (Input.GetKeyDown(KeyCode.F9))
-            LoadSettings();
+        pauseMenu = GetComponent<PauseMenu>();
+
     }
 
     void CheckAllRes()
