@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] AudioClip garden;
     [SerializeField] AudioClip catacombs;
+    [SerializeField] AudioClip mantis;
 
     bool audioPlaying;
 
@@ -98,6 +99,20 @@ public class GameManager : MonoBehaviour
             source.PlayOneShot(garden);
             audioPlaying = true;
             yield return new WaitForSeconds(garden.length);
+            audioPlaying = false;
+        }
+        else if (MantysEnablerDisabler.mantisEnable)
+        {
+            if (audioPlaying) yield break;
+            if (!MantysEnablerDisabler.mantisEnable)
+            {
+                source.Stop();
+                audioPlaying = false;
+                yield break;
+            }
+            source.PlayOneShot(mantis);
+            audioPlaying = true;
+            yield return new WaitForSeconds(mantis.length);
             audioPlaying = false;
         }
         else

@@ -30,8 +30,6 @@ public class JumpPad : MonoBehaviour
 
             rb.AddForce(bounceForce,ForceMode2D.Impulse);
 
-            animator.Play("Bumper");
-            source.PlayOneShot(sound);
         }
     }
 
@@ -40,7 +38,10 @@ public class JumpPad : MonoBehaviour
         controller.glideJump = true;
         controller.glideTime = controller.playerControllerData.maxGlideTime;
 
-        if(bounceForce.x != 0)
+        animator.Play("Bumper");
+        source.PlayOneShot(sound);
+
+        if (bounceForce.x != 0)
             controller.jumpPadOn = true;
         controller.jumpPadVer = true;
 

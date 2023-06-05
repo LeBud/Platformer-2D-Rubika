@@ -16,11 +16,14 @@ public class MantisCatch : MonoBehaviour
     SpriteRenderer sprite;
     Animator anim;
 
+    AudioSource source;
+    public AudioClip sound;
     private void Start()
     {
         death = FindObjectOfType<PlayerDeath>();
         sprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
         anim= GetComponent<Animator>();
+        source = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -37,11 +40,13 @@ public class MantisCatch : MonoBehaviour
     IEnumerator Catch()
     {
         isActive = true;
-        //anim.Play("MantisPawOn");
-        anim.Play("MantisPawAnim");
+        anim.Play("MantisPawOn");
+
+        source.PlayOneShot(sound);
+
         yield return new WaitForSeconds(activeTime);
         
-        //anim.Play("MantisPawOff");
+        anim.Play("MantisPawOff");
         isActive = false;
     }
 
