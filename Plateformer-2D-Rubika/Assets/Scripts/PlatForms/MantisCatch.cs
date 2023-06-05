@@ -38,6 +38,7 @@ public class MantisCatch : MonoBehaviour
     {
         isActive = true;
         anim.Play("MantisPawOn");
+        //anim.Play("MantisPawAnim");
         yield return new WaitForSeconds(activeTime);
         
         anim.Play("MantisPawOff");
