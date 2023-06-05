@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,11 @@ public class MainMenu : MonoBehaviour
 {
     [Header("First Selected Button in each Menu")]
     [SerializeField] GameObject playBtt, optionsBtt, creditsBtt, continueBtt, newGameBtt;
+
+    [Header("Loading Screen")]
+    [SerializeField] Image loadingBar;
+    [SerializeField] GameObject loadingScreen;
+    [SerializeField] TextMeshProUGUI loadingTxt;
 
     public static bool loadSave;
     public static bool ereaseSave;
@@ -35,14 +41,14 @@ public class MainMenu : MonoBehaviour
     {
         ereaseSave = true;
         loadSave = false;
-        SceneManager.LoadScene(sceneNum);
+        StartCoroutine(LoadSceneAsync(sceneNum));
     }
 
     public void ContinueGame(int sceneNum)
     {
         loadSave = true;
         ereaseSave = false;
-        SceneManager.LoadScene(sceneNum);
+        StartCoroutine(LoadSceneAsync(sceneNum));
     }
 
     public void Exit()
@@ -54,5 +60,23 @@ public class MainMenu : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(button);
+    }
+
+
+    IEnumerator LoadSceneAsync(int scene)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
+
+        loadingScreen.SetActive(true);
+
+        while(!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+            loadingBar.fillAmount = progress;
+            loadingTxt.text = "Loading progress : " + "\n" + (progress * 100).ToString("F0") + "%";
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1);
     }
 }
