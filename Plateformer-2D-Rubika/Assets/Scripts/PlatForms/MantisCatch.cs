@@ -37,11 +37,11 @@ public class MantisCatch : MonoBehaviour
     IEnumerator Catch()
     {
         isActive = true;
-        //anim.Play("MantisPawOn");
-        anim.Play("MantisPawAnim");
+        anim.Play("MantisPawOn");
+        //anim.Play("MantisPawAnim");
         yield return new WaitForSeconds(activeTime);
         
-        //anim.Play("MantisPawOff");
+        anim.Play("MantisPawOff");
         isActive = false;
     }
 
