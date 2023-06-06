@@ -18,11 +18,19 @@ public class MantisAI : MonoBehaviour
     float currentSpeed;
     float targetSpeed;
 
+    AudioSource source;
+    [Header("Sounds")]
+    public AudioClip walkSound;
+    public AudioClip screamSound;
+
+    bool screamSoundPlayong;
+
     public static bool respawning;
 
     private void Start()
     {
         playerController = GameObject.FindGameObjectWithTag("Player").transform;
+        source = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -32,6 +40,25 @@ public class MantisAI : MonoBehaviour
 
         WaypointsMovement();
         ChangeSpeed();
+
+        if (!screamSoundPlayong)
+            StartCoroutine(ScreamSound());
+    }
+
+    public void PawSound()
+    {
+        source.PlayOneShot(walkSound);
+    }
+
+    IEnumerator ScreamSound()
+    {
+        screamSoundPlayong = true;
+        int time = Random.Range(5, 20);
+
+        source.PlayOneShot(screamSound);
+
+        yield return new WaitForSeconds(time);
+        screamSoundPlayong = false;
     }
 
     void WaypointsMovement()
