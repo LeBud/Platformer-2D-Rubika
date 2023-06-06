@@ -98,6 +98,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Light2D blueLight;
     [SerializeField] Light2D eyeLight;
 
+    public TrailRenderer trail;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -232,6 +233,11 @@ public class PlayerController : MonoBehaviour
                 StopCoroutine(GlideSound());
             }
         }
+
+        if (Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundCheckLayerMask))
+            trail.emitting = true;
+        else
+            trail.emitting = false;
 
         if (CanJump()) Jump();
 
