@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8512361183813187716}
   - component: {fileID: 4417957729158107144}
-  - component: {fileID: 3223759074357807066}
+  - component: {fileID: 2921369593175621541}
   m_Layer: 0
   m_Name: Assets Pillar3
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3223759074357807066
+--- !u!114 &2921369593175621541
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,8 +94,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7355876327500432978}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe17bd491af92e04599b20f6e9636a2c, type: 3}
+  m_Script: {fileID: 11500000, guid: ff00cdaafbcfee14191afed18dc27736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffectMult: 0.5
-  parallaxEffectMultY: 0.1
+  parallaxEffectMult: -0.05

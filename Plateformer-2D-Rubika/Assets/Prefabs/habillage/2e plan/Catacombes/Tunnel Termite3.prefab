@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2013002024041569230}
   - component: {fileID: 6908588532243088352}
-  - component: {fileID: 135326709181272675}
+  - component: {fileID: 8905054570083306632}
   m_Layer: 0
   m_Name: Tunnel Termite3
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &135326709181272675
+--- !u!114 &8905054570083306632
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,8 +94,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7961169010947284961}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe17bd491af92e04599b20f6e9636a2c, type: 3}
+  m_Script: {fileID: 11500000, guid: ff00cdaafbcfee14191afed18dc27736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffectMult: 0.5
-  parallaxEffectMultY: 0.1
+  parallaxEffectMult: -0.05
