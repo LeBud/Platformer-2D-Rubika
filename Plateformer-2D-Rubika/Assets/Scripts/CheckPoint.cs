@@ -21,6 +21,7 @@ public class CheckPoint : MonoBehaviour
     Light2D lightSpot;
 
     Animator animator;
+    private ParticleSystem particles;
 
     AudioSource source;
     public AudioClip sound;
@@ -32,12 +33,14 @@ public class CheckPoint : MonoBehaviour
         sprite.sprite = unCheck;
         //lightSpot.enabled = false;
         animator = GetComponent<Animator>();
+        particles = GetComponentInChildren<ParticleSystem>();
     }
 
     private void Start()
     {
         roomNumber = transform.parent.GetComponentInParent<LevelRoom>().roomNum;
         source= GetComponent<AudioSource>();
+        particles.Stop();
     }
 
     private void OnEnable()
@@ -71,6 +74,7 @@ public class CheckPoint : MonoBehaviour
         //source.PlayOneShot(sound);
 
         animator.Play("Checkpoint");
+        particles.Play();
 
         if (lightLevel)
         {
