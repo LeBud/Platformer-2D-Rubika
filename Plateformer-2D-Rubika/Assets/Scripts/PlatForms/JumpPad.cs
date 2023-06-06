@@ -38,7 +38,8 @@ public class JumpPad : MonoBehaviour
         controller.glideJump = true;
         controller.glideTime = controller.playerControllerData.maxGlideTime;
 
-        animator.Play("Bumper");
+        //animator.Play("Bumper");
+        animator.SetTrigger("Bump");
         source.PlayOneShot(sound);
 
         if (bounceForce.x != 0)
