@@ -17,6 +17,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI deathCounterTxt;
     [SerializeField] TextMeshProUGUI collectablesTxt;
     [SerializeField] float glideSliderYOffset;
+    [SerializeField] float glideSliderXOffset;
 
     Animator slider;
     Animator collectable;
@@ -51,6 +52,7 @@ public class PlayerUI : MonoBehaviour
 
         Vector2 playerPos = Camera.main.WorldToScreenPoint(transform.position);
 
+        //playerPos.x += glideSliderXOffset;
         playerPos.y += glideSliderYOffset;
 
         glideSlider.transform.position = playerPos;
