@@ -27,11 +27,14 @@ public class PlayerUI : MonoBehaviour
         playerController = GetComponent<PlayerController>();
         playerDeath = GetComponent<PlayerDeath>();
         ladyLight = GetComponent<LadyBugLight>();
+        
         if(ladyLight.oldSystem)
             lightSlider.maxValue = playerController.playerControllerData.maxAphid * 10;
         else
             lightSlider.maxValue = playerController.playerControllerData.maxAphidCharge;
+        
         glideSlider.maxValue = playerController.playerControllerData.maxGlideTime;
+        
         deathCounterTxt.text = "Death : " + playerDeath.deathCounter;
 
         collectable = collectablesTxt.GetComponent<Animator>();
@@ -45,15 +48,6 @@ public class PlayerUI : MonoBehaviour
         else
             glideSlider.gameObject.SetActive(false);
 
-        if (playerController.blueAnimator && lightSlider.transform.GetChild(0).GetComponent<Image>().color.a == 0)
-        {
-            slider.Play("lightSliderOn");
-        }
-        else if (!playerController.blueAnimator && lightSlider.transform.GetChild(0).GetComponent<Image>().color.a == 1)
-        {
-            slider.Play("lightSliderOff");
-
-        }
 
         Vector2 playerPos = Camera.main.WorldToScreenPoint(transform.position);
 
@@ -69,6 +63,16 @@ public class PlayerUI : MonoBehaviour
 
         deathCounterTxt.text = "Death : " + playerDeath.deathCounter;
         collectablesTxt.text = "Collectable : " + gameManager.collectableCount;
+        
+        if (playerController.blueAnimator && lightSlider.transform.GetChild(0).GetComponent<Image>().color.a == 0)
+        {
+            slider.Play("lightSliderOn");
+        }
+        else if (!playerController.blueAnimator && lightSlider.transform.GetChild(0).GetComponent<Image>().color.a == 1)
+        {
+            slider.Play("lightSliderOff");
+        }
+
     }
 
     public IEnumerator ShowCollectable()
