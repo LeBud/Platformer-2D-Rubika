@@ -18,6 +18,8 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI collectablesTxt;
     [SerializeField] float glideSliderYOffset;
 
+    Animator slider;
+
     private void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -30,6 +32,8 @@ public class PlayerUI : MonoBehaviour
             lightSlider.maxValue = playerController.playerControllerData.maxAphidCharge;
         glideSlider.maxValue = playerController.playerControllerData.maxGlideTime;
         deathCounterTxt.text = "Death : " + playerDeath.deathCounter;
+
+        slider = lightSlider.GetComponent<Animator>();
     }
 
     private void LateUpdate()
@@ -38,6 +42,16 @@ public class PlayerUI : MonoBehaviour
             glideSlider.gameObject.SetActive(true);
         else
             glideSlider.gameObject.SetActive(false);
+
+        if (playerController.blueAnimator && lightSlider.transform.GetChild(0).GetComponent<Image>().color.a == 0)
+        {
+            slider.Play("lightSliderOn");
+        }
+        else if (!playerController.blueAnimator && lightSlider.transform.GetChild(0).GetComponent<Image>().color.a == 1)
+        {
+            slider.Play("lightSliderOff");
+
+        }
 
         Vector2 playerPos = Camera.main.WorldToScreenPoint(transform.position);
 
