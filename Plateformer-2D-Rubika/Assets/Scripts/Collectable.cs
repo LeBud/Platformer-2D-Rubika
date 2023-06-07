@@ -11,11 +11,13 @@ public class Collectable : MonoBehaviour
     public int ID;
     AudioSource source;
     public AudioClip sound;
+    PlayerUI UI;
 
     private void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
         source = GetComponent<AudioSource>();
+        UI = FindObjectOfType<PlayerUI>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -31,8 +33,10 @@ public class Collectable : MonoBehaviour
 
             FindObjectOfType<SaveSystem>().SaveCollectable();
 
-            gameObject.SetActive(false);
             source.PlayOneShot(sound);
+            StartCoroutine(UI.ShowCollectable());
+
+            gameObject.SetActive(false);
         }
     }
 
