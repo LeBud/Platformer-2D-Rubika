@@ -19,6 +19,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] float glideSliderYOffset;
 
     Animator slider;
+    Animator collectable;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class PlayerUI : MonoBehaviour
         glideSlider.maxValue = playerController.playerControllerData.maxGlideTime;
         deathCounterTxt.text = "Death : " + playerDeath.deathCounter;
 
+        collectable = collectablesTxt.GetComponent<Animator>();
         slider = lightSlider.GetComponent<Animator>();
     }
 
@@ -67,6 +69,16 @@ public class PlayerUI : MonoBehaviour
 
         deathCounterTxt.text = "Death : " + playerDeath.deathCounter;
         collectablesTxt.text = "Collectable : " + gameManager.collectableCount;
+    }
+
+    public IEnumerator ShowCollectable()
+    {
+        if(collectablesTxt.color.a == 0)
+            collectable.Play("CollectableOn");
+
+        yield return new WaitForSeconds(1);
+
+        collectable.Play("CollectableOff");
     }
 
 }
