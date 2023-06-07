@@ -79,7 +79,7 @@ public class MantisAI : MonoBehaviour
             else
             {
                 if (!MantysEnablerDisabler.mantisEnable) return;
-                currentWP++;
+                //currentWP++;
             }
         }
     }
