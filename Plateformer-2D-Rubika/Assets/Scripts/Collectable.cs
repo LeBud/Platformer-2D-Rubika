@@ -14,7 +14,7 @@ public class Collectable : MonoBehaviour
     PlayerUI UI;
 
     float timeToTake = 3;
-    float currentTime;
+    bool shrink;
 
     private void Awake()
     {
@@ -38,23 +38,45 @@ public class Collectable : MonoBehaviour
 
             source.PlayOneShot(sound);
             StartCoroutine(UI.ShowCollectable());
-
-            gameManager.RefreshList();
-            gameObject.SetActive(false);
+            StartCoroutine(TakeCollectable());
         }
     }
 
-    /*private void LateUpdate()
+    IEnumerator TakeCollectable()
     {
-        if(taken)
+        float elapsedTime = 0;
+        while (elapsedTime < timeToTake)
         {
-            transform.position = Vector3.Lerp(transform.position, UI.transform.position, 2 * Time.deltaTime);
-            if (currentTime + timeToTake > Time.time)
-            {
-                gameManager.RefreshList();
-                gameObject.SetActive(false);
-            }
+            elapsedTime += Time.deltaTime;
+            transform.position = Vector3.Lerp(transform.position, UI.transform.position, 4 * Time.deltaTime);
+
+            if (elapsedTime > 1.9f && !shrink)
+                StartCoroutine(Shrink());
+
+            yield return null;
         }
-    }*/
+
+    }
+
+    IEnumerator Shrink()
+    {
+        shrink = true;
+
+        for (int i = 0; i < 10; i++)
+        {
+            transform.localScale += Vector3.one * 0.05f;
+            yield return new WaitForSeconds(.05f);
+        }
+
+        for (int i = 0; i < 24; i++)
+        {
+            transform.localScale -= Vector3.one * 0.05f;
+            yield return new WaitForSeconds(.025f);
+        }
+
+        gameObject.SetActive(false);
+        gameManager.RefreshList();
+
+    }
 
 }
