@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
+using UnityEngine.Android;
 using UnityEngine.Rendering.Universal;
 
 public class CheckPoint : MonoBehaviour
@@ -20,8 +22,12 @@ public class CheckPoint : MonoBehaviour
 
     Light2D lightSpot;
 
-    Animator animator;
-    private ParticleSystem particles;
+    Animator                                animator;
+    
+    [Header("particules")]
+    private                  ParticleSystem particles;
+
+    private ParticleSystem.EmissionModule emission;
 
     AudioSource source;
     public AudioClip sound;
@@ -34,13 +40,14 @@ public class CheckPoint : MonoBehaviour
         //lightSpot.enabled = false;
         animator = GetComponent<Animator>();
         particles = GetComponentInChildren<ParticleSystem>();
+        emission = GetComponentInChildren<ParticleSystem>().emission;
     }
 
     private void Start()
     {
         roomNumber = transform.parent.GetComponentInParent<LevelRoom>().roomNum;
         source= GetComponent<AudioSource>();
-        particles.Stop();
+        emission.enabled = false;
     }
 
     private void OnEnable()
@@ -74,7 +81,9 @@ public class CheckPoint : MonoBehaviour
         //source.PlayOneShot(sound);
 
         animator.Play("Checkpoint");
-        particles.Play();
+        emission.enabled = true;
+        particles.Emit(30);
+        
 
         if (lightLevel)
         {
@@ -83,6 +92,7 @@ public class CheckPoint : MonoBehaviour
         }
         /*else
             player.lightCheckPoint = false;*/
+
     }
 
 }
