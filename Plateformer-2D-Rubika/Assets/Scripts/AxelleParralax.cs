@@ -23,7 +23,7 @@ public class AxelleParralax : MonoBehaviour
     private void LateUpdate()
     {
         Vector3 deltaMovement = camTrans.position - lastCamPos;
-        transform.position += new Vector3(deltaMovement.x * parallaxEffectMult, transform.position.y, transform.position.z);
+        transform.position += new Vector3(deltaMovement.x * parallaxEffectMult, 0, 0);
 
         lastCamPos = camTrans.position;
 
