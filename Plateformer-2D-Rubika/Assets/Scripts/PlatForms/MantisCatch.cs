@@ -11,6 +11,7 @@ public class MantisCatch : MonoBehaviour
 
     float nextTimeTo;
     bool isActive;
+    public ParticleSystem particule;
 
     PlayerDeath death;
     SpriteRenderer sprite;
@@ -37,12 +38,16 @@ public class MantisCatch : MonoBehaviour
 
     }
 
+    public void SFX()
+    {
+        source.PlayOneShot(sound);
+        particule.Play();
+    }
+
     IEnumerator Catch()
     {
         isActive = true;
         anim.Play("MantisPawOn");
-
-        source.PlayOneShot(sound);
 
         yield return new WaitForSeconds(activeTime);
         
