@@ -39,16 +39,14 @@ public class LoadMenu : MonoBehaviour
         yield return new WaitForSeconds(1);
     }
 
-    public void PlayerCanMove()
+    public void PlayerCanMove(int i)
     {
-        /*if (i == 1)
+        if (i == 0)
             PlayerController.canMove = true;
         else if (i == 1)
         {
-            PlayerController.canMove = true;
-        }*/
-        PlayerController.canMove = true;
-        Debug.Log(1);
+            PlayerController.canMove = false;
+        }
     }
 
     public void Transform()
