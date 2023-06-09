@@ -25,6 +25,8 @@ public class UIAnim : MonoBehaviour
     public void EndAnimation()
     {
         EndGameAnim.Play("EndGame");
+
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
