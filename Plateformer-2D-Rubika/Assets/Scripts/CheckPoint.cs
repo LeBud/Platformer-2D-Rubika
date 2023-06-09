@@ -82,7 +82,7 @@ public class CheckPoint : MonoBehaviour
 
         animator.Play("Checkpoint");
         emission.enabled = true;
-        particles.Emit(30);
+        //particles.Emit(30);
         
 
         if (lightLevel)
