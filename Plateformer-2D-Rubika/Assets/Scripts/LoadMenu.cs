@@ -13,6 +13,13 @@ public class LoadMenu : MonoBehaviour
     [SerializeField] GameObject loadingScreen;
     [SerializeField] TextMeshProUGUI loadingTxt;
 
+    ParallaxSwap parallaxSwap;
+
+    private void Start()
+    {
+        parallaxSwap = FindObjectOfType<ParallaxSwap>();
+    }
+
     public IEnumerator LoadSceneAsync(int scene)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
@@ -40,5 +47,12 @@ public class LoadMenu : MonoBehaviour
             PlayerController.canMove = true;
 
         yield return null;
+    }
+
+    void Transform()
+    {
+        GetComponent<PlayerController>().transform.position = new Vector2(783, -95);
+        parallaxSwap.parallax = ParallaxSwap.Parallax.termiteParallax;
+        parallaxSwap.ParallaxSwapFonction();
     }
 }

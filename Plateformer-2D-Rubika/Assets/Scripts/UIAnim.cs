@@ -19,7 +19,7 @@ public class UIAnim : MonoBehaviour
 
     public void FallAnimation()
     {
-
+        FallAnim.Play("Cinematique");
     }
 
     public void EndAnimation()
