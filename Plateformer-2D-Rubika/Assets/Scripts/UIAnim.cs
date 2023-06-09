@@ -6,7 +6,10 @@ public class UIAnim : MonoBehaviour
 {
 
     [SerializeField] Animator loadingScreen;
+    [SerializeField] Animator FallAnim;
+    [SerializeField] Animator EndGameAnim;
     
+    public bool fallAnim, endAnim;
 
     void Start()
     {
@@ -17,6 +20,24 @@ public class UIAnim : MonoBehaviour
     public void FallAnimation()
     {
 
+    }
+
+    public void EndAnimation()
+    {
+        EndGameAnim.Play("EndGame");
+
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            if (endAnim)
+                EndAnimation();
+            else if(fallAnim)
+                FallAnimation();
+        }
     }
 
 }

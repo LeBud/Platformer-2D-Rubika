@@ -99,6 +99,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Light2D eyeLight;
 
     public TrailRenderer trail;
+    public static bool canMove;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -132,6 +133,8 @@ public class PlayerController : MonoBehaviour
         if (PauseMenu.gameIsPause) return;
 
         if (PlayerDeath.respawning) return;
+
+        if (canMove) return;
 
         //Timers
         onGround -= Time.deltaTime;
