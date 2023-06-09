@@ -22,7 +22,8 @@ public class NewAchievementSystem : MonoBehaviour
         display = FindObjectOfType<AchievementsDisplay>();
         manager = GetComponent<GameManager>();
         RefreshData();
-        collectableCount = manager.collectableCount;
+        if(manager != null)
+            collectableCount = manager.collectableCount;
     }
 
     public void UpdateValue()
