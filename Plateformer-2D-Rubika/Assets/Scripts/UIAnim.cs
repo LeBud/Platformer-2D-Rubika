@@ -9,11 +9,15 @@ public class UIAnim : MonoBehaviour
     [SerializeField] Animator FallAnim;
     [SerializeField] Animator EndGameAnim;
     
-    public bool fallAnim, endAnim;
+    public bool fallAnim, endAnim, isLoadingScreen;
 
     void Start()
     {
-        loadingScreen.Play("LoadingScreenFadeOut");
+        if (isLoadingScreen)
+        {
+            loadingScreen.gameObject.SetActive(true);
+            loadingScreen.Play("LoadingScreenFadeOut");
+        }
     }
 
 
