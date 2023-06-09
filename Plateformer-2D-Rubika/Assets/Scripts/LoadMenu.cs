@@ -39,19 +39,21 @@ public class LoadMenu : MonoBehaviour
         yield return new WaitForSeconds(1);
     }
 
-    public IEnumerator PlayerCanMove(int i)
+    public void PlayerCanMove()
     {
-        if (i == 0)
-            PlayerController.canMove = false;
-        else
+        /*if (i == 1)
             PlayerController.canMove = true;
-
-        yield return null;
+        else if (i == 1)
+        {
+            PlayerController.canMove = true;
+        }*/
+        PlayerController.canMove = true;
+        Debug.Log(1);
     }
 
-    void Transform()
+    public void Transform()
     {
-        GetComponent<PlayerController>().transform.position = new Vector2(783, -95);
+        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector2(783, -95);
         parallaxSwap.parallax = ParallaxSwap.Parallax.termiteParallax;
         parallaxSwap.ParallaxSwapFonction();
     }
