@@ -34,12 +34,16 @@ public class SettingsMenu : MonoBehaviour
 
     private void Awake()
     {
-        if (System.IO.File.Exists(Application.persistentDataPath + "/Settings.json"))
-            LoadSettings();
         CheckAllRes();
 
         pauseMenu = GetComponent<PauseMenu>();
 
+    }
+
+    private void Start()
+    {
+        if (System.IO.File.Exists(Application.persistentDataPath + "/Settings.json"))
+            LoadSettings();
     }
 
     void CheckAllRes()

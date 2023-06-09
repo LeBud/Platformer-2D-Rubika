@@ -53,7 +53,7 @@ public class MantisAI : MonoBehaviour
     IEnumerator ScreamSound()
     {
         screamSoundPlayong = true;
-        int time = Random.Range(5, 20);
+        int time = Random.Range(2, 8);
 
         source.PlayOneShot(screamSound);
 
