@@ -25,6 +25,7 @@ public class MantisCatch : MonoBehaviour
         sprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
         anim= GetComponent<Animator>();
         source = GetComponent<AudioSource>();
+        particule = GetComponentInChildren<ParticleSystem>();
     }
 
     private void Update()
