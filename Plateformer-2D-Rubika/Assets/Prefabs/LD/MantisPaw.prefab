@@ -104,6 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeTime: 1
   deactiveTime: 2.5
+  particule: {fileID: 1813707020799275556, guid: bd64c95287f066446910b94920b56ab2, type: 3}
   sound: {fileID: 8300000, guid: 1d67b1cb2751bb84b8d171535afc5cfc, type: 3}
 --- !u!61 &61310708554453259
 BoxCollider2D:
@@ -341,7 +342,7 @@ Transform:
   m_Children:
   - {fileID: 61310708554453254}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8977176489355056917
 GameObject:

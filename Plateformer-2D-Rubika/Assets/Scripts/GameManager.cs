@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < inGameCollectibles.Count; i++)
         {
-            Debug.Log(i);
+            //Debug.Log(i);
             collectiblesSaveList.Add(new Collected { ID = inGameCollectibles[i].ID, taken = inGameCollectibles[i].taken });
         }
 
