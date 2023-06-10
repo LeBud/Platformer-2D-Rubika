@@ -55,4 +55,11 @@ public class LoadMenu : MonoBehaviour
         parallaxSwap.parallax = ParallaxSwap.Parallax.termiteParallax;
         parallaxSwap.ParallaxSwapFonction();
     }
+    
+    public void TransformExit()
+    {
+        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector2(2995, 206);
+        parallaxSwap.parallax = ParallaxSwap.Parallax.gardenParallax;
+        parallaxSwap.ParallaxSwapFonction();
+    }
 }
