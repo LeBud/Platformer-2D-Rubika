@@ -76,20 +76,20 @@ public class SettingsMenu : MonoBehaviour
     public void Graphics(int graphicsIndex)
     {
         QualitySettings.SetQualityLevel(graphicsIndex);
-        SaveSettings();
+        //SaveSettings();
     }
 
     public void Resolution(int resoltionIndex)
     {
         Resolution resolution = resolutions[resoltionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-        SaveSettings();
+        //SaveSettings();
     }
 
     public void Fullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
-        SaveSettings();
+        //SaveSettings();
     }
 
     public void SetMasterVolume(float sliderValue)
@@ -100,7 +100,7 @@ public class SettingsMenu : MonoBehaviour
         masterVolumeTxt.text = "Master : " + displayNumber.ToString("F0");
 
         masterSound = sliderValue;
-        SaveSettings();
+        //SaveSettings();
     }
 
     public void SetSFXVolume(float sliderValue)
@@ -111,7 +111,7 @@ public class SettingsMenu : MonoBehaviour
         SFXVolumeTxt.text = "SFX : " + displayNumber.ToString("F0");
 
         SFXSound = sliderValue;
-        SaveSettings();
+        //SaveSettings();
 
     }
 
@@ -123,7 +123,7 @@ public class SettingsMenu : MonoBehaviour
         musicVolumeTxt.text = "music : " + displayNumber.ToString("F0");
 
         musicSound = sliderValue;
-        SaveSettings();
+        //SaveSettings();
 
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Collectable : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class Collectable : MonoBehaviour
             taken = true;
             FindObjectOfType<SaveSystem>().SaveCollectable();
 
+            transform.parent = null;
+
             source.PlayOneShot(sound);
             StartCoroutine(UI.ShowCollectable());
             StartCoroutine(TakeCollectable());
@@ -67,7 +70,7 @@ public class Collectable : MonoBehaviour
     IEnumerator Shrink()
     {
         shrink = true;
-
+        Light2D light = GetComponent<Light2D>();
         for (int i = 0; i < 10; i++)
         {
             transform.localScale += Vector3.one * 0.05f;
@@ -77,6 +80,7 @@ public class Collectable : MonoBehaviour
         for (int i = 0; i < 24; i++)
         {
             transform.localScale -= Vector3.one * 0.05f;
+            light.intensity -= .025f;
             yield return new WaitForSeconds(.025f);
         }
 
