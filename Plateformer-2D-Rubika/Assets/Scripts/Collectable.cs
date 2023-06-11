@@ -52,8 +52,14 @@ public class Collectable : MonoBehaviour
 
             if (elapsedTime > 1.9f && !shrink)
                 StartCoroutine(Shrink());
+            
+            foreach( Transform child in transform )
+            {
+                child.gameObject.SetActive(false);
+            }
 
             yield return null;
+            
         }
 
     }
@@ -75,7 +81,9 @@ public class Collectable : MonoBehaviour
         }
 
         gameObject.SetActive(false);
+
         gameManager.RefreshList();
+        
 
     }
 
