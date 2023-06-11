@@ -134,7 +134,11 @@ public class PlayerController : MonoBehaviour
 
         if (PlayerDeath.respawning) return;
 
-        if (canMove) return;
+        if (canMove)
+        {
+            rb.velocity = Vector2.zero;
+            return;
+        } 
 
         //Timers
         onGround -= Time.deltaTime;

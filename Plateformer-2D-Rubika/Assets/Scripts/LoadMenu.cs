@@ -51,6 +51,7 @@ public class LoadMenu : MonoBehaviour
 
     public void Transform()
     {
+        FindObjectOfType<GameManager>().inGarden = false;
         PlayerController controller = FindObjectOfType<PlayerController>();
         controller.transform.position = new Vector2(783, -95);
         parallaxSwap.parallax = ParallaxSwap.Parallax.termiteParallax;
@@ -58,14 +59,13 @@ public class LoadMenu : MonoBehaviour
         controller.canGlide = true;
         controller.blueAnimator = false;
         controller.gardenAnimator = false;
-        FindObjectOfType<GameManager>().inGarden = false;
     }
     
     public void TransformExit()
     {
+        FindObjectOfType<GameManager>().inGarden = true;
         FindObjectOfType<PlayerController>().transform.position = new Vector2(2995, 206);
         parallaxSwap.parallax = ParallaxSwap.Parallax.gardenParallax;
         parallaxSwap.ParallaxSwapFonction();
-        FindObjectOfType<GameManager>().inGarden = true;
     }
 }
