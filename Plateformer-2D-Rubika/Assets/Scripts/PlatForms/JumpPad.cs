@@ -35,6 +35,8 @@ public class JumpPad : MonoBehaviour
 
     IEnumerator OnJumpPad()
     {
+        FindObjectOfType<NewAchievementSystem>().jumpPadUse = true;
+
         controller.glideJump = true;
         controller.glideTime = controller.playerControllerData.maxGlideTime;
 

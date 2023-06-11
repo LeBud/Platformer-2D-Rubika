@@ -51,14 +51,18 @@ public class LoadMenu : MonoBehaviour
 
     public void Transform()
     {
-        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector2(783, -95);
+        PlayerController controller = FindObjectOfType<PlayerController>();
+        controller.transform.position = new Vector2(783, -95);
         parallaxSwap.parallax = ParallaxSwap.Parallax.termiteParallax;
         parallaxSwap.ParallaxSwapFonction();
+        controller.canGlide = true;
+        controller.blueAnimator = false;
+        controller.gardenAnimator = false;
     }
     
     public void TransformExit()
     {
-        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector2(2995, 206);
+        FindObjectOfType<PlayerController>().transform.position = new Vector2(2995, 206);
         parallaxSwap.parallax = ParallaxSwap.Parallax.gardenParallax;
         parallaxSwap.ParallaxSwapFonction();
     }
