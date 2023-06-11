@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -18,6 +20,12 @@ public class PauseMenu : MonoBehaviour
     public InputAction pauseBtt, saveBtt, loadBtt;
 
     [SerializeField] GameObject firstButton;
+
+    [Header("Loading Screen")]
+    [SerializeField] Image loadingBar;
+    [SerializeField] GameObject loadingScreen;
+    [SerializeField] TextMeshProUGUI loadingTxt;
+
 
     private void Awake()
     {
@@ -105,7 +113,26 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        SceneManager.LoadScene(0);
+        StartCoroutine(LoadSceneAsync(0));
+    }
+
+    public IEnumerator LoadSceneAsync(int scene)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
+        PlayerController.canMove = false;
+        FindObjectOfType<SaveSystem>().SaveData();
+
+        loadingScreen.SetActive(true);
+
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+            loadingBar.fillAmount = progress;
+            loadingTxt.text = "Loading progress : " + "\n" + (progress * 100).ToString("F0") + "%";
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1);
     }
 
     public void SelectBtt(GameObject button)

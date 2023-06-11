@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(garden.length);
             audioPlaying = false;
         }
-        else if (MantysEnablerDisabler.mantisEnable)
+        /*else if (MantysEnablerDisabler.mantisEnable)
         {
             if (audioPlaying) yield break;
             if (!MantysEnablerDisabler.mantisEnable)
@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
             audioPlaying = true;
             yield return new WaitForSeconds(mantis.length);
             audioPlaying = false;
-        }
+        }*/
         else
         {
             if (audioPlaying) yield break;
