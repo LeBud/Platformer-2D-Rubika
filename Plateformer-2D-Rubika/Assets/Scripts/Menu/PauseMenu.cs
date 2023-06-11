@@ -42,10 +42,10 @@ public class PauseMenu : MonoBehaviour
 
     private void Start()
     {
-        if (gameIsPause)
+        /*if (gameIsPause)
             Pause();
         else
-            Resume();
+            Resume();*/
 
         EventSystem.current.SetSelectedGameObject(null);
 

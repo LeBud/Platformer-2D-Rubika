@@ -47,7 +47,7 @@ public class BreakPlatform : MonoBehaviour
     IEnumerator PlatformBreak()
     {
         isPlaying = true;
-        //source.PlayOneShot(sound);
+        source.PlayOneShot(sound);
         yield return new WaitForSeconds(breakTimer);
 
         //spriteRenderer.color= color2;

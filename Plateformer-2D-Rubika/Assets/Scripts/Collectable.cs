@@ -60,11 +60,6 @@ public class Collectable : MonoBehaviour
             
         }
 
-        foreach (Transform child in transform)
-        {
-            child.gameObject.SetActive(false);
-        }
-
     }
 
     IEnumerator Shrink()
@@ -84,10 +79,10 @@ public class Collectable : MonoBehaviour
             yield return new WaitForSeconds(.025f);
         }
 
-        gameObject.SetActive(false);
-
+        GetComponent<Collider2D>().enabled = false;
         gameManager.RefreshList();
         
+        gameObject.SetActive(false);
 
     }
 

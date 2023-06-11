@@ -35,6 +35,8 @@ public class AphidCollect : MonoBehaviour
                     return;
                 source.PlayOneShot(sound);
                 lady.aphidCharge += 100;
+                if (lady.aphidCharge >= controller.playerControllerData.maxAphidCharge) 
+                    lady.aphidCharge = controller.playerControllerData.maxAphidCharge;
             }
 
             if(canRespawn)

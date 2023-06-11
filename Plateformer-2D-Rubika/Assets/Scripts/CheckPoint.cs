@@ -41,12 +41,12 @@ public class CheckPoint : MonoBehaviour
         animator = GetComponent<Animator>();
         particles = GetComponentInChildren<ParticleSystem>();
         emission = GetComponentInChildren<ParticleSystem>().emission;
+        source = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
         roomNumber = transform.parent.GetComponentInParent<LevelRoom>().roomNum;
-        source= GetComponent<AudioSource>();
         emission.enabled = false;
     }
 
@@ -78,7 +78,7 @@ public class CheckPoint : MonoBehaviour
         player.currentCheckPoint = checkPointNum;
         player.checkPointRoom = roomNumber;
 
-        //source.PlayOneShot(sound);
+        source.PlayOneShot(sound);
 
         animator.Play("Checkpoint");
         emission.enabled = true;

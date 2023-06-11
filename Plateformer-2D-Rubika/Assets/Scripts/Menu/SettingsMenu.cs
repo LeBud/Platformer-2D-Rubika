@@ -30,20 +30,13 @@ public class SettingsMenu : MonoBehaviour
     float SFXSound;
     float musicSound;
 
-    PauseMenu pauseMenu;
-
     private void Awake()
     {
         CheckAllRes();
 
-        pauseMenu = GetComponent<PauseMenu>();
-
-    }
-
-    private void Start()
-    {
         if (System.IO.File.Exists(Application.persistentDataPath + "/Settings.json"))
             LoadSettings();
+
     }
 
     void CheckAllRes()

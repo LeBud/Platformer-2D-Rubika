@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     bool audioPlaying;
 
+    [HideInInspector] public bool inGarden;
+
     private void Awake()
     {
         saveSystem = GetComponent<SaveSystem>();
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour
                 achievement.actualValue = 0;
                 achievement.achieved = false;
             }
+            inGarden = true;
         }
         else if (MainMenu.loadSave) FindObjectOfType<SaveSystem>().LoadData();
 
@@ -87,10 +90,10 @@ public class GameManager : MonoBehaviour
 
     IEnumerator AudioPlay()
     {
-        if (controller.gardenAnimator)
+        if (inGarden)
         {
             if (audioPlaying) yield break;
-            if (!controller.gardenAnimator)
+            if (!inGarden)
             {
                 source.Stop();
                 audioPlaying = false;
@@ -118,7 +121,7 @@ public class GameManager : MonoBehaviour
         else
         {
             if (audioPlaying) yield break;
-            if (controller.gardenAnimator)
+            if (inGarden)
             {
                 source.Stop();
                 audioPlaying = false;

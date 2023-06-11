@@ -129,6 +129,7 @@ public class SaveSystem : MonoBehaviour
             gardenAnim = playerController.gardenAnimator,
             blueAnim = playerController.blueAnimator,
             achievementIntJump = achievements.jumpCount,
+            ingarden = gameManager.inGarden,
         };
 
         if (achievements.achievements.Count > 0)
@@ -174,8 +175,10 @@ public class SaveSystem : MonoBehaviour
         playerController.gardenAnimator = savedData.gardenAnim;
 
         parallax.parallax = savedData.parallaxNum;
-
+        parallax.ParallaxSwapFonction();
         gameManager.LoadCollectable();
+
+        gameManager.inGarden = savedData.ingarden;
 
         achievements.jumpCount = savedData.achievementIntJump;
 
@@ -222,4 +225,5 @@ public class SavedData
     public List<AchievementData> achievementsData;
     public int achievementIntJump;
     public int achievementInt;
+    public bool ingarden;
 }
