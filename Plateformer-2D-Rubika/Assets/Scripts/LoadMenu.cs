@@ -43,7 +43,7 @@ public class LoadMenu : MonoBehaviour
     {
         if (i == 0)
             PlayerController.canMove = true;
-        else if (i == 1)
+        else
         {
             PlayerController.canMove = false;
         }

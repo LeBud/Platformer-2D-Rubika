@@ -6,45 +6,41 @@ public class UIAnim : MonoBehaviour
 {
 
     [SerializeField] Animator loadingScreen;
-    [SerializeField] Animator FallAnim;
-    [SerializeField] Animator EndGameAnim;
-    [SerializeField] Animator ExitAnim;
+    [SerializeField] Animator cinematics;
 
-    public bool fallAnim, endAnim, exitAnim, isLoadingScreen;
+    public bool fallAnim, endAnim, exitAnim;
 
     void Start()
     {
-        if (isLoadingScreen)
-        {
-            loadingScreen.gameObject.SetActive(true);
+        if(loadingScreen != null)
             loadingScreen.Play("LoadingScreenFadeOut");
-        }
     }
+
     public void FallAnimation()
     {
-        FallAnim.Play("Cinematique");
+        cinematics.Play("Cinematique");
     }
 
     public void EndAnimation()
     {
-        EndGameAnim.Play("EndGame");
+        cinematics.Play("EndGame");
     }
 
     public void ExitAnimation()
     {
-        ExitAnim.Play("Exit");
+        cinematics.Play("Exit");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-        if (endAnim)
-            EndAnimation();
-        else if (fallAnim)
-            FallAnimation();
-        else if (exitAnim)
-            ExitAnimation();
+            if (endAnim)
+                EndAnimation();
+            else if (fallAnim)
+                FallAnimation();
+            else if (exitAnim)
+                ExitAnimation();
         }
     }
 

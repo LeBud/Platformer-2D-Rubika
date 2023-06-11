@@ -66,18 +66,14 @@ public class PlayerUI : MonoBehaviour
         deathCounterTxt.text = "Death : " + playerDeath.deathCounter;
         collectablesTxt.text = "Collectable : " + gameManager.collectableCount;
 
-        if (slider.gameObject.activeInHierarchy)
+        if (playerController.blueAnimator && lightSlider.transform.GetChild(0).GetComponent<Image>().color.a == 0)
         {
-            if (playerController.blueAnimator && lightSlider.transform.GetChild(0).GetComponent<Image>().color.a == 0)
-            {
-                slider.Play("lightSliderOn");
-            }
-            else if (!playerController.blueAnimator && lightSlider.transform.GetChild(0).GetComponent<Image>().color.a == 1)
-            {
-                slider.Play("lightSliderOff");
-            }
+            slider.Play("lightSliderOn");
         }
-
+        else if (!playerController.blueAnimator && lightSlider.transform.GetChild(0).GetComponent<Image>().color.a == 1)
+        {
+            slider.Play("lightSliderOff");
+        }
     }
 
     public IEnumerator ShowCollectable()
