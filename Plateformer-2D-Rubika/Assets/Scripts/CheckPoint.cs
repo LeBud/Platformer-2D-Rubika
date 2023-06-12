@@ -65,6 +65,7 @@ public class CheckPoint : MonoBehaviour
         {
             if(checkPointNum > player.currentCheckPoint)
             {
+                source.PlayOneShot(sound);
                 Active();
                 FindObjectOfType<SaveSystem>().SaveData();
             }
@@ -78,7 +79,6 @@ public class CheckPoint : MonoBehaviour
         player.currentCheckPoint = checkPointNum;
         player.checkPointRoom = roomNumber;
 
-        source.PlayOneShot(sound);
 
         animator.Play("Checkpoint");
         emission.enabled = true;
