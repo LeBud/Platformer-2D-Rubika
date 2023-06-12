@@ -13,16 +13,14 @@ public class GameManager : MonoBehaviour
 
     SaveSystem saveSystem;
     NewAchievementSystem achievementSystem;
-    AudioSource source;
     PlayerController controller;
 
-    [SerializeField] AudioClip garden;
-    [SerializeField] AudioClip catacombs;
-    [SerializeField] AudioClip mantis;
+    [SerializeField] AudioSource garden;
+    [SerializeField] AudioSource catacombs;
 
     bool audioPlaying;
 
-    [HideInInspector] public bool inGarden;
+    public bool inGarden;
 
     private void Awake()
     {
@@ -49,7 +47,6 @@ public class GameManager : MonoBehaviour
             RefreshList();
 
         LoadCollectable();
-        source = GetComponent<AudioSource>();
         controller = FindObjectOfType<PlayerController>();
     }
 
@@ -92,46 +89,26 @@ public class GameManager : MonoBehaviour
     {
         if (inGarden)
         {
-            if (audioPlaying) yield break;
-            if (!inGarden)
-            {
-                source.Stop();
-                audioPlaying = false;
-                yield break;
-            }
-            source.PlayOneShot(garden);
-            audioPlaying = true;
-            yield return new WaitForSeconds(garden.length);
-            audioPlaying = false;
+            if (garden.isPlaying) yield break;
+            garden.Play();
         }
-        /*else if (MantysEnablerDisabler.mantisEnable)
+        else if(!inGarden)
         {
-            if (audioPlaying) yield break;
-            if (!MantysEnablerDisabler.mantisEnable)
-            {
-                source.Stop();
-                audioPlaying = false;
-                yield break;
-            }
-            source.PlayOneShot(mantis);
-            audioPlaying = true;
-            yield return new WaitForSeconds(mantis.length);
-            audioPlaying = false;
-        }*/
-        else
-        {
-            if (audioPlaying) yield break;
-            if (inGarden)
-            {
-                source.Stop();
-                audioPlaying = false;
-                yield break;
-            }
-            source.PlayOneShot(catacombs);
-            audioPlaying = true;
-            yield return new WaitForSeconds(catacombs.length);
-            audioPlaying = false;
+            if (catacombs.isPlaying) yield break;
+            catacombs.Play();
         }
+
+        if (!inGarden)
+        {
+            garden.Stop();
+            yield break;
+        }
+        if (inGarden)
+        {
+            catacombs.Stop();
+            yield break;
+        }
+
     }
 
 }
