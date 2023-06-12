@@ -30,6 +30,7 @@ public class PauseMenu : MonoBehaviour
     private void Awake()
     {
         inputController = new InputController();
+        FindObjectOfType<SettingsMenu>().LoadSettings();
     }
 
     private void OnEnable()
