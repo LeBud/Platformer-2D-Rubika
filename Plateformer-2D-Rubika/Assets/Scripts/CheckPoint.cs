@@ -22,10 +22,10 @@ public class CheckPoint : MonoBehaviour
 
     Light2D lightSpot;
 
-    Animator                                animator;
+    Animator animator;
     
     [Header("particules")]
-    private                  ParticleSystem particles;
+    private ParticleSystem particles;
 
     private ParticleSystem.EmissionModule emission;
 
@@ -63,6 +63,7 @@ public class CheckPoint : MonoBehaviour
 
         if (collision.CompareTag("Player"))
         {
+
             if(checkPointNum > player.currentCheckPoint)
             {
                 source.PlayOneShot(sound);
