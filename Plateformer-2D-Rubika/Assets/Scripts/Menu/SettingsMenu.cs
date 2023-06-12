@@ -139,7 +139,7 @@ public class SettingsMenu : MonoBehaviour
 
     }
 
-    void LoadSettings()
+    public void LoadSettings()
     {
 
         string filePath = Application.persistentDataPath + "/Settings.json";
